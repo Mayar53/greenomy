@@ -5,6 +5,7 @@
 import { requireAuthOrRedirect } from "./authservise.js";
 import { api } from "./servisapi.js";
 import { createPlant } from "./serviseplant.js";
+import { t } from "./language.js";
 
 const DRAFT_KEY = "greenomy:onboarding-draft";
 
@@ -61,13 +62,13 @@ function initEcoProfilePage() {
 
     if (!fullName || !city) {
       status.className = "form-status is-error";
-      status.textContent = "Please fill in your name and city.";
+      status.textContent = t("wizard.errProfile");
       return;
     }
 
     submitBtn.disabled = true;
     status.className = "form-status is-loading";
-    status.textContent = "Saving your profile...";
+    status.textContent = t("wizard.saving");
 
     try {
       await api.patch("/users/me", { fullName, city });
@@ -75,7 +76,7 @@ function initEcoProfilePage() {
       window.location.href = "new-seed.html";
     } catch (err) {
       status.className = "form-status is-error";
-      status.textContent = err.message || "Something went wrong. Please try again.";
+      status.textContent = err.message || t("common.errorGeneric");
       submitBtn.disabled = false;
     }
   });
@@ -114,9 +115,9 @@ function initNewSeedWizard() {
       <div class="card plant-preview-card">
         <div class="plant-preview-emoji">🌱</div>
         <div>
-          <strong>${draft.seed.plantType || "Your plant"}</strong>
+          <strong>${draft.seed.plantType || t("wizard.yourPlant")}</strong>
           <p style="margin:2px 0 0; font-size:0.88rem;">
-            ${draft.seed.plantingMethod || "—"} · Planting ${draft.seed.plantingDate || "today"} · ${draft.seed.location || "Location not set"}
+            ${draft.seed.plantingMethod || "—"} · ${t("wizard.plantingLabel")} ${draft.seed.plantingDate || t("wizard.today")} · ${draft.seed.location || t("wizard.notSet")}
           </p>
         </div>
       </div>
@@ -164,7 +165,7 @@ function initNewSeedWizard() {
       const status = wizard.querySelector("[data-form-status]");
       createBtn.disabled = true;
       status.className = "form-status is-loading";
-      status.textContent = "Planting your first seed...";
+      status.textContent = t("wizard.plantingStatus");
 
       try {
         await createPlant({
@@ -175,11 +176,11 @@ function initNewSeedWizard() {
         });
         sessionStorage.removeItem(DRAFT_KEY);
         status.className = "form-status is-success";
-        status.textContent = "Your plant has been created! Redirecting...";
+        status.textContent = t("wizard.planted");
         window.location.href = "index.html";
       } catch (err) {
         status.className = "form-status is-error";
-        status.textContent = err.message || "Something went wrong. Please try again.";
+        status.textContent = err.message || t("common.errorGeneric");
         createBtn.disabled = false;
       }
     });

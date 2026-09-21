@@ -14,7 +14,7 @@ class ApiError extends Error {
 }
 
 function getAuthToken() {
-  return localStorage.getItem("greenomy:token");
+  return localStorage.getItem("greenomy:token") || sessionStorage.getItem("greenomy:token");
 }
 
 async function request(method, path, { body, params, auth = true } = {}) {

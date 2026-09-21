@@ -2,6 +2,7 @@
 // signup.html; it detects which form is present on the page).
 import { signup, login, isAuthenticated } from "./authservise.js";
 import { ApiError } from "./servisapi.js";
+import { t } from "./language.js";
 
 function setFieldError(input, message) {
   const wrapper = input.closest(".form-field");
@@ -16,13 +17,17 @@ function setStatus(statusEl, mode, message) {
   statusEl.textContent = message;
 }
 
+function errorMessage(err) {
+  return err instanceof ApiError ? err.message : t("common.errorGeneric");
+}
+
 function initPasswordToggles() {
   document.querySelectorAll(".password-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const input = btn.closest(".password-field").querySelector("input");
       const isHidden = input.type === "password";
       input.type = isHidden ? "text" : "password";
-      btn.textContent = isHidden ? "Hide" : "Show";
+      btn.textContent = isHidden ? t("auth.hidePassword") : t("auth.showPassword");
     });
   });
 }
@@ -41,20 +46,20 @@ function initSignupForm() {
     const submitBtn = form.querySelector('button[type="submit"]');
 
     let valid = true;
-    if (!fullName.value.trim()) { setFieldError(fullName, "Please enter your name."); valid = false; }
+    if (!fullName.value.trim()) { setFieldError(fullName, t("auth.errName")); valid = false; }
     else setFieldError(fullName, "");
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email.value.trim())) { setFieldError(email, "Please enter a valid email."); valid = false; }
+    if (!emailPattern.test(email.value.trim())) { setFieldError(email, t("auth.errEmail")); valid = false; }
     else setFieldError(email, "");
 
-    if (password.value.length < 8) { setFieldError(password, "Password must be at least 8 characters."); valid = false; }
+    if (password.value.length < 8) { setFieldError(password, t("auth.errPasswordShort")); valid = false; }
     else setFieldError(password, "");
 
     if (!valid) return;
 
     submitBtn.disabled = true;
-    setStatus(status, "loading", "Creating your account...");
+    setStatus(status, "loading", t("auth.creating"));
 
     try {
       await signup({
@@ -63,11 +68,10 @@ function initSignupForm() {
         password: password.value,
         city: city ? city.value.trim() : undefined,
       });
-      setStatus(status, "success", "Account created! Redirecting...");
+      setStatus(status, "success", t("auth.created"));
       window.location.href = "onboarding.html";
     } catch (err) {
-      const message = err instanceof ApiError ? err.message : "Something went wrong. Please try again.";
-      setStatus(status, "error", message);
+      setStatus(status, "error", errorMessage(err));
       submitBtn.disabled = false;
     }
   });
@@ -81,28 +85,32 @@ function initLoginForm() {
     e.preventDefault();
     const email = form.querySelector("#email");
     const password = form.querySelector("#password");
+    const rememberInput = form.querySelector('input[name="remember"]');
     const status = form.querySelector("[data-form-status]");
     const submitBtn = form.querySelector('button[type="submit"]');
 
     let valid = true;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email.value.trim())) { setFieldError(email, "Please enter a valid email."); valid = false; }
+    if (!emailPattern.test(email.value.trim())) { setFieldError(email, t("auth.errEmail")); valid = false; }
     else setFieldError(email, "");
-    if (!password.value) { setFieldError(password, "Please enter your password."); valid = false; }
+    if (!password.value) { setFieldError(password, t("auth.errPasswordRequired")); valid = false; }
     else setFieldError(password, "");
 
     if (!valid) return;
 
     submitBtn.disabled = true;
-    setStatus(status, "loading", "Logging in...");
+    setStatus(status, "loading", t("auth.loggingIn"));
 
     try {
-      await login({ email: email.value.trim(), password: password.value });
-      setStatus(status, "success", "Welcome back! Redirecting...");
+      await login({
+        email: email.value.trim(),
+        password: password.value,
+        remember: rememberInput ? rememberInput.checked : true,
+      });
+      setStatus(status, "success", t("auth.welcome"));
       window.location.href = "index.html";
     } catch (err) {
-      const message = err instanceof ApiError ? err.message : "Something went wrong. Please try again.";
-      setStatus(status, "error", message);
+      setStatus(status, "error", errorMessage(err));
       submitBtn.disabled = false;
     }
   });

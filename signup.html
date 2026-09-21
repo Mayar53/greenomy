@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E" />
   <title>Join Greenomy — Create Your Account</title>
   <meta name="robots" content="noindex" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -28,43 +29,43 @@
     <div class="auth-card card">
       <div class="auth-header">
         <span class="brand-mark" aria-hidden="true" style="margin: 0 auto 14px; display:flex;">🌱</span>
-        <h1>Start with one seed</h1>
-        <p>Create your Greenomy account — it takes less than a minute.</p>
+        <h1 data-i18n="auth.signupTitle">Start with one seed</h1>
+        <p data-i18n="auth.signupLead">Create your Greenomy account — it takes less than a minute.</p>
       </div>
 
       <form data-signup-form novalidate>
         <div class="form-field">
-          <label for="fullName">Full Name</label>
+          <label for="fullName" data-i18n="contact.fullName">Full Name</label>
           <input type="text" id="fullName" name="fullName" autocomplete="name" required />
           <span class="field-error" role="alert"></span>
         </div>
 
         <div class="form-field">
-          <label for="email">Email</label>
+          <label for="email" data-i18n="contact.email">Email</label>
           <input type="email" id="email" name="email" autocomplete="email" required />
           <span class="field-error" role="alert"></span>
         </div>
 
         <div class="form-field">
-          <label for="password">Password</label>
+          <label for="password" data-i18n="auth.password">Password</label>
           <div class="password-field">
             <input type="password" id="password" name="password" autocomplete="new-password" minlength="8" required />
-            <button type="button" class="password-toggle">Show</button>
+            <button type="button" class="password-toggle" data-i18n="auth.showPassword">Show</button>
           </div>
           <span class="field-error" role="alert"></span>
-          <span class="form-note">At least 8 characters.</span>
+          <span class="form-note" data-i18n="auth.passwordNote">At least 8 characters.</span>
         </div>
 
         <div class="form-field">
-          <label for="city">City <span style="font-weight: 400; color: var(--color-text-muted);">(optional)</span></label>
+          <label for="city"><span data-i18n="contact.city">City</span> <span style="font-weight: 400; color: var(--color-text-muted);" data-i18n="auth.optional">(optional)</span></label>
           <input type="text" id="city" name="city" autocomplete="address-level2" />
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Join Greenomy</button>
+        <button type="submit" class="btn btn-primary btn-block" data-i18n="auth.signupButton">Join Greenomy</button>
         <div class="form-status" data-form-status role="status" aria-live="polite"></div>
       </form>
 
-      <p class="auth-switch">Already have an account? <a href="login.html" class="btn-ghost">Log In</a></p>
+      <p class="auth-switch"><span data-i18n="auth.signupSwitch">Already have an account?</span> <a href="login.html" class="btn-ghost" data-i18n="nav.login">Log In</a></p>
     </div>
   </main>
 

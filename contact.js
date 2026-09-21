@@ -14,7 +14,7 @@ function validate(form) {
 
   const fullName = form.querySelector("#fullName");
   if (!fullName.value.trim()) {
-    setFieldError(fullName, "Please enter your full name.");
+    setFieldError(fullName, t("contact.errName"));
     valid = false;
   } else {
     setFieldError(fullName, "");
@@ -23,7 +23,7 @@ function validate(form) {
   const email = form.querySelector("#email");
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(email.value.trim())) {
-    setFieldError(email, "Please enter a valid email address.");
+    setFieldError(email, t("contact.errEmail"));
     valid = false;
   } else {
     setFieldError(email, "");
@@ -31,7 +31,7 @@ function validate(form) {
 
   const city = form.querySelector("#city");
   if (!city.value.trim()) {
-    setFieldError(city, "Please enter your city.");
+    setFieldError(city, t("contact.errCity"));
     valid = false;
   } else {
     setFieldError(city, "");

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E" />
   <title>Log In — Greenomy</title>
   <meta name="robots" content="noindex" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -28,22 +29,22 @@
     <div class="auth-card card">
       <div class="auth-header">
         <span class="brand-mark" aria-hidden="true" style="margin: 0 auto 14px; display:flex;">🌱</span>
-        <h1>Welcome back</h1>
-        <p>Log in to keep growing with Greenomy.</p>
+        <h1 data-i18n="auth.loginTitle">Welcome back</h1>
+        <p data-i18n="auth.loginLead">Log in to keep growing with Greenomy.</p>
       </div>
 
       <form data-login-form novalidate>
         <div class="form-field">
-          <label for="email">Email</label>
+          <label for="email" data-i18n="contact.email">Email</label>
           <input type="email" id="email" name="email" autocomplete="email" required />
           <span class="field-error" role="alert"></span>
         </div>
 
         <div class="form-field">
-          <label for="password">Password</label>
+          <label for="password" data-i18n="auth.password">Password</label>
           <div class="password-field">
             <input type="password" id="password" name="password" autocomplete="current-password" required />
-            <button type="button" class="password-toggle">Show</button>
+            <button type="button" class="password-toggle" data-i18n="auth.showPassword">Show</button>
           </div>
           <span class="field-error" role="alert"></span>
         </div>
@@ -51,16 +52,16 @@
         <div class="auth-meta-row">
           <label class="checkbox-row">
             <input type="checkbox" name="remember" />
-            Remember me
+            <span data-i18n="auth.rememberMe">Remember me</span>
           </label>
-          <a href="contact.html" class="btn-ghost">Forgot password?</a>
+          <a href="contact.html" class="btn-ghost" data-i18n="auth.forgotPassword">Forgot password?</a>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+        <button type="submit" class="btn btn-primary btn-block" data-i18n="auth.loginButton">Log In</button>
         <div class="form-status" data-form-status role="status" aria-live="polite"></div>
       </form>
 
-      <p class="auth-switch">Don't have an account? <a href="signup.html" class="btn-ghost">Join Greenomy</a></p>
+      <p class="auth-switch"><span data-i18n="auth.loginSwitch">Don't have an account?</span> <a href="signup.html" class="btn-ghost" data-i18n="nav.join">Join Greenomy</a></p>
     </div>
   </main>
 

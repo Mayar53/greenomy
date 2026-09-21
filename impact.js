@@ -15,11 +15,21 @@ function animateValue(el, target, duration = 1400) {
   requestAnimationFrame(tick);
 }
 
+const HERO_STAT_MAP = { plants: "plantsGrown", seeds: "seedsStarted", members: "members" };
+
 async function initImpactCounters() {
   const section = document.querySelector("[data-impact-section]");
-  if (!section) return;
+  const heroStats = document.querySelectorAll("[data-hero-stat]");
+  if (!section && !heroStats.length) return;
 
   const { data } = await getImpactStats();
+
+  heroStats.forEach((el) => {
+    const key = HERO_STAT_MAP[el.getAttribute("data-hero-stat")];
+    if (key && typeof data[key] === "number") el.textContent = data[key].toLocaleString();
+  });
+
+  if (!section) return;
 
   const map = {
     plantsGrown: section.querySelector('[data-stat="plants"]'),

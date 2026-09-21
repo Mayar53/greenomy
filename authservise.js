@@ -4,6 +4,19 @@ import { api } from "./servisapi.js";
 const TOKEN_KEY = "greenomy:token";
 const USER_KEY = "greenomy:user";
 
+// Sessions are kept in localStorage ("remember me") or sessionStorage (this tab only).
+function readKey(key) {
+  for (const store of [localStorage, sessionStorage]) {
+    const value = store.getItem(key);
+    if (value !== null) return value;
+  }
+  return null;
+}
+
+function activeStore() {
+  return sessionStorage.getItem(TOKEN_KEY) !== null ? sessionStorage : localStorage;
+}
+
 function normalizeUser(raw) {
   if (!raw) return raw;
   const { user_id, full_name, total_points, created_at, updated_at, ...rest } = raw;
@@ -17,19 +30,25 @@ function normalizeUser(raw) {
   };
 }
 
-function storeSession(user, token) {
-  localStorage.setItem(TOKEN_KEY, token);
-  localStorage.setItem(USER_KEY, JSON.stringify(normalizeUser(user)));
+function storeSession(user, token, remember = true) {
+  const target = remember ? localStorage : sessionStorage;
+  const other = remember ? sessionStorage : localStorage;
+  other.removeItem(TOKEN_KEY);
+  other.removeItem(USER_KEY);
+  target.setItem(TOKEN_KEY, token);
+  target.setItem(USER_KEY, JSON.stringify(normalizeUser(user)));
 }
 
 export function clearSession() {
-  localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem(USER_KEY);
+  [localStorage, sessionStorage].forEach((store) => {
+    store.removeItem(TOKEN_KEY);
+    store.removeItem(USER_KEY);
+  });
 }
 
 export function getCurrentUser() {
   try {
-    const raw = localStorage.getItem(USER_KEY);
+    const raw = readKey(USER_KEY);
     return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
@@ -37,18 +56,18 @@ export function getCurrentUser() {
 }
 
 export function isAuthenticated() {
-  return Boolean(localStorage.getItem(TOKEN_KEY));
+  return Boolean(readKey(TOKEN_KEY));
 }
 
 export async function signup({ fullName, email, password, city }) {
   const result = await api.post("/auth/signup", { fullName, email, password, city }, { auth: false });
-  storeSession(result.user, result.token);
+  storeSession(result.user, result.token, true);
   return result.user;
 }
 
-export async function login({ email, password }) {
+export async function login({ email, password, remember = true }) {
   const result = await api.post("/auth/login", { email, password }, { auth: false });
-  storeSession(result.user, result.token);
+  storeSession(result.user, result.token, remember);
   return result.user;
 }
 
@@ -66,7 +85,7 @@ export async function requestPasswordReset(email) {
 
 export async function fetchCurrentUser() {
   const user = normalizeUser(await api.get("/auth/me"));
-  localStorage.setItem(USER_KEY, JSON.stringify(user));
+  activeStore().setItem(USER_KEY, JSON.stringify(user));
   return user;
 }
 

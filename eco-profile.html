@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E" />
   <title>Your Eco Profile — Greenomy</title>
   <meta name="robots" content="noindex" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -26,76 +27,76 @@
     </div>
 
     <form class="card wizard-card" data-eco-profile-form novalidate>
-      <h1>Build your Eco Profile</h1>
-      <p class="section-lead" style="margin-bottom: 24px;">Tell us a little about yourself so Greenomy can tailor tips and reminders to you.</p>
+      <h1 data-i18n="wizard.ecoTitle">Build your Eco Profile</h1>
+      <p class="section-lead" style="margin-bottom: 24px;" data-i18n="wizard.ecoLead">Tell us a little about yourself so Greenomy can tailor tips and reminders to you.</p>
 
       <div class="form-field">
-        <label for="fullName">Full Name</label>
+        <label for="fullName" data-i18n="wizard.fullName">Full Name</label>
         <input type="text" id="fullName" name="fullName" autocomplete="name" required />
       </div>
 
       <div class="form-field">
-        <label for="city">City</label>
+        <label for="city" data-i18n="wizard.city">City</label>
         <input type="text" id="city" name="city" autocomplete="address-level2" required />
       </div>
 
       <div class="form-field">
-        <label>Experience Level</label>
+        <label data-i18n="wizard.experience">Experience Level</label>
         <div class="option-grid" data-tile-group="experience">
           <button type="button" class="option-tile" data-value="beginner" aria-pressed="false">
-            <span class="tile-emoji">🌱</span><strong>Beginner</strong><span>New to growing plants</span>
+            <span class="tile-emoji">🌱</span><strong data-i18n="wizard.expBeginner">Beginner</strong><span data-i18n="wizard.expBeginnerDesc">New to growing plants</span>
           </button>
           <button type="button" class="option-tile" data-value="some-experience" aria-pressed="false">
-            <span class="tile-emoji">🪴</span><strong>Some Experience</strong><span>Grown a few plants before</span>
+            <span class="tile-emoji">🪴</span><strong data-i18n="wizard.expSome">Some Experience</strong><span data-i18n="wizard.expSomeDesc">Grown a few plants before</span>
           </button>
           <button type="button" class="option-tile" data-value="experienced" aria-pressed="false">
-            <span class="tile-emoji">🌳</span><strong>Experienced</strong><span>I garden regularly</span>
+            <span class="tile-emoji">🌳</span><strong data-i18n="wizard.expExperienced">Experienced</strong><span data-i18n="wizard.expExperiencedDesc">I garden regularly</span>
           </button>
           <button type="button" class="option-tile" data-value="expert" aria-pressed="false">
-            <span class="tile-emoji">🌿</span><strong>Expert</strong><span>Plants thrive under my care</span>
+            <span class="tile-emoji">🌿</span><strong data-i18n="wizard.expExpert">Expert</strong><span data-i18n="wizard.expExpertDesc">Plants thrive under my care</span>
           </button>
         </div>
       </div>
 
       <div class="form-field">
-        <label>Preferred Plant Types <span style="font-weight:400; color: var(--color-text-muted);">(pick any)</span></label>
+        <label><span data-i18n="wizard.plantTypes">Preferred Plant Types</span> <span style="font-weight:400; color: var(--color-text-muted);" data-i18n="wizard.pickAny">(pick any)</span></label>
         <div class="option-grid" data-tile-group="plantTypes" data-multi>
           <button type="button" class="option-tile" data-value="vegetables" aria-pressed="false">
-            <span class="tile-emoji">🍅</span><strong>Vegetables</strong>
+            <span class="tile-emoji">🍅</span><strong data-i18n="wizard.plantVeg">Vegetables</strong>
           </button>
           <button type="button" class="option-tile" data-value="herbs" aria-pressed="false">
-            <span class="tile-emoji">🌿</span><strong>Herbs</strong>
+            <span class="tile-emoji">🌿</span><strong data-i18n="wizard.plantHerbs">Herbs</strong>
           </button>
           <button type="button" class="option-tile" data-value="fruit-trees" aria-pressed="false">
-            <span class="tile-emoji">🍊</span><strong>Fruit Trees</strong>
+            <span class="tile-emoji">🍊</span><strong data-i18n="wizard.plantFruit">Fruit Trees</strong>
           </button>
           <button type="button" class="option-tile" data-value="houseplants" aria-pressed="false">
-            <span class="tile-emoji">🪴</span><strong>Houseplants</strong>
+            <span class="tile-emoji">🪴</span><strong data-i18n="wizard.plantHouse">Houseplants</strong>
           </button>
         </div>
       </div>
 
       <div class="form-field">
-        <label>Sustainability Interests <span style="font-weight:400; color: var(--color-text-muted);">(pick any)</span></label>
+        <label><span data-i18n="wizard.interests">Sustainability Interests</span> <span style="font-weight:400; color: var(--color-text-muted);" data-i18n="wizard.pickAny">(pick any)</span></label>
         <div class="option-grid" data-tile-group="interests" data-multi>
           <button type="button" class="option-tile" data-value="food-recycling" aria-pressed="false">
-            <span class="tile-emoji">♻️</span><strong>Food Recycling</strong>
+            <span class="tile-emoji">♻️</span><strong data-i18n="wizard.intFood">Food Recycling</strong>
           </button>
           <button type="button" class="option-tile" data-value="composting" aria-pressed="false">
-            <span class="tile-emoji">🪱</span><strong>Composting</strong>
+            <span class="tile-emoji">🪱</span><strong data-i18n="wizard.intCompost">Composting</strong>
           </button>
           <button type="button" class="option-tile" data-value="urban-greening" aria-pressed="false">
-            <span class="tile-emoji">🏙️</span><strong>Urban Greening</strong>
+            <span class="tile-emoji">🏙️</span><strong data-i18n="wizard.intUrban">Urban Greening</strong>
           </button>
           <button type="button" class="option-tile" data-value="zero-waste" aria-pressed="false">
-            <span class="tile-emoji">🌍</span><strong>Zero Waste</strong>
+            <span class="tile-emoji">🌍</span><strong data-i18n="wizard.intZero">Zero Waste</strong>
           </button>
         </div>
       </div>
 
       <div class="wizard-actions">
-        <a href="onboarding.html" class="btn btn-secondary">Back</a>
-        <button type="submit" class="btn btn-primary">Continue</button>
+        <a href="onboarding.html" class="btn btn-secondary" data-i18n="wizard.back">Back</a>
+        <button type="submit" class="btn btn-primary" data-i18n="wizard.continue">Continue</button>
       </div>
       <div class="form-status" data-form-status role="status" aria-live="polite"></div>
     </form>

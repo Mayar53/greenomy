@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E" />
   <title>Plant Your First Seed — Greenomy</title>
   <meta name="robots" content="noindex" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -37,88 +38,88 @@
 
       <!-- Step 1: choose plant/seed -->
       <div data-step>
-        <h1>What are you planting?</h1>
-        <p class="section-lead" style="margin-bottom: 20px;">Choose the seed or plant you'd like to start tracking.</p>
+        <h1 data-i18n="wizard.seedStep1Title">What are you planting?</h1>
+        <p class="section-lead" style="margin-bottom: 20px;" data-i18n="wizard.seedStep1Lead">Choose the seed or plant you'd like to start tracking.</p>
         <div class="option-grid" data-tile-group="plantType">
           <button type="button" class="option-tile" data-value="Tomato" aria-pressed="false">
-            <span class="tile-emoji">🍅</span><strong>Tomato</strong><span>Vegetable</span>
+            <span class="tile-emoji">🍅</span><strong data-i18n="wizard.plantTomato">Tomato</strong><span data-i18n="wizard.plantTomatoDesc">Vegetable</span>
           </button>
           <button type="button" class="option-tile" data-value="Basil" aria-pressed="false">
-            <span class="tile-emoji">🌿</span><strong>Basil</strong><span>Herb</span>
+            <span class="tile-emoji">🌿</span><strong data-i18n="wizard.plantBasil">Basil</strong><span data-i18n="wizard.plantBasilDesc">Herb</span>
           </button>
           <button type="button" class="option-tile" data-value="Orange Tree" aria-pressed="false">
-            <span class="tile-emoji">🍊</span><strong>Orange Tree</strong><span>Fruit tree, from seed</span>
+            <span class="tile-emoji">🍊</span><strong data-i18n="wizard.plantOrange">Orange Tree</strong><span data-i18n="wizard.plantOrangeDesc">Fruit tree, from seed</span>
           </button>
           <button type="button" class="option-tile" data-value="Pothos" aria-pressed="false">
-            <span class="tile-emoji">🪴</span><strong>Pothos</strong><span>Houseplant</span>
+            <span class="tile-emoji">🪴</span><strong data-i18n="wizard.plantPothos">Pothos</strong><span data-i18n="wizard.plantPothosDesc">Houseplant</span>
           </button>
         </div>
         <div class="wizard-actions">
           <span></span>
-          <button type="button" class="btn btn-primary" data-next>Continue</button>
+          <button type="button" class="btn btn-primary" data-next data-i18n="wizard.continue">Continue</button>
         </div>
       </div>
 
       <!-- Step 2: planting method -->
       <div data-step hidden>
-        <h1>How are you planting it?</h1>
-        <p class="section-lead" style="margin-bottom: 20px;">This helps us tailor watering and growth guidance.</p>
+        <h1 data-i18n="wizard.seedStep2Title">How are you planting it?</h1>
+        <p class="section-lead" style="margin-bottom: 20px;" data-i18n="wizard.seedStep2Lead">This helps us tailor watering and growth guidance.</p>
         <div class="option-grid" data-tile-group="plantingMethod">
           <button type="button" class="option-tile" data-value="From Seed" aria-pressed="false">
-            <span class="tile-emoji">🌰</span><strong>From Seed</strong>
+            <span class="tile-emoji">🌰</span><strong data-i18n="wizard.methodSeed">From Seed</strong>
           </button>
           <button type="button" class="option-tile" data-value="From Cutting" aria-pressed="false">
-            <span class="tile-emoji">🌿</span><strong>From Cutting</strong>
+            <span class="tile-emoji">🌿</span><strong data-i18n="wizard.methodCutting">From Cutting</strong>
           </button>
           <button type="button" class="option-tile" data-value="Transplanted Seedling" aria-pressed="false">
-            <span class="tile-emoji">🪴</span><strong>Transplanted Seedling</strong>
+            <span class="tile-emoji">🪴</span><strong data-i18n="wizard.methodSeedling">Transplanted Seedling</strong>
           </button>
           <button type="button" class="option-tile" data-value="Regrown From Scraps" aria-pressed="false">
-            <span class="tile-emoji">♻️</span><strong>Regrown From Scraps</strong>
+            <span class="tile-emoji">♻️</span><strong data-i18n="wizard.methodScraps">Regrown From Scraps</strong>
           </button>
         </div>
         <div class="wizard-actions">
-          <button type="button" class="btn btn-secondary" data-back>Back</button>
-          <button type="button" class="btn btn-primary" data-next>Continue</button>
+          <button type="button" class="btn btn-secondary" data-back data-i18n="wizard.back">Back</button>
+          <button type="button" class="btn btn-primary" data-next data-i18n="wizard.continue">Continue</button>
         </div>
       </div>
 
       <!-- Step 3: planting date -->
       <div data-step hidden>
-        <h1>When did you plant it?</h1>
-        <p class="section-lead" style="margin-bottom: 20px;">We'll use this to track growth day-by-day.</p>
+        <h1 data-i18n="wizard.seedStep3Title">When did you plant it?</h1>
+        <p class="section-lead" style="margin-bottom: 20px;" data-i18n="wizard.seedStep3Lead">We'll use this to track growth day-by-day.</p>
         <div class="form-field">
-          <label for="plantingDate">Planting Date</label>
+          <label for="plantingDate" data-i18n="wizard.plantingDate">Planting Date</label>
           <input type="date" id="plantingDate" name="plantingDate" />
         </div>
         <div class="wizard-actions">
-          <button type="button" class="btn btn-secondary" data-back>Back</button>
-          <button type="button" class="btn btn-primary" data-next>Continue</button>
+          <button type="button" class="btn btn-secondary" data-back data-i18n="wizard.back">Back</button>
+          <button type="button" class="btn btn-primary" data-next data-i18n="wizard.continue">Continue</button>
         </div>
       </div>
 
       <!-- Step 4: location -->
       <div data-step hidden>
-        <h1>Where is it growing?</h1>
-        <p class="section-lead" style="margin-bottom: 20px;">A balcony, a windowsill, a backyard — anywhere counts.</p>
+        <h1 data-i18n="wizard.seedStep4Title">Where is it growing?</h1>
+        <p class="section-lead" style="margin-bottom: 20px;" data-i18n="wizard.seedStep4Lead">A balcony, a windowsill, a backyard — anywhere counts.</p>
         <div class="form-field">
-          <label for="location">Location</label>
-          <input type="text" id="location" name="location" placeholder="e.g. Kitchen windowsill" />
+          <label for="location" data-i18n="wizard.location">Location</label>
+          <input type="text" id="location" name="location" data-i18n-attr="placeholder:wizard.locationPlaceholder" placeholder="e.g. Kitchen windowsill" />
         </div>
         <div class="wizard-actions">
-          <button type="button" class="btn btn-secondary" data-back>Back</button>
-          <button type="button" class="btn btn-primary" data-next>Continue</button>
+          <button type="button" class="btn btn-secondary" data-back data-i18n="wizard.back">Back</button>
+          <button type="button" class="btn btn-primary" data-next data-i18n="wizard.continue">Continue</button>
         </div>
       </div>
 
       <!-- Step 5: confirmation + create -->
       <div data-step hidden>
-        <h1>Ready to grow?</h1>
-        <p class="section-lead" style="margin-bottom: 20px;">Here's what we'll add to your green space.</p>
+        <h1 data-i18n="wizard.seedStep5Title">Ready to grow?</h1>
+        <p class="section-lead" style="margin-bottom: 20px;" data-i18n="wizard.seedStep5Lead">Here's what we'll add to your green space.</p>
         <div data-seed-summary></div>
         <div class="wizard-actions">
-          <button type="button" class="btn btn-secondary" data-back>Back</button>
-          <button type="button" class="btn btn-primary" data-create-plant>Create My Plant</button>
+          <button type="button" class="btn btn-secondary" data-back data-i18n="wizard.back">Back</button>
+          <button type="button" class="btn btn-primary" data-create-plant data-i18n="wizard.createPlant">Create My Plant</button>
         </div>
         <div class="form-status" data-form-status role="status" aria-live="polite"></div>
       </div>

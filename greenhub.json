@@ -5,7 +5,11 @@
     "description": "Turn a seed you'd normally throw away into a slow-growing houseplant with a little patience.",
     "category": "food-seed-recycling",
     "readingTime": 6,
-    "image": "orange-seed.jpg"
+    "image": "orange-seed.jpg",
+    "body": [
+      "Orange seeds germinate readily, but the tree they grow into is a long-term project. Rinse the pips, soak them overnight, and plant them about 1 cm deep in moist seed compost.",
+      "Keep the pot warm and bright and it can sprout within a few weeks. Expect glossy leaves first — fruit, if it ever comes, is years away. Treat it as a beautiful houseplant, not a harvest."
+    ]
   },
   {
     "slug": "growing-tomato-seeds",
@@ -13,7 +17,11 @@
     "description": "A beginner-friendly guide to germinating tomato seeds before the growing season starts.",
     "category": "home-gardening",
     "readingTime": 5,
-    "image": "tomato-seeds.jpg"
+    "image": "tomato-seeds.jpg",
+    "body": [
+      "Start tomatoes six to eight weeks before your last frost. Sow seeds about 5 mm deep in damp seed compost, water gently, and keep them at around 20°C.",
+      "Once seedlings have two sets of true leaves, pot them on and move them to the brightest spot you have. They need light more than heat to grow sturdy."
+    ]
   },
   {
     "slug": "growing-apple-seeds",
@@ -21,7 +29,11 @@
     "description": "What actually happens when you plant an apple seed, and how to give it the best chance.",
     "category": "food-seed-recycling",
     "readingTime": 7,
-    "image": "apple-seeds.jpg"
+    "image": "apple-seeds.jpg",
+    "body": [
+      "An apple seed will sprout, but the tree it grows into won't be the apple you ate. Apples don't come true from seed, so the fruit will be unpredictable.",
+      "If you still want to try, chill the seeds in a damp paper towel in the fridge for a few weeks, then plant them. Think of it as an experiment, not an orchard."
+    ]
   },
   {
     "slug": "preparing-soil",
@@ -29,7 +41,11 @@
     "description": "The basics of soil, drainage, and containers before you plant anything.",
     "category": "home-gardening",
     "readingTime": 4,
-    "image": "soil-prep.jpg"
+    "image": "soil-prep.jpg",
+    "body": [
+      "Most houseplants fail because of waterlogged roots, not bad soil. Choose a mix with plenty of air and a pot that has drainage holes.",
+      "Fill the pot, firm the soil lightly, and water before planting so it settles. Then water only when the top couple of centimetres feel dry."
+    ]
   },
   {
     "slug": "watering-plants",
@@ -37,7 +53,11 @@
     "description": "Watering schedules depend on plant type, not the calendar. Here's how to read your plant.",
     "category": "plant-care",
     "readingTime": 5,
-    "image": "watering.jpg"
+    "image": "watering.jpg",
+    "body": [
+      "Forget the calendar and check the soil instead. Push a finger in; if it's dry a few centimetres down, it's time to water.",
+      "Water thoroughly until it runs out of the drainage holes, then empty the saucer. Little and often is the fastest way to lose a plant."
+    ]
   },
   {
     "slug": "indoor-gardening",
@@ -45,7 +65,11 @@
     "description": "Apartment living doesn't rule out a green space. Here's what actually survives indoors.",
     "category": "home-gardening",
     "readingTime": 6,
-    "image": "indoor-gardening.jpg"
+    "image": "indoor-gardening.jpg",
+    "body": [
+      "Low light doesn't mean no plants. Snake plants, pothos, and ZZ plants tolerate shade and forgive missed waterings.",
+      "Rotate them now and then so they grow evenly, and keep them away from cold draughts. A window that faces north can still work."
+    ]
   },
   {
     "slug": "plant-care-basics",
@@ -53,7 +77,11 @@
     "description": "Skip the overwhelm — these are the habits that keep most houseplants alive.",
     "category": "plant-care",
     "readingTime": 4,
-    "image": "plant-care.jpg"
+    "image": "plant-care.jpg",
+    "body": [
+      "Five habits do most of the work: water by feel, give the right light, feed lightly in spring and summer, clean the leaves, and repot when roots circle the pot.",
+      "None of these is complicated. Consistency matters far more than any special product."
+    ]
   },
   {
     "slug": "urban-greening",
@@ -61,7 +89,11 @@
     "description": "You don't need a backyard to make a neighborhood greener.",
     "category": "home-gardening",
     "readingTime": 5,
-    "image": "urban-greening.jpg"
+    "image": "urban-greening.jpg",
+    "body": [
+      "A balcony, a fire escape, or a windowsill is enough to green a street. Even a few pots add shade, food, and a home for pollinators.",
+      "Start with tough plants suited to your light and wind, and add more as you learn what thrives in your spot."
+    ]
   },
   {
     "slug": "recycling-food-seeds",
@@ -69,6 +101,10 @@
     "description": "From avocado pits to green onion roots — an easy intro to regrowing food.",
     "category": "food-seed-recycling",
     "readingTime": 6,
-    "image": "food-scraps.jpg"
+    "image": "food-scraps.jpg",
+    "body": [
+      "Green onion roots, lettuce bases, celery bottoms, and avocado pits can all be regrown in water or soil with almost no effort.",
+      "Keep the water fresh, give them light, and pot them up once roots form. It's the easiest first step into growing your own food."
+    ]
   }
 ]
