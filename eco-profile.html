@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Eco Profile — Greenomy</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="responsive.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true">🌱</span> Greenomy</a>
+    </div>
+  </header>
+
+  <main class="wizard-shell">
+    <div class="wizard-progress" aria-hidden="true">
+      <span class="step-dot is-complete"></span>
+      <span class="step-dot is-active"></span>
+      <span class="step-dot"></span>
+    </div>
+
+    <form class="card wizard-card" data-eco-profile-form novalidate>
+      <h1>Build your Eco Profile</h1>
+      <p class="section-lead" style="margin-bottom: 24px;">Tell us a little about yourself so Greenomy can tailor tips and reminders to you.</p>
+
+      <div class="form-field">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" autocomplete="name" required />
+      </div>
+
+      <div class="form-field">
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" autocomplete="address-level2" required />
+      </div>
+
+      <div class="form-field">
+        <label>Experience Level</label>
+        <div class="option-grid" data-tile-group="experience">
+          <button type="button" class="option-tile" data-value="beginner" aria-pressed="false">
+            <span class="tile-emoji">🌱</span><strong>Beginner</strong><span>New to growing plants</span>
+          </button>
+          <button type="button" class="option-tile" data-value="some-experience" aria-pressed="false">
+            <span class="tile-emoji">🪴</span><strong>Some Experience</strong><span>Grown a few plants before</span>
+          </button>
+          <button type="button" class="option-tile" data-value="experienced" aria-pressed="false">
+            <span class="tile-emoji">🌳</span><strong>Experienced</strong><span>I garden regularly</span>
+          </button>
+          <button type="button" class="option-tile" data-value="expert" aria-pressed="false">
+            <span class="tile-emoji">🌿</span><strong>Expert</strong><span>Plants thrive under my care</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Preferred Plant Types <span style="font-weight:400; color: var(--color-text-muted);">(pick any)</span></label>
+        <div class="option-grid" data-tile-group="plantTypes" data-multi>
+          <button type="button" class="option-tile" data-value="vegetables" aria-pressed="false">
+            <span class="tile-emoji">🍅</span><strong>Vegetables</strong>
+          </button>
+          <button type="button" class="option-tile" data-value="herbs" aria-pressed="false">
+            <span class="tile-emoji">🌿</span><strong>Herbs</strong>
+          </button>
+          <button type="button" class="option-tile" data-value="fruit-trees" aria-pressed="false">
+            <span class="tile-emoji">🍊</span><strong>Fruit Trees</strong>
+          </button>
+          <button type="button" class="option-tile" data-value="houseplants" aria-pressed="false">
+            <span class="tile-emoji">🪴</span><strong>Houseplants</strong>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Sustainability Interests <span style="font-weight:400; color: var(--color-text-muted);">(pick any)</span></label>
+        <div class="option-grid" data-tile-group="interests" data-multi>
+          <button type="button" class="option-tile" data-value="food-recycling" aria-pressed="false">
+            <span class="tile-emoji">♻️</span><strong>Food Recycling</strong>
+          </button>
+          <button type="button" class="option-tile" data-value="composting" aria-pressed="false">
+            <span class="tile-emoji">🪱</span><strong>Composting</strong>
+          </button>
+          <button type="button" class="option-tile" data-value="urban-greening" aria-pressed="false">
+            <span class="tile-emoji">🏙️</span><strong>Urban Greening</strong>
+          </button>
+          <button type="button" class="option-tile" data-value="zero-waste" aria-pressed="false">
+            <span class="tile-emoji">🌍</span><strong>Zero Waste</strong>
+          </button>
+        </div>
+      </div>
+
+      <div class="wizard-actions">
+        <a href="onboarding.html" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-primary">Continue</button>
+      </div>
+      <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <script type="module" src="main.js"></script>
+  <script type="module" src="onboarding.js"></script>
+</body>
+</html>

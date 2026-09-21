@@ -1,0 +1,107 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "greenHub": "Green Hub",
+    "rewards": "Rewards",
+    "contact": "Contact",
+    "join": "Join Greenomy",
+    "login": "Log In"
+  },
+  "hero": {
+    "eyebrow": "Nature × Technology × Community",
+    "title": "Your Small Step Can Grow a Forest.",
+    "subtitle": "Greenomy helps you grow real plants, learn everyday sustainability, and turn your progress into points you can redeem with partner businesses.",
+    "ctaPrimary": "Join Greenomy",
+    "ctaSecondary": "Explore Green Hub",
+    "statPlants": "Plants Grown",
+    "statSeeds": "Seeds Started",
+    "statMembers": "Greenomy Members"
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "Four simple steps to your first green win",
+    "join": { "title": "Join", "desc": "Create an account and build your Greenomy profile." },
+    "learn": { "title": "Learn & Collect", "desc": "Learn about plants and sustainability while earning points." },
+    "grow": { "title": "Grow & Verify", "desc": "Plant something and document its growth." },
+    "earn": { "title": "Earn", "desc": "Earn points and redeem rewards from Greenomy partners." }
+  },
+  "impact": {
+    "eyebrow": "Live impact",
+    "title": "Growing together, one seed at a time",
+    "lead": "Every plant on Greenomy is real. Here's what our community has grown so far.",
+    "plants": "Plants Grown",
+    "seeds": "Seeds Started",
+    "co2": "Estimated CO₂ Impact",
+    "members": "Greenomy Members"
+  },
+  "footer": {
+    "mission": "Environmental technology made warm and human. Grow plants, learn sustainability, earn rewards.",
+    "explore": "Explore",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "getApp": "Get the app",
+    "rights": "All rights reserved."
+  },
+  "about": {
+    "eyebrow": "About Greenomy",
+    "title": "Making sustainability something you can grow with your hands",
+    "visionTitle": "Our Vision",
+    "vision": "Greenomy makes sustainability and urban greening accessible through technology and community participation — one small plant at a time.",
+    "whyTitle": "Why Greenomy",
+    "why": "Most sustainability advice stays abstract. Greenomy turns it into a plant on your windowsill, a photo you're proud of, and points you can actually use.",
+    "circularTitle": "Circular Economy",
+    "circular": "We encourage regrowing food scraps and seeds you'd normally throw away, turning kitchen waste into new life.",
+    "urbanTitle": "Urban Greening",
+    "urban": "Even a balcony or a windowsill counts. Greenomy helps cities grow greener, one household at a time.",
+    "communityTitle": "Community Empowerment",
+    "community": "Growth is more fun together. Members share progress, tips, and encouragement across the Greenomy community.",
+    "valuesTitle": "Core Values",
+    "founderTitle": "Founder",
+    "founderName": "Founder Name",
+    "founderRole": "Founder & CEO, Greenomy",
+    "founderBio": "Placeholder bio — replace with the founder's real story and motivation for building Greenomy."
+  },
+  "greenHub": {
+    "eyebrow": "Green Hub",
+    "title": "Learn something new, grow something real",
+    "lead": "Bite-sized guides on seeds, gardening, and everyday sustainability.",
+    "filterAll": "All",
+    "filterSeed": "Food Seed Recycling",
+    "filterGarden": "Home Gardening",
+    "filterCare": "Plant Care",
+    "readMore": "Read Article",
+    "minRead": "min read"
+  },
+  "rewards": {
+    "eyebrow": "Rewards",
+    "title": "Turn your green habits into real rewards",
+    "lead": "Preview what Greenomy members can redeem with partner businesses.",
+    "pointsRequired": "points",
+    "expires": "Expires",
+    "appOnly": "Reward redemption is available exclusively inside the Greenomy app."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's grow something together",
+    "lead": "Questions, partnerships, or just want to say hi? Reach out any time.",
+    "emailLabel": "Email",
+    "partnershipLabel": "Partnerships",
+    "waitlistTitle": "Join the Waitlist",
+    "waitlistLead": "Be first to know when Greenomy launches in your city.",
+    "fullName": "Full Name",
+    "email": "Email",
+    "city": "City",
+    "interests": "Gardening Interests",
+    "submit": "Join Waitlist",
+    "sending": "Sending...",
+    "success": "You're on the list! Welcome to Greenomy 🌱",
+    "error": "Something went wrong. Please try again."
+  },
+  "common": {
+    "loading": "Loading...",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "emptyGeneric": "Nothing here yet."
+  }
+}

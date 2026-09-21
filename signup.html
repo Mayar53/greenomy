@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Greenomy — Create Your Account</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="responsive.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true">🌱</span> Greenomy</a>
+      <div class="header-actions" style="margin-inline-start: auto;">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang-option="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang-option="ar" aria-pressed="false">AR</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-shell">
+    <div class="auth-card card">
+      <div class="auth-header">
+        <span class="brand-mark" aria-hidden="true" style="margin: 0 auto 14px; display:flex;">🌱</span>
+        <h1>Start with one seed</h1>
+        <p>Create your Greenomy account — it takes less than a minute.</p>
+      </div>
+
+      <form data-signup-form novalidate>
+        <div class="form-field">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" autocomplete="name" required />
+          <span class="field-error" role="alert"></span>
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required />
+          <span class="field-error" role="alert"></span>
+        </div>
+
+        <div class="form-field">
+          <label for="password">Password</label>
+          <div class="password-field">
+            <input type="password" id="password" name="password" autocomplete="new-password" minlength="8" required />
+            <button type="button" class="password-toggle">Show</button>
+          </div>
+          <span class="field-error" role="alert"></span>
+          <span class="form-note">At least 8 characters.</span>
+        </div>
+
+        <div class="form-field">
+          <label for="city">City <span style="font-weight: 400; color: var(--color-text-muted);">(optional)</span></label>
+          <input type="text" id="city" name="city" autocomplete="address-level2" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Join Greenomy</button>
+        <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+      </form>
+
+      <p class="auth-switch">Already have an account? <a href="login.html" class="btn-ghost">Log In</a></p>
+    </div>
+  </main>
+
+  <script type="module" src="main.js"></script>
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

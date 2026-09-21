@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log In — Greenomy</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="responsive.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true">🌱</span> Greenomy</a>
+      <div class="header-actions" style="margin-inline-start: auto;">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang-option="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang-option="ar" aria-pressed="false">AR</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-shell">
+    <div class="auth-card card">
+      <div class="auth-header">
+        <span class="brand-mark" aria-hidden="true" style="margin: 0 auto 14px; display:flex;">🌱</span>
+        <h1>Welcome back</h1>
+        <p>Log in to keep growing with Greenomy.</p>
+      </div>
+
+      <form data-login-form novalidate>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required />
+          <span class="field-error" role="alert"></span>
+        </div>
+
+        <div class="form-field">
+          <label for="password">Password</label>
+          <div class="password-field">
+            <input type="password" id="password" name="password" autocomplete="current-password" required />
+            <button type="button" class="password-toggle">Show</button>
+          </div>
+          <span class="field-error" role="alert"></span>
+        </div>
+
+        <div class="auth-meta-row">
+          <label class="checkbox-row">
+            <input type="checkbox" name="remember" />
+            Remember me
+          </label>
+          <a href="contact.html" class="btn-ghost">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+        <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+      </form>
+
+      <p class="auth-switch">Don't have an account? <a href="signup.html" class="btn-ghost">Join Greenomy</a></p>
+    </div>
+  </main>
+
+  <script type="module" src="main.js"></script>
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

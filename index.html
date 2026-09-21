@@ -1,94 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Furas — Opportunities for Iraqi Youth</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greenomy — Grow Plants. Learn Sustainability. Earn Rewards.</title>
+  <meta name="description" content="Greenomy helps you grow real plants, learn everyday sustainability, and earn points you can redeem with partner businesses." />
+  <meta property="og:title" content="Greenomy — Your Small Step Can Grow a Forest" />
+  <meta property="og:description" content="Grow plants, learn sustainability, and earn rewards with Greenomy." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
 </head>
 <body>
 
-<header>
-  <div class="wrap nav">
-    <a href="#" class="logo"><span class="mark">F</span>Furas</a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#opportunities">Opportunities</a>
-      <a href="#faq">FAQ</a>
-      <a href="#" class="nav-cta">Admin Login</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
-  </div>
-</header>
-<div class="star-strip"></div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true">🌱</span>
+        Greenomy
+      </a>
 
-<section class="hero">
-  <div class="wrap hero-inner">
-    <div class="eyebrow">For Iraqi Youth</div>
-    <h1>Find your next opportunity, all in one place.</h1>
-    <p class="sub">Volunteering, fellowships, internships, competitions, courses, workshops, sessions, and conferences — researched and verified by our team, updated every week.</p>
-    <div class="search-box">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#5C5C5C" stroke-width="2"/><path d="M20 20L16.5 16.5" stroke="#5C5C5C" stroke-width="2" stroke-linecap="round"/></svg>
-      <input type="text" id="searchInput" placeholder="Search by title or keyword, e.g. “marketing internship”">
-      <button class="search-btn" id="searchBtn">Search</button>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html" data-i18n="nav.home" aria-current="page">Home</a>
+        <a href="about.html" data-i18n="nav.about">About</a>
+        <a href="greenhub.html" data-i18n="nav.greenHub">Green Hub</a>
+        <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang-option="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang-option="ar" aria-pressed="false">AR</button>
+        </div>
+        <a href="signup.html" class="btn btn-primary" data-i18n="nav.join">Join Greenomy</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div><strong id="statTotal">0</strong><span>Live opportunities</span></div>
-      <div><strong>8</strong><span>Categories</span></div>
-      <div><strong>100%</strong><span>Verified by our team</span></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow" data-i18n="hero.eyebrow">Nature × Technology × Community</span>
+          <h1 class="heading-xl" data-i18n="hero.title">Your Small Step Can Grow a Forest.</h1>
+          <p class="section-lead" data-i18n="hero.subtitle">
+            Greenomy helps you grow real plants, learn everyday sustainability, and turn your progress into points you can redeem with partner businesses.
+          </p>
+          <div class="hero-actions">
+            <a href="signup.html" class="btn btn-primary" data-i18n="hero.ctaPrimary">Join Greenomy</a>
+            <a href="greenhub.html" class="btn btn-secondary" data-i18n="hero.ctaSecondary">Explore Green Hub</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>12,483</strong><span data-i18n="hero.statPlants">Plants Grown</span></div>
+            <div class="hero-stat"><strong>18,921</strong><span data-i18n="hero.statSeeds">Seeds Started</span></div>
+            <div class="hero-stat"><strong>2,840</strong><span data-i18n="hero.statMembers">Greenomy Members</span></div>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 170 C100 120 100 90 100 60" stroke="#F5F1EB" stroke-width="5" stroke-linecap="round"/>
+            <path d="M100 100 C80 90 65 70 68 45 C90 50 100 70 100 100Z" fill="#F5F1EB"/>
+            <path d="M100 85 C120 75 135 55 132 30 C110 35 100 55 100 85Z" fill="#EBE4D8"/>
+            <circle cx="100" cy="35" r="14" fill="#D4AF37" opacity="0.9"/>
+            <ellipse cx="100" cy="172" rx="46" ry="8" fill="#F5F1EB" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="section-head text-center">
+          <span class="eyebrow" data-i18n="how.eyebrow">How it works</span>
+          <h2 class="heading-lg" data-i18n="how.title">Four simple steps to your first green win</h2>
+        </div>
+        <div class="grid grid-4">
+          <div class="card">
+            <div class="icon-badge" aria-hidden="true">👤</div>
+            <h3 data-i18n="how.join.title">Join</h3>
+            <p data-i18n="how.join.desc">Create an account and build your Greenomy profile.</p>
+          </div>
+          <div class="card">
+            <div class="icon-badge" aria-hidden="true">📚</div>
+            <h3 data-i18n="how.learn.title">Learn &amp; Collect</h3>
+            <p data-i18n="how.learn.desc">Learn about plants and sustainability while earning points.</p>
+          </div>
+          <div class="card">
+            <div class="icon-badge" aria-hidden="true">🌿</div>
+            <h3 data-i18n="how.grow.title">Grow &amp; Verify</h3>
+            <p data-i18n="how.grow.desc">Plant something and document its growth.</p>
+          </div>
+          <div class="card">
+            <div class="icon-badge" aria-hidden="true">🏆</div>
+            <h3 data-i18n="how.earn.title">Earn</h3>
+            <p data-i18n="how.earn.desc">Earn points and redeem rewards from Greenomy partners.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-impact-section>
+      <div class="container">
+        <div class="impact-section">
+          <div class="section-head text-center">
+            <span class="eyebrow" data-i18n="impact.eyebrow" style="background: rgba(212,175,55,0.18); color: #E8CB6A;">Live impact</span>
+            <h2 class="heading-lg" data-i18n="impact.title">Growing together, one seed at a time</h2>
+            <p class="section-lead" data-i18n="impact.lead" style="margin: 0 auto;">
+              Every plant on Greenomy is real. Here's what our community has grown so far.
+            </p>
+          </div>
+          <div class="grid grid-4">
+            <div class="impact-stat"><strong data-stat="plants">0</strong><span data-i18n="impact.plants">Plants Grown</span></div>
+            <div class="impact-stat"><strong data-stat="seeds">0</strong><span data-i18n="impact.seeds">Seeds Started</span></div>
+            <div class="impact-stat"><strong data-stat="co2">0</strong><span data-i18n="impact.co2">Estimated CO₂ Impact (kg)</span></div>
+            <div class="impact-stat"><strong data-stat="members">0</strong><span data-i18n="impact.members">Greenomy Members</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand" style="color:#fff;">
+            <span class="brand-mark" aria-hidden="true">🌱</span> Greenomy
+          </a>
+          <p data-i18n="footer.mission">Environmental technology made warm and human.</p>
+          <div class="store-badges">
+            <span class="store-badge">App Store</span>
+            <span class="store-badge">Google Play</span>
+          </div>
+        </div>
+        <div>
+          <h4 data-i18n="footer.explore">Explore</h4>
+          <a href="about.html" data-i18n="nav.about">About</a>
+          <a href="greenhub.html" data-i18n="nav.greenHub">Green Hub</a>
+          <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
+        </div>
+        <div>
+          <h4 data-i18n="footer.legal">Legal</h4>
+          <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+          <a href="#" data-i18n="footer.terms">Terms of Use</a>
+          <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div>
+          <h4 data-i18n="footer.getApp">Get the app</h4>
+          <a href="#">App Store</a>
+          <a href="#">Google Play</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span data-current-year>2026</span> Greenomy. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<main class="wrap" id="opportunities">
-
-  <section class="categories">
-    <div class="section-label">Browse</div>
-    <h2 class="section-title">Opportunity categories</h2>
-    <div class="pill-row" id="categoryPills"></div>
-  </section>
-
-  <section class="filter-bar">
-    <select id="modeFilter">
-      <option value="all">All modes</option>
-      <option value="On-site">On-site</option>
-      <option value="Online">Online</option>
-      <option value="Hybrid">Hybrid</option>
-    </select>
-    <select id="paidFilter">
-      <option value="all">Paid & unpaid</option>
-      <option value="paid">Paid only</option>
-      <option value="unpaid">Unpaid only</option>
-    </select>
-    <select id="sortFilter">
-      <option value="deadline">Sort: closing soonest</option>
-      <option value="newest">Sort: newest</option>
-    </select>
-    <button class="clear" id="clearFilters">Clear filters</button>
-    <span class="count" id="resultCount"></span>
-  </section>
-
-  <div class="grid" id="cardGrid"></div>
-  <div class="empty-state" id="emptyState">
-    <p>No opportunities match your filters right now. Try clearing a filter or searching a different keyword.</p>
-  </div>
-
-</main>
-
-<section class="wrap faq" id="faq">
-  <div class="section-label">Help</div>
-  <h2 class="section-title">Frequently asked questions</h2>
-  <div id="faqList"></div>
-</section>
-
-<footer>
-  <div class="wrap footer-inner">
-    <a href="#" class="logo"><span class="mark">F</span>Furas</a>
-    <p>Built by and for Iraqi youth. Opportunities researched and added by our volunteer team.</p>
-  </div>
-</footer>
-
-<script src="app.js"></script>
+  <script type="module" src="main.js"></script>
+  <script type="module" src="impact.js"></script>
 </body>
 </html>

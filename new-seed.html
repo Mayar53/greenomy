@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plant Your First Seed — Greenomy</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="responsive.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true">🌱</span> Greenomy</a>
+    </div>
+  </header>
+
+  <main class="wizard-shell">
+    <div class="wizard-progress" aria-hidden="true">
+      <span class="step-dot is-complete"></span>
+      <span class="step-dot is-complete"></span>
+      <span class="step-dot is-active"></span>
+    </div>
+
+    <div class="card wizard-card" data-seed-wizard>
+      <!-- Internal 5-step progress for this wizard specifically -->
+      <div class="wizard-progress" style="margin-bottom: 28px;">
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+      </div>
+
+      <!-- Step 1: choose plant/seed -->
+      <div data-step>
+        <h1>What are you planting?</h1>
+        <p class="section-lead" style="margin-bottom: 20px;">Choose the seed or plant you'd like to start tracking.</p>
+        <div class="option-grid" data-tile-group="plantType">
+          <button type="button" class="option-tile" data-value="Tomato" aria-pressed="false">
+            <span class="tile-emoji">🍅</span><strong>Tomato</strong><span>Vegetable</span>
+          </button>
+          <button type="button" class="option-tile" data-value="Basil" aria-pressed="false">
+            <span class="tile-emoji">🌿</span><strong>Basil</strong><span>Herb</span>
+          </button>
+          <button type="button" class="option-tile" data-value="Orange Tree" aria-pressed="false">
+            <span class="tile-emoji">🍊</span><strong>Orange Tree</strong><span>Fruit tree, from seed</span>
+          </button>
+          <button type="button" class="option-tile" data-value="Pothos" aria-pressed="false">
+            <span class="tile-emoji">🪴</span><strong>Pothos</strong><span>Houseplant</span>
+          </button>
+        </div>
+        <div class="wizard-actions">
+          <span></span>
+          <button type="button" class="btn btn-primary" data-next>Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 2: planting method -->
+      <div data-step hidden>
+        <h1>How are you planting it?</h1>
+        <p class="section-lead" style="margin-bottom: 20px;">This helps us tailor watering and growth guidance.</p>
+        <div class="option-grid" data-tile-group="plantingMethod">
+          <button type="button" class="option-tile" data-value="From Seed" aria-pressed="false">
+            <span class="tile-emoji">🌰</span><strong>From Seed</strong>
+          </button>
+          <button type="button" class="option-tile" data-value="From Cutting" aria-pressed="false">
+            <span class="tile-emoji">🌿</span><strong>From Cutting</strong>
+          </button>
+          <button type="button" class="option-tile" data-value="Transplanted Seedling" aria-pressed="false">
+            <span class="tile-emoji">🪴</span><strong>Transplanted Seedling</strong>
+          </button>
+          <button type="button" class="option-tile" data-value="Regrown From Scraps" aria-pressed="false">
+            <span class="tile-emoji">♻️</span><strong>Regrown From Scraps</strong>
+          </button>
+        </div>
+        <div class="wizard-actions">
+          <button type="button" class="btn btn-secondary" data-back>Back</button>
+          <button type="button" class="btn btn-primary" data-next>Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 3: planting date -->
+      <div data-step hidden>
+        <h1>When did you plant it?</h1>
+        <p class="section-lead" style="margin-bottom: 20px;">We'll use this to track growth day-by-day.</p>
+        <div class="form-field">
+          <label for="plantingDate">Planting Date</label>
+          <input type="date" id="plantingDate" name="plantingDate" />
+        </div>
+        <div class="wizard-actions">
+          <button type="button" class="btn btn-secondary" data-back>Back</button>
+          <button type="button" class="btn btn-primary" data-next>Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 4: location -->
+      <div data-step hidden>
+        <h1>Where is it growing?</h1>
+        <p class="section-lead" style="margin-bottom: 20px;">A balcony, a windowsill, a backyard — anywhere counts.</p>
+        <div class="form-field">
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" placeholder="e.g. Kitchen windowsill" />
+        </div>
+        <div class="wizard-actions">
+          <button type="button" class="btn btn-secondary" data-back>Back</button>
+          <button type="button" class="btn btn-primary" data-next>Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 5: confirmation + create -->
+      <div data-step hidden>
+        <h1>Ready to grow?</h1>
+        <p class="section-lead" style="margin-bottom: 20px;">Here's what we'll add to your green space.</p>
+        <div data-seed-summary></div>
+        <div class="wizard-actions">
+          <button type="button" class="btn btn-secondary" data-back>Back</button>
+          <button type="button" class="btn btn-primary" data-create-plant>Create My Plant</button>
+        </div>
+        <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="main.js"></script>
+  <script type="module" src="onboarding.js"></script>
+</body>
+</html>

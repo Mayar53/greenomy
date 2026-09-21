@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "growing-orange-seed",
+    "title": "How to Grow an Orange Tree From a Seed",
+    "description": "Turn a seed you'd normally throw away into a slow-growing houseplant with a little patience.",
+    "category": "food-seed-recycling",
+    "readingTime": 6,
+    "image": "orange-seed.jpg"
+  },
+  {
+    "slug": "growing-tomato-seeds",
+    "title": "Starting Tomato Seeds Indoors",
+    "description": "A beginner-friendly guide to germinating tomato seeds before the growing season starts.",
+    "category": "home-gardening",
+    "readingTime": 5,
+    "image": "tomato-seeds.jpg"
+  },
+  {
+    "slug": "growing-apple-seeds",
+    "title": "Can You Grow an Apple Tree From Seed?",
+    "description": "What actually happens when you plant an apple seed, and how to give it the best chance.",
+    "category": "food-seed-recycling",
+    "readingTime": 7,
+    "image": "apple-seeds.jpg"
+  },
+  {
+    "slug": "preparing-soil",
+    "title": "Preparing Soil for Your First Plant",
+    "description": "The basics of soil, drainage, and containers before you plant anything.",
+    "category": "home-gardening",
+    "readingTime": 4,
+    "image": "soil-prep.jpg"
+  },
+  {
+    "slug": "watering-plants",
+    "title": "How Often Should You Really Water Your Plants?",
+    "description": "Watering schedules depend on plant type, not the calendar. Here's how to read your plant.",
+    "category": "plant-care",
+    "readingTime": 5,
+    "image": "watering.jpg"
+  },
+  {
+    "slug": "indoor-gardening",
+    "title": "Indoor Gardening With Little to No Sunlight",
+    "description": "Apartment living doesn't rule out a green space. Here's what actually survives indoors.",
+    "category": "home-gardening",
+    "readingTime": 6,
+    "image": "indoor-gardening.jpg"
+  },
+  {
+    "slug": "plant-care-basics",
+    "title": "Five Plant Care Habits That Actually Matter",
+    "description": "Skip the overwhelm — these are the habits that keep most houseplants alive.",
+    "category": "plant-care",
+    "readingTime": 4,
+    "image": "plant-care.jpg"
+  },
+  {
+    "slug": "urban-greening",
+    "title": "What Urban Greening Looks Like on a Balcony",
+    "description": "You don't need a backyard to make a neighborhood greener.",
+    "category": "home-gardening",
+    "readingTime": 5,
+    "image": "urban-greening.jpg"
+  },
+  {
+    "slug": "recycling-food-seeds",
+    "title": "Kitchen Scraps You Can Regrow This Week",
+    "description": "From avocado pits to green onion roots — an easy intro to regrowing food.",
+    "category": "food-seed-recycling",
+    "readingTime": 6,
+    "image": "food-scraps.jpg"
+  }
+]

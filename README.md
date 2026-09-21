@@ -1,63 +1,57 @@
-# Frontend Template
+# Greenomy
 
-Next.js 16 + shadcn/ui (RTL) starter — **feature-based** and **DRY**. It is a full app shell
-(sidebar + topbar navigation), not just a dashboard: new features plug in as pages.
+A sustainability and urban-greening platform: grow real plants, learn
+everyday sustainability, document growth, earn points, and redeem them with
+partner businesses.
 
-- React 19 · React Compiler · Tailwind v4 · Zustand · GSAP · bilingual ar/en (i18n) · reactbits
-- ApexCharts + three.js (R3F) installed and ready (reusable `components/shared/apex-chart.tsx`)
-- Arabic-first RTL (toggleable) · deploy to Vercel or Netlify
+Nature × Technology × Community.
 
-See [`AGENTS.md`](./AGENTS.md) for conventions and how to add a feature; the repo-root
-`ARCHITECTURE.md` has the full picture.
+## Status: Phase 1 complete
 
-## Quickstart
+This delivery covers **Phase 1** of the build plan — the public marketing
+site — plus the backend and data architecture that every later phase will
+plug into.
 
-```bash
+**Built and working:**
+- Public pages: `index.html`, `about.html`, `green-hub.html`, `rewards.html`, `contact.html`
+- Full design system (`css/style.css`, `css/responsive.css`) — sage/beige/burgundy/gold palette, 16px-radius cards, mobile-first responsive rules down to 375px
+- Bilingual English/Arabic i18n with live RTL/LTR switching (`js/language.js`, `locales/en.json`, `locales/ar.json`)
+- Mobile nav, animated live-impact counters, Green Hub category filters, rewards showcase, and a validated waitlist form — all wired through a real service layer (`js/services/*.js`) with demo-data fallbacks
+- A running Express + PostgreSQL-shaped REST API (`backend/`) implementing every route in `docs/API.md` against an in-memory store, so the frontend has something real to talk to before Postgres is provisioned
+- Docs: `docs/ARCHITECTURE.md`, `docs/DATABASE.md`, `docs/API.md`, `docs/DEPLOYMENT.md`
+
+**Not yet built** (per the phased plan — each is a substantial piece of work in its own right):
+- Phase 2: `login.html`, `signup.html`, `onboarding.html`, `eco-profile.html`, `new-seed.html`
+- Phase 3: `app/dashboard.html`, `app/wallet.html`, `app/store.html`, `app/profile.html`
+- Phase 4: `app/camera.html` + live camera/GPS capture + AI verification wiring
+- Phase 5: PostgreSQL actually provisioned and wired in place of the mock store
+- Phase 6: `admin/*.html` — user management, verification queue, partners, rewards, content, analytics
+- Phase 7: push notifications, deeper security hardening, full accessibility/SEO pass, automated tests
+
+## Running it
+
+**Frontend** — any static file server from the project root, e.g.:
+```
+npx serve .
+```
+
+**Backend**:
+```
+cd backend
 npm install
-cp .env.example .env.local        # set NEXT_PUBLIC_API_URL (defaults to http://localhost:8000/api)
-npm run dev                       # http://localhost:3000
+cp ../.env.example .env   # fill in JWT_SECRET at minimum for local dev
+npm start
 ```
+The API listens on `http://localhost:4000/api` by default and runs fully
+against demo data — no database is required to try it end-to-end yet.
 
-Run the backend alongside it (see `../backend`) so login and the app pages have an API.
+## Project structure
+See `docs/ARCHITECTURE.md` for the full breakdown. In short: plain HTML per
+page, modular vanilla JS behind a service layer, Express routes → controllers
+→ (soon) PostgreSQL-backed models, with a swappable AI-verification provider
+and a demo-data fallback everywhere the real backend isn't reachable yet.
 
-## Routes
-
-- `/` — public landing
-- `/login` · `/signup` — JWT auth (signup registers then auto-logs-in) → session in Zustand → app
-- `(app)` group — authenticated shell (sidebar + topbar):
-  - `/account` — post-login: a message describing the signed-in account (name, email, role, status)
-
-Toggle language (ar ⇄ en) and theme from the top bar; switching language flips text and direction.
-
-## Scripts
-
-```bash
-npm run dev      # dev server (Turbopack)
-npm run build    # production build (type-checks too)
-npm run start    # serve the production build
-npm run lint     # eslint
-```
-
-## Structure
-
-```
-app/              routing only — (app) shell group, (auth) login/signup, landing
-features/         feature modules (auth, account) — each with an index.ts barrel
-components/ui     shadcn primitives         components/shared  cross-feature components
-components/layout app shell (sidebar/topbar)
-lib/              api-client, env, i18n, types, constants, utils
-stores/           global Zustand stores (auth, ui)   providers/  client providers
-hooks/            useTranslation (i18n)
-```
-
-## Adding UI
-
-```bash
-npx shadcn@latest add button card dialog ...          # shadcn primitives
-npx shadcn@latest add @reactbits/SplitText-TS-TW      # reactbits animated components
-```
-
-## Deploy
-
-- **Vercel:** zero-config — import the repo and set `NEXT_PUBLIC_API_URL`.
-- **Netlify:** `netlify.toml` is included (uses `@netlify/plugin-nextjs`); set `NEXT_PUBLIC_API_URL`.
+## Next step
+Tell me which phase to build next (recommend Phase 2: auth + onboarding,
+since the dashboard and camera flows depend on having a logged-in user), and
+I'll build it against this same architecture rather than starting over.

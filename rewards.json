@@ -1,0 +1,56 @@
+[
+  {
+    "id": "rw-001",
+    "partner": "Green Bean Coffee",
+    "title": "20% Off Any Drink",
+    "description": "Enjoy a discount on any handcrafted drink at participating locations.",
+    "pointsRequired": 150,
+    "expiresAt": "2026-12-31",
+    "isActive": true
+  },
+  {
+    "id": "rw-002",
+    "partner": "Urban Roots Nursery",
+    "title": "Free Seed Starter Kit",
+    "description": "Redeem a beginner seed kit including soil pellets and a mini tray.",
+    "pointsRequired": 300,
+    "expiresAt": "2026-11-30",
+    "isActive": true
+  },
+  {
+    "id": "rw-003",
+    "partner": "EcoWear Basics",
+    "title": "15% Off Sustainable Apparel",
+    "description": "A discount on organic-cotton and recycled-fabric clothing.",
+    "pointsRequired": 250,
+    "expiresAt": "2027-01-15",
+    "isActive": true
+  },
+  {
+    "id": "rw-004",
+    "partner": "The Refill Store",
+    "title": "Free Reusable Tote",
+    "description": "Pick up a Greenomy x Refill Store canvas tote bag, free with enough points.",
+    "pointsRequired": 100,
+    "expiresAt": "2026-12-01",
+    "isActive": true
+  },
+  {
+    "id": "rw-005",
+    "partner": "Sprout Café",
+    "title": "Buy One Get One — Pastries",
+    "description": "A BOGO offer on any pastry, valid at all Sprout Café branches.",
+    "pointsRequired": 180,
+    "expiresAt": "2026-10-31",
+    "isActive": true
+  },
+  {
+    "id": "rw-006",
+    "partner": "Terra Home Goods",
+    "title": "10% Off Home & Garden",
+    "description": "A storewide discount on planters, tools, and home garden accessories.",
+    "pointsRequired": 220,
+    "expiresAt": "2027-02-28",
+    "isActive": true
+  }
+]
