@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Furas — Opportunities for Iraqi Youth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo"><span class="mark">F</span>Furas</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#opportunities">Opportunities</a>
+      <a href="#faq">FAQ</a>
+      <a href="#" class="nav-cta">Admin Login</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+<div class="star-strip"></div>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">For Iraqi Youth</div>
+    <h1>Find your next opportunity, all in one place.</h1>
+    <p class="sub">Volunteering, fellowships, internships, competitions, courses, workshops, sessions, and conferences — researched and verified by our team, updated every week.</p>
+    <div class="search-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#5C5C5C" stroke-width="2"/><path d="M20 20L16.5 16.5" stroke="#5C5C5C" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="searchInput" placeholder="Search by title or keyword, e.g. “marketing internship”">
+      <button class="search-btn" id="searchBtn">Search</button>
+    </div>
+    <div class="hero-stats">
+      <div><strong id="statTotal">0</strong><span>Live opportunities</span></div>
+      <div><strong>8</strong><span>Categories</span></div>
+      <div><strong>100%</strong><span>Verified by our team</span></div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap" id="opportunities">
+
+  <section class="categories">
+    <div class="section-label">Browse</div>
+    <h2 class="section-title">Opportunity categories</h2>
+    <div class="pill-row" id="categoryPills"></div>
+  </section>
+
+  <section class="filter-bar">
+    <select id="modeFilter">
+      <option value="all">All modes</option>
+      <option value="On-site">On-site</option>
+      <option value="Online">Online</option>
+      <option value="Hybrid">Hybrid</option>
+    </select>
+    <select id="paidFilter">
+      <option value="all">Paid & unpaid</option>
+      <option value="paid">Paid only</option>
+      <option value="unpaid">Unpaid only</option>
+    </select>
+    <select id="sortFilter">
+      <option value="deadline">Sort: closing soonest</option>
+      <option value="newest">Sort: newest</option>
+    </select>
+    <button class="clear" id="clearFilters">Clear filters</button>
+    <span class="count" id="resultCount"></span>
+  </section>
+
+  <div class="grid" id="cardGrid"></div>
+  <div class="empty-state" id="emptyState">
+    <p>No opportunities match your filters right now. Try clearing a filter or searching a different keyword.</p>
+  </div>
+
+</main>
+
+<section class="wrap faq" id="faq">
+  <div class="section-label">Help</div>
+  <h2 class="section-title">Frequently asked questions</h2>
+  <div id="faqList"></div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a href="#" class="logo"><span class="mark">F</span>Furas</a>
+    <p>Built by and for Iraqi youth. Opportunities researched and added by our volunteer team.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
