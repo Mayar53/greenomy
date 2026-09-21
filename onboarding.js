@@ -108,16 +108,38 @@ function initNewSeedWizard() {
     if (current === steps.length - 1) renderConfirmation();
   }
 
+  const PLANT_TYPE_KEYS = {
+    "Tomato": "wizard.plantTomato",
+    "Basil": "wizard.plantBasil",
+    "Orange Tree": "wizard.plantOrange",
+    "Pothos": "wizard.plantPothos",
+  };
+  const PLANTING_METHOD_KEYS = {
+    "From Seed": "wizard.methodSeed",
+    "From Cutting": "wizard.methodCutting",
+    "Transplanted Seedling": "wizard.methodSeedling",
+    "Regrown From Scraps": "wizard.methodScraps",
+  };
+
+  function localizedValue(value, map, fallbackKey) {
+    if (!value) return t(fallbackKey);
+    return map[value] ? t(map[value]) : value;
+  }
+
   function renderConfirmation() {
     const summary = wizard.querySelector("[data-seed-summary]");
     if (!summary) return;
+    const plantType = localizedValue(draft.seed.plantType, PLANT_TYPE_KEYS, "wizard.yourPlant");
+    const method = draft.seed.plantingMethod
+      ? localizedValue(draft.seed.plantingMethod, PLANTING_METHOD_KEYS)
+      : "—";
     summary.innerHTML = `
       <div class="card plant-preview-card">
         <div class="plant-preview-emoji">🌱</div>
         <div>
-          <strong>${draft.seed.plantType || t("wizard.yourPlant")}</strong>
+          <strong>${plantType}</strong>
           <p style="margin:2px 0 0; font-size:0.88rem;">
-            ${draft.seed.plantingMethod || "—"} · ${t("wizard.plantingLabel")} ${draft.seed.plantingDate || t("wizard.today")} · ${draft.seed.location || t("wizard.notSet")}
+            ${method} · ${t("wizard.plantingLabel")} ${draft.seed.plantingDate || t("wizard.today")} · ${draft.seed.location || t("wizard.notSet")}
           </p>
         </div>
       </div>

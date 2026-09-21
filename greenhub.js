@@ -1,6 +1,6 @@
 // green-hub.js — Green Hub article grid + category filters + article view
 import { getGreenHubArticles } from "./contentservice.js";
-import { t } from "./language.js";
+import { t, localized } from "./language.js";
 
 const CATEGORY_LABELS = {
   all: "greenHub.filterAll",
@@ -16,16 +16,17 @@ function escapeHtml(value) {
 }
 
 function articleCardHTML(article) {
+  const title = localized(article, "title");
   return `
     <article class="card article-card">
-      <div class="article-thumb" role="img" aria-label="${escapeHtml(article.title)}"></div>
+      <div class="article-thumb" role="img" aria-label="${escapeHtml(title)}"></div>
       <div class="article-body">
         <div class="article-meta">
           <span>${t(CATEGORY_LABELS[article.category] || "greenHub.filterAll")}</span>
           <span>${article.readingTime} ${t("greenHub.minRead")}</span>
         </div>
-        <h3>${escapeHtml(article.title)}</h3>
-        <p>${escapeHtml(article.description)}</p>
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(localized(article, "description"))}</p>
         <a class="btn-ghost reading-time" href="greenhub.html?slug=${encodeURIComponent(article.slug)}">${t("greenHub.readMore")} →</a>
       </div>
     </article>
@@ -33,11 +34,12 @@ function articleCardHTML(article) {
 }
 
 function articleViewHTML(article) {
-  const paragraphs = Array.isArray(article.body)
-    ? article.body
-    : article.body
-      ? [article.body]
-      : [article.description];
+  const body = localized(article, "body");
+  const paragraphs = Array.isArray(body)
+    ? body
+    : body
+      ? [body]
+      : [localized(article, "description")];
 
   return `
     <article class="card article-card" style="grid-column: 1 / -1;">
@@ -46,8 +48,8 @@ function articleViewHTML(article) {
         <span>${t(CATEGORY_LABELS[article.category] || "greenHub.filterAll")}</span>
         <span>${article.readingTime} ${t("greenHub.minRead")}</span>
       </div>
-      <h1 class="heading-lg" style="margin-top:8px;">${escapeHtml(article.title)}</h1>
-      <p class="section-lead">${escapeHtml(article.description)}</p>
+      <h1 class="heading-lg" style="margin-top:8px;">${escapeHtml(localized(article, "title"))}</h1>
+      <p class="section-lead">${escapeHtml(localized(article, "description"))}</p>
       ${paragraphs.map((p) => `<p>${escapeHtml(p)}</p>`).join("")}
     </article>
   `;

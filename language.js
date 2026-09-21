@@ -75,6 +75,16 @@ export function t(path) {
   return typeof value === "string" ? value : path;
 }
 
+/** Returns the active language's value for a data record field, falling back
+ * to the record's base (English) field. Records may carry:
+ *   { title, description, ..., i18n: { ar: { title, description, body } } } */
+export function localized(record, field) {
+  if (!record) return undefined;
+  const lang = getStoredLang();
+  const translated = record.i18n && record.i18n[lang] && record.i18n[lang][field];
+  return translated !== undefined ? translated : record[field];
+}
+
 export function currentLanguage() {
   return getStoredLang();
 }

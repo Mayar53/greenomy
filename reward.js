@@ -1,9 +1,15 @@
 // rewards.js — public rewards showcase (read-only; redemption happens in-app)
 import { getRewards } from "./contentservice.js";
-import { t } from "./language.js";
+import { t, localized } from "./language.js";
+
+function escapeHtml(value) {
+  return String(value == null ? "" : value).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
+  );
+}
 
 function rewardCardHTML(reward) {
-  const initials = reward.partner
+  const initials = String(reward.partner || "")
     .split(" ")
     .map((w) => w[0])
     .slice(0, 2)
@@ -12,16 +18,16 @@ function rewardCardHTML(reward) {
   return `
     <article class="card reward-card">
       <div class="reward-top">
-        <div class="partner-logo">${initials}</div>
+        <div class="partner-logo">${escapeHtml(initials)}</div>
         <div>
-          <strong>${reward.partner}</strong>
+          <strong>${escapeHtml(reward.partner)}</strong>
         </div>
       </div>
-      <h3>${reward.title}</h3>
-      <p>${reward.description}</p>
+      <h3>${escapeHtml(localized(reward, "title"))}</h3>
+      <p>${escapeHtml(localized(reward, "description"))}</p>
       <span class="points-tag">🏆 ${reward.pointsRequired} ${t("rewards.pointsRequired")}</span>
       <div class="reward-footer">
-        <span>${t("rewards.expires")}: ${reward.expiresAt}</span>
+        <span>${t("rewards.expires")}: ${escapeHtml(reward.expiresAt)}</span>
       </div>
     </article>
   `;

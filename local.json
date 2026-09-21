@@ -61,7 +61,11 @@
     "founderTitle": "Founder",
     "founderName": "Founder Name",
     "founderRole": "Founder & CEO, Greenomy",
-    "founderBio": "Placeholder bio — replace with the founder's real story and motivation for building Greenomy."
+    "founderBio": "Placeholder bio — replace with the founder's real story and motivation for building Greenomy.",
+    "value1": "Everyday Sustainability",
+    "value2": "Innovation",
+    "value3": "Community Empowerment",
+    "value4": "Education"
   },
   "greenHub": {
     "eyebrow": "Green Hub",
@@ -192,6 +196,18 @@
     "saving": "Saving your profile...",
     "plantingStatus": "Planting your first seed...",
     "planted": "Your plant has been created! Redirecting..."
+  },
+  "meta": {
+    "homeTitle": "Greenomy — Grow Plants. Learn Sustainability. Earn Rewards.",
+    "aboutTitle": "About Greenomy — Sustainability You Can Grow",
+    "greenHubTitle": "Green Hub — Learn Sustainability | Greenomy",
+    "rewardsTitle": "Rewards — Greenomy",
+    "contactTitle": "Contact & Waitlist — Greenomy",
+    "loginTitle": "Log In — Greenomy",
+    "signupTitle": "Join Greenomy — Create Your Account",
+    "onboardingTitle": "Welcome to Greenomy",
+    "ecoProfileTitle": "Your Eco Profile — Greenomy",
+    "newSeedTitle": "Plant Your First Seed — Greenomy"
   },
   "common": {
     "loading": "Loading...",

@@ -9,7 +9,17 @@
     "body": [
       "Orange seeds germinate readily, but the tree they grow into is a long-term project. Rinse the pips, soak them overnight, and plant them about 1 cm deep in moist seed compost.",
       "Keep the pot warm and bright and it can sprout within a few weeks. Expect glossy leaves first — fruit, if it ever comes, is years away. Treat it as a beautiful houseplant, not a harvest."
-    ]
+    ],
+    "i18n": {
+      "ar": {
+        "title": "كيف تزرع شجرة برتقال من بذرة",
+        "description": "حوّل بذرة كنت ستتخلص منها إلى نبتة منزلية بطيئة النمو بقليل من الصبر.",
+        "body": [
+          "تنبت بذور البرتقال بسهولة، لكن الشجرة التي تنمو منها مشروع طويل الأمد. اغسل البذور وانقعها ليلة كاملة، ثم ازرعها على عمق نحو ١ سم في تربة بذر رطبة.",
+          "أبقِ الأصيص دافئًا ومضاءً، وقد تُنبِت خلال أسابيع. توقّع أوراقًا لامعة أولًا — أما الثمار، إن جاءت، فتبعد سنوات. تعامل معها كنبتة منزلية جميلة لا كمحصول."
+        ]
+      }
+    }
   },
   {
     "slug": "growing-tomato-seeds",
@@ -21,7 +31,17 @@
     "body": [
       "Start tomatoes six to eight weeks before your last frost. Sow seeds about 5 mm deep in damp seed compost, water gently, and keep them at around 20°C.",
       "Once seedlings have two sets of true leaves, pot them on and move them to the brightest spot you have. They need light more than heat to grow sturdy."
-    ]
+    ],
+    "i18n": {
+      "ar": {
+        "title": "بدء بذور الطماطم في الداخل",
+        "description": "دليل مناسب للمبتدئين لإنبات بذور الطماطم قبل بدء موسم النمو.",
+        "body": [
+          "ابدأ الطماطم قبل ست إلى ثماني أسابيع من آخر صقيع. ازرع البذور على عمق نحو ٥ مم في تربة بذر رطبة، واسقِ بلطف، وأبقِها عند ٢٠°م تقريبًا.",
+          "بعد ظهور مجموعتين من الأوراق الحقيقية، انقل الشتلات إلى أوانٍ أكبر وضعها في أكثر مكان إضاءة لديك. تحتاج الضوء أكثر من الحرارة لتنمو قوية."
+        ]
+      }
+    }
   },
   {
     "slug": "growing-apple-seeds",
@@ -33,7 +53,17 @@
     "body": [
       "An apple seed will sprout, but the tree it grows into won't be the apple you ate. Apples don't come true from seed, so the fruit will be unpredictable.",
       "If you still want to try, chill the seeds in a damp paper towel in the fridge for a few weeks, then plant them. Think of it as an experiment, not an orchard."
-    ]
+    ],
+    "i18n": {
+      "ar": {
+        "title": "هل يمكنك زراعة شجرة تفاح من بذرة؟",
+        "description": "ما يحدث فعلًا عند زراعة بذرة تفاح، وكيف تمنحها أفضل فرصة.",
+        "body": [
+          "ستنبت بذرة التفاح، لكن الشجرة الناتجة لن تكون التفاحة التي أكلتها. التفاح لا يأتي مطابقًا من البذرة، لذا ستكون الثمرة غير متوقعة.",
+          "إن أردت التجربة، برّد البذور في منديل ورقي رطب داخل الثلاجة لأسابيع، ثم ازرعها. اعتبرها تجربة لا بستانًا."
+        ]
+      }
+    }
   },
   {
     "slug": "preparing-soil",
@@ -45,7 +75,17 @@
     "body": [
       "Most houseplants fail because of waterlogged roots, not bad soil. Choose a mix with plenty of air and a pot that has drainage holes.",
       "Fill the pot, firm the soil lightly, and water before planting so it settles. Then water only when the top couple of centimetres feel dry."
-    ]
+    ],
+    "i18n": {
+      "ar": {
+        "title": "تحضير التربة لأول نبتة لك",
+        "description": "أساسيات التربة والصرف والأواني قبل أن تزرع أي شيء.",
+        "body": [
+          "معظم النباتات المنزلية تفشل بسبب تعفّن الجذور وليس سوء التربة. اختر خليطًا جيد التهوية وأصيصًا به فتحات تصريف.",
+          "املأ الأصيص وثبّت التربة قليلًا واسقِها قبل الزراعة لتستقر. ثم اسقِ فقط عندما تجف الطبقة العليا بضعة سنتيمترات."
+        ]
+      }
+    }
   },
   {
     "slug": "watering-plants",
@@ -57,7 +97,17 @@
     "body": [
       "Forget the calendar and check the soil instead. Push a finger in; if it's dry a few centimetres down, it's time to water.",
       "Water thoroughly until it runs out of the drainage holes, then empty the saucer. Little and often is the fastest way to lose a plant."
-    ]
+    ],
+    "i18n": {
+      "ar": {
+        "title": "كم مرة يجب أن تسقي نباتاتك حقًا؟",
+        "description": "جداول الري تعتمد على نوع النبتة لا على التقويم. إليك كيف تقرأ نبتتك.",
+        "body": [
+          "انسَ التقويم وافحص التربة بدلًا منه. أدخل إصبعك؛ إذا جفّت على عمق بضعة سنتيمترات فقد حان وقت الري.",
+          "اسقِ جيدًا حتى يخرج الماء من فتحات التصريف ثم أفرغ الطبق. الري القليل المتكرر أسرع طريق لخسارة النبتة."
+        ]
+      }
+    }
   },
   {
     "slug": "indoor-gardening",
@@ -69,7 +119,17 @@
     "body": [
       "Low light doesn't mean no plants. Snake plants, pothos, and ZZ plants tolerate shade and forgive missed waterings.",
       "Rotate them now and then so they grow evenly, and keep them away from cold draughts. A window that faces north can still work."
-    ]
+    ],
+    "i18n": {
+      "ar": {
+        "title": "البستنة الداخلية بأقل قدر من ضوء الشمس",
+        "description": "السكن في شقة لا يمنع وجود مساحة خضراء. إليك ما يعيش فعلًا في الداخل.",
+        "body": [
+          "قلة الإضاءة لا تعني غياب النباتات. نبات الأفعى والبوتس ونبات ZZ تتحمّل الظل وتتجاوز الريات الفائتة.",
+          "أدِرها من وقت لآخر لتنمو بالتساوي، وأبعدها عن التيارات الباردة. نافذة تواجه الشمال قد تكفي."
+        ]
+      }
+    }
   },
   {
     "slug": "plant-care-basics",
@@ -81,7 +141,17 @@
     "body": [
       "Five habits do most of the work: water by feel, give the right light, feed lightly in spring and summer, clean the leaves, and repot when roots circle the pot.",
       "None of these is complicated. Consistency matters far more than any special product."
-    ]
+    ],
+    "i18n": {
+      "ar": {
+        "title": "خمس عادات للعناية بالنباتات تهم فعلًا",
+        "description": "تجاوز الإرهاق — هذه هي العادات التي تبقي معظم النباتات المنزلية حية.",
+        "body": [
+          "خمس عادات تقوم بمعظم العمل: اسقِ باللمس، وفّر الإضاءة المناسبة، غذِّ باعتدال في الربيع والصيف، نظّف الأوراق، وانقل الأصيص عندما تلتف الجذور.",
+          "لا شيء من هذا معقّد. الانتظام أهم بكثير من أي منتج خاص."
+        ]
+      }
+    }
   },
   {
     "slug": "urban-greening",
@@ -93,7 +163,17 @@
     "body": [
       "A balcony, a fire escape, or a windowsill is enough to green a street. Even a few pots add shade, food, and a home for pollinators.",
       "Start with tough plants suited to your light and wind, and add more as you learn what thrives in your spot."
-    ]
+    ],
+    "i18n": {
+      "ar": {
+        "title": "كيف يبدو التخضير الحضري على الشرفة",
+        "description": "لا تحتاج حديقة خلفية لتجعل حيّك أكثر خضرة.",
+        "body": [
+          "شرفة أو حافة نافذة تكفي لتخضير شارع. حتى بعض الأصص تضيف ظلًا وطعامًا وبيتًا للملقّحات.",
+          "ابدأ بنباتات قوية تناسب إضاءتك ورياحك، وأضف المزيد مع تعلّمك ما يزدهر في مكانك."
+        ]
+      }
+    }
   },
   {
     "slug": "recycling-food-seeds",
@@ -105,6 +185,16 @@
     "body": [
       "Green onion roots, lettuce bases, celery bottoms, and avocado pits can all be regrown in water or soil with almost no effort.",
       "Keep the water fresh, give them light, and pot them up once roots form. It's the easiest first step into growing your own food."
-    ]
+    ],
+    "i18n": {
+      "ar": {
+        "title": "بقايا مطبخ يمكنك إعادة إنمائها هذا الأسبوع",
+        "description": "من نوى الأفوكادو إلى جذور البصل الأخضر — مدخل سهل لإعادة إنماء الطعام.",
+        "body": [
+          "جذور البصل الأخضر وقواعد الخس وأطراف الكرفس ونوى الأفوكادو يمكن إعادة إنمائها في الماء أو التربة بجهد ضئيل.",
+          "حافظ على نظافة الماء، وفّر الإضاءة، وانقلها إلى الأصص بعد تكوّن الجذور. إنها أسهل خطوة أولى نحو زراعة طعامك."
+        ]
+      }
+    }
   }
 ]

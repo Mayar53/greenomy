@@ -20,6 +20,7 @@ module.exports = {
     points_required: r.pointsRequired,
     expires_at: r.expiresAt,
     is_active: r.isActive,
+    i18n: r.i18n,
   })),
   pointTransactions: [],
   redemptions: [],
