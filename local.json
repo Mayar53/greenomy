@@ -207,11 +207,22 @@
     "signupTitle": "Join Greenomy — Create Your Account",
     "onboardingTitle": "Welcome to Greenomy",
     "ecoProfileTitle": "Your Eco Profile — Greenomy",
-    "newSeedTitle": "Plant Your First Seed — Greenomy"
+    "newSeedTitle": "Plant Your First Seed — Greenomy",
+    "homeDesc": "Greenomy helps you grow real plants, learn everyday sustainability, and earn points you can redeem with partner businesses.",
+    "aboutDesc": "Greenomy's vision, values, and mission to make sustainability and urban greening accessible to everyone.",
+    "greenHubDesc": "Bite-sized guides on seeds, home gardening, and everyday sustainability from Greenomy.",
+    "rewardsDesc": "Preview the rewards Greenomy members can redeem with partner businesses.",
+    "contactDesc": "Get in touch with Greenomy or join the waitlist to be first in line when we launch in your city.",
+    "ogTitle": "Greenomy — Your Small Step Can Grow a Forest",
+    "ogDesc": "Grow plants, learn sustainability, and earn rewards with Greenomy."
   },
   "common": {
     "loading": "Loading...",
     "errorGeneric": "Something went wrong. Please try again.",
-    "emptyGeneric": "Nothing here yet."
+    "emptyGeneric": "Nothing here yet.",
+    "toggleMenu": "Toggle menu",
+    "language": "Language",
+    "primaryNav": "Primary",
+    "filterArticles": "Filter articles by category"
   }
 }
