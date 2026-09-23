@@ -214,5 +214,221 @@
         ]
       }
     }
+  },
+  {
+    "id": "gh-007",
+    "slug": "growing-in-iraq-and-kurdistan",
+    "category": "iraq-climate",
+    "contentType": "article",
+    "readingTime": 6,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Growing in Iraq and Kurdistan: What the Climate Asks of You",
+    "description": "Hot, dry summers, cold highland winters and a short rainy season shape everything you can grow here — and when you can grow it.",
+    "body": [
+      "Gardening here is really a conversation with heat. Summers across Iraq and Kurdistan are long, dry and often extreme — highland cities such as Erbil and Sulaymaniyah reach the high thirties to low forties in July and August, while Baghdad and the southern plains run hotter still and can pass 45°C. Planning around that heat, rather than fighting it, is the single most useful habit you can build.",
+      "Winters are the opposite problem, and altitude divides them. On the plains around Baghdad, frosts are brief and rare; in the Kurdistan highlands, nights between December and February regularly drop to freezing, and Duhok and the mountain edges see harder frost and occasional snow. That difference decides which plants survive outside and which need protection or a move indoors.",
+      "Almost all of the rain falls between roughly November and April. The rest of the year is essentially dry, so from late spring onward every plant depends on irrigation — which means the water side of gardening matters here as much as the sunlight.",
+      "The practical takeaway: choose your planting date by the season, not by the calendar month alone. Let cool-season crops grow through the mild winter, and warm-season crops finish before the peak of summer. In the highlands, add two to four weeks to any date you read for Baghdad — the season there starts later and ends earlier.",
+      "Local frost dates vary from valley to valley and year to year, so treat any date here as a guide and check your own area before you rely on it."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "الزراعة في العراق وكردستان: ما يطلبه المناخ منك",
+        "description": "صيف حار وجاف، وشتاء بارد في المرتفعات، وموسم أمطار قصير — كل هذا يشكّل ما يمكنك زراعته ومتى.",
+        "body": [
+          "الزراعة هنا حوار مع الحرارة. الصيف في العراق وكردستان طويل وجاف وغالبًا متطرف — تصل مدن المرتفعات مثل أربيل والسليمانية إلى أواخر الثلاثينيات وأوائل الأربعينيات في تموز وآب، بينما يكون بغداد والسهول الجنوبية أشد حرارة وقد يتجاوزان 45 درجة. التخطيط حول هذه الحرارة بدل مقاومتها هو أنفع عادة تكتسبها.",
+          "الشتاء مشكلة معاكسة، يفصل فيها الارتفاع. في سهول بغداد يكون الصقيع قصيرًا ونادرًا؛ أما في مرتفعات كردستان فتنخفض الليالي بين كانون الأول وشباط بانتظام إلى ما دون الصفر، وتشهد دهوك وأطراف الجبال صقيعًا أقوى وثلجًا أحيانًا. هذا الفرق يحدد أي النباتات تنجو في الخارج وأيها يحتاج حماية أو نقلًا إلى الداخل.",
+          "تسقط معظم الأمطار بين تشرين الثاني ونيسان تقريبًا. أما بقية العام فجاف أساسًا، لذا من أواخر الربيع يصبح كل نبات معتمدًا على الري — ما يعني أن الحديث عن الماء هنا لا يقل أهمية عن الحديث عن الشمس.",
+          "الخلاصة العملية: اختر موعد الزراعة حسب الموسم، لا حسب الشهر وحده. اجعل محاصيل الموسم البارد تنمو خلال الشتاء المعتدل، ومحاصيل الموسم الدافئ تنتهي قبل ذروة الصيف. في المرتفعات أضف أسبوعين إلى أربعة على أي موعد تقرأه لبغداد؛ فالموسم هناك يبدأ متأخرًا وينتهي أبكر.",
+          "تتفاوت مواعيد الصقيع المحلية بين وادٍ وآخر ومن سنة إلى أخرى، لذا اعتبر أي تاريخ هنا دليلًا إرشاديًا وراجع منطقتك قبل الاعتماد عليه."
+        ]
+      },
+      "ku": {
+        "title": "چاندن لە عێراق و کوردستان: ئاووهەوا چیت لێ دەوێت",
+        "description": "هاوینێکی گەرم و وشک، زستانێکی سارد لە ناوچە بەرزەکان، و وەرزێکی کورتی باران — هەموو ئەمانە دیاری دەکەن چی و کەنگی چاندن.",
+        "body": [
+          "چاندن لێرە گفتوگۆیەکە لەگەڵ گەرمی. هاوین لە عێراق و کوردستان درێژ و وشک و زۆرجار توندە — شارەکانی ناوچەی بەرز وەک هەولێر و سلێمانی لە تەمموز و ئاب دەگەنە کۆتایی سییەکان تا سەرەتای چلەکان، لە کاتێکدا بەغداد و دەشتەکانی باشوور گەرمترن و لەوانەیە لە 45 پلە تێپەڕن. پلاندانان بەدەوری ئەم گەرمییە بەسوودترین خووە.",
+          "زستان کێشەی بەرەوپێچەوانەیە و بەپێی بەرزی دیاری دەکرێت. لە دەشتەکانی بەغداد بەستەڵەک کورت و دەگمەنە؛ لە ناوچە بەرزەکانی کوردستان شەوانی نێوان کانوونی یەکەم و شوبات بەردەوام دەگەنە ژێر سفر، و دهۆک و لێوارەکانی چیا بەستەڵەکی توندتر و هەندێک جار بەفر دەبینن. ئەم جیاوازییە دیاری دەکات کام ڕووەک لە دەرەوە دەژیت.",
+          "زۆربەی باران لە نێوان تشرینی دووەم و نیساندا دەبارێت. ئەم باقی ساڵە بە شێوەیەکی سەرەکی وشکە، بۆیە لە کۆتایی بەهارەوە هەموو ڕووەکێک پشت بە ئاودان دەبەستێت — واتە باسی ئاو لێرە کەمتر گرنگ نییە لە باسی خۆر.",
+          "ئەنجامی کردەیی: بەرواری چاندن بەپێی وەرز هەڵبژێرە، نەک بە تەنها بەپێی مانگ. وا بکە بەرهەمەکانی وەرزی سارد بە درێژایی زستانی نەرم گەشە بکەن، و بەرهەمەکانی وەرزی گەرم پێش لووتکەی هاوین تەواو ببن. لە ناوچە بەرزەکان دوو بۆ چوار هەفتە زیاد بکە بۆ هەر بەروارێک کە بۆ بەغداد دەخوێنیتەوە.",
+          "بەرواری بەستەڵەک لە هەر دۆڵ و ساڵێک جیاوازە، بۆیە هەر بەروارێک لێرە وەک ڕێنماییەک ببینە و ناوچەکەت بپشکنە."
+        ]
+      }
+    }
+  },
+  {
+    "id": "gh-008",
+    "slug": "choosing-crops-for-your-soil",
+    "category": "soil",
+    "contentType": "article",
+    "readingTime": 5,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Choosing Crops for Your Soil",
+    "description": "Alluvial, calcareous, saline, sandy — Iraq's soils vary enormously. Match the crop to the ground you actually have.",
+    "body": [
+      "Iraq's soils are far more varied than the flat horizon suggests, and which soil you have matters more than almost anything else you can change.",
+      "Along the Tigris and Euphrates you find alluvial soils — silty, fertile and the easiest to work with. Most of the country's best farmland sits on them. They hold water well, but the heavier ones compact and drain slowly, so add compost and avoid treading on them when wet.",
+      "A very large share of the country is calcareous: rich in lime, with an alkaline pH typically between 7.5 and 8.5. In that range iron and manganese become hard for roots to take up, which is why leaves yellow between green veins so often here. The cure is rarely more fertiliser — it is chelated iron, plenty of compost, and now and then a little elemental sulphur to nudge the pH down.",
+      "Saline and gypsum soils dominate parts of the centre and south, and they are the hardest to farm. High salt levels pull water away from roots and stunt growth. Work with them rather than against them: choose salt-tolerant crops such as barley, beetroot, date palm and — to a degree — tomato and spinach; plant in raised beds so salts leach downward with irrigation; water by drip rather than flooding so you don't push salt up into the root zone; and add organic matter every year.",
+      "Sandy soils near the desert margins drain almost instantly and hold little nutrition, so they need compost, mulch, and more frequent but smaller waterings than their texture suggests. Clay soils are the mirror image: they hold water so tightly that roots can suffocate, and they are best managed with organic matter, raised beds and patience.",
+      "A single soil test will tell you more than any general rule. If you do one thing before your next planting, test your soil and choose crops to fit it."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "اختيار المحاصيل حسب تربتك",
+        "description": "رسوبية، جيرية، مالحة، رملية — تتنوع تربة العراق تنوعًا هائلًا. طابق المحصول مع الأرض التي لديك فعلًا.",
+        "body": [
+          "تربة العراق أكثر تنوعًا بكثير مما يوحي به الأفق المستوي، ونوع التربة لديك يهم أكثر من أي شيء آخر يمكنك تغييره.",
+          "على طول دجلة والفرات تجد التربة الرسوبية الغرينية — غرينية وخصبة والأسهل في التعامل. عليها تقع أفضل الأراضي الزراعية في البلاد. تحتفظ بالماء جيدًا، لكن الأثقل منها تتضاغط وتصريفها بطيء، لذا أضف الكمبوست وتجنّب السير عليها وهي رطبة.",
+          "تحتوي مساحة كبيرة جدًا من البلاد على تربة جيرية غنية بالكلس، ودرجة حموضتها قلوية عادة بين 7.5 و8.5. في هذا المدى يصعب على الجذور امتصاص الحديد والمنغنيز، ولهذا يشيع هنا اصفرار الأوراق بين العروق الخضراء. العلاج نادرًا ما يكون مزيدًا من السماد — بل حديد مُخَلَّب وكثير من الكمبوست، وقليل من الكبريت العنصري أحيانًا لتخفيض الحموضة.",
+          "تهيمن التربة المالحة والجبسية على أجزاء من الوسط والجنوب، وهي الأصعب في الزراعة. مستويات الملح العالية تسحب الماء بعيدًا عن الجذور وتُعيق النمو. تعامل معها لا ضدها: اختر محاصيل متحمّلة للملوحة مثل الشعير والبنجر والنخيل وإلى حدٍّ ما الطماطم والسبانخ، وازرع في أحواض مرتفعة لتتسرب الأملاح إلى الأسفل مع الري، واسقِ بالتنقيط لا بالغمر حتى لا تدفع الملح صعودًا إلى منطقة الجذور، وأضف مواد عضوية كل عام.",
+          "التربة الرملية قرب أطراف الصحراء تصرّف الماء فورًا تقريبًا وتحتفظ بقليل من الغذاء، لذا تحتاج كمبوست وغطاءً (ملش) وريات أكثر تكرارًا وأصغر مما يوحي قوامها. أما التربة الطينية فهي الصورة المقابلة: تحتفظ بالماء بإحكام حتى تختنق الجذور، وأفضل إدارتها بالمواد العضوية والأحواض المرتفعة والصبر.",
+          "تحليل واحد للتربة سيخبرك أكثر من أي قاعدة عامة. إن فعلت شيئًا واحدًا قبل زراعتك القادمة، فليكن تحليل تربتك واختيار المحاصيل وفقها."
+        ]
+      },
+      "ku": {
+        "title": "هەڵبژاردنی بەرهەم بەپێی خاکەکەت",
+        "description": "ڕووباری، کهلکدار، سوێر، لمی — خاکی عێراق زۆر جیاوازە. بەرهەم لەگەڵ ئەو زەوییە بگونجێنە کە بەڕاستی هەتە.",
+        "body": [
+          "خاکی عێراق زۆر جیاوازترە لەوەی ئاسۆی تەخت پیشانی دەدات، و کام خاکت هەیە گرنگترە لە نزیکەی هەموو شتێکی تر کە دەتوانیت بیگۆڕیت.",
+          "لە درێژایی دیجلە و فورات خاکی ڕووباری دەدۆزیتەوە — لیمۆیی، بەپیت و ئاسانترین بۆ کارکردن. باشترین زەویی کشتوکاڵی وڵات لەسەریانە. ئاو باش دەگرن، بەڵام قورسەکان پەستان دەخۆن و هێواش ئاوڕێژ دەکەن، بۆیە کۆمپۆست زیاد بکە و لە کاتی تەڕییاندا پێیان مەکەوە.",
+          "بەشێکی زۆر گەورەی وڵات کهلکدارە: دەوڵەمەند بە کهلک، و pH ی قەڵەم عادەتەن لە نێوان 7.5 و 8.5. لەو مەودایەدا ئاسن و مەنگەنیز بۆ ڕەگەکان سەختە هەڵبمژرێن، ئەمەش وای دەکات گەڵا لە نێوان دەمارە سەوزەکاندا زەرد ببێت. چارەسەر بە دەگمەن بەسترێژێکی زیاترە — بەڵکو ئاسنی شەلێتە، کۆمپۆستی زۆر، و هەندێک جار گۆگرد بۆ کەمکردنەوەی pH.",
+          "خاکی سوێر و گەچی بەشێک لە ناوەڕاست و باشوور دەگرێتەوە، و سەختترینن بۆ کشتوکاڵ. ئاستی بەرزی خوێ ئاو لە ڕەگەکان دوور دەخاتەوە و گەشەکردن دەوەستێنێت. لەگەڵیان کار بکە نەک دژیان: بەرهەمی بەرگەگر لە خوێ هەڵبژێرە وەک جۆ، چوغوندەر، دار خورما، و تا ڕادەیەک تەماتە و ئیسپیناخ، لە قاپی بەرزدا بچێنە بۆ ئەوەی خوێ لەگەڵ ئاودا بڕواتە خوارەوە، بە دڵۆپەیی ئاوی بدە، و هەموو ساڵ ماددەی ئەندامی زیاد بکە.",
+          "خاکی لمی لە نزیک لێوارەکانی بیابان خێرا ئاوڕێژ دەکات و کەم خۆراک دەگرێت، بۆیە پێویستی بە کۆمپۆست و مەڵح و ئاودانی زیاتر و بچووکتر هەیە. خاکی قوڕین پێچەوانەیە: ئاو بە توندی دەگرێت تا ڕەگەکان خنکێن دەبن، و باشترە بە ماددەی ئەندامی و قاپی بەرز و ئارامگرتنی بەڕێوەببەیت.",
+          "یەک پشکنینی خاک زیاتر پێت دەڵێت لە هەر یاسایەکی گشتی. ئەگەر یەک شت بکەیت پێش چاندنی داهاتووت، با پشکنینی خاکەکەت بێت و بەرهەم بەپێی ئەو هەڵبژێرە."
+        ]
+      }
+    }
+  },
+  {
+    "id": "gh-009",
+    "slug": "watering-in-a-hot-dry-climate",
+    "category": "water",
+    "contentType": "article",
+    "readingTime": 4,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Watering in a Hot, Dry Climate",
+    "description": "Deep, less frequent watering and a layer of mulch will do more for your plants in an Iraqi summer than any fixed schedule.",
+    "body": [
+      "Water is the limiting factor in an Iraqi garden, and the usual mistake is watering a little and often. Shallow watering keeps roots near the surface where the sun dries them fastest, and loses a great deal to evaporation before the plant ever drinks it.",
+      "Water deeply and less often. Soak the soil until moisture reaches well below the surface, then let the top few centimetres dry before watering again. Roots follow the water downward, and a deep-rooted plant rides out a heatwave far better than a shallow one.",
+      "Mulch is the cheapest improvement you can make. A five-centimetre layer of straw, compost or even gravel over the soil cuts evaporation sharply and keeps the root zone several degrees cooler through the worst of summer. Water early in the morning or after sunset so less is lost before it soaks in.",
+      "Salinity complicates everything in the centre and south. Salty water leaves salt behind as it evaporates, and over a season it builds up until it stunts the plants. Use the lowest-salinity water you have, prefer drip over overhead watering, and once or twice a season water heavily enough to push the accumulated salt below the roots.",
+      "Containers and balconies are a climate of their own: a pot can dry out completely in a single summer day. Expect to water daily, sometimes twice, and to move pots into afternoon shade when the heat peaks."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "الري في مناخ حار وجاف",
+        "description": "الري العميق الأقل تكرارًا وطبقة من الملش ستفيد نباتاتك في صيف العراق أكثر من أي جدول ثابت.",
+        "body": [
+          "الماء هو العامل المحدِّد في حديقة عراقية، والخطأ المعتاد هو الري بقليل ومتكرر. الري السطحي يبقي الجذور قرب السطح حيث تجففها الشمس أسرع، ويفقد قدرًا كبيرًا بالتبخر قبل أن تشرب النبتة أصلًا.",
+          "اسقِ بعمق وبتكرار أقل. أشبع التربة حتى تصل الرطوبة إلى ما دون السطح بكثير، ثم دع السنتيمترات العلوية تجف قبل الري التالي. الجذور تتبع الماء إلى الأسفل، والنبتة ذات الجذور العميقة تتحمل موجة الحر أفضل بكثير من ضحلة الجذور.",
+          "الملش أرخص تحسين يمكنك القيام به. طبقة بسماكة خمسة سنتيمترات من القش أو الكمبوست أو حتى الحصى فوق التربة تقلّل التبخر بشدة وتبقي منطقة الجذور أبرد بعدة درجات خلال أشد الصيف. اسقِ في الصباح الباكر أو بعد الغروب ليضيع أقل قبل أن يتسرب.",
+          "الملوحة تعقّد كل شيء في الوسط والجنوب. الماء المالح يترك الملح خلفه عند التبخر، وعلى مدى موسم يتراكم حتى يُعيق النباتات. استخدم أقل ماء ملوحة متاح، وفضّل التنقيط على الري العلوي، ومرة أو مرتين في الموسم اسقِ بكثافة كافية لدفع الملح المتراكم تحت الجذور.",
+          "الأواني والشرفات مناخ قائم بذاته: قد يجف الوعاء تمامًا في يوم صيفي واحد. توقّع الري يوميًا، وأحيانًا مرتين، ونقل الأصص إلى ظل بعد الظهر عند ذروة الحرارة."
+        ]
+      },
+      "ku": {
+        "title": "ئاودان لە ئاووهەوایەکی گەرم و وشکدا",
+        "description": "ئاودانی قووڵ و کەمتر دووبارەبووەوە لەگەڵ چینێک مەڵح زیاتر سوودی دەبێت بۆ ڕووەکەکانت لە هاوینی عێراقدا.",
+        "body": [
+          "ئاو ئەو هۆکارە سنووردارە لە باخێکی عێراقیدا، و هەڵەی باو ئەوەیە کەمێک و بەردەوام ئاوی بدەیت. ئاودانی ڕووکەش ڕەگەکان لە نزیک ڕووکەش دەهێڵێتەوە کە خۆر خێراتر وشکیان دەکات، و زۆرێک لە دەست دەچێت بە هەڵمبوون.",
+          "بە قووڵی و کەمتر ئاوی بدە. خاکەکە تێربکە تا شێ بگاتە زۆر خوارتر لە ڕووکەش، پاشان با چەند سانتیمەتری سەرەوە وشک ببێت پێش ئاودانی داهاتوو. ڕەگەکان بەدوای ئاوەکەدا دەچنە خوارەوە.",
+          "مەڵح هەرزانترین باشترکردنە. چینێکی پێنج سانتیمەتری کایی، کۆمپۆست یان تەنانەت چەوڵ لەسەر خاکەکە هەڵمبوون توند کەم دەکاتەوە و ناوچەی ڕەگ چەند پلە ساردتر دەهێڵێتەوە. بەیانی زوو یان دوای ئاوابوونی خۆر ئاوی بدە.",
+          "سوێری هەموو شتێک ئاڵۆز دەکات لە ناوەڕاست و باشوور. ئاوی سوێر کە هەڵدەمێت خوێ بەجێدەهێڵێت، و بە درێژایی وەرزێک کۆدەبێتەوە تا ڕووەکەکان دەوەستێنێت. کەمترین ئاوی سوێر بەکاربهێنە، دڵۆپەیی باشترە لە ئاودانی سەرەوە، و جارێک یان دوو جار بە وەرز بە قووڵی ئاوی بدە بۆ داکشاندنی خوێ.",
+          "قاپ و بەلکۆنەکان ئاووهەوایەکی سەربەخۆن: لەوانەیە قاپێک لە یەک ڕۆژی هاویندا بە تەواوی وشک ببێت. چاوەڕوانی ئاودانی ڕۆژانە بکە، هەندێک جار دوو جار، و قاپەکان بخە سێبەری دوای نیوەڕۆ لە کاتی لووتکەی گەرمیدا."
+        ]
+      }
+    }
+  },
+  {
+    "id": "gh-010",
+    "slug": "the-two-growing-seasons",
+    "category": "planting-strategies",
+    "contentType": "article",
+    "readingTime": 5,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "The Two Growing Seasons",
+    "description": "In Iraq and Kurdistan the gardening year splits in two, divided by a hard summer. Knowing which season you're in changes everything.",
+    "body": [
+      "The gardening year in Iraq and Kurdistan has two useful seasons separated by a difficult summer, and knowing which one you are in is the difference between a harvest and disappointment.",
+      "The cool season is the forgiving one. Planted from roughly October to November, it grows slowly through the mild, wet winter and matures in spring. Leafy crops and roots do best: lettuce, spinach, radish, carrot, pea, spring onion, and the herbs parsley, coriander, dill and chives, along with strawberry. Most of these can be sown again in late winter for a second round.",
+      "The warm season begins after the last frost — roughly March on the plains, later in the highlands — and belongs to fruiting crops: tomato, cucumber, zucchini, bell pepper, pumpkin and beans, with basil and mint alongside them. These need to be established, and ideally cropping, before the full force of summer arrives.",
+      "Midsummer is the gap. Once daytime heat sits in the forties, cool-season crops bolt or scorch and even warm-season plants set less fruit. You can bridge it with shade nets, deep mulch and the hardier varieties, but the honest strategy is to plan around the heat rather than expect a full garden through it.",
+      "Perennial trees and shrubs — olive, fig, pomegranate, lemon and orange — follow a slower rhythm and establish best when planted in early spring or autumn, so their roots settle before either extreme. Wherever you garden, let the season choose the crop rather than choosing a crop and hoping."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "موسما الزراعة: البارد والدافئ",
+        "description": "في العراق وكردستان ينقسم عام البستنة إلى موسمين يفصل بينهما صيف قاسٍ. معرفة الموسم الذي أنت فيه تغيّر كل شيء.",
+        "body": [
+          "لعام البستنة في العراق وكردستان موسمان مفيدان يفصل بينهما صيف صعب، ومعرفة أيهما أنت فيه هي الفرق بين حصاد وخيبة أمل.",
+          "الموسم البارد هو الأكثر تسامحًا. يُزرع تقريبًا من تشرين الأول إلى تشرين الثاني، وينمو ببطء خلال الشتاء المعتدل الممطر وينضج في الربيع. تزدهر فيه المحاصيل الورقية والجذرية: الخس والسبانخ والفجل والجزر والبازلاء والبصل الأخضر، والأعشاب البقدونس والكزبرة والشبت والثوم المعمر، مع الفراولة. يمكن إعادة زراعة معظمها في أواخر الشتاء لجولة ثانية.",
+          "الموسم الدافئ يبدأ بعد آخر صقيع — نحو آذار في السهول، وأبكر في المرتفعات — وهو لمحاصيل الإثمار: الطماطم والخيار والكوسا والفلفل الحلو والقرع والفاصولياء، مع الريحان والنعناع إلى جانبها. يجب أن تُثبَّت هذه، ويُفضّل أن تُثمر، قبل أن تصل قوة الصيف الكاملة.",
+          "منتصف الصيف هو الفجوة. عندما تستقر حرارة النهار في الأربعينيات، تتجه المحاصيل الباردة إلى الإزهار المبكر أو تحترق، وحتى نباتات الموسم الدافئ تُثمر أقل. يمكنك تجاوزها بشبكات التظليل والملش العميق والأصناف الأكثر تحملًا، لكن الاستراتيجية الصادقة هي التخطيط حول الحرارة لا توقّع حديقة كاملة خلالها.",
+          "الأشجار والشجيرات المعمّرة — الزيتون والتين والرمان والليمون والبرتقال — تتبع إيقاعًا أبطأ وتثبت أفضل عند زراعتها في أوائل الربيع أو في الخريف، لتستقر جذورها قبل أي من الطرفين. أيًا كان مكان بستانك، دع الموسم يختار المحصول بدل أن تختار محصولًا وتأمل."
+        ]
+      },
+      "ku": {
+        "title": "دوو وەرزی چاندن",
+        "description": "لە عێراق و کوردستاندا ساڵی باخداری دەبێتە دوو وەرز کە هاوینێکی سەخت جیایان دەکاتەوە. زانینی ئەوەی لە کام وەرزتدایت هەموو شتێک دەگۆڕێت.",
+        "body": [
+          "ساڵی باخداری لە عێراق و کوردستاندا دوو وەرزی بەسوودی هەیە کە هاوینێکی سەخت جیایان دەکاتەوە، و زانینی ئەوەی لە کام وەرزتدایت جیاوازییەکە دەکات لە نێوان بەرهەم و بێهیوایی.",
+          "وەرزی سارد لێبوردەترینە. لە نزیکەی تشرینی یەکەم تا تشرینی دووەم دەچێنرێت، بە هێواشی گەشە دەکات بە درێژایی زستانی نەرم و باراناوی و لە بەهاردا پێدەگات. بەرهەمی گەڵایی و ڕەگی باشترینن: کاهو، ئیسپیناخ، توره، گێزەر، نۆکە، پیازی سەوز، و گیاەکانی جەعفەری، کەرەفس، شوید و پیازی سەوز، لەگەڵ فڕاولە. زۆربەیان دەتوانرێن لە کۆتایی زستاندا دووبارە بچێنرێن.",
+          "وەرزی گەرم دوای کۆتا بەستەڵەک دەست پێدەکات — نزیکەی ئازار لە دەشتەکاندا، درەنگتر لە ناوچە بەرزەکان — و بۆ بەرهەمە بەرەکانە: تەماتە، خەیار، کۆسا، بیبەری شیرین، کادوو و لۆبیا، لەگەڵ ڕەیحان و پونگ. دەبێت ئەمانە دامەزرێنرێن و باشترە بەرهەم بێنن پێش ئەوەی توندی هاوین بگات.",
+          "ناوەڕاستی هاوین کەلێنەکەیە. کاتێک گەرمیی ڕۆژانە لە چلەکاندا جێگیر دەبێت، بەرهەمەکانی وەرزی سارد زوو دەگەن یان دەسووتێن، و تەنانەت ڕووەکەکانی وەرزی گەرمیش کەمتر بەرهەم دەهێنن. دەتوانیت بە تۆڕی سێبەر و مەڵحی قووڵ و جۆرە بەرگەگرەکان بەسەری ببەیت، بەڵام ستراتیژیی ڕاستەقینە ئەوەیە بەدەوری گەرمی پلان دابنێیت.",
+          "درەخت و دەوەنە هەمیشەییەکان — زەیتوون، هەنجیر، هەنار، لیمۆ و پرتەقاڵ — ڕیتمێکی هێواشتریان هەیە و باشتر جێگیر دەبن کاتێک لە سەرەتای بەهار یان پاییزدا دەچێنرێن. لە هەر شوێنێک باخەکەت هەبێت، با وەرز بەرهەم هەڵبژێرێت."
+        ]
+      }
+    }
+  },
+  {
+    "id": "gh-011",
+    "slug": "saving-your-own-seeds-extraction",
+    "category": "food-seed-recycling",
+    "contentType": "article",
+    "readingTime": 5,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Saving Your Own Seeds: Wet and Dry Extraction",
+    "description": "Once you've grown a plant you like, saving its seed is the cheapest way to grow it again. The method depends on whether the fruit is dry or fleshy.",
+    "body": [
+      "Saving seed starts with the fruit you'd eat anyway: seed is taken from fruits picked at the ripeness you'd choose for the table — fully ripe for some crops, a little past ripe for others — but never from a diseased plant.",
+      "For dry fruits — pods, capsules and cones — the work is mostly separation. Pods and capsules that split open as they dry can simply be spread out in the sun, then the seed shaken or beaten free. Lighter debris comes off by winnowing (dropping the material in a breeze so the seed falls and the chaff blows away) or by sieving, and hand-picking finishes the job. Beat gently: a cracked seed will not germinate.",
+      "For fleshy fruits the seed sits embedded in pulp, and the job is to separate it cleanly without letting it rot or sprout. Small amounts can be handled by hand — scooping the seed from pumpkins and squashes, scraping it out of cucumbers, or crushing and rinsing it free from brinjal and melons. The one nuisance is sliminess, which a brief rinse in a very weak acid solution removes so the seed can be washed and dried.",
+      "The classic method for tomato and similar fruits is fermentation. Squeeze the pulp and seed into a jar, add a little water and leave it for a day or two. The good seed sinks; the pulp and any immature seed float and can be poured off. Rinse the settled seed, then dry it — first in the shade, then in the sun — before storing. Fermentation cleans seed well, but it can leave it slightly dull, and it must not be left so long that the seed starts to germinate.",
+      "A faster alternative for tomato is a short acid treatment, favoured by commercial growers because extraction and drying can be done the same day, more seed is recovered, and seed-borne pathogens on the surface are knocked back. A weaker alkali wash is also possible but tends to darken the seed coat, so it is usually reserved for small quantities.",
+      "However you extract them, seeds must be cleaned before storage. Remove all pod, capsule and pulp debris, and discard anything mouldy or damaged — damp seed left to ferment in the pod will rot in the jar. Then dry the seed thoroughly and store it cool and dry, labelled with the variety and the year. In a climate as hot as Iraq's, thorough drying is not optional: it is what keeps seed alive until the next season."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "حفظ بذورك: استخلاص الرطب والجاف",
+        "description": "بعد أن تزرع نبتة تعجبك، فإن حفظ بذورها أرخص طريقة لزراعتها مجددًا. والطريقة تعتمد على ما إذا كانت الثمرة جافة أم لحمية.",
+        "body": [
+          "يبدأ حفظ البذور من الثمرة التي كنت ستأكلها أصلًا: تُؤخذ البذور من ثمار تُقطف بالنضج الذي تختاره للمائدة — ناضجة تمامًا في بعض المحاصيل، وأكثر من ذلك قليلًا في غيرها — لكن أبدًا من نبتة مريضة.",
+          "أما الثمار الجافة — القرون والكبسولات والمخاريط — فالعمل فيها في الغالب فصل. القرون والكبسولات التي تنفتح وهي تجف يمكن ببساطة فردها في الشمس، ثم يُنفض البذر أو يُضرب. وتُزال الشوائب الأخف بالتذرية (إسقاط المادة في مهبّ الريح فيسقط البذر وتطير القشور) أو بالغربلة، وتُكمِل اليد العمل. اضرب بلطف: البذرة المتشققة لن تنبت.",
+          "أما الثمار اللحمية فالبذر مدفون في اللب، والمهم فصله نظيفًا دون أن يتعفن أو ينبت. الكميات الصغيرة تُعالج يدويًا — كشط البذر من القرع والكوسا، أو حكّه من الخيار، أو سحقه وشطفه من الباذنجان والشمّام. والمشكلة الوحيدة هي اللزوجة، ويُزيلها شطف قصير في محلول حمضي ضعيف جدًا حتى يُغسل البذر ويُجفف.",
+          "الطريقة الكلاسيكية للطماطم وما شابهها هي التخمير. اعصر اللب والبذر في برطمان، أضف قليلًا من الماء واتركه يومًا أو يومين. البذر الجيد يترسّب؛ واللب والبذر غير الناضج يطفوان ويُصبان. اشطف البذر المترسّب ثم جفّفه — أولًا في الظل ثم في الشمس — قبل التخزين. ينظّف التخمير البذر جيدًا، لكنه قد يجعله باهتًا قليلًا، ويجب ألا يُترك طويلًا حتى يبدأ البذر بالإنبات.",
+          "البديل الأسرع للطماطم هو معالجة حمضية قصيرة، يفضّلها المنتجون التجاريون لأن الاستخلاص والتجفيف يتمّان في اليوم نفسه، ويُستعاد بذر أكثر، وتُضعف مسببات الأمراض المحمولة على سطح البذرة. والغسل القلوي الأضعف ممكن أيضًا لكنه يميل إلى تغميق غلاف البذرة، لذا يُقتصر عادة على الكميات الصغيرة.",
+          "كيفما استخلصتها، يجب تنظيف البذور قبل التخزين. أزل كل بقايا القرون والكبسولات واللب، وارمِ كل ما هو متعفن أو تالف — فالبذر الرطب المتخمّر في القرن يتعفن في الجرة. ثم جفّف البذور تمامًا واحفظها في مكان بارد وجاف مع تدوين الصنف والسنة. في مناخ حار كمناخ العراق، التجفيف الكامل ليس اختياريًا: إنه ما يُبقي البذر حيًا حتى الموسم القادم."
+        ]
+      },
+      "ku": {
+        "title": "پاراستنی تۆوی خۆت: دەرهێنانی تەڕ و وشک",
+        "description": "دوای ئەوەی ڕووەکێکت چاند کە حەزت لێیە، پاراستنی تۆوەکەی هەرزانترین ڕێگەیە بۆ چاندنەوە. ڕێگاکە بەپێی ئەوەیە کە بەرهەمەکە وشکە یان گۆشتی.",
+        "body": [
+          "پاراستنی تۆو لەو بەرهەمەوە دەست پێدەکات کە هەر بەنیازی خواردنی بوویت: تۆو لە بەرهەمێکەوە وەردەگیرێت کە بەو پێگەیشتنە هەڵدەدرێت کە بۆ سەفرەکە هەڵدەبژێریت — لە هەندێک بەرهەمدا بە تەواوی پێگەیشتوو، لە هەندێکی تردا کەمێک زیاتر — بەڵام هەرگیز لە ڕووەکێکی نەخۆشەوە نا.",
+          "بۆ بەرهەمە وشکەکان — فەقێلە و کەپسوول و کۆنەکان — کارەکە زۆربەی جار جیاکردنەوەیە. فەقێلە و کەپسوولەکان کە بە وشکبوونەوە دەکرێنەوە بە سادەیی لە خۆردا بڵاو دەکرێنەوە، پاشان تۆوەکە دەهەژێنرێت یان دەلێدرێت. پاشماوەی سووک بە بایکردن یان بە بێخەڵان لادەبرێت، و دەستکاری کۆتایی پێدەهێنێت. بە نەرمی لێبدە: تۆوی شکاو شین نابێتەوە.",
+          "بۆ بەرهەمە گۆشتییەکان تۆو لە ناو گۆشتەکەدا نوقمە و کارەکە جیاکردنەوەیەکی پاکە بەبێ ئەوەی بڕزێت یان بشینێت. بڕی کەم بە دەست ئەنجام دەدرێت — کۆکردنەوەی تۆو لە کادوو و کۆسا، یان ڕاکێشانی لە خەیار، یان لێدان و شوشتنی لە بادمجان و کاڵەک. تەنها کێشە لینجییە، کە شوشتنی کورت لە گیراوەیەکی ترشی زۆر لاواز لایدەبەرێت.",
+          "ڕێگای کلاسیکی بۆ تەماتە و هاوشێوەکانی خەمیرکردنە. گۆشت و تۆوەکە بگوشە ناو بەربانێک، کەمێک ئاو زیاد بکە و ڕۆژێک یان دوو ڕۆژ جێی بهێڵە. تۆوی باش نیشتەو دەبێت؛ گۆشت و تۆوی نەگەیشتوو سەرئاو دەکەن و دەڕژێنرێن. تۆوی نیشتوو بشۆ، پاشان وشکی بکە — سەرەتا لە سێبەر و پاشان لە خۆر — پێش هەڵگرتن. خەمیرکردن تۆو باش پاک دەکاتەوە، بەڵام ڕەنگە کەمێک لاوازی بکات، و نابێت ئەوەندە درێژ بهێڵرێت کە تۆو دەست بکات بە شینبوونەوە.",
+          "هەڵبژاردەیەکی خێراتر بۆ تەماتە چارەسەری ترشی کورتە، کە بەرهەمهێنەرانی بازرگانی حەزی لێیە چونکە دەرهێنان و وشککردن لە هەمان ڕۆژدا دەکرێن، تۆوی زیاتر دەگەڕێتەوە، و نەخۆشییەکانی سەر ڕووکەشی تۆو لاواز دەکرێن. شوشتنی قەڵەمی لاوازتریش دەکرێت بەڵام ڕەنگی پۆشاکی تۆو تاریک دەکات.",
+          "هەر چۆنێک دەریهێنیت، دەبێت تۆو پێش هەڵگرتن پاک بکرێتەوە. هەموو پاشماوەی فەقێلە و کەپسوول و گۆشت لابەرە، و هەر شتێکی کەڵکێش یان تێکچوو فڕێ بدە. پاشان تۆوەکان بە تەواوی وشک بکە و لە شوێنێکی سارد و وشکدا هەڵبگرە لەگەڵ نووسینی جۆر و ساڵ. لە ئاووهەوایەکی گەرم وەک عێراقدا، وشککردنی تەواو بژاردەیی نییە."
+        ]
+      }
+    }
   }
 ]

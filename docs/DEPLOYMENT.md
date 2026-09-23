@@ -90,6 +90,14 @@ Everything AI is off until a key exists; nothing else in the app depends on it.
 - `VERIFICATION_PROVIDER=ai` switches photo scoring from the offline heuristic
   to the model. Without a key it silently keeps using the heuristic.
 
+**Grounding — how to teach the assistant.** The assistant answers from Green Hub
+articles, not from the model's memory. Publish an article (see `greenhub.json`
+or the admin Content page) and it becomes available to the assistant on the next
+request; `backend/controllers/ai.controller.js` retrieves the relevant ones
+automatically, in any of the three languages. A `plant_catalog` row's `notes`
+field is also used whenever a question names that plant, so keeping the catalog
+notes accurate improves both the recommender and the assistant.
+
 Two things to be deliberate about:
 - **Photos leave your server** — a submission sent for AI verification goes to
   the provider. That is a privacy decision for a platform handling members'

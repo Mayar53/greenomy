@@ -169,3 +169,71 @@ describe("AI verification resilience", () => {
     assert.equal(submitted.body.ai_provider, "heuristic");
   });
 });
+
+describe("the assistant is grounded in our own content", () => {
+  // Required lazily: the controller pulls in the models, which need the test
+  // environment that before() has set up.
+  const ctrl = () => require("../controllers/ai.controller");
+
+  test("search terms fold synonyms and stems", () => {
+    const t = ctrl()._terms("When should I water my tomatoes?");
+    assert.ok(t.has("water"), "watering/wet should fold to water");
+    assert.ok(t.has("tomato"), "tomatoes should stem to tomato");
+  });
+
+  test("a distinctive question retrieves the matching guide", async () => {
+    const articles = await ctrl()._selectKnowledge("which crops suit saline soil?");
+    const slugs = articles.map((a) => a.slug);
+    assert.ok(
+      slugs.includes("choosing-crops-for-your-soil"),
+      `expected the soil guide, got: ${slugs.join(", ") || "(none)"}`
+    );
+  });
+
+  test("an unrelated question retrieves nothing", async () => {
+    const articles = await ctrl()._selectKnowledge("what is the capital of France?");
+    assert.equal(articles.length, 0);
+  });
+
+  test("the assistant sends Greenomy's own content to the model as CONTEXT", async () => {
+    const realFetch = global.fetch;
+    const previousKey = process.env.AI_API_KEY;
+    process.env.AI_API_KEY = "test-key";
+
+    let sent = null;
+    global.fetch = async (url, options) => {
+      // Only the provider call is stubbed — the test client's own HTTP goes through.
+      if (!String(url).includes("/chat/completions")) return realFetch(url, options);
+      sent = JSON.parse(options.body);
+      return {
+        ok: true,
+        status: 200,
+        json: async () => ({ choices: [{ message: { content: "Water deeply and less often." } }] }),
+      };
+    };
+
+    try {
+      const { token } = await h.signup(api.base);
+      const res = await h.post(api.base, "/ai/assistant", {
+        token,
+        body: { message: "how should I water my tomatoes in summer?" },
+      });
+
+      assert.equal(res.status, 200);
+      assert.equal(res.body.reply, "Water deeply and less often.");
+
+      const system = sent.messages[0].content;
+      assert.match(system, /CONTEXT:/);
+      assert.match(system, /GREENOMY GUIDES/);
+      assert.match(system, /Watering in a Hot, Dry Climate/);
+      assert.ok(
+        res.body.sources.includes("watering-in-a-hot-dry-climate"),
+        `expected the watering guide in sources, got: ${(res.body.sources || []).join(", ")}`
+      );
+    } finally {
+      global.fetch = realFetch;
+      if (previousKey === undefined) delete process.env.AI_API_KEY;
+      else process.env.AI_API_KEY = previousKey;
+    }
+  });
+});

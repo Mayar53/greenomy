@@ -77,6 +77,10 @@
     "filterSeed": "إعادة تدوير بذور الطعام",
     "filterGarden": "البستنة المنزلية",
     "filterCare": "العناية بالنباتات",
+    "filterClimate": "المناخ",
+    "filterSoil": "التربة",
+    "filterWater": "الماء",
+    "filterStrategy": "مواسم الزراعة",
     "readMore": "اقرأ المقال",
     "backToList": "العودة إلى المركز الأخضر",
     "minRead": "دقيقة قراءة"
@@ -487,6 +491,55 @@
     "found": "يبدو أنها",
     "none": "تعذّر التعرّف على نبتة في هذه الصورة.",
     "error": "تعذّر التعرّف على النبتة. يرجى المحاولة مرة أخرى."
+  },
+  "recommend": {
+    "title": "مقترح لك",
+    "durationLabel": "كم من الوقت يمكنك الانتظار حتى الحصاد؟",
+    "durationWeeks": "بضعة أسابيع",
+    "durationMonths": "بضعة أشهر",
+    "durationSeason": "حتى موسم كامل",
+    "durationAny": "لا عجلة",
+    "loading": "جارٍ البحث عن نباتات لمنطقتك…",
+    "daysUnit": "يوم",
+    "approximate": "مناخ عام",
+    "reason": {
+      "climateMatch": "يناسب مناخك",
+      "inSeason": "في موسمه الآن",
+      "matchesPreference": "يطابق اهتماماتك",
+      "fitsDuration": "جاهز في الوقت المناسب",
+      "fitsExperience": "مناسب لمستواك",
+      "fitsSpace": "يناسب مساحتك",
+      "outOfSeason": "خارج موسمه هنا",
+      "differentClimate": "غير مثالي لمناخك",
+      "outsidePreference": "خارج اهتماماتك",
+      "needsExperience": "يحتاج خبرة"
+    }
+  },
+  "season": {
+    "spring": "الربيع",
+    "summer": "الصيف",
+    "autumn": "الخريف",
+    "winter": "الشتاء"
+  },
+  "climate": {
+    "tropical": "استوائي",
+    "arid": "جاف",
+    "subtropical": "شبه استوائي",
+    "mediterranean": "متوسطي",
+    "temperate": "معتدل",
+    "continental": "قاري",
+    "cold": "بارد"
+  },
+  "category": {
+    "vegetables": "خضروات",
+    "herbs": "أعشاب",
+    "fruit-trees": "أشجار فاكهة",
+    "houseplants": "نباتات منزلية"
+  },
+  "difficulty": {
+    "easy": "سهل",
+    "medium": "متوسط",
+    "hard": "يتطلب خبرة"
   },
   "common": {
     "loading": "جارٍ التحميل...",

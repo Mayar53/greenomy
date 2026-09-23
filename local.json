@@ -77,6 +77,10 @@
     "filterSeed": "Food Seed Recycling",
     "filterGarden": "Home Gardening",
     "filterCare": "Plant Care",
+    "filterClimate": "Climate",
+    "filterSoil": "Soil",
+    "filterWater": "Water",
+    "filterStrategy": "Planting Seasons",
     "readMore": "Read Article",
     "backToList": "Back to Green Hub",
     "minRead": "min read"
@@ -487,6 +491,55 @@
     "found": "Looks like",
     "none": "Couldn't identify a plant in that photo.",
     "error": "Couldn't identify the plant. Please try again."
+  },
+  "recommend": {
+    "title": "Recommended for you",
+    "durationLabel": "How long will you wait for a harvest?",
+    "durationWeeks": "A few weeks",
+    "durationMonths": "A few months",
+    "durationSeason": "Up to a season",
+    "durationAny": "No rush",
+    "loading": "Finding plants for your area…",
+    "daysUnit": "days",
+    "approximate": "general climate",
+    "reason": {
+      "climateMatch": "Suits your climate",
+      "inSeason": "In season now",
+      "matchesPreference": "Matches your interests",
+      "fitsDuration": "Ready in time",
+      "fitsExperience": "Right for your level",
+      "fitsSpace": "Fits your space",
+      "outOfSeason": "Out of season here",
+      "differentClimate": "Not ideal for your climate",
+      "outsidePreference": "Outside your interests",
+      "needsExperience": "Needs experience"
+    }
+  },
+  "season": {
+    "spring": "spring",
+    "summer": "summer",
+    "autumn": "autumn",
+    "winter": "winter"
+  },
+  "climate": {
+    "tropical": "tropical",
+    "arid": "arid",
+    "subtropical": "subtropical",
+    "mediterranean": "mediterranean",
+    "temperate": "temperate",
+    "continental": "continental",
+    "cold": "cold"
+  },
+  "category": {
+    "vegetables": "Vegetables",
+    "herbs": "Herbs",
+    "fruit-trees": "Fruit trees",
+    "houseplants": "Houseplants"
+  },
+  "difficulty": {
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Challenging"
   },
   "common": {
     "loading": "Loading...",

@@ -7,6 +7,10 @@ const CATEGORY_LABELS = {
   "food-seed-recycling": "greenHub.filterSeed",
   "home-gardening": "greenHub.filterGarden",
   "plant-care": "greenHub.filterCare",
+  "iraq-climate": "greenHub.filterClimate",
+  soil: "greenHub.filterSoil",
+  water: "greenHub.filterWater",
+  "planting-strategies": "greenHub.filterStrategy",
 };
 
 function escapeHtml(value) {

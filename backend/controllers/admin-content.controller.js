@@ -1,7 +1,15 @@
 // controllers/admin-content.controller.js
 const greenHubModel = require("../models/green-hub.model");
 
-const CATEGORIES = ["food-seed-recycling", "home-gardening", "plant-care"];
+const CATEGORIES = [
+  "food-seed-recycling",
+  "home-gardening",
+  "plant-care",
+  "iraq-climate",
+  "soil",
+  "water",
+  "planting-strategies",
+];
 
 exports.list = async (req, res) => {
   res.json(await greenHubModel.listAll());

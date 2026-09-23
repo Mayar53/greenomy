@@ -166,7 +166,12 @@ describe("admin dashboard", () => {
     assert.equal(draft.status, 201);
 
     const publicBefore = await h.get(api.base, "/green-hub");
-    assert.equal(publicBefore.body.length, 6, "an unpublished draft is not public");
+    // Counted relative to whatever is seeded, so adding content never breaks this.
+    const baseline = publicBefore.body.length;
+    assert.ok(
+      !publicBefore.body.some((a) => a.slug === "admin-created-draft"),
+      "an unpublished draft is not public"
+    );
 
     const published = await h.patch(api.base, `/admin/content/${draft.body.id}`, {
       token: adminToken,
@@ -175,13 +180,13 @@ describe("admin dashboard", () => {
     assert.equal(published.status, 200);
 
     const publicAfter = await h.get(api.base, "/green-hub");
-    assert.equal(publicAfter.body.length, 7);
+    assert.equal(publicAfter.body.length, baseline + 1);
 
     const removed = await h.del(api.base, `/admin/content/${draft.body.id}`, { token: adminToken });
     assert.equal(removed.status, 204);
 
     const publicFinal = await h.get(api.base, "/green-hub");
-    assert.equal(publicFinal.body.length, 6);
+    assert.equal(publicFinal.body.length, baseline);
   });
 
   test("analytics reflects real activity and keeps its shape", async () => {

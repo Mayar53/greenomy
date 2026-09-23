@@ -77,6 +77,10 @@
     "filterSeed": "دووبارە بەکارهێنانەوەی تۆوی خۆراک",
     "filterGarden": "باخداریی ماڵ",
     "filterCare": "چاودێری ڕووەک",
+    "filterClimate": "ئاووهەوا",
+    "filterSoil": "خاک",
+    "filterWater": "ئاو",
+    "filterStrategy": "وەرزەکانی چاندن",
     "readMore": "وتارەکە بخوێنەوە",
     "backToList": "گەڕانەوە بۆ ناوەندی سەوز",
     "minRead": "خولەک خوێندنەوە"
@@ -487,6 +491,55 @@
     "found": "وا دیارە",
     "none": "نەتوانرا ڕووەکێک لەم وێنەیەدا بناسرێتەوە.",
     "error": "نەتوانرا ڕووەک بناسرێتەوە. تکایە دووبارە هەوڵ بدە."
+  },
+  "recommend": {
+    "title": "پێشنیارکراو بۆ تۆ",
+    "durationLabel": "چەند دەتوانیت چاوەڕوانی بەرهەم بیت؟",
+    "durationWeeks": "چەند هەفتەیەک",
+    "durationMonths": "چەند مانگێک",
+    "durationSeason": "تا وەرزێکی تەواو",
+    "durationAny": "پەلە نەکە",
+    "loading": "گەڕان بۆ ڕووەک بۆ ناوچەکەت…",
+    "daysUnit": "ڕۆژ",
+    "approximate": "کەشوهەوای گشتی",
+    "reason": {
+      "climateMatch": "لەگەڵ کەشوهەوای تۆ دەگونجێت",
+      "inSeason": "ئێستا لە وەرزیدایە",
+      "matchesPreference": "لەگەڵ حەزەکانت دەگونجێت",
+      "fitsDuration": "بە کاتی خۆی ئامادە دەبێت",
+      "fitsExperience": "گونجاوە بۆ ئاستی تۆ",
+      "fitsSpace": "لەگەڵ شوێنەکەت دەگونجێت",
+      "outOfSeason": "لەم ناوچەیەدا لە وەرزی نییە",
+      "differentClimate": "بۆ کەشوهەوای تۆ گونجاو نییە",
+      "outsidePreference": "دەرەوەی حەزەکانتە",
+      "needsExperience": "ئەزموون پێویستە"
+    }
+  },
+  "season": {
+    "spring": "بەهار",
+    "summer": "هاوین",
+    "autumn": "پایز",
+    "winter": "زستان"
+  },
+  "climate": {
+    "tropical": "ئەستوایی",
+    "arid": "وشک",
+    "subtropical": "نیمچە ئەستوایی",
+    "mediterranean": "دەریای ناوەڕاست",
+    "temperate": "مەعتەدیل",
+    "continental": "کیشوەری",
+    "cold": "سارد"
+  },
+  "category": {
+    "vegetables": "سەوزەوات",
+    "herbs": "گیا خۆشەکان",
+    "fruit-trees": "دارەوەی بەرهەم",
+    "houseplants": "ڕووەکی ماڵی"
+  },
+  "difficulty": {
+    "easy": "ئاسان",
+    "medium": "ناوەند",
+    "hard": "سەخت"
   },
   "common": {
     "loading": "بارکردن...",
