@@ -197,6 +197,32 @@ function groundingContext({ knowledge, plants, conditions, memberPlants }) {
   return parts.join("\n\n");
 }
 
+/** A per-record translation, falling back to the English base — the same idea
+ * as `localized()` in language.js. */
+function localizedField(article, field, lang) {
+  const translation = lang && article.i18n && article.i18n[lang];
+  return (translation && translation[field]) || article[field];
+}
+
+const FALLBACK_MAX_CHARS = 700;
+
+/** When the model cannot answer — no key, a spent daily quota, an outage — the
+ * backend answers from the guide it retrieved, so the feature still works. It is
+ * labelled as a guide excerpt rather than passed off as a model reply. */
+function guideAnswer(article, lang) {
+  if (!article) return null;
+
+  const description = localizedField(article, "description", lang);
+  const body = localizedField(article, "body", lang);
+  const parts = [description, ...(Array.isArray(body) ? body : [body])].filter(Boolean);
+  const text = parts.join(" ").replace(/\s+/g, " ").trim();
+  if (!text) return null;
+
+  const trimmed =
+    text.length > FALLBACK_MAX_CHARS ? `${text.slice(0, FALLBACK_MAX_CHARS).replace(/\s+\S*$/, "")}…` : text;
+  return `${trimmed}\n\n— ${localizedField(article, "title", lang)}`;
+}
+
 /** POST /api/ai/identify — read the species from an uploaded photo. */
 exports.identify = async (req, res) => {
   const { imageUrl } = req.body || {};
@@ -225,7 +251,7 @@ exports.identify = async (req, res) => {
 /** POST /api/ai/assistant — answer a gardening question from Greenomy's own
  * content, with the member's garden and their local conditions for context. */
 exports.assistant = async (req, res) => {
-  const { message } = req.body || {};
+  const { message, lang } = req.body || {};
   if (!message || typeof message !== "string") {
     return res.status(400).json({ error: "message is required" });
   }
@@ -242,27 +268,39 @@ exports.assistant = async (req, res) => {
 
   const context = groundingContext({ knowledge, plants, conditions, memberPlants });
 
-  const reply = await ai.chat({
-    messages: [
-      {
-        role: "system",
-        content: [
-          "You are Greenomy's gardening assistant: practical, encouraging and concise.",
-          "Answer ONLY from the CONTEXT below — it is Greenomy's own researched content and the member's own garden.",
-          "If the CONTEXT does not cover the question, say briefly that you don't have that information yet and point at the closest topic it does cover. Never invent harvest times, dates, dosages or plant names.",
-          "Answer in 2-4 short sentences. If the question is unrelated to plants, gardening or sustainability, say so briefly and steer back.",
-          "",
-          "CONTEXT:",
-          context || "(no matching Greenomy content was found for this question)",
-        ].join("\n"),
-      },
-      { role: "user", content: message.slice(0, MAX_MESSAGE_LENGTH) },
-    ],
-    maxTokens: 2000,
-  });
+  let reply;
+  let answeredBy = "ai";
+  try {
+    reply = await ai.chat({
+      messages: [
+        {
+          role: "system",
+          content: [
+            "You are Greenomy's gardening assistant: practical, encouraging and concise.",
+            "Answer ONLY from the CONTEXT below — it is Greenomy's own researched content and the member's own garden.",
+            "If the CONTEXT does not cover the question, say briefly that you don't have that information yet and point at the closest topic it does cover. Never invent harvest times, dates, dosages or plant names.",
+            "Answer in 2-4 short sentences. If the question is unrelated to plants, gardening or sustainability, say so briefly and steer back.",
+            "",
+            "CONTEXT:",
+            context || "(no matching Greenomy content was found for this question)",
+          ].join("\n"),
+        },
+        { role: "user", content: message.slice(0, MAX_MESSAGE_LENGTH) },
+      ],
+      maxTokens: 2000,
+    });
+  } catch (err) {
+    // No key, a spent daily quota or a provider outage must not leave a member
+    // with nothing: if we hold content for this question, answer from it.
+    const fromGuides = guideAnswer(knowledge[0], lang);
+    if (!fromGuides) throw err;
+    console.warn(`Assistant answering from our own guides instead — ${err.message}`);
+    reply = fromGuides;
+    answeredBy = "guide";
+  }
 
   // The slugs of the guides that grounded this answer, for the UI to link.
-  res.json({ reply, sources: knowledge.map((a) => a.slug) });
+  res.json({ reply, sources: knowledge.map((a) => a.slug), answeredBy });
 };
 
 // Exported for tests.

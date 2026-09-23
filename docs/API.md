@@ -21,10 +21,11 @@ nothing in these routes is web-specific.
 | Method | Path | Auth | Notes |
 |---|---|---|---|
 | POST | /ai/identify | user | `{ imageUrl }` → `{ plantType, confidence, alternatives }` |
-| POST | /ai/assistant | user | `{ message }` → `{ reply, sources }` — answered from Greenomy's own content plus the member's plants |
+| POST | /ai/assistant | user | `{ message, lang? }` → `{ reply, sources, answeredBy }` — answered from Greenomy's own content plus the member's plants |
 
-Both return **503** with an explanatory message when no key is configured, and
-are rate-limited (40 per 15 min) because every call costs money at the provider.
+Both are rate-limited (40 per 15 min) because every call costs money at the
+provider. Without a key, `identify` returns **503**; the assistant does not —
+see below.
 
 The assistant does not answer from the model's general memory. Each request
 retrieves the relevant **Green Hub articles** (keyword/synonym matching over
@@ -34,6 +35,11 @@ conditions, and puts them in front of the model as **CONTEXT**. `sources` lists
 the slugs of the guides that grounded the answer. When the CONTEXT doesn't cover
 the question, the model says so instead of inventing an answer. To teach it
 something new, add a Green Hub article — no code change needed.
+
+If the model is unavailable — no key, a spent daily quota, an outage — the
+backend answers from the retrieved guide itself and reports `answeredBy: "guide"`
+rather than `"ai"`, so the feature still works. `lang` (`en`/`ar`/`ku`) picks
+which translation that answer is drawn from.
 
 ## Development
 | GET /dev/mail | – | development only — the outbox of emails the app would have sent (password-reset links). Not mounted when `NODE_ENV=production`. |

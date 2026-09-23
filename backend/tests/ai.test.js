@@ -31,10 +31,43 @@ describe("AI features without a key", () => {
     assert.match(res.body.error, /not configured/i);
   });
 
-  test("assistant reports that AI is not configured", async () => {
+  test("the assistant answers from our own guides when AI is not configured", async () => {
     const { token } = await h.signup(api.base);
 
-    const res = await h.post(api.base, "/ai/assistant", { token, body: { message: "Why are my leaves yellow?" } });
+    const res = await h.post(api.base, "/ai/assistant", {
+      token,
+      body: { message: "Why are my leaves yellow?" },
+    });
+
+    assert.equal(res.status, 200);
+    assert.equal(res.body.answeredBy, "guide");
+    assert.match(res.body.reply, /yellow/i);
+    assert.ok(
+      res.body.sources.includes("when-something-goes-wrong"),
+      `expected the troubleshooting guide, got: ${(res.body.sources || []).join(", ")}`
+    );
+  });
+
+  test("the guide answer follows the member's language", async () => {
+    const { token } = await h.signup(api.base);
+
+    const res = await h.post(api.base, "/ai/assistant", {
+      token,
+      body: { lang: "ar", message: "كم ماء تحتاج الطماطم؟" },
+    });
+
+    assert.equal(res.status, 200);
+    assert.equal(res.body.answeredBy, "guide");
+    assert.match(res.body.reply, /[\u0600-\u06FF]/, "an Arabic request gets Arabic guide text");
+  });
+
+  test("with nothing of our own to answer from, no key is still reported honestly", async () => {
+    const { token } = await h.signup(api.base);
+
+    const res = await h.post(api.base, "/ai/assistant", {
+      token,
+      body: { message: "what is the capital of France?" },
+    });
 
     assert.equal(res.status, 503);
     assert.match(res.body.error, /not configured/i);

@@ -81,8 +81,9 @@ override an existing variable) will not expose it. Run with
 ## AI (optional)
 Everything AI is off until a key exists; nothing else in the app depends on it.
 
-- `AI_API_KEY` — leave empty to run fully offline (heuristic verification, no
-  identification or assistant).
+- `AI_API_KEY` — leave empty to run without a provider: heuristic verification,
+  no photo identification, and an assistant that answers from Green Hub guides
+  instead of a model.
 - `AI_API_URL` — defaults to `https://api.openai.com/v1`. Any OpenAI-compatible
   chat-completions endpoint works: Google's Gemini compatibility URL,
   OpenRouter, Groq, or a local Ollama.
