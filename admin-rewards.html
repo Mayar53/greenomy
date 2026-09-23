@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <title data-i18n="adminTab.rewards">Rewards — Greenomy</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><img class="brand-mark" src="logo-mark.png" alt="" /> Greenomy</a>
+      <div class="header-actions" style="margin-inline-start: auto;">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang-option="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang-option="ar" aria-pressed="false">AR</button>
+          <button type="button" data-lang-option="ku" aria-pressed="false">KU</button>
+        </div>
+        <a href="wallet.html" class="btn btn-ghost" data-i18n="nav.wallet">Wallet</a>
+        <button type="button" class="btn btn-secondary" data-logout data-i18n="app.logout">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-tight">
+      <div class="container">
+        <nav class="admin-nav" aria-label="Admin sections">
+          <a href="admin.html" data-i18n="adminTab.queue">Queue</a>
+          <a href="admin-users.html" data-i18n="adminTab.users">Users</a>
+          <a href="admin-partners.html" data-i18n="adminTab.partners">Partners</a>
+          <a href="admin-rewards.html" data-i18n="adminTab.rewards" aria-current="page">Rewards</a>
+          <a href="admin-content.html" data-i18n="adminTab.content">Content</a>
+          <a href="admin-analytics.html" data-i18n="adminTab.analytics">Analytics</a>
+        </nav>
+
+        <div class="section-head">
+          <span class="eyebrow" data-i18n="admin.eyebrow">Admin</span>
+          <h1 class="heading-lg" data-i18n="adminTab.rewards">Rewards</h1>
+          <p class="section-lead" data-i18n="admin.rewardsLead">The full rewards catalogue, including deactivated rewards.</p>
+        </div>
+
+        <div class="empty-state" data-admin-denied hidden>
+          <span class="emoji">🔒</span><span data-i18n="admin.notAuthorized">You don't have admin access to this page.</span>
+        </div>
+
+        <div data-admin-host>
+          <form class="admin-form" data-reward-form novalidate>
+            <div class="form-field">
+              <label for="reward-partner" data-i18n="admin.colPartner">Partner</label>
+              <input type="text" id="reward-partner" name="partner" required />
+            </div>
+            <div class="form-field">
+              <label for="reward-category" data-i18n="admin.colCategory">Category</label>
+              <select id="reward-category" name="category">
+                <option value="restaurant" data-i18n="rewards.catRestaurant">Restaurants &amp; Cafés</option>
+                <option value="courses" data-i18n="rewards.catCourses">Courses &amp; Training</option>
+                <option value="supplies" data-i18n="rewards.catSupplies">Seeds &amp; Supplies</option>
+                <option value="university" data-i18n="rewards.catUniversity">University Perks</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="reward-title" data-i18n="admin.rewardTitle">Title</label>
+              <input type="text" id="reward-title" name="title" required />
+            </div>
+            <div class="form-field">
+              <label for="reward-points" data-i18n="admin.pointsRequired">Points required</label>
+              <input type="number" id="reward-points" name="pointsRequired" min="1" step="1" required />
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary" data-i18n="admin.create">Create</button>
+            </div>
+            <div class="form-status admin-form-wide" data-form-status role="status" aria-live="polite"></div>
+          </form>
+
+          <div data-admin-rewards></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="main.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

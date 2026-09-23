@@ -40,7 +40,7 @@
   position: absolute; top: 50%; transform: translateY(-50%);
   inset-inline-end: 14px;
   background: none; border: none; cursor: pointer;
-  font-size: 0.8rem; font-weight: 700; color: var(--sage-dark);
+  font-size: 0.8rem; font-weight: 700; color: var(--sage-ink);
 }
 
 .auth-meta-row {

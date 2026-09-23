@@ -83,6 +83,16 @@ export async function requestPasswordReset(email) {
   return api.post("/auth/forgot-password", { email }, { auth: false });
 }
 
+/** Completes a reset with the token from the emailed link. */
+export async function resetPassword({ token, newPassword }) {
+  return api.post("/auth/reset-password", { token, newPassword }, { auth: false });
+}
+
+/** Changes the password of the signed-in user. */
+export async function changePassword({ currentPassword, newPassword }) {
+  return api.post("/auth/change-password", { currentPassword, newPassword });
+}
+
 export async function fetchCurrentUser() {
   const user = normalizeUser(await api.get("/auth/me"));
   activeStore().setItem(USER_KEY, JSON.stringify(user));

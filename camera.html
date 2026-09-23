@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <title data-i18n="meta.verifyTitle">Verify Your Plant — Greenomy</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="responsive.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><img class="brand-mark" src="logo-mark.png" alt="" /> Greenomy</a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="garden.html" data-i18n="nav.garden">My Garden</a>
+        <a href="wallet.html" data-i18n="nav.wallet">Wallet</a>
+        <a href="greenhub.html" data-i18n="nav.greenHub">Green Hub</a>
+        <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang-option="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang-option="ar" aria-pressed="false">AR</button>
+          <button type="button" data-lang-option="ku" aria-pressed="false">KU</button>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wizard-shell">
+    <div class="card wizard-card verify-card">
+      <div class="section-head text-center">
+        <span class="eyebrow" data-i18n="verify.eyebrow">Smart verification</span>
+        <h1 class="heading-lg" data-i18n="verify.title">Verify your plant</h1>
+        <p class="section-lead" data-i18n="verify.lead" style="margin: 0 auto;">
+          Take a photo of your plant. The checker looks for real greenery and a bright, sharp shot, then awards points.
+        </p>
+      </div>
+
+      <p class="verify-hint" data-i18n="verify.hint">Tip: fill the frame with leaves, keep it bright, and avoid blur.</p>
+
+      <div class="verify-empty" data-verify-empty hidden>
+        <p data-i18n="verify.noPlants">You don't have a plant yet.</p>
+        <a href="new-seed.html" class="btn btn-primary" data-i18n="verify.noPlantsCta">Plant your first seed</a>
+      </div>
+
+      <div data-verify-form hidden>
+        <div class="form-field">
+          <label for="plantId" data-i18n="verify.choosePlant">Which plant is this?</label>
+          <select id="plantId" name="plantId" data-plant-select></select>
+        </div>
+
+        <div class="verify-stage" data-camera-stage>
+          <video data-camera-video playsinline muted autoplay hidden></video>
+          <img data-camera-preview alt="" hidden />
+          <div class="verify-placeholder" data-camera-placeholder aria-hidden="true">📷</div>
+        </div>
+
+        <p class="verify-status" data-camera-status hidden role="status"></p>
+
+        <div class="verify-actions">
+          <button type="button" class="btn btn-primary" data-camera-start data-i18n="verify.startCamera">Start camera</button>
+          <button type="button" class="btn btn-primary" data-camera-capture hidden data-i18n="verify.capture">Capture photo</button>
+          <button type="button" class="btn btn-secondary" data-camera-retake hidden data-i18n="verify.retake">Retake</button>
+          <label class="btn btn-secondary" for="photoFile" data-i18n="verify.chooseFile">Choose a photo</label>
+          <input type="file" id="photoFile" accept="image/*" data-camera-file hidden />
+        </div>
+
+        <div class="verify-actions">
+          <button type="button" class="btn btn-ghost" data-location-btn data-i18n="verify.addLocation">Attach my location</button>
+          <span class="verify-loc" data-location-state hidden></span>
+        </div>
+
+        <button type="button" class="btn btn-primary verify-submit" data-verify-submit data-i18n="verify.submit">Submit for verification</button>
+        <p class="form-status" data-form-status></p>
+      </div>
+
+      <div class="verify-result" data-verify-result hidden>
+        <h2 class="heading-lg" data-i18n="verify.resultTitle">Verification result</h2>
+        <div class="score-ring"><strong data-score-value>0%</strong></div>
+        <p class="verify-verdict" data-verdict-text></p>
+        <p class="verify-points" data-points-text></p>
+        <button type="button" class="btn btn-secondary" data-verify-again data-i18n="verify.retry">Try another photo</button>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="main.js"></script>
+  <script type="module" src="camera.js"></script>
+</body>
+</html>

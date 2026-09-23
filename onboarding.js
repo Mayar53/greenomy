@@ -3,7 +3,7 @@
 // onboarding → eco-profile → new-seed, then persisted for real
 // (PATCH /users/me, POST /plants) at each page's completion.
 import { requireAuthOrRedirect } from "./authservise.js";
-import { api } from "./servisapi.js";
+import { api, ApiError } from "./servisapi.js";
 import { createPlant } from "./serviseplant.js";
 import { t } from "./language.js";
 
@@ -199,7 +199,7 @@ function initNewSeedWizard() {
         sessionStorage.removeItem(DRAFT_KEY);
         status.className = "form-status is-success";
         status.textContent = t("wizard.planted");
-        window.location.href = "index.html";
+        window.location.href = "camera.html";
       } catch (err) {
         status.className = "form-status is-error";
         status.textContent = err.message || t("common.errorGeneric");
@@ -211,7 +211,99 @@ function initNewSeedWizard() {
   renderStep();
 }
 
+/* ------------------------------------------------------------------ */
+/* Optional AI: identify the plant from a photo (new-seed.html step 1) */
+/* ------------------------------------------------------------------ */
+const IDENTIFY_MAX = 640; // shrink before sending — vision calls are priced by size
+
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, IDENTIFY_MAX / Math.max(img.naturalWidth, img.naturalHeight));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(img.src);
+      resolve(canvas.toDataURL("image/jpeg", 0.75));
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(img.src);
+      reject(new Error("unreadable image"));
+    };
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+/** Selects the matching tile, or adds one when the plant isn't in our catalog. */
+function selectPlantType(group, value) {
+  if (!group) return;
+
+  group.querySelectorAll(".option-tile").forEach((t) => t.setAttribute("aria-pressed", "false"));
+
+  const match = Array.from(group.querySelectorAll(".option-tile")).find(
+    (tile) => (tile.dataset.value || "").toLowerCase() === value.toLowerCase()
+  );
+  if (match) {
+    match.setAttribute("aria-pressed", "true");
+    return;
+  }
+
+  const tile = document.createElement("button");
+  tile.type = "button";
+  tile.className = "option-tile";
+  tile.dataset.value = value;
+  tile.setAttribute("aria-pressed", "true");
+
+  const emoji = document.createElement("span");
+  emoji.className = "tile-emoji";
+  emoji.textContent = "🌱";
+
+  const name = document.createElement("strong");
+  name.textContent = value;
+
+  tile.append(emoji, name);
+  group.appendChild(tile);
+}
+
+function initIdentify() {
+  const input = document.querySelector("#seedPhoto");
+  const status = document.querySelector("[data-identify-status]");
+  const group = document.querySelector('[data-tile-group="plantType"]');
+  if (!input || !status) return;
+
+  input.addEventListener("change", async () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+
+    status.className = "form-status is-loading";
+    status.textContent = t("identify.checking");
+
+    try {
+      const imageUrl = await fileToDataUrl(file);
+      const result = await api.post("/ai/identify", { imageUrl });
+
+      if (result.plantType) {
+        selectPlantType(group, result.plantType);
+        status.className = "form-status is-success";
+        status.textContent = `${t("identify.found")}: ${result.plantType}`;
+      } else {
+        status.className = "form-status is-error";
+        status.textContent = t("identify.none");
+      }
+    } catch (err) {
+      // A 503 means no AI key is configured — the API's message explains that.
+      status.className = "form-status is-error";
+      status.textContent = err instanceof ApiError ? err.message : t("identify.error");
+    } finally {
+      input.value = "";
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initEcoProfilePage();
   initNewSeedWizard();
+  initIdentify();
 });

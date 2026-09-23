@@ -25,7 +25,7 @@ function articleCardHTML(article) {
           <span>${t(CATEGORY_LABELS[article.category] || "greenHub.filterAll")}</span>
           <span>${article.readingTime} ${t("greenHub.minRead")}</span>
         </div>
-        <h3>${escapeHtml(title)}</h3>
+        <h2>${escapeHtml(title)}</h2>
         <p>${escapeHtml(localized(article, "description"))}</p>
         <a class="btn-ghost reading-time" href="greenhub.html?slug=${encodeURIComponent(article.slug)}">${t("greenHub.readMore")} →</a>
       </div>
@@ -48,7 +48,7 @@ function articleViewHTML(article) {
         <span>${t(CATEGORY_LABELS[article.category] || "greenHub.filterAll")}</span>
         <span>${article.readingTime} ${t("greenHub.minRead")}</span>
       </div>
-      <h1 class="heading-lg" style="margin-top:8px;">${escapeHtml(localized(article, "title"))}</h1>
+      <h2 class="heading-lg" style="margin-top:8px;">${escapeHtml(localized(article, "title"))}</h2>
       <p class="section-lead">${escapeHtml(localized(article, "description"))}</p>
       ${paragraphs.map((p) => `<p>${escapeHtml(p)}</p>`).join("")}
     </article>

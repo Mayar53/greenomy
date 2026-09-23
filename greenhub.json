@@ -1,198 +1,216 @@
 [
   {
-    "slug": "growing-orange-seed",
-    "title": "How to Grow an Orange Tree From a Seed",
-    "description": "Turn a seed you'd normally throw away into a slow-growing houseplant with a little patience.",
+    "id": "gh-001",
+    "slug": "regrow-kitchen-scraps-in-water",
     "category": "food-seed-recycling",
-    "readingTime": 6,
-    "image": "orange-seed.jpg",
+    "contentType": "article",
+    "readingTime": 3,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Regrow Your Kitchen Scraps in Water",
+    "description": "Spring onions, lettuce hearts, and celery bottoms can all come back to life on a windowsill — no soil required.",
     "body": [
-      "Orange seeds germinate readily, but the tree they grow into is a long-term project. Rinse the pips, soak them overnight, and plant them about 1 cm deep in moist seed compost.",
-      "Keep the pot warm and bright and it can sprout within a few weeks. Expect glossy leaves first — fruit, if it ever comes, is years away. Treat it as a beautiful houseplant, not a harvest."
+      "Before you throw away the base of a lettuce, a celery bunch, or the white ends of spring onions, keep them. These pieces already contain everything the plant needs to start again, and roots will form in nothing more than a shallow dish of clean water.",
+      "Place the cuttings cut-side down in a jar with about two centimetres of water, then leave them somewhere bright but out of harsh midday sun. Change the water every couple of days so it stays fresh — stagnant water is what makes scraps rot instead of regrow.",
+      "Within a week you'll see new leaves and fresh roots. Once the roots are a few centimetres long you can keep harvesting from the same plant for weeks, or move it into soil for a longer life. This is the simplest way to turn kitchen waste into a second harvest."
     ],
     "i18n": {
       "ar": {
-        "title": "كيف تزرع شجرة برتقال من بذرة",
-        "description": "حوّل بذرة كنت ستتخلص منها إلى نبتة منزلية بطيئة النمو بقليل من الصبر.",
+        "title": "أعِد إنماء بقايا مطبخك في الماء",
+        "description": "البصل الأخضر وقلوب الخس وقواعد الكرفس يمكنها جميعًا أن تعود إلى الحياة على حافة النافذة — دون حاجة إلى تربة.",
         "body": [
-          "تنبت بذور البرتقال بسهولة، لكن الشجرة التي تنمو منها مشروع طويل الأمد. اغسل البذور وانقعها ليلة كاملة، ثم ازرعها على عمق نحو ١ سم في تربة بذر رطبة.",
-          "أبقِ الأصيص دافئًا ومضاءً، وقد تُنبِت خلال أسابيع. توقّع أوراقًا لامعة أولًا — أما الثمار، إن جاءت، فتبعد سنوات. تعامل معها كنبتة منزلية جميلة لا كمحصول."
+          "قبل أن ترمي قاعدة الخس أو حزمة الكرفس أو الأطراف البيضاء من البصل الأخضر، احتفظ بها. هذه القطع تحتوي أصلًا على كل ما تحتاجه النبتة لتبدأ من جديد، وستتشكل الجذور في طبق ضحل من الماء النظيف.",
+          "ضع القطع في برطمان بحيث يكون الجانب المقطوع للأسفل مع نحو سنتيمترين من الماء، ثم اتركها في مكان مضيء بعيدًا عن شمس الظهيرة القوية. غيّر الماء كل يومين ليبقى نقيًا — فالماء الراكد هو ما يجعل البقايا تتعفن بدل أن تنمو.",
+          "خلال أسبوع سترى أوراقًا جديدة وجذورًا طازجة. وعندما تصبح الجذور بطول بضعة سنتيمترات يمكنك مواصلة الحصاد من النبتة نفسها لأسابيع، أو نقلها إلى التربة لعمر أطول. هذه أبسط طريقة لتحويل نفايات المطبخ إلى حصاد ثانٍ."
+        ]
+      },
+      "ku": {
+        "title": "پاشماوەی چێشتخانەکەت لە ئاودا دووبارە بەخێو بکەرەوە",
+        "description": "پیازی سەوز، دڵی کاهو، و بنی کەرەفس دەتوانن هەموویان لەسەر قەراغی پەنجەرە بە زیندوویی بگەڕێنەوە — بەبێ خاک.",
+        "body": [
+          "پێش ئەوەی بنی کاهو، دەستەی کەرەفس، یان سەرە سپییەکانی پیازی سەوز فڕێ بدەیت، بیانهێڵەوە. ئەم پارچانە پێشتر هەموو ئەوەی تێدایە کە ڕووەک پێویستی پێیەتی بۆ دەستپێکردنەوە، و ڕەگ لە ناو قاپێکی تەنک لە ئاوی پاکدا دروست دەبێت.",
+          "پارچەکان لە قەراخێکدا دابنێ بە شێوەیەک لای بڕاوەکە بەرەو خوارەوە بێت لەگەڵ نزیکەی دوو سانتیمەتر ئاو، پاشان لە شوێنێکی ڕووناکدا بیانهێڵەوە بەڵام دوور لە خۆری توندی نیوەڕۆ. هەر دوو ڕۆژ ئاوەکە بگۆڕە بۆ ئەوەی تازە بمێنێتەوە.",
+          "لە ماوەی هەفتەیەکدا گەڵای نوێ و ڕەگی تازە دەبینیت. کاتێک ڕەگەکان چەند سانتیمەترێک درێژ بوون دەتوانیت بۆ هەفتەها لە هەمان ڕووەک بەردەوام بیت لە دروێنەکردن، یان بیگوازەیتەوە بۆ خاک بۆ تەمەنێکی درێژتر."
         ]
       }
     }
   },
   {
-    "slug": "growing-tomato-seeds",
-    "title": "Starting Tomato Seeds Indoors",
-    "description": "A beginner-friendly guide to germinating tomato seeds before the growing season starts.",
-    "category": "home-gardening",
-    "readingTime": 5,
-    "image": "tomato-seeds.jpg",
-    "body": [
-      "Start tomatoes six to eight weeks before your last frost. Sow seeds about 5 mm deep in damp seed compost, water gently, and keep them at around 20°C.",
-      "Once seedlings have two sets of true leaves, pot them on and move them to the brightest spot you have. They need light more than heat to grow sturdy."
-    ],
-    "i18n": {
-      "ar": {
-        "title": "بدء بذور الطماطم في الداخل",
-        "description": "دليل مناسب للمبتدئين لإنبات بذور الطماطم قبل بدء موسم النمو.",
-        "body": [
-          "ابدأ الطماطم قبل ست إلى ثماني أسابيع من آخر صقيع. ازرع البذور على عمق نحو ٥ مم في تربة بذر رطبة، واسقِ بلطف، وأبقِها عند ٢٠°م تقريبًا.",
-          "بعد ظهور مجموعتين من الأوراق الحقيقية، انقل الشتلات إلى أوانٍ أكبر وضعها في أكثر مكان إضاءة لديك. تحتاج الضوء أكثر من الحرارة لتنمو قوية."
-        ]
-      }
-    }
-  },
-  {
-    "slug": "growing-apple-seeds",
-    "title": "Can You Grow an Apple Tree From Seed?",
-    "description": "What actually happens when you plant an apple seed, and how to give it the best chance.",
+    "id": "gh-002",
+    "slug": "from-avocado-pit-to-sapling",
     "category": "food-seed-recycling",
-    "readingTime": 7,
-    "image": "apple-seeds.jpg",
-    "body": [
-      "An apple seed will sprout, but the tree it grows into won't be the apple you ate. Apples don't come true from seed, so the fruit will be unpredictable.",
-      "If you still want to try, chill the seeds in a damp paper towel in the fridge for a few weeks, then plant them. Think of it as an experiment, not an orchard."
-    ],
-    "i18n": {
-      "ar": {
-        "title": "هل يمكنك زراعة شجرة تفاح من بذرة؟",
-        "description": "ما يحدث فعلًا عند زراعة بذرة تفاح، وكيف تمنحها أفضل فرصة.",
-        "body": [
-          "ستنبت بذرة التفاح، لكن الشجرة الناتجة لن تكون التفاحة التي أكلتها. التفاح لا يأتي مطابقًا من البذرة، لذا ستكون الثمرة غير متوقعة.",
-          "إن أردت التجربة، برّد البذور في منديل ورقي رطب داخل الثلاجة لأسابيع، ثم ازرعها. اعتبرها تجربة لا بستانًا."
-        ]
-      }
-    }
-  },
-  {
-    "slug": "preparing-soil",
-    "title": "Preparing Soil for Your First Plant",
-    "description": "The basics of soil, drainage, and containers before you plant anything.",
-    "category": "home-gardening",
+    "contentType": "article",
     "readingTime": 4,
-    "image": "soil-prep.jpg",
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "From Avocado Pit to Sapling",
+    "description": "An avocado stone is a living seed. Here's how to sprout one and what to expect along the way.",
     "body": [
-      "Most houseplants fail because of waterlogged roots, not bad soil. Choose a mix with plenty of air and a pot that has drainage holes.",
-      "Fill the pot, firm the soil lightly, and water before planting so it settles. Then water only when the top couple of centimetres feel dry."
+      "An avocado pit is a seed, and with a little patience it will sprout into a small tree that makes a handsome houseplant even if it never fruits indoors. Start by washing the pit and identifying which end is which: the slightly pointier end is the top, and the flatter end is where the roots emerge.",
+      "Suspend the pit over a glass of water using three toothpicks so the bottom sits just under the surface, then keep the glass somewhere warm and bright. Roots usually appear within two to six weeks, and a shoot follows once the roots are established. Top up the water so the base never dries out.",
+      "When the stem is around fifteen centimetres tall, pot the pit into free-draining soil with the top half exposed. Water when the surface dries, and pinch the stem back occasionally to encourage a bushier shape. Expect it to grow steadily rather than quickly — the reward is patience made visible."
     ],
     "i18n": {
       "ar": {
-        "title": "تحضير التربة لأول نبتة لك",
-        "description": "أساسيات التربة والصرف والأواني قبل أن تزرع أي شيء.",
+        "title": "من نواة الأفوكادو إلى شتلة",
+        "description": "نواة الأفوكادو بذرة حيّة. إليك كيفية إنباتها وما يمكن توقعه أثناء ذلك.",
         "body": [
-          "معظم النباتات المنزلية تفشل بسبب تعفّن الجذور وليس سوء التربة. اختر خليطًا جيد التهوية وأصيصًا به فتحات تصريف.",
-          "املأ الأصيص وثبّت التربة قليلًا واسقِها قبل الزراعة لتستقر. ثم اسقِ فقط عندما تجف الطبقة العليا بضعة سنتيمترات."
+          "نواة الأفوكادو بذرة، وبقليل من الصبر ستنبت إلى شجرة صغيرة تصبح نبتة منزلية جميلة حتى لو لم تثمر في الداخل. ابدأ بغسل النواة وتحديد أي طرف هو الأعلى: الطرف الأكثر استدارة قليلًا هو الأعلى، والطرف المسطح هو حيث تخرج الجذور.",
+          "علّق النواة فوق كأس من الماء باستخدام ثلاثة أعواد أسنان بحيث يكون الجزء السفلي تحت السطح مباشرة، ثم احفظ الكأس في مكان دافئ ومضيء. تظهر الجذور عادة خلال أسبوعين إلى ستة أسابيع، ويتبعها البرعم بعد ترسّخ الجذور. أضف الماء حتى لا تجف القاعدة أبدًا.",
+          "عندما يبلغ الساق نحو خمسة عشر سنتيمترًا، ازرع النواة في تربة جيدة التصريف مع ترك النصف العلوي مكشوفًا. اسقِ عندما يجف السطح، واقطع الساق أحيانًا لتشجيع شكل أكثر كثافة. توقّع نموًا مطردًا لا سريعًا — والمكافأة هي الصبر وقد أصبح مرئيًا."
+        ]
+      },
+      "ku": {
+        "title": "لە ناوکی ئەڤۆکادۆوە بۆ نەمام",
+        "description": "ناوکی ئەڤۆکادۆ تۆوێکی زیندییە. ئەمە چۆنێتیی شینکردنەوەی و ئەوەی چاوەڕوانی بکەیت.",
+        "body": [
+          "ناوکی ئەڤۆکادۆ تۆوە، و بە کەمێک ئارامگرتن دەشینێتەوە بۆ درەختێکی بچووک کە دەبێتە ڕووەکێکی ماڵی جوان تەنانەت ئەگەر لە ژوورەوە بەرهەم نەهێنێت. سەرەتا ناوکەکە بشۆ و دیاری بکە کام لای سەرەوەیە.",
+          "ناوکەکە لەسەر پەرداخێک ئاو هەڵبواسە بە بەکارهێنانی سێ ددانی دەستکرد بە شێوەیەک بنکەکە کەمێک لە ژێر ڕووەکە بێت، پاشان پەرداخەکە لە شوێنێکی گەرم و ڕووناکدا بهێڵەوە. ڕەگەکان بەزۆری لە ماوەی دوو بۆ شەش هەفتەدا دەردەکەون.",
+          "کاتێک قەدەکە نزیکەی پازدە سانتیمەتر بوو، ناوکەکە بخە ناو خاکێکی باش-تێرئاو بە شێوەیەک نیوەی سەرەوە ئاشکرا بێت. کاتێک ڕووەکەکە وشک بوو ئاوی بدە، و نۆکەکە بپسێوە بۆ هاندانی شێوەیەکی چڕتر."
         ]
       }
     }
   },
   {
-    "slug": "watering-plants",
-    "title": "How Often Should You Really Water Your Plants?",
-    "description": "Watering schedules depend on plant type, not the calendar. Here's how to read your plant.",
-    "category": "plant-care",
-    "readingTime": 5,
-    "image": "watering.jpg",
-    "body": [
-      "Forget the calendar and check the soil instead. Push a finger in; if it's dry a few centimetres down, it's time to water.",
-      "Water thoroughly until it runs out of the drainage holes, then empty the saucer. Little and often is the fastest way to lose a plant."
-    ],
-    "i18n": {
-      "ar": {
-        "title": "كم مرة يجب أن تسقي نباتاتك حقًا؟",
-        "description": "جداول الري تعتمد على نوع النبتة لا على التقويم. إليك كيف تقرأ نبتتك.",
-        "body": [
-          "انسَ التقويم وافحص التربة بدلًا منه. أدخل إصبعك؛ إذا جفّت على عمق بضعة سنتيمترات فقد حان وقت الري.",
-          "اسقِ جيدًا حتى يخرج الماء من فتحات التصريف ثم أفرغ الطبق. الري القليل المتكرر أسرع طريق لخسارة النبتة."
-        ]
-      }
-    }
-  },
-  {
-    "slug": "indoor-gardening",
-    "title": "Indoor Gardening With Little to No Sunlight",
-    "description": "Apartment living doesn't rule out a green space. Here's what actually survives indoors.",
+    "id": "gh-003",
+    "slug": "small-space-gardening-balconies",
     "category": "home-gardening",
-    "readingTime": 6,
-    "image": "indoor-gardening.jpg",
-    "body": [
-      "Low light doesn't mean no plants. Snake plants, pothos, and ZZ plants tolerate shade and forgive missed waterings.",
-      "Rotate them now and then so they grow evenly, and keep them away from cold draughts. A window that faces north can still work."
-    ],
-    "i18n": {
-      "ar": {
-        "title": "البستنة الداخلية بأقل قدر من ضوء الشمس",
-        "description": "السكن في شقة لا يمنع وجود مساحة خضراء. إليك ما يعيش فعلًا في الداخل.",
-        "body": [
-          "قلة الإضاءة لا تعني غياب النباتات. نبات الأفعى والبوتس ونبات ZZ تتحمّل الظل وتتجاوز الريات الفائتة.",
-          "أدِرها من وقت لآخر لتنمو بالتساوي، وأبعدها عن التيارات الباردة. نافذة تواجه الشمال قد تكفي."
-        ]
-      }
-    }
-  },
-  {
-    "slug": "plant-care-basics",
-    "title": "Five Plant Care Habits That Actually Matter",
-    "description": "Skip the overwhelm — these are the habits that keep most houseplants alive.",
-    "category": "plant-care",
+    "contentType": "article",
     "readingTime": 4,
-    "image": "plant-care.jpg",
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Small-Space Gardening: Balconies That Produce",
+    "description": "You don't need a garden bed to grow food. A balcony, a windowsill, or a sunny wall is enough to start.",
     "body": [
-      "Five habits do most of the work: water by feel, give the right light, feed lightly in spring and summer, clean the leaves, and repot when roots circle the pot.",
-      "None of these is complicated. Consistency matters far more than any special product."
+      "The biggest mistake new urban growers make is trying to plant everything at once. Start with two or three crops that suit your light and your habits, learn how they behave through a full season, and expand only once they're thriving.",
+      "Herbs, salad leaves, radishes, and cherry tomatoes are forgiving choices for a sunny balcony. Root vegetables need deeper containers, while climbing plants like beans will happily use a trellis to grow upward and save floor space. Match the plant to the space rather than forcing the space to fit the plant.",
+      "Pay attention to weight and drainage. Containers full of wet soil are heavy, so keep large pots near the wall rather than the railing, and always use saucers or feet to stop water staining the floor below. A balcony that drains well and gets six hours of sun will out-produce many garden beds."
     ],
     "i18n": {
       "ar": {
-        "title": "خمس عادات للعناية بالنباتات تهم فعلًا",
-        "description": "تجاوز الإرهاق — هذه هي العادات التي تبقي معظم النباتات المنزلية حية.",
+        "title": "البستنة في المساحات الصغيرة: شرفات منتجة",
+        "description": "لا تحتاج إلى أحواض حديقة لزراعة الغذاء. شرفة أو حافة نافذة أو جدار مشمس يكفي للبدء.",
         "body": [
-          "خمس عادات تقوم بمعظم العمل: اسقِ باللمس، وفّر الإضاءة المناسبة، غذِّ باعتدال في الربيع والصيف، نظّف الأوراق، وانقل الأصيص عندما تلتف الجذور.",
-          "لا شيء من هذا معقّد. الانتظام أهم بكثير من أي منتج خاص."
+          "أكبر خطأ يقع فيه المزارعون الحضريون الجدد هو محاولة زراعة كل شيء دفعة واحدة. ابدأ بمحصولين أو ثلاثة تناسب إضاءتك وعاداتك، وتعلّم سلوكها خلال موسم كامل، ثم توسّع فقط بعد أن تزدهر.",
+          "الأعشاب وأوراق السلطة والفجل والطماطم الكرزية خيارات متسامحة للشرفة المشمسة. تحتاج الخضروات الجذرية أوعية أعمق، بينما تستخدم النباتات المتسلقة كالفاصولياء تعريشة لتنمو صعودًا وتوفّر مساحة الأرض. طابق النبتة مع المساحة بدل أن تُجبر المساحة على احتواء النبتة.",
+          "انتبه للوزن والتصريف. الأوعية الممتلئة بالتربة الرطبة ثقيلة، لذا أبقِ الأصص الكبيرة قرب الجدار لا السور، واستخدم دائمًا صحونًا أو قواعد لمنع تسرّب الماء إلى الطابق السفلي. الشرفة جيدة التصريف والتي تحصل على ست ساعات من الشمس ستنتج أكثر من أحواض حديقة كثيرة."
+        ]
+      },
+      "ku": {
+        "title": "باخداری لە شوێنی بچووک: بەلکۆنە بەرهەمهێنەرەکان",
+        "description": "پێویستت بە ناوچەی باخ نییە بۆ چاندنی خۆراک. بەلکۆنێک، قەراغی پەنجەرەیەک، یان دیوارێکی خۆرگیر تووشە بۆ دەستپێکردن.",
+        "body": [
+          "گەورەترین هەڵەی چێنەرە نوێیەکانی شار ئەوەیە هەوڵ بدەن هەموو شتێک پێکەوە بچێنن. بە دوو یان سێ بەرهەم دەست پێبکە کە لەگەڵ ڕووناکی و ڕەوشتی تۆدا بگونجێن، فێری ڕەفتاریان ببە بە درێژایی وەرزێکی تەواو، و تەنها دوای سەرکەوتنیان فراوانتر بکە.",
+          "گیا، گەڵای زەڵاتە، توره، و تەماتەی گێلاس هەڵبژاردەی لێبوردەن بۆ بەلکۆنێکی خۆرگیر. سەوزەواتی ڕەگ پێویستیان بە قاپی قووڵترە، لە کاتێکدا ڕووەکی سەرکەوە وەک لۆبیا بە خۆشییەوە بەرز دەکەونەوە و شوێنی زەوی پارێزگاری دەکەن.",
+          "سەرنجی کێش و ئاوڕێژە بدە. قاپە پڕەکان لە خاکی تەڕەدا قورسن، بۆیە گۆزە گەورەکان لە نزیک دیوار دابنێ نەک لە نزیک ڕێڵەکە، و هەمیشە سەحەن یان پێ بەکاربهێنە بۆ ڕێگرتن لە چوونی ئاو بۆ ژێرەوە."
         ]
       }
     }
   },
   {
-    "slug": "urban-greening",
-    "title": "What Urban Greening Looks Like on a Balcony",
-    "description": "You don't need a backyard to make a neighborhood greener.",
+    "id": "gh-004",
+    "slug": "choosing-the-right-container-and-soil",
     "category": "home-gardening",
-    "readingTime": 5,
-    "image": "urban-greening.jpg",
+    "contentType": "article",
+    "readingTime": 3,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Choosing the Right Container and Soil",
+    "description": "Pot size, drainage holes, and the soil mix you choose decide whether a plant thrives or quietly struggles.",
     "body": [
-      "A balcony, a fire escape, or a windowsill is enough to green a street. Even a few pots add shade, food, and a home for pollinators.",
-      "Start with tough plants suited to your light and wind, and add more as you learn what thrives in your spot."
+      "The single most common reason a container plant fails is a pot that is too small. A cramped pot dries out fast, heats up in the sun, and stops roots from spreading. When in doubt, size up — most herbs and salad crops are happiest in containers of at least five litres.",
+      "Drainage holes are not optional. Without somewhere for excess water to escape, the lower part of the pot stays permanently wet and roots suffocate. If you fall in love with a decorative pot that has no holes, use it as a cover and keep the real plant in a simpler inner pot that does.",
+      "Use a proper potting mix rather than garden soil dug from outside. Potting mix is light, holds moisture, and drains freely, while garden soil compacts in a container and can bring pests and weeds with it. A simple mix of compost, coir, and perlite suits almost everything you'll grow on a balcony."
     ],
     "i18n": {
       "ar": {
-        "title": "كيف يبدو التخضير الحضري على الشرفة",
-        "description": "لا تحتاج حديقة خلفية لتجعل حيّك أكثر خضرة.",
+        "title": "اختيار الوعاء والتربة المناسبين",
+        "description": "حجم الوعاء وثقوب التصريف ومزيج التربة الذي تختاره تحدّد ما إذا كانت النبتة ستزدهر أم ستتعثر بصمت.",
         "body": [
-          "شرفة أو حافة نافذة تكفي لتخضير شارع. حتى بعض الأصص تضيف ظلًا وطعامًا وبيتًا للملقّحات.",
-          "ابدأ بنباتات قوية تناسب إضاءتك ورياحك، وأضف المزيد مع تعلّمك ما يزدهر في مكانك."
+          "السبب الأكثر شيوعًا لفشل نبتة في وعاء هو أن الوعاء صغير جدًا. الوعاء الضيق يجف سريعًا ويسخن في الشمس ويمنع الجذور من الانتشار. عند الشك، اختر الأكبر — فمعظم الأعشاب ومحاصيل السلطة تكون أسعد في أوعية لا تقل عن خمسة لترات.",
+          "ثقوب التصريف ليست اختيارية. بدون مكان ليخرج منه الماء الزائد، يبقى الجزء السفلي من الوعاء رطبًا دائمًا وتختنق الجذور. إذا أحببت وعاءً مزخرفًا بلا ثقوب، استخدمه كغلاف وضع النبتة الحقيقية في وعاء داخلي أبسط به ثقوب.",
+          "استخدم خلطة أصص مناسبة بدل تربة الحديقة المأخوذة من الخارج. خلطة الأصص خفيفة وتحتفظ بالرطوبة وتصرّف الماء بحرية، بينما تنضغط تربة الحديقة في الوعاء وقد تجلب معها آفات وأعشابًا ضارة. خلطة بسيطة من الكمبوست والكوكو والبرلايت تناسب كل ما ستزرعه تقريبًا على الشرفة."
+        ]
+      },
+      "ku": {
+        "title": "هەڵبژاردنی قاپ و خاکی گونجاو",
+        "description": "قەبارەی قاپ، کونەکانی ئاوڕێژ، و تێکەڵەی خاک دیاری دەکەن ڕووەک سەردەکەوێت یان بێدەنگانە تێدەکۆشێت.",
+        "body": [
+          "باویترین هۆکاری شکستهێنانی ڕووەکێک لە قاپدا ئەوەیە قاپەکە زۆر بچووکە. قاپی تەنگ خێرا وشک دەبێت، لە خۆردا گەرم دەبێت، و ڕێگرە لە بڵاوکردنەوەی ڕەگ. کاتێک گومانت هەیە، گەورەتر هەڵبژێرە.",
+          "کونەکانی ئاوڕێژ بژاردەیی نین. بەبێ شوێنێک بۆ هەڵاتنی ئاوی زیادە، بەشی خوارەوەی قاپەکە هەمیشە تەڕ دەمێنێت و ڕەگەکان خنکێن دەبن. ئەگەر عاشقی قاپێکی ڕازاوە بوویت بێ کون، وەک داپۆشەر بەکاری بهێنە.",
+          "تێکەڵەیەکی گونجاوی قاپ بەکاربهێنە نەک خاکی باخی دەرەوە. تێکەڵەی قاپ سووکە، شێی دەگرێت، و بە ئازادی ئاوڕێژ دەکات، لە کاتێکدا خاکی باخ لە قاپدا پەستان دەخوات و ڕەنگە ئافت و ڕووەکی زیانبەخش بهێنێت."
         ]
       }
     }
   },
   {
-    "slug": "recycling-food-seeds",
-    "title": "Kitchen Scraps You Can Regrow This Week",
-    "description": "From avocado pits to green onion roots — an easy intro to regrowing food.",
-    "category": "food-seed-recycling",
-    "readingTime": 6,
-    "image": "food-scraps.jpg",
+    "id": "gh-005",
+    "slug": "watering-without-drowning-your-plants",
+    "category": "plant-care",
+    "contentType": "article",
+    "readingTime": 3,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Watering Without Drowning Your Plants",
+    "description": "More houseplants die from kindness than neglect. Learn to read the soil instead of following a schedule.",
     "body": [
-      "Green onion roots, lettuce bases, celery bottoms, and avocado pits can all be regrown in water or soil with almost no effort.",
-      "Keep the water fresh, give them light, and pot them up once roots form. It's the easiest first step into growing your own food."
+      "Overwatering is the most common way people kill a houseplant, and it rarely looks like drowning at first. The leaves may wilt or yellow exactly as they would when thirsty, which is why the habit spirals: the plant looks sad, so we water it again.",
+      "The fix is to check the soil before you water, not to water on a fixed day. Push a finger two or three centimetres into the pot. If it feels damp, wait. If it feels dry at that depth, water thoroughly until it runs out of the drainage holes, then empty the saucer so the pot isn't standing in water.",
+      "Different plants want different rhythms. Succulents and cacti prefer to dry out almost completely between waterings, while ferns and most tropical houseplants like soil that stays lightly moist. Adjust to the plant in front of you, and water less in winter and more during active summer growth."
     ],
     "i18n": {
       "ar": {
-        "title": "بقايا مطبخ يمكنك إعادة إنمائها هذا الأسبوع",
-        "description": "من نوى الأفوكادو إلى جذور البصل الأخضر — مدخل سهل لإعادة إنماء الطعام.",
+        "title": "الري دون إغراق نباتاتك",
+        "description": "عدد أكبر من النباتات المنزلية يموت بسبب الإفراط في الرعاية لا الإهمال. تعلّم قراءة التربة بدل اتباع جدول ثابت.",
         "body": [
-          "جذور البصل الأخضر وقواعد الخس وأطراف الكرفس ونوى الأفوكادو يمكن إعادة إنمائها في الماء أو التربة بجهد ضئيل.",
-          "حافظ على نظافة الماء، وفّر الإضاءة، وانقلها إلى الأصص بعد تكوّن الجذور. إنها أسهل خطوة أولى نحو زراعة طعامك."
+          "الإفراط في الري هو الطريقة الأكثر شيوعًا لقتل نبتة منزلية، ونادرًا ما يشبه الغرق في البداية. قد تذبل الأوراق أو تصفر تمامًا كما لو كانت عطشى، وهذا ما يجعل العادة تتفاقم: تبدو النبتة حزينة فنرويها مرة أخرى.",
+          "الحل هو فحص التربة قبل الري، لا الري في يوم ثابت. أدخل إصبعك سنتيمترين أو ثلاثة في الوعاء. إذا كان رطبًا فانتظر. وإذا كان جافًا عند هذا العمق، اسقِ جيدًا حتى يخرج الماء من ثقوب التصريف، ثم أفرغ الصحن حتى لا يبقى الوعاء واقفًا في الماء.",
+          "نباتات مختلفة تريد إيقاعات مختلفة. العصاريات والصبار يفضّلان أن تجفّ التربة تمامًا تقريبًا بين الريات، بينما تحب السرخسيات ومعظم النباتات الاستوائية تربة تبقى رطبة قليلًا. تكيّف مع النبتة التي أمامك، وقلّل الري في الشتاء وزِده خلال نمو الصيف النشط."
+        ]
+      },
+      "ku": {
+        "title": "ئاودان بەبێ خنکاندنی ڕووەکەکانت",
+        "description": "زۆرێک لە ڕووەکەکانی ماڵ لە دڵۆپاندنی زۆر دەمرن نەک لە پشتگوێخستن. فێری خوێندنەوەی خاک ببە لە جیاتی شوێنکەوتنی خشتەیەکی چەسپاو.",
+        "body": [
+          "زۆر ئاودان باویترین ڕێگەیە کە خەڵک ڕووەکی ماڵی پێ دەکوژن، و سەرەتا بە دەگمەن وەک خنکان دەردەکەوێت. گەڵاکان ڕەنگە ڕەنجور یان زەرد ببن هەروەک ئەگەر تینوو بن، ئەمەش وای دەکات کەسەکە دووبارە ئاوی بدات.",
+          "چارەسەر ئەوەیە پێش ئاودان خاکەکە بپشکنیت، نەک لە ڕۆژێکی چەسپاودا ئاوی بدەیت. پەنجەت بکە دوو یان سێ سانتیمەتر بۆ ناو قاپەکە. ئەگەر شێدار بوو چاوەڕێ بکە. ئەگەر لەو قووڵییەدا وشک بوو، بە تەواوی ئاوی بدە.",
+          "ڕووەکی جیاواز ڕیتمی جیاواز دەوێت. سوکولێنت و کاکتوس حەز دەکەن بە تەواوی وشک ببنەوە لە نێوان ئاودانەکان، لە کاتێکدا فێرن و زۆربەی ڕووەکە گەرمسێرییەکان حەز دەکەن خاکەکە کەمێک شێدار بمێنێتەوە."
+        ]
+      }
+    }
+  },
+  {
+    "id": "gh-006",
+    "slug": "reading-light-where-should-your-plant-live",
+    "category": "plant-care",
+    "contentType": "article",
+    "readingTime": 3,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Reading Light: Where Should Your Plant Live?",
+    "description": "Light is the one thing a plant can't live without and the hardest to judge indoors. Here's how to read a room.",
+    "body": [
+      "Every plant problem looks different in different light. A plant that stretches tall and thin with wide gaps between leaves is reaching for more light, while one with scorched, bleached patches is getting too much direct sun. Learning to read those two signals solves most placement questions.",
+      "A south-facing window gives strong, direct light for most of the day; an east or west window gives a few hours of gentler light; a north window offers only soft, indirect light. Distance matters too — light drops off sharply as you move away from the glass, so a spot two metres from the window is far dimmer than it looks.",
+      "If your home is short on natural light, choose plants that tolerate shade rather than fighting the space: pothos, snake plants, and ZZ plants all cope well in dim rooms. Rotate your pots a quarter turn each week so growth stays even, and remember that in winter almost every plant slows down and needs less water."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "قراءة الضوء: أين يجب أن تعيش نبتتك؟",
+        "description": "الضوء هو الشيء الوحيد الذي لا تعيش النبتة دونه، وهو أصعب ما يُقدّر في الداخل. إليك كيفية قراءة الغرفة.",
+        "body": [
+          "كل مشكلة في النبتة تبدو مختلفة في ضوء مختلف. النبتة التي تمتد طويلًا ونحيلًا مع فراغات واسعة بين الأوراق تتوق إلى مزيد من الضوء، أما التي عليها بقع محترقة أو باهتة فتحصل على شمس مباشرة أكثر من اللازم. تعلّم قراءة هاتين الإشارتين يحلّ معظم أسئلة الموقع.",
+          "النافذة المطلة على الجنوب توفّر ضوءًا قويًا مباشرًا معظم اليوم؛ ونافذة الشرق أو الغرب توفّر ساعات قليلة من ضوء ألطف؛ أما نافذة الشمال فلا توفّر سوى ضوء ناعم غير مباشر. المسافة مهمة أيضًا — إذ يهبط الضوء بحدّة كلما ابتعدت عن الزجاج، فبقعة على بعد مترين تبدو أغمق بكثير مما تتوقع.",
+          "إذا كان منزلك يعاني من قلّة الضوء الطبيعي، فاختر نباتات تتحمّل الظل بدل مصارعة المساحة: البوتس ونبات الثعبان ونبات ZZ كلها تتأقلم جيدًا في الغرف المعتمة. أدر الأصص ربع دورة كل أسبوع ليبقى النمو متوازنًا، وتذكّر أن في الشتاء يبطؤ كل نبات تقريبًا ويحتاج ماءً أقل."
+        ]
+      },
+      "ku": {
+        "title": "خوێندنەوەی ڕووناکی: ڕووەکەکەت لە کوێ بژیت؟",
+        "description": "ڕووناکی تەنها شتە کە ڕووەک بەبێ ئەو ناژیت و سەختترینە بۆ دیاریکردن لە ژوورەوە. ئەمە چۆنێتیی خوێندنەوەی ژوورێک.",
+        "body": [
+          "هەموو کێشەیەکی ڕووەک لە ڕووناکی جیاوازدا جیاواز دەردەکەوێت. ئەو ڕووەکەی درێژ و تەنک دەڕوات بەڵام دووری زۆر لە نێوان گەڵاکاندا، بەدوای ڕووناکی زیاتردا دەگەڕێت، لە کاتێکدا ئەوەی خاڵە سووتاوەکانی هەیە زۆر خۆری ڕاستەوخۆی پێدەگات.",
+          "پەنجەرەی بەرەو باشوور ڕووناکییەکی بەهێز و ڕاستەوخۆ دەدات بۆ زۆربەی ڕۆژەکە؛ پەنجەرەی ڕۆژهەڵات یان ڕۆژئاوا چەند کاتژمێرێک ڕووناکی نەرمتر دەدات؛ پەنجەرەی باکوور تەنها ڕووناکی نەرم و ناڕاستەوخۆ دەدات. دووریش گرنگە.",
+          "ئەگەر ماڵەکەت کەمی ڕووناکیی سروشتی هەیە، ڕووەک هەڵبژێرە کە سێبەر دەگرن لە جیاتی شەڕکردن لەگەڵ شوێنەکە: پۆتۆس، ڕووەکی مار، و ڕووەکی ZZ هەموویان لە ژووری تاریکدا باش دەژین. گۆزەکان هەفتانە بە چوارگۆشە بسوڕێوە."
         ]
       }
     }

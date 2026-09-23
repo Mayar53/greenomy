@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title data-i18n="meta.homeTitle">Greenomy — Grow Plants. Learn Sustainability. Earn Rewards.</title>
   <meta name="description" data-i18n-attr="content:meta.homeDesc" content="Greenomy helps you grow real plants, learn everyday sustainability, and earn points you can redeem with partner businesses." />
   <meta property="og:title" data-i18n-attr="content:meta.ogTitle" content="Greenomy — Your Small Step Can Grow a Forest" />
@@ -13,13 +14,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="responsive.css" />
+  <link rel="canonical" href="https://greenomy.app/" />
+  <meta property="og:image" content="https://greenomy.app/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body>
 
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">
-        <span class="brand-mark" aria-hidden="true">🌱</span>
+        <img class="brand-mark" src="logo-mark.png" alt="" />
         Greenomy
       </a>
 
@@ -35,6 +39,7 @@
         <div class="lang-switch" role="group" aria-label="Language">
           <button type="button" data-lang-option="en" aria-pressed="true">EN</button>
           <button type="button" data-lang-option="ar" aria-pressed="false">AR</button>
+          <button type="button" data-lang-option="ku" aria-pressed="false">KU</button>
         </div>
         <a href="signup.html" class="btn btn-primary" data-i18n="nav.join">Join Greenomy</a>
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
@@ -63,13 +68,7 @@
         </div>
 
         <div class="hero-art" aria-hidden="true">
-          <svg viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M100 170 C100 120 100 90 100 60" stroke="#F5F1EB" stroke-width="5" stroke-linecap="round"/>
-            <path d="M100 100 C80 90 65 70 68 45 C90 50 100 70 100 100Z" fill="#F5F1EB"/>
-            <path d="M100 85 C120 75 135 55 132 30 C110 35 100 55 100 85Z" fill="#EBE4D8"/>
-            <circle cx="100" cy="35" r="14" fill="#D4AF37" opacity="0.9"/>
-            <ellipse cx="100" cy="172" rx="46" ry="8" fill="#F5F1EB" opacity="0.5"/>
-          </svg>
+          <img class="hero-logo" src="logo.png" alt="" />
         </div>
       </div>
     </section>
@@ -131,30 +130,21 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="brand" style="color:#fff;">
-            <span class="brand-mark" aria-hidden="true">🌱</span> Greenomy
+            <img class="brand-mark" src="logo-mark.png" alt="" /> Greenomy
           </a>
           <p data-i18n="footer.mission">Environmental technology made warm and human.</p>
-          <div class="store-badges">
-            <span class="store-badge">App Store</span>
-            <span class="store-badge">Google Play</span>
-          </div>
         </div>
         <div>
-          <h4 data-i18n="footer.explore">Explore</h4>
+          <h3 data-i18n="footer.explore">Explore</h3>
           <a href="about.html" data-i18n="nav.about">About</a>
           <a href="greenhub.html" data-i18n="nav.greenHub">Green Hub</a>
           <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
         </div>
         <div>
-          <h4 data-i18n="footer.legal">Legal</h4>
+          <h3 data-i18n="footer.legal">Legal</h3>
           <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
           <a href="#" data-i18n="footer.terms">Terms of Use</a>
           <a href="contact.html" data-i18n="nav.contact">Contact</a>
-        </div>
-        <div>
-          <h4 data-i18n="footer.getApp">Get the app</h4>
-          <a href="#">App Store</a>
-          <a href="#">Google Play</a>
         </div>
       </div>
       <div class="footer-bottom">

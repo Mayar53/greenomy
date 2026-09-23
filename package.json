@@ -1,0 +1,9 @@
+{
+  "name": "greenomy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Greenomy — run the whole stack (API + website) with one command",
+  "scripts": {
+    "start": "node dev.js"
+  }
+}

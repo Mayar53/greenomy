@@ -5,14 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <title data-i18n="meta.contactTitle">Contact & Waitlist — Greenomy</title>
-  <meta name="description" data-i18n-attr="content:meta.contactDesc" content="Get in touch with Greenomy or join the waitlist to be first in line when we launch in your city." />
+  <title data-i18n="profile.title">My Profile — Greenomy</title>
+  <meta name="robots" content="noindex" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="responsive.css" />
-  <link rel="canonical" href="https://greenomy.app/contact.html" />
-  <meta property="og:image" content="https://greenomy.app/logo.png" />
-  <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body>
 
@@ -21,10 +18,11 @@
       <a href="index.html" class="brand"><img class="brand-mark" src="logo-mark.png" alt="" /> Greenomy</a>
       <nav class="main-nav" aria-label="Primary">
         <a href="index.html" data-i18n="nav.home">Home</a>
-        <a href="about.html" data-i18n="nav.about">About</a>
+        <a href="garden.html" data-i18n="nav.garden">My Garden</a>
+        <a href="wallet.html" data-i18n="nav.wallet">Wallet</a>
+        <a href="profile.html" data-i18n="nav.profile" aria-current="page">Profile</a>
         <a href="greenhub.html" data-i18n="nav.greenHub">Green Hub</a>
         <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
-        <a href="contact.html" data-i18n="nav.contact" aria-current="page">Contact</a>
       </nav>
       <div class="header-actions">
         <div class="lang-switch" role="group" aria-label="Language">
@@ -32,7 +30,7 @@
           <button type="button" data-lang-option="ar" aria-pressed="false">AR</button>
           <button type="button" data-lang-option="ku" aria-pressed="false">KU</button>
         </div>
-        <a href="signup.html" class="btn btn-primary" data-i18n="nav.join">Join Greenomy</a>
+        <button type="button" class="btn btn-secondary" data-logout data-i18n="app.logout">Log out</button>
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
       </div>
     </div>
@@ -40,53 +38,59 @@
 
   <main>
     <section class="section-tight">
-      <div class="container text-center">
-        <span class="eyebrow" data-i18n="contact.eyebrow">Contact</span>
-        <h1 class="heading-lg" data-i18n="contact.title">Let's grow something together</h1>
-        <p class="section-lead" data-i18n="contact.lead" style="margin: 0 auto;">Questions, partnerships, or just want to say hi? Reach out any time.</p>
-      </div>
-    </section>
-
-    <section class="section-tight">
-      <div class="container grid grid-2" style="align-items: start;">
-        <div class="grid" style="gap: 20px;">
-          <div class="card">
-            <div class="icon-badge" aria-hidden="true">✉️</div>
-            <h2 class="heading-sm" data-i18n="contact.emailLabel">Email</h2>
-            <p>hello@greenomy.app</p>
-          </div>
-          <div class="card">
-            <div class="icon-badge" aria-hidden="true">🤝</div>
-            <h2 class="heading-sm" data-i18n="contact.partnershipLabel">Partnerships</h2>
-            <p>partners@greenomy.app</p>
-          </div>
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-i18n="nav.profile">Profile</span>
+          <h1 class="heading-lg" data-i18n="profile.title">My Profile</h1>
+          <p class="section-lead" data-i18n="profile.lead">Your account details, and how to change your password.</p>
         </div>
 
-        <div class="card">
-          <h2 class="heading-sm" data-i18n="contact.waitlistTitle">Join the Waitlist</h2>
-          <p data-i18n="contact.waitlistLead">Be first to know when Greenomy launches in your city.</p>
+        <div class="card" data-profile-summary style="margin-bottom: 24px;"></div>
 
-          <form data-waitlist-form novalidate>
+        <div class="grid grid-2">
+          <form class="card" data-profile-form novalidate>
+            <h2 class="heading-md" data-i18n="profile.detailsTitle">Account details</h2>
+
             <div class="form-field">
-              <label for="fullName" data-i18n="contact.fullName">Full Name</label>
+              <label for="fullName" data-i18n="wizard.fullName">Full Name</label>
               <input type="text" id="fullName" name="fullName" autocomplete="name" required />
               <span class="field-error" role="alert"></span>
             </div>
+
             <div class="form-field">
-              <label for="email" data-i18n="contact.email">Email</label>
-              <input type="email" id="email" name="email" autocomplete="email" required />
+              <label for="city" data-i18n="wizard.city">City</label>
+              <input type="text" id="city" name="city" autocomplete="address-level2" />
               <span class="field-error" role="alert"></span>
             </div>
+
+            <button type="submit" class="btn btn-primary" data-i18n="profile.save">Save changes</button>
+            <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+          </form>
+
+          <form class="card" data-password-form novalidate>
+            <h2 class="heading-md" data-i18n="profile.passwordTitle">Change password</h2>
+
             <div class="form-field">
-              <label for="city" data-i18n="contact.city">City</label>
-              <input type="text" id="city" name="city" autocomplete="address-level2" required />
+              <label for="currentPassword" data-i18n="profile.currentPassword">Current password</label>
+              <div class="password-field">
+                <input type="password" id="currentPassword" name="currentPassword" autocomplete="current-password" required />
+                <button type="button" class="password-toggle" data-i18n="auth.showPassword">Show</button>
+              </div>
               <span class="field-error" role="alert"></span>
             </div>
+
             <div class="form-field">
-              <label for="interests" data-i18n="contact.interests">Gardening Interests</label>
-              <input type="text" id="interests" name="interests" placeholder="e.g. herbs, balcony gardening, composting" />
+              <label for="newPassword" data-i18n="profile.newPassword">New password</label>
+              <div class="password-field">
+                <input type="password" id="newPassword" name="newPassword" autocomplete="new-password" required />
+                <button type="button" class="password-toggle" data-i18n="auth.showPassword">Show</button>
+              </div>
+              <span class="field-error" role="alert"></span>
             </div>
-            <button type="submit" class="btn btn-primary btn-block" data-i18n="contact.submit">Join Waitlist</button>
+
+            <p class="form-note" data-i18n="auth.passwordNote">At least 8 characters, with a letter and a number.</p>
+
+            <button type="submit" class="btn btn-primary" data-i18n="profile.updatePassword">Update password</button>
             <div class="form-status" data-form-status role="status" aria-live="polite"></div>
           </form>
         </div>
@@ -121,6 +125,6 @@
   </footer>
 
   <script type="module" src="main.js"></script>
-  <script type="module" src="contact.js"></script>
+  <script type="module" src="profile.js"></script>
 </body>
 </html>

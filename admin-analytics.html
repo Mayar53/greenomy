@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <title data-i18n="adminTab.analytics">Analytics — Greenomy</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsive.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><img class="brand-mark" src="logo-mark.png" alt="" /> Greenomy</a>
+      <div class="header-actions" style="margin-inline-start: auto;">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang-option="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang-option="ar" aria-pressed="false">AR</button>
+          <button type="button" data-lang-option="ku" aria-pressed="false">KU</button>
+        </div>
+        <a href="wallet.html" class="btn btn-ghost" data-i18n="nav.wallet">Wallet</a>
+        <button type="button" class="btn btn-secondary" data-logout data-i18n="app.logout">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-tight">
+      <div class="container">
+        <nav class="admin-nav" aria-label="Admin sections">
+          <a href="admin.html" data-i18n="adminTab.queue">Queue</a>
+          <a href="admin-users.html" data-i18n="adminTab.users">Users</a>
+          <a href="admin-partners.html" data-i18n="adminTab.partners">Partners</a>
+          <a href="admin-rewards.html" data-i18n="adminTab.rewards">Rewards</a>
+          <a href="admin-content.html" data-i18n="adminTab.content">Content</a>
+          <a href="admin-analytics.html" data-i18n="adminTab.analytics" aria-current="page">Analytics</a>
+        </nav>
+
+        <div class="section-head">
+          <span class="eyebrow" data-i18n="admin.eyebrow">Admin</span>
+          <h1 class="heading-lg" data-i18n="adminTab.analytics">Analytics</h1>
+          <p class="section-lead" data-i18n="admin.analyticsLead">Platform activity at a glance.</p>
+        </div>
+
+        <div class="empty-state" data-admin-denied hidden>
+          <span class="emoji">🔒</span><span data-i18n="admin.notAuthorized">You don't have admin access to this page.</span>
+        </div>
+
+        <div data-admin-host>
+          <div data-admin-analytics></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="main.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

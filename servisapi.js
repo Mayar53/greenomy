@@ -17,6 +17,22 @@ function getAuthToken() {
   return localStorage.getItem("greenomy:token") || sessionStorage.getItem("greenomy:token");
 }
 
+/**
+ * A failed fetch is either "the API is down" or "the browser blocked the
+ * response (CORS)" — the TypeError looks identical. A no-cors probe bypasses
+ * the CORS check, so if it resolves the server is up and CORS is the culprit.
+ */
+async function networkErrorMessage() {
+  const base = `Couldn't reach the API at ${API_BASE_URL}.`;
+
+  try {
+    await fetch(`${API_BASE_URL}/health`, { mode: "no-cors" });
+    return `${base} The server IS reachable, so the browser blocked the response — add ${window.location.origin} to CORS_ORIGIN in backend/.env and restart the API.`;
+  } catch {
+    return `${base} The API does not appear to be running — start it with \`npm start\` in backend/.`;
+  }
+}
+
 async function request(method, path, { body, params, auth = true } = {}) {
   const url = new URL(`${API_BASE_URL}${path}`, window.location.origin);
   if (params) {
@@ -37,7 +53,7 @@ async function request(method, path, { body, params, auth = true } = {}) {
       body: body ? JSON.stringify(body) : undefined,
     });
   } catch (networkErr) {
-    throw new ApiError("Network error — please check your connection.", 0, null);
+    throw new ApiError(await networkErrorMessage(), 0, null);
   }
 
   const contentType = response.headers.get("content-type") || "";

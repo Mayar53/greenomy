@@ -1,0 +1,24 @@
+# Greenomy
+# Update the Sitemap host to the real production domain before deploying.
+
+User-agent: *
+Allow: /
+
+# Private app + admin pages. Each of these also carries
+# <meta name="robots" content="noindex"> so a stray link can't get indexed.
+Disallow: /admin
+Disallow: /admin-users
+Disallow: /admin-partners
+Disallow: /admin-rewards
+Disallow: /admin-content
+Disallow: /admin-analytics
+Disallow: /wallet
+Disallow: /garden
+Disallow: /camera
+Disallow: /onboarding
+Disallow: /eco-profile
+Disallow: /new-seed
+Disallow: /login
+Disallow: /signup
+
+Sitemap: https://greenomy.app/sitemap.xml

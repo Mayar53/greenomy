@@ -2,6 +2,7 @@
   {
     "id": "rw-001",
     "partner": "Green Bean Coffee",
+    "category": "restaurant",
     "title": "20% Off Any Drink",
     "description": "Enjoy a discount on any handcrafted drink at participating locations.",
     "pointsRequired": 150,
@@ -11,72 +12,157 @@
       "ar": {
         "title": "خصم 20% على أي مشروب",
         "description": "استمتع بخصم على أي مشروب محضّر يدويًا في الفروع المشاركة."
+      },
+      "ku": {
+        "title": "٢٠٪ داشکاندن لە هەر خواردنەوەیەک",
+        "description": "چێژ لە داشکاندن ببینە لە هەر خواردنەوەیەکی دەستکرد لە شوێنە بەشدارەکان."
       }
     }
   },
   {
     "id": "rw-002",
-    "partner": "Urban Roots Nursery",
-    "title": "Free Seed Starter Kit",
-    "description": "Redeem a beginner seed kit including soil pellets and a mini tray.",
-    "pointsRequired": 300,
-    "expiresAt": "2026-11-30",
-    "isActive": true,
-    "i18n": {
-      "ar": {
-        "title": "طقم بدء البذور مجانًا",
-        "description": "استبدل طقم بذور للمبتدئين يشمل أقراص تربة وصينية صغيرة."
-      }
-    }
-  },
-  {
-    "id": "rw-003",
-    "partner": "EcoWear Basics",
-    "title": "15% Off Sustainable Apparel",
-    "description": "A discount on organic-cotton and recycled-fabric clothing.",
-    "pointsRequired": 250,
-    "expiresAt": "2027-01-15",
-    "isActive": true,
-    "i18n": {
-      "ar": {
-        "title": "خصم 15% على الملابس المستدامة",
-        "description": "خصم على ملابس القطن العضوي والأقمشة المعاد تدويرها."
-      }
-    }
-  },
-  {
-    "id": "rw-004",
-    "partner": "The Refill Store",
-    "title": "Free Reusable Tote",
-    "description": "Pick up a Greenomy x Refill Store canvas tote bag, free with enough points.",
-    "pointsRequired": 100,
-    "expiresAt": "2026-12-01",
-    "isActive": true,
-    "i18n": {
-      "ar": {
-        "title": "حقيبة قماشية قابلة لإعادة الاستخدام مجانًا",
-        "description": "احصل على حقيبة قماشية من غرينومي × ذا ريفيل ستور مجانًا عند توفر نقاط كافية."
-      }
-    }
-  },
-  {
-    "id": "rw-005",
     "partner": "Sprout Café",
+    "category": "restaurant",
     "title": "Buy One Get One — Pastries",
     "description": "A BOGO offer on any pastry, valid at all Sprout Café branches.",
     "pointsRequired": 180,
-    "expiresAt": "2026-10-31",
+    "expiresAt": "2027-01-31",
     "isActive": true,
     "i18n": {
       "ar": {
         "title": "اشترِ واحدة واحصل على الأخرى — معجنات",
         "description": "عرض اشترِ واحدة واحصل على الأخرى على أي معجنات في جميع فروع سبراوت كافيه."
+      },
+      "ku": {
+        "title": "یەک بکڕە یەک وەربگرە — شیرینی",
+        "description": "پێشکەشکردنی یەک بکڕە یەک وەربگرە لەسەر هەر شیرینییەک، لە هەموو لقەکانی سپڕاوت کافێ بەردەستە."
+      }
+    }
+  },
+  {
+    "id": "rw-003",
+    "partner": "Cedar Bistro",
+    "category": "restaurant",
+    "title": "Free Dessert With Any Meal",
+    "description": "Finish your meal with a complimentary seasonal dessert.",
+    "pointsRequired": 160,
+    "expiresAt": "2027-03-31",
+    "isActive": true,
+    "i18n": {
+      "ar": {
+        "title": "حلوى مجانية مع أي وجبة",
+        "description": "اختم وجبتك بحلوى موسمية مجانية."
+      },
+      "ku": {
+        "title": "شیرینی بە خۆڕایی لەگەڵ هەر ژەمێک",
+        "description": "ژەمەکەت بە شیرینییەکی وەرزی بە خۆڕایی کۆتایی پێبهێنە."
+      }
+    }
+  },
+  {
+    "id": "rw-004",
+    "partner": "Verde Juice Bar",
+    "category": "restaurant",
+    "title": "One Free Cold-Pressed Juice",
+    "description": "Grab a fresh cold-pressed juice on the house at any Verde location.",
+    "pointsRequired": 120,
+    "expiresAt": "2027-02-28",
+    "isActive": true,
+    "i18n": {
+      "ar": {
+        "title": "عصير طازج بالعصر البارد مجانًا",
+        "description": "احصل على عصير طازج بالعصر البارد على حسابنا في أي فرع من فيردي."
+      },
+      "ku": {
+        "title": "یەک شەربەتی سارد-گوشراو بە خۆڕایی",
+        "description": "شەربەتێکی تازەی سارد-گوشراو لە هەر لقێکی ڤێردێ بە خۆڕایی وەربگرە."
+      }
+    }
+  },
+  {
+    "id": "rw-005",
+    "partner": "Urban Farm School",
+    "category": "courses",
+    "title": "Urban Gardening 101 — Free Seat",
+    "description": "A free seat in our beginner course on growing food in small city spaces.",
+    "pointsRequired": 400,
+    "expiresAt": "2027-06-30",
+    "isActive": true,
+    "i18n": {
+      "ar": {
+        "title": "البستنة الحضرية ١٠١ — مقعد مجاني",
+        "description": "مقعد مجاني في دورتنا للمبتدئين حول زراعة الغذاء في المساحات الحضرية الصغيرة."
+      },
+      "ku": {
+        "title": "باخداریی شاری ١٠١ — کورسی بە خۆڕایی",
+        "description": "کورسییەکی بە خۆڕایی لە خولی دەستپێکەرانمان دەربارەی چاندنی خۆراک لە شوێنە بچووکەکانی شاردا."
       }
     }
   },
   {
     "id": "rw-006",
+    "partner": "Compost Collective",
+    "category": "courses",
+    "title": "Home Composting Workshop",
+    "description": "A hands-on workshop turning kitchen scraps into rich compost.",
+    "pointsRequired": 300,
+    "expiresAt": "2027-05-31",
+    "isActive": true,
+    "i18n": {
+      "ar": {
+        "title": "ورشة التسميد المنزلي",
+        "description": "ورشة عملية لتحويل بقايا المطبخ إلى سماد غني."
+      },
+      "ku": {
+        "title": "ئۆتۆمبێلی کۆمپۆستی ماڵەوە",
+        "description": "ئۆتۆمبێلێکی پراکتیکی بۆ گۆڕینی پاشماوەی چێشتخانە بۆ کۆمپۆستێکی دەوڵەمەند."
+      }
+    }
+  },
+  {
+    "id": "rw-007",
+    "partner": "Greenomy Academy",
+    "category": "courses",
+    "title": "Seed Saving Masterclass",
+    "description": "Learn to harvest, store, and share seeds from your own plants.",
+    "pointsRequired": 350,
+    "expiresAt": "2027-04-30",
+    "isActive": true,
+    "i18n": {
+      "ar": {
+        "title": "دورة حفظ البذور المتقدمة",
+        "description": "تعلّم جمع البذور من نباتاتك وتخزينها ومشاركتها."
+      },
+      "ku": {
+        "title": "ماستەرکلاسی پاراستنی تۆو",
+        "description": "فێرببە تۆو لە ڕووەکەکانی خۆت کۆبکەیتەوە، بیپارێزیت و هاوبەشی بکەیت."
+      }
+    }
+  },
+  {
+    "id": "rw-008",
+    "partner": "Urban Roots Nursery",
+    "category": "supplies",
+    "title": "Free Seed Starter Kit",
+    "description": "Redeem a beginner seed kit including soil pellets and a mini tray.",
+    "pointsRequired": 250,
+    "expiresAt": "2027-01-15",
+    "isActive": true,
+    "i18n": {
+      "ar": {
+        "title": "طقم بدء البذور مجانًا",
+        "description": "استبدل طقم بذور للمبتدئين يشمل أقراص تربة وصينية صغيرة."
+      },
+      "ku": {
+        "title": "کیتی دەستپێکردنی تۆو بە خۆڕایی",
+        "description": "کیتێکی تۆوی دەستپێکەران بگۆڕە کە گرێی خاک و سینییەکی بچووک لەخۆدەگرێت."
+      }
+    }
+  },
+  {
+    "id": "rw-009",
     "partner": "Terra Home Goods",
+    "category": "supplies",
     "title": "10% Off Home & Garden",
     "description": "A storewide discount on planters, tools, and home garden accessories.",
     "pointsRequired": 220,
@@ -86,6 +172,30 @@
       "ar": {
         "title": "خصم 10% على المنزل والحديقة",
         "description": "خصم على مستوى المتجر على الأصص والأدوات ومستلزمات حديقة المنزل."
+      },
+      "ku": {
+        "title": "١٠٪ داشکاندن لە ماڵ و باخ",
+        "description": "داشکاندنێک بە درێژایی فرۆشگا لەسەر گۆزە، ئامراز، و پێداویستییەکانی باخی ماڵ."
+      }
+    }
+  },
+  {
+    "id": "rw-010",
+    "partner": "Zanist University",
+    "category": "university",
+    "title": "Sustainable Agriculture Seminar Pass",
+    "description": "A guest pass to the university's public seminar series on sustainable farming.",
+    "pointsRequired": 200,
+    "expiresAt": "2027-07-31",
+    "isActive": true,
+    "i18n": {
+      "ar": {
+        "title": "تصريح حضور ندوة الزراعة المستدامة",
+        "description": "تصريح ضيف لسلسلة الندوات العامة في الجامعة حول الزراعة المستدامة."
+      },
+      "ku": {
+        "title": "مۆڵەتی سیمیناری کشتوکاڵی بەردەوام",
+        "description": "مۆڵەتێکی میوان بۆ زنجیرە سیمینارە گشتییەکانی زانکۆ دەربارەی کشتوکاڵی بەردەوام."
       }
     }
   }

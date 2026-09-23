@@ -3,9 +3,10 @@
 // or `data-i18n-attr="placeholder:path.to.key"` for attributes.
 
 const STORAGE_KEY = "greenomy:lang";
-const SUPPORTED = ["en", "ar"];
+const SUPPORTED = ["en", "ar", "ku"];
 const DEFAULT_LANG = "en";
-const LOCALE_FILES = { en: "local.json", ar: "localesar.json" };
+const LOCALE_FILES = { en: "local.json", ar: "localesar.json", ku: "localeku.json" };
+const RTL_LANGS = ["ar", "ku"];
 
 let dictionary = {};
 
@@ -52,7 +53,7 @@ async function loadDictionary(lang) {
 
 function setDocumentDirection(lang) {
   document.documentElement.lang = lang;
-  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
 }
 
 function updateSwitchUI(lang) {
