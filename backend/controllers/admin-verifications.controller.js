@@ -1,36 +1,52 @@
-const db = require("../database/mock-data");
+// controllers/admin-verifications.controller.js
+const { withTransaction } = require("../config/db");
+const verificationModel = require("../models/verification.model");
+const userModel = require("../models/user.model");
+const transactionModel = require("../models/point-transaction.model");
+const { notify } = require("../services/notification.service");
 
-exports.queue = (req, res) => {
-  res.json(db.verifications.filter((v) => v.approval_status === "pending"));
+// Shared with the auto-approval path in verifications.controller.js.
+const POINTS_PER_APPROVED_PHOTO = 30;
+
+exports.queue = async (req, res) => {
+  res.json(await verificationModel.listPending());
 };
 
-exports.approve = (req, res) => {
-  const v = db.verifications.find((v) => v.verification_id === req.params.id);
-  if (!v) return res.status(404).json({ error: "Verification not found" });
-  v.approval_status = "approved";
-  v.admin_reviewed_by = req.user.id;
-  v.reviewed_at = new Date().toISOString();
+exports.approve = async (req, res) => {
+  // approve() only matches a still-pending row, so a double-click or two
+  // admins at once cannot pay the same photo's points twice.
+  const verification = await withTransaction(async (client) => {
+    const record = await verificationModel.approve(client, req.params.id, req.user.id);
+    if (!record) return null;
 
-  const user = db.users.find((u) => u.user_id === v.user_id);
-  if (user) user.total_points += 30;
-  db.pointTransactions.push({
-    transaction_id: `t_${Date.now()}`,
-    user_id: v.user_id,
-    amount: 30,
-    transaction_type: "verification_approved",
-    reference_id: v.verification_id,
-    created_at: new Date().toISOString(),
+    await userModel.addPoints(client, record.user_id, POINTS_PER_APPROVED_PHOTO);
+    await transactionModel.create(client, {
+      userId: record.user_id,
+      amount: POINTS_PER_APPROVED_PHOTO,
+      transactionType: "verification_approved",
+      referenceId: record.verification_id,
+    });
+    return record;
   });
 
-  res.json(v);
+  if (!verification) {
+    return res.status(404).json({ error: "Pending verification not found" });
+  }
+
+  await notify({ userId: verification.user_id, type: "verification_approved" });
+  res.json(verification);
 };
 
-exports.reject = (req, res) => {
-  const v = db.verifications.find((v) => v.verification_id === req.params.id);
-  if (!v) return res.status(404).json({ error: "Verification not found" });
-  v.approval_status = "rejected";
-  v.admin_reviewed_by = req.user.id;
-  v.rejection_reason = (req.body && req.body.reason) || null;
-  v.reviewed_at = new Date().toISOString();
-  res.json(v);
+exports.reject = async (req, res) => {
+  const reason = (req.body && req.body.reason) || null;
+  const verification = await withTransaction((client) =>
+    verificationModel.reject(client, req.params.id, req.user.id, reason)
+  );
+
+  if (!verification) {
+    return res.status(404).json({ error: "Pending verification not found" });
+  }
+
+  await notify({ userId: verification.user_id, type: "verification_rejected" });
+  res.json(verification);
 };

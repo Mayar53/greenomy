@@ -1,29 +1,29 @@
-const db = require("../database/mock-data");
+// controllers/users.controller.js
+const userModel = require("../models/user.model");
+const plantModel = require("../models/plant.model");
+const verificationModel = require("../models/verification.model");
 
-exports.getMe = (req, res) => {
-  const user = db.users.find((u) => u.user_id === req.user.id);
+exports.getMe = async (req, res) => {
+  const user = await userModel.findById(req.user.id);
   if (!user) return res.status(404).json({ error: "User not found" });
-  const { password_hash, ...safe } = user;
-  res.json(safe);
+  res.json(user);
 };
 
-exports.updateMe = (req, res) => {
-  const user = db.users.find((u) => u.user_id === req.user.id);
-  if (!user) return res.status(404).json({ error: "User not found" });
+exports.updateMe = async (req, res) => {
   const { fullName, city } = req.body || {};
-  if (fullName) user.full_name = fullName;
-  if (city) user.city = city;
-  user.updated_at = new Date().toISOString();
-  const { password_hash, ...safe } = user;
-  res.json(safe);
+  const user = await userModel.updateProfile(req.user.id, { fullName, city });
+  if (!user) return res.status(404).json({ error: "User not found" });
+  res.json(user);
 };
 
-exports.getMyImpact = (req, res) => {
-  const plants = db.plants.filter((p) => p.user_id === req.user.id);
-  const verifications = db.verifications.filter((v) => v.user_id === req.user.id && v.approval_status === "approved");
+exports.getMyImpact = async (req, res) => {
+  const [plantsGrown, verifiedPhotos] = await Promise.all([
+    plantModel.countByUser(req.user.id),
+    verificationModel.countApprovedByUser(req.user.id),
+  ]);
   res.json({
-    plantsGrown: plants.length,
-    verifiedPhotos: verifications.length,
-    estimatedCo2Kg: plants.length * 1.8,
+    plantsGrown,
+    verifiedPhotos,
+    estimatedCo2Kg: plantsGrown * 1.8,
   });
 };

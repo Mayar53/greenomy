@@ -1,61 +1,80 @@
 // controllers/verifications.controller.js
 // Verification confidence >= 85% auto-approves; below that, it queues for
-// admin review. The actual scoring is delegated to a swappable provider
+// admin review. The scoring itself is delegated to a swappable provider
 // (see services/verification-provider.js) so the AI vendor isn't hardcoded.
-const db = require("../database/mock-data");
-const { getVerificationProvider } = require("../services/verification-provider");
+const { withTransaction } = require("../config/db");
+const verificationModel = require("../models/verification.model");
+const plantModel = require("../models/plant.model");
+const userModel = require("../models/user.model");
+const transactionModel = require("../models/point-transaction.model");
+const { getVerificationProvider, HeuristicVerificationProvider } = require("../services/verification-provider");
+const { notify } = require("../services/notification.service");
 
 const AUTO_APPROVE_THRESHOLD = 0.85;
 const POINTS_PER_VERIFIED_PHOTO = 30;
 
 exports.submit = async (req, res) => {
-  const { plantId, imageUrl, gpsLat, gpsLong } = req.body || {};
-  if (!plantId || !imageUrl) return res.status(400).json({ error: "plantId and imageUrl are required" });
+  const { plantId, imageUrl, gpsLat, gpsLong, pixelStats } = req.body || {};
+  if (!plantId || !imageUrl) {
+    return res.status(400).json({ error: "plantId and imageUrl are required" });
+  }
 
-  const plant = db.plants.find((p) => p.plant_id === plantId && p.user_id === req.user.id);
+  const plant = await plantModel.findByIdForUser(plantId, req.user.id);
   if (!plant) return res.status(404).json({ error: "Plant not found" });
 
-  const provider = getVerificationProvider();
-  const { confidence } = await provider.score({ imageUrl });
-
-  const approval_status = confidence >= AUTO_APPROVE_THRESHOLD ? "approved" : "pending";
-
-  const verification = {
-    verification_id: `v_${Date.now()}`,
-    plant_id: plantId,
-    user_id: req.user.id,
-    image_url: imageUrl,
-    gps_lat: gpsLat ?? null,
-    gps_long: gpsLong ?? null,
-    captured_at: new Date().toISOString(),
-    ai_confidence_score: confidence,
-    approval_status,
-    created_at: new Date().toISOString(),
-  };
-  db.verifications.push(verification);
-
-  if (approval_status === "approved") {
-    const user = db.users.find((u) => u.user_id === req.user.id);
-    if (user) user.total_points += POINTS_PER_VERIFIED_PHOTO;
-    db.pointTransactions.push({
-      transaction_id: `t_${Date.now()}`,
-      user_id: req.user.id,
-      amount: POINTS_PER_VERIFIED_PHOTO,
-      transaction_type: "verification_approved",
-      reference_id: verification.verification_id,
-      created_at: new Date().toISOString(),
-    });
+  // An AI provider outage, timeout or bad key must never block a submission —
+  // fall back to the offline scorer so the member still gets a result.
+  let scored;
+  try {
+    scored = await getVerificationProvider().score({ imageUrl, pixelStats });
+  } catch (err) {
+    console.warn(`Verification provider failed (${err.message}) — using the heuristic scorer.`);
+    scored = await new HeuristicVerificationProvider().score({ imageUrl, pixelStats });
   }
+  const { confidence, provider: scoredBy, metrics } = scored;
+
+  const approvalStatus = confidence >= AUTO_APPROVE_THRESHOLD ? "approved" : "pending";
+
+  // The record and the points it earns must land together or not at all.
+  const verification = await withTransaction(async (client) => {
+    const record = await verificationModel.create(client, {
+      plantId,
+      userId: req.user.id,
+      imageUrl,
+      gpsLat,
+      gpsLong,
+      confidence,
+      provider: scoredBy,
+      metrics,
+      approvalStatus,
+    });
+
+    if (approvalStatus === "approved") {
+      await userModel.addPoints(client, req.user.id, POINTS_PER_VERIFIED_PHOTO);
+      await transactionModel.create(client, {
+        userId: req.user.id,
+        amount: POINTS_PER_VERIFIED_PHOTO,
+        transactionType: "verification_approved",
+        referenceId: record.verification_id,
+      });
+    }
+    return record;
+  });
+
+  await notify({
+    userId: req.user.id,
+    type: approvalStatus === "approved" ? "verification_approved" : "verification_pending",
+  });
 
   res.status(201).json(verification);
 };
 
-exports.getOne = (req, res) => {
-  const v = db.verifications.find((v) => v.verification_id === req.params.id && v.user_id === req.user.id);
-  if (!v) return res.status(404).json({ error: "Verification not found" });
-  res.json(v);
+exports.getOne = async (req, res) => {
+  const verification = await verificationModel.findByIdForUser(req.params.id, req.user.id);
+  if (!verification) return res.status(404).json({ error: "Verification not found" });
+  res.json(verification);
 };
 
-exports.history = (req, res) => {
-  res.json(db.verifications.filter((v) => v.user_id === req.user.id));
+exports.history = async (req, res) => {
+  res.json(await verificationModel.listByUser(req.user.id));
 };

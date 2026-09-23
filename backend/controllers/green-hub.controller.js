@@ -1,15 +1,12 @@
-const db = require("../database/mock-data");
+// controllers/green-hub.controller.js
+const greenHubModel = require("../models/green-hub.model");
 
-exports.list = (req, res) => {
-  const { category } = req.query;
-  const data = category && category !== "all"
-    ? db.greenHub.filter((a) => a.category === category)
-    : db.greenHub;
-  res.json(data);
+exports.list = async (req, res) => {
+  res.json(await greenHubModel.list({ category: req.query.category }));
 };
 
-exports.getOne = (req, res) => {
-  const article = db.greenHub.find((a) => a.slug === req.params.slug);
+exports.getOne = async (req, res) => {
+  const article = await greenHubModel.findBySlug(req.params.slug);
   if (!article) return res.status(404).json({ error: "Article not found" });
   res.json(article);
 };

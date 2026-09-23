@@ -12,9 +12,22 @@ nothing in these routes is web-specific.
 | POST | /auth/signup | – | `{ fullName, email, password, city? }` |
 | POST | /auth/login | – | `{ email, password }` → `{ user, token }` |
 | POST | /auth/logout | user | stateless JWT; discards client-side |
-| POST | /auth/forgot-password | – | always returns a generic response |
-| POST | /auth/reset-password | – | `{ token, newPassword }` |
+| POST | /auth/forgot-password | – | `{ email }` — always a generic response; emails a single-use reset link |
+| POST | /auth/reset-password | – | `{ token, newPassword }` — token is single-use and valid for 30 minutes |
+| POST | /auth/change-password | user | `{ currentPassword, newPassword }` |
 | GET | /auth/me | user | current session's user |
+
+## AI (optional — needs `AI_API_KEY`)
+| Method | Path | Auth | Notes |
+|---|---|---|---|
+| POST | /ai/identify | user | `{ imageUrl }` → `{ plantType, confidence, alternatives }` |
+| POST | /ai/assistant | user | `{ message }` → `{ reply }`, answered with the member's own plants as context |
+
+Both return **503** with an explanatory message when no key is configured, and
+are rate-limited (40 per 15 min) because every call costs money at the provider.
+
+## Development
+| GET /dev/mail | – | development only — the outbox of emails the app would have sent (password-reset links). Not mounted when `NODE_ENV=production`. |
 
 ## Users
 | GET /users/me | user |

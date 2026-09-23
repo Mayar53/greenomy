@@ -10,18 +10,25 @@ API's URL if it isn't served from the same origin under `/api`.
 1. `cd backend && npm install`
 2. Copy `.env.example` → `backend/.env` and fill in real values, especially
    `DATABASE_URL` and `JWT_SECRET`.
-3. Provision PostgreSQL and run the schema in `docs/DATABASE.md` (a
-   migration tool — e.g. `node-pg-migrate` or Prisma — should own this once
-   the schema stabilizes; it is hand-documented for now).
-4. `npm start` (or run behind a process manager like PM2 / systemd).
-5. Put the API behind HTTPS and a reverse proxy (nginx / a managed load
+3. Provide PostgreSQL. `DB_DRIVER` selects the driver: `pglite` runs Postgres
+   in-process for local development (nothing to install, single connection),
+   while `pg` needs a real server — either `docker compose up -d db` from the
+   project root, or a managed instance (Neon / Supabase / RDS) with
+   `DATABASE_SSL=true`.
+4. `npm run migrate` — applies `database/migrations/*.sql`; safe to re-run.
+5. `npm run seed` — creates the first admin account (`ADMIN_SEED_EMAIL` /
+   `ADMIN_SEED_PASSWORD`) plus the rewards and Green Hub reference data; also
+   safe to re-run. `npm run db:setup` runs both.
+6. `npm start` (or run behind a process manager like PM2 / systemd). The API
+   exits immediately with a readable message if it can't reach the database.
+7. Put the API behind HTTPS and a reverse proxy (nginx / a managed load
    balancer) in production; never expose Node directly to the internet.
 
 ## Environment separation
-- `NODE_ENV=production` switches the verification provider from
-  `MockVerificationProvider` to `AIVerificationProvider` — make sure
-  `AI_VERIFICATION_API_KEY` is set before flipping this, or verification
-  submissions will fail.
+- The verification provider defaults to the offline heuristic scorer in every
+  environment. `AIVerificationProvider` is used only when
+  `VERIFICATION_PROVIDER=ai` **and** `AI_VERIFICATION_API_KEY` is set;
+  otherwise the API logs a warning and falls back to the heuristic.
 - Use different `JWT_SECRET` and `DATABASE_URL` values per environment.
 
 ## Storage & media
@@ -29,11 +36,76 @@ Verification photos, partner logos, and article images should go to
 object storage (the `.env.example` `STORAGE_*` variables assume an S3-
 compatible bucket), not the application server's local disk.
 
+## Security
+- The API sets `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`,
+  `Permissions-Policy` and (in production) HSTS, and disables `X-Powered-By`.
+- `NODE_ENV=production` refuses to start unless `JWT_SECRET` is set to a real
+  value, and an unset `CORS_ORIGIN` then allows *no* browser origin rather than
+  falling back to a wildcard.
+- Content-Security-Policy belongs on the static host, not the API. A policy
+  that fits this frontend (Google Fonts, the cdnjs QR library, inline
+  `style` attributes):
+
+  ```
+  Content-Security-Policy:
+    default-src 'self';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    script-src 'self' https://cdnjs.cloudflare.com;
+    img-src 'self' data:;
+    connect-src 'self' https://<api-host>;
+    frame-ancestors 'none';
+    base-uri 'self'
+  ```
+
+  `img-src data:` is required because verification photos are data URLs.
+  Drop `'unsafe-inline'` from `style-src` once the inline `style` attributes
+  are moved into stylesheets.
+
+## Email
+Password-reset mail goes through a swappable provider (`services/mail.service.js`):
+
+- `MAIL_PROVIDER=console` (default) logs the message, and outside production
+  keeps it readable at `GET /api/dev/mail` — so the reset flow is completable
+  locally with no mail account.
+- `MAIL_PROVIDER=api` POSTs JSON to `MAIL_API_URL` with `MAIL_API_KEY` and
+  `MAIL_FROM` (Resend / SendGrid / Postmark / …).
+
+Set `APP_BASE_URL` to the public site URL so reset links point at the right host.
+
+Caveat: the dev mailbox keys off `NODE_ENV`, so an environment that already sets
+`NODE_ENV=production` (some CI images and shells do — note that dotenv will not
+override an existing variable) will not expose it. Run with
+`NODE_ENV=development` locally, or configure a real provider.
+
+## AI (optional)
+Everything AI is off until a key exists; nothing else in the app depends on it.
+
+- `AI_API_KEY` — leave empty to run fully offline (heuristic verification, no
+  identification or assistant).
+- `AI_API_URL` — defaults to `https://api.openai.com/v1`. Any OpenAI-compatible
+  chat-completions endpoint works: Google's Gemini compatibility URL,
+  OpenRouter, Groq, or a local Ollama.
+- `AI_MODEL` — defaults to `gpt-4o-mini`. Use a vision-capable model.
+- `VERIFICATION_PROVIDER=ai` switches photo scoring from the offline heuristic
+  to the model. Without a key it silently keeps using the heuristic.
+
+Two things to be deliberate about:
+- **Photos leave your server** — a submission sent for AI verification goes to
+  the provider. That is a privacy decision for a platform handling members'
+  home and garden photos.
+- **The key is server-side only.** `services/ai.service.js` is the single place
+  that talks to a provider; nothing in the browser ever sees the key.
+
+If a provider call fails (outage, timeout, bad key) verification still
+succeeds: the controller falls back to the heuristic scorer and records
+`ai_provider: "heuristic"` on the record.
+
 ## Not yet implemented
 - CI/CD pipeline
-- Automated database migrations
 - Log aggregation / monitoring
 - CDN / image optimization pipeline
+- Frontend tests (the suite in `backend/tests/` is API-only)
 
 This file should be expanded as those pieces are actually built, rather
 than describing infrastructure that doesn't exist yet.

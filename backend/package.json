@@ -6,10 +6,15 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "migrate": "node database/migrate.js",
+    "seed": "node database/seed.js",
+    "db:setup": "npm run migrate && npm run seed",
+    "test": "node --test"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "@electric-sql/pglite": "^0.5.8",
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

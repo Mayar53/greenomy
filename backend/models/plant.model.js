@@ -1,0 +1,109 @@
+// models/plant.model.js
+const { query } = require("../config/db");
+
+// The API speaks camelCase for plant updates; the columns are snake_case.
+const FIELD_MAP = {
+  plantType: "plant_type",
+  plantingMethod: "planting_method",
+  stage: "stage",
+  plantingDate: "planting_date",
+  location: "location",
+  lastWatered: "last_watered",
+  nextWatering: "next_watering",
+  status: "status",
+};
+
+async function listByUser(userId) {
+  const { rows } = await query(
+    "SELECT * FROM plants WHERE user_id = $1 ORDER BY created_at DESC",
+    [userId]
+  );
+  return rows;
+}
+
+async function create({ userId, plantType, plantingMethod, plantingDate, location }) {
+  const { rows } = await query(
+    `INSERT INTO plants (user_id, plant_type, planting_method, planting_date, location)
+     VALUES ($1, $2, $3, COALESCE($4, now()), $5)
+     RETURNING *`,
+    [userId, plantType, plantingMethod || null, plantingDate || null, location || null]
+  );
+  return rows[0];
+}
+
+async function findByIdForUser(plantId, userId) {
+  const { rows } = await query(
+    "SELECT * FROM plants WHERE plant_id = $1 AND user_id = $2",
+    [plantId, userId]
+  );
+  return rows[0] || null;
+}
+
+/** Returns null when there is nothing to change or the plant isn't theirs. */
+async function update(plantId, userId, changes) {
+  const sets = [];
+  const values = [plantId, userId];
+
+  for (const [key, column] of Object.entries(FIELD_MAP)) {
+    if (changes[key] !== undefined) {
+      values.push(changes[key]);
+      sets.push(`${column} = $${values.length}`);
+    }
+  }
+  if (!sets.length) return findByIdForUser(plantId, userId);
+
+  sets.push("updated_at = now()");
+  const { rows } = await query(
+    `UPDATE plants SET ${sets.join(", ")}
+      WHERE plant_id = $1 AND user_id = $2
+      RETURNING *`,
+    values
+  );
+  return rows[0] || null;
+}
+
+async function remove(plantId, userId) {
+  const { rowCount } = await query(
+    "DELETE FROM plants WHERE plant_id = $1 AND user_id = $2",
+    [plantId, userId]
+  );
+  return rowCount > 0;
+}
+
+/** Homepage impact: every plant counts as a started seed. */
+async function countAll() {
+  const { rows } = await query("SELECT count(*)::int AS n FROM plants");
+  return rows[0].n;
+}
+
+async function countByUser(userId) {
+  const { rows } = await query(
+    "SELECT count(*)::int AS n FROM plants WHERE user_id = $1",
+    [userId]
+  );
+  return rows[0].n;
+}
+
+/** Homepage impact: a plant is "grown" once a photo of it is approved. */
+async function countGrown() {
+  const { rows } = await query(
+    `SELECT count(*)::int AS n
+       FROM plants p
+      WHERE EXISTS (
+        SELECT 1 FROM verifications v
+         WHERE v.plant_id = p.plant_id AND v.approval_status = 'approved'
+      )`
+  );
+  return rows[0].n;
+}
+
+module.exports = {
+  listByUser,
+  create,
+  findByIdForUser,
+  update,
+  remove,
+  countAll,
+  countByUser,
+  countGrown,
+};

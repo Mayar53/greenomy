@@ -1,0 +1,25 @@
+# Greenomy — local development database.
+# Optional now that the API targets a real PostgreSQL: use this if you'd rather
+# run Postgres locally than point DATABASE_URL at a managed provider.
+#   docker compose up -d db
+services:
+  db:
+    image: postgres:16
+    container_name: greenomy-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: greenomy
+      POSTGRES_USER: greenomy
+      POSTGRES_PASSWORD: greenomy
+    ports:
+      - "5432:5432"
+    volumes:
+      - greenomy-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U greenomy -d greenomy"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  greenomy-pgdata:
