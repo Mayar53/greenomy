@@ -430,5 +430,50 @@
         ]
       }
     }
+  },
+  {
+    "id": "gh-012",
+    "slug": "when-something-goes-wrong",
+    "category": "plant-care",
+    "contentType": "article",
+    "readingTime": 6,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "When Something Goes Wrong: Reading Your Plants",
+    "description": "Yellow leaves, wilting, scorched patches, holes — most problems announce themselves weeks before they kill anything. Here's how to read the signs.",
+    "body": [
+      "A plant cannot tell you what it needs, but it can show you. Almost every problem in a home or balcony garden appears on the leaves, and the pattern — which leaves, what colour, how widespread — usually names the cause.",
+      "Yellowing is the most common complaint and the most ambiguous. When the older, lower leaves yellow first while the new growth stays green, the plant is usually short of nitrogen or simply ageing; feed it and remove the tired leaves. When yellow appears between green veins on the newer leaves, the cause is usually an alkaline, lime-rich soil locking up iron — very common in Iraq — and chelated iron plus compost fixes it far better than more general fertiliser.",
+      "Wilting is the classic misleading symptom. A plant wilts both when it is too dry and when its roots are waterlogged and drowning, and the fix is opposite in each case. Push a finger into the soil: dry at depth means water it; damp and sour-smelling means stop watering, lift it out of any standing water and let it dry. In summer heat, wilting at midday and recovering by evening is normal for many plants — it is the ones that are still limp at dawn that need attention.",
+      "Scorched, bleached or papery patches facing the sun are sunburn, and they happen here most in late spring, when the light jumps: a plant used to mild rays scorches in its first week of full summer sun. Shade nets, a gradual move into the sun and deep watering all help. The opposite problem — a plant that stretches tall and thin with wide gaps between its leaves — is reaching for light and needs a brighter spot.",
+      "Holes, sticky residue, webbing or sudden colonies on the growing tips mean pests, and in this climate aphids, whitefly and spider mites are the usual suspects. Check the undersides of leaves, where they hide, and start with the least aggressive fix: a strong jet of water, then a soap or oil spray on the undersides in the evening. Remove badly infested leaves rather than spraying the whole plant.",
+      "Finally, cool-season crops that suddenly run to flower and seed — lettuce, spinach, coriander — are bolting, and that is heat, not disease. Once it starts you cannot undo it; pick the leaves and sow again for the cooler part of the season. Most of these problems are easier to prevent than to cure: the right plant in the right season, soil that drains, and steady deep watering will head off more trouble than any bottle of spray."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "عندما يحدث خلل: كيف تقرأ نباتك",
+        "description": "اصفرار الأوراق، الذبول، البقع المحروقة، الثقوب — معظم المشاكل تُعلن عن نفسها قبل أن تقتل شيئًا بأسابيع. إليك كيف تقرأ الإشارات.",
+        "body": [
+          "لا يستطيع النبات أن يخبرك بما يحتاج، لكنه يستطيع أن يُريك. كل مشكلة تقريبًا في حديقة المنزل أو الشرفة تظهر على الأوراق، والنمط — أي الأوراق، وأي لون، ومدى الانتشار — غالبًا ما يسمّي السبب.",
+          "الاصفرار هو الشكوى الأكثر شيوعًا والأكثر غموضًا. عندما تصفرّ الأوراق الأقدم السفلية أولًا بينما تبقى النموات الجديدة خضراء، فالنبات عادة يعاني نقص النيتروجين أو هو ببساطة يتقدم في العمر؛ غذّه وأزل الأوراق المتعبة. أما عندما يظهر الاصفرار بين العروق الخضراء على الأوراق الأحدث، فالسبب عادة تربة قلوية غنية بالكلس تحبس الحديد — وهو شائع جدًا في العراق — والحديد المخلّب مع الكمبوست يحلّ ذلك أفضل بكثير من سماد عام إضافي.",
+          "الذبول هو العَرَض المُضلِّل الكلاسيكي. يذبل النبات عندما يكون جافًا جدًا وعندما تكون جذوره غارقة وتختنق، والعلاج متعارض في الحالتين. أدخل إصبعك في التربة: الجفاف في العمق يعني اسقه؛ والرطوبة مع رائحة حامضة تعني توقّف عن الري وأخرجه من أي ماء راكد واتركه يجف. في حرارة الصيف، الذبول عند الظهيرة والعودة في المساء أمر طبيعي لكثير من النباتات — أما التي تبقى ذابلة عند الفجر فهي التي تحتاج انتباهًا.",
+          "البقع المحروقة أو الباهتة أو الجافة التي تواجه الشمس حروق شمسية، وتحدث هنا أكثر في أواخر الربيع عندما يقفز الضوء: نبات معتاد على أشعة لطيفة يحترق في أسبوعه الأول تحت شمس الصيف الكاملة. شبكات التظليل والنقل التدريجي إلى الشمس والري العميق كلها تساعد. والمشكلة المقابلة — نبات يمتد طويلًا ونحيلًا مع فراغات واسعة بين أوراقه — يتوق إلى الضوء ويحتاج مكانًا أكثر إشراقًا.",
+          "الثقوب أو المادة اللزجة أو الخيوط العنكبوتية أو المستعمرات المفاجئة على القمم النامية تعني آفات، وفي هذا المناخ يكون المنّ والذبابة البيضاء والعنكبوت الأحمر المتهمين المعتادين. افحص أسفل الأوراق حيث تختبئ، وابدأ بأقل الحلول قسوة: نافورة ماء قوية ثم رشّة صابون أو زيت على الأسفل في المساء. أزل الأوراق المصابة بشدة بدل رشّ النبات كله.",
+          "أخيرًا، محاصيل الموسم البارد التي تنطلق فجأة إلى الإزهار والبذر — الخس والسبانخ والكزبرة — «تذهب إلى الزهر»، وهذا من الحرارة لا من المرض. متى بدأ لا يمكن التراجع؛ اقطف الأوراق وازرع من جديد في الجزء الأبرد من الموسم. ومعظم هذه المشاكل أسهل في الوقاية منها من علاجها: النبتة الصحيحة في الموسم الصحيح، وتربة تصرّف جيدًا، وري عميق منتظم، تدفع عنك أكثر مما يدفعه أي زجاجة رشّ."
+        ]
+      },
+      "ku": {
+        "title": "کاتێک شتێک تێک دەچێت: چۆن ڕووەکەکەت بخوێنیتەوە",
+        "description": "گەڵای زەرد، ڕەنجوربوون، خاڵی سووتاو، کون — زۆربەی کێشەکان هەفتەها پێش ئەوەی شتێک بکوژن خۆیان ئاشکرا دەکەن. ئەمە چۆنێتیی خوێندنەوەی نیشانەکان.",
+        "body": [
+          "ڕووەک ناتوانێت پێت بڵێت چی پێویستە، بەڵام دەتوانێت نیشانت بدات. نزیکەی هەموو کێشەیەک لە باخی ماڵ یان بەلکۆن لەسەر گەڵاکان خۆی ئاشکرا دەکات، و شێوازەکە — کام گەڵا، چ ڕەنگ، چەند بڵاوە — زۆربەی جار هۆکارەکە دیاری دەکات.",
+          "زەردبوون باوترین گلەیە و گەنگەشەترینیش. کاتێک گەڵاکانی کۆنتر و خوارەوە سەرەتا زەرد دەبن و گەشەی نوێ سەوز دەمێنێتەوە، ڕووەک زۆربەی جار کەموکوڕی نایترۆجینی هەیە یان بەس پیربووە؛ خۆراکی پێ بدە و گەڵاکانی ماندوو لابەرە. کاتێک زەردبوون لە نێوان دەمارە سەوزەکاندا لە گەڵای نوێدا دەردەکەوێت، هۆکار زۆربەی جار خاکێکی قەڵەمی دەوڵەمەند بە کهلکە کە ئاسن دەگرێت — لە عێراقدا زۆر باوە — و ئاسنی شەلێت لەگەڵ کۆمپۆست زۆر باشتر چارەسەری دەکات.",
+          "ڕەنجوربوون نیشانەیەکی فریودەری کلاسیکییە. ڕووەک هەم کاتێک زۆر وشکە ڕەنجور دەبێت هەم کاتێک ڕەگەکانی لە ئاودا خنکاون، و چارەسەر لە هەر حاڵەتێکدا پێچەوانەیە. پەنجەت بخە ناو خاکەکە: وشکی لە قووڵی واتە ئاوی بدە؛ شێداری لەگەڵ بۆنی ترش واتە واز لە ئاودان بهێنە و لە ئاوی وەستاو بیخە دەرەوە. لە گەرمیی هاویندا، ڕەنجوربوون لە نیوەڕۆ و گەڕانەوە لە ئێوارە بۆ زۆربەی ڕووەکەکان ئاساییە — ئەوانەی کە لە بەرەبەیانیندا ڕەنجور دەمێننەوە پێویستیان بە سەرنجە.",
+          "خاڵە سووتاوەکان کە بەرەو خۆرن سووتانی خۆرن، و لێرە زۆرتر لە کۆتایی بەهاردا ڕوودەدەن کاتێک ڕووناکی باز دەدات. تۆڕی سێبەر و گواستنەوەی تدریجی بۆ خۆر و ئاودانی قووڵ یارمەتی دەدەن. کێشەکەی بەرەوپێچەوانە — ڕووەکێک کە درێژ و تەنک دەڕوات لەگەڵ دووری زۆر لە نێوان گەڵاکاندا — بەدوای ڕووناکیدا دەگەڕێت و شوێنێکی ڕووناکتر دەوێت.",
+          "کون یان شلەی لینج یان تەنی جاڵجاڵۆکە یان کۆمەڵی لەناکاو لەسەر لوتکەکانی گەشە ئافت دەنیشانن؛ لەم ئاووهەوایەدا مێشوولە و مێشی سپی و کرمی جاڵجاڵۆکە گومانلێکراوانی ئاسایین. ژێرەوەی گەڵاکان بپشکن کە لێی خۆ دەشارنەوە، و بە نەرمترین چارەسەر دەست پێبکە: کۆمێکی ئاوی بەهێز و پاشان سپرەی سابوون یان زەیت لەسەر ژێرەوە لە ئێوارەدا. ئەو گەڵانەی کە زۆر تووشبوون لابەرە لە جیاتی سپرەیکردنی هەموو ڕووەکەکە.",
+          "لە کۆتاییدا، بەرهەمەکانی وەرزی سارد کە لەناکاو دەکەنە گوڵ و تۆو — کاهو، ئیسپیناخ، کەرەفس — دەچنە گوڵ، و ئەمە گەرمییە نەک نەخۆشی. کاتێک دەستی پێکرد ناتوانیت بگەڕێنیتەوە؛ گەڵاکان بکۆڵەرەوە و لە بەشی ساردتری وەرزدا دووبارە بچێنە. زۆربەی ئەم کێشانە پاراستنیان ئاسانترە لە چارەسەریان: ڕووەکی گونجاو لە وەرزی گونجاو، خاکێک کە ئاوڕێژ دەکات، و ئاودانی قووڵی بەردەوام."
+        ]
+      }
+    }
   }
 ]

@@ -195,6 +195,15 @@ describe("the assistant is grounded in our own content", () => {
     assert.equal(articles.length, 0);
   });
 
+  test("a symptom question reaches the troubleshooting guide", async () => {
+    const articles = await ctrl()._selectKnowledge("why are my plant leaves turning yellow?");
+    const slugs = articles.map((a) => a.slug);
+    assert.ok(
+      slugs.includes("when-something-goes-wrong"),
+      `expected the troubleshooting guide, got: ${slugs.join(", ") || "(none)"}`
+    );
+  });
+
   test("the assistant sends Greenomy's own content to the model as CONTEXT", async () => {
     const realFetch = global.fetch;
     const previousKey = process.env.AI_API_KEY;

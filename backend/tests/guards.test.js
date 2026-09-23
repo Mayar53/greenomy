@@ -126,6 +126,10 @@ describe("guards and admin queue", () => {
     assert.equal(articles.body[0].readingTime !== undefined, true, "green hub is camelCase");
 
     const filtered = await h.get(api.base, "/green-hub?category=plant-care");
-    assert.equal(filtered.body.length, 2);
+    assert.ok(filtered.body.length >= 1, "the category filter returns articles");
+    assert.ok(
+      filtered.body.every((a) => a.category === "plant-care"),
+      "the category filter returns only that category"
+    );
   });
 });

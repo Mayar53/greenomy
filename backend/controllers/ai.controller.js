@@ -52,8 +52,10 @@ const SYNONYM_GROUPS = [
   ["sand", "sandy", "رمل", "رملية", "لمی"],
   ["salt", "saline", "salinity", "ملح", "ملوحة", "مالحة", "خوێ", "سوێر"],
   ["container", "pot", "pots", "balcony", "أصص", "وعاء", "شرفة", "قاپ", "بەلکۆن"],
-  ["pest", "insect", "insects", "حشرات", "آفات", "ئافت"],
-  ["yellow", "yellowing", "اصفرار", "زەرد"],
+  ["pest", "insect", "insects", "aphid", "aphids", "whitefly", "mite", "mites", "grub", "حشرات", "آفات", "ئافت", "مێشوولە"],
+  ["yellow", "yellowing", "pale", "chlorosis", "اصفرار", "شحوب", "زەرد"],
+  ["wilt", "wilting", "wilted", "droop", "drooping", "limp", "ذبول", "ذابل", "ڕەنجور"],
+  ["sun", "sunburn", "scorch", "scorched", "shade", "شمس", "حروق", "ظل", "خۆر", "سێبەر"],
   ["root", "roots", "جذور", "ڕەگ"],
 ];
 
