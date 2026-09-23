@@ -74,7 +74,7 @@ class AIVerificationProvider {
         { role: "system", content: VERIFY_SYSTEM_PROMPT },
         { role: "user", content: ai.userContent(VERIFY_PROMPT, imageUrl) },
       ],
-      maxTokens: 200,
+      maxTokens: 1000,
     });
 
     const parsed = ai.parseJson(reply);

@@ -23,7 +23,7 @@ exports.identify = async (req, res) => {
       { role: "system", content: "You identify plants from photos. Reply with JSON only." },
       { role: "user", content: ai.userContent(IDENTIFY_PROMPT, imageUrl) },
     ],
-    maxTokens: 200,
+    maxTokens: 1000,
   });
 
   const parsed = ai.parseJson(reply);
@@ -66,7 +66,7 @@ exports.assistant = async (req, res) => {
       },
       { role: "user", content: message.slice(0, MAX_MESSAGE_LENGTH) },
     ],
-    maxTokens: 400,
+    maxTokens: 2000,
   });
 
   res.json({ reply });

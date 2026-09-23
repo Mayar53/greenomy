@@ -30,6 +30,17 @@ function createTestDatabase() {
   // Not "production": the dev mail outbox and rate-limit skips key off this.
   process.env.NODE_ENV = "test";
 
+  // Tests must never reach a real AI provider, and must never depend on (or
+  // spend) a developer's own key from .env. Setting these to "" rather than
+  // deleting them is what makes that work: dotenv only fills keys that are
+  // absent from process.env, so an empty value keeps backend/.env out.
+  process.env.AI_API_KEY = "";
+  process.env.AI_VERIFICATION_API_KEY = "";
+  process.env.AI_API_URL = "";
+  process.env.AI_MODEL = "";
+  process.env.AI_FALLBACK_MODELS = "";
+  process.env.AI_MAX_ATTEMPTS = "1";
+
   for (const script of ["database/migrate.js", "database/seed.js"]) {
     execFileSync(process.execPath, [script], { cwd: BACKEND, env: process.env, stdio: "pipe" });
   }

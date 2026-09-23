@@ -4,6 +4,7 @@
 const { test, before, after, describe } = require("node:test");
 const assert = require("node:assert/strict");
 const h = require("./helpers");
+const ai = require("../services/ai.service");
 
 let dbDir;
 let api;
@@ -55,6 +56,66 @@ describe("AI features without a key", () => {
 
     const noMessage = await h.post(api.base, "/ai/assistant", { token, body: {} });
     assert.equal(noMessage.status, 400);
+  });
+});
+
+describe("provider failures are described honestly", () => {
+  // Stubs global.fetch rather than calling a provider: the point is the message
+  // and the retry behaviour, not the network.
+  async function withStubbedProvider(status, body, run) {
+    const realFetch = global.fetch;
+    const previousKey = process.env.AI_API_KEY;
+    const previousAttempts = process.env.AI_MAX_ATTEMPTS;
+    process.env.AI_API_KEY = "test-key";
+    process.env.AI_MAX_ATTEMPTS = "3";
+
+    let calls = 0;
+    global.fetch = async () => {
+      calls += 1;
+      return { ok: false, status, text: async () => body };
+    };
+
+    try {
+      await run(() => calls);
+    } finally {
+      global.fetch = realFetch;
+      process.env.AI_MAX_ATTEMPTS = previousAttempts;
+      if (previousKey === undefined) delete process.env.AI_API_KEY;
+      else process.env.AI_API_KEY = previousKey;
+    }
+  }
+
+  test("an exhausted DAILY quota is not reported as a passing busy spell", async () => {
+    const quotaBody = JSON.stringify({
+      error: {
+        code: 429,
+        message: "You exceeded your current quota, please check your plan and billing details.",
+        details: [{ quotaId: "GenerateRequestsPerDayPerProjectPerModel-FreeTier" }],
+      },
+    });
+
+    await withStubbedProvider(429, quotaBody, async (calls) => {
+      await assert.rejects(
+        () => ai.chat({ messages: [{ role: "user", content: "hi" }] }),
+        /allowance for today is used up/i
+      );
+      // A daily cap cannot be waited out, so the same model must not be retried.
+      assert.equal(calls(), 1, "should not burn attempts on an exhausted model");
+    });
+  });
+
+  test("a momentary capacity spike still reads as busy", async () => {
+    const busyBody = JSON.stringify({
+      error: { code: 503, message: "This model is currently experiencing high demand." },
+    });
+
+    await withStubbedProvider(503, busyBody, async (calls) => {
+      await assert.rejects(
+        () => ai.chat({ messages: [{ role: "user", content: "hi" }] }),
+        /busy right now/i
+      );
+      assert.ok(calls() > 1, "a transient failure is worth retrying");
+    });
   });
 });
 
