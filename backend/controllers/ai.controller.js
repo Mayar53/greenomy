@@ -76,15 +76,14 @@ function stem(word) {
 }
 
 /** Searchable terms from a string: any script, lowercased, with stopwords
- * dropped and synonyms folded to one canonical word. */
+ * dropped and synonyms folded to one canonical word. A word and its canonical
+ * are the same term, so a question never counts twice for the same word. */
 function terms(text) {
   const found = new Set();
   for (const raw of String(text || "").toLowerCase().match(/[\p{L}\p{N}]+/gu) || []) {
     const word = stem(raw);
     if (word.length < 2 || STOPWORDS.has(word)) continue;
-    found.add(word);
-    const canonical = SYNONYMS.get(word);
-    if (canonical) found.add(canonical);
+    found.add(SYNONYMS.get(word) || word);
   }
   return found;
 }
@@ -104,30 +103,49 @@ function articleFields(article) {
     if (locale.description) fields.push({ text: locale.description, weight: 2 });
     if (Array.isArray(locale.body)) fields.push({ text: locale.body.join(" "), weight: 1 });
   }
-  return fields;
+  return fields.map((field) => ({ terms: terms(field.text), weight: field.weight }));
 }
 
-function scoreArticle(article, questionTerms) {
-  const articleTerms = new Set();
-  let score = 0;
-  for (const { text, weight } of articleFields(article)) {
-    for (const term of terms(text)) {
-      if (articleTerms.has(term)) continue;
-      articleTerms.add(term);
-      if (questionTerms.has(term)) score += weight;
-    }
-  }
-  return score;
-}
-
-/** The published Green Hub articles most relevant to a question, best first. */
+/** The published Green Hub articles most relevant to a question, best first.
+ *
+ * Matched terms are weighted by how rare they are across the corpus: a word
+ * that appears in every guide ("plant") counts for little, one that appears in
+ * a single guide ("Erbil", "saline", "pumpkin") counts for a lot. That is what
+ * keeps a vague question from landing on whichever guide happens to repeat the
+ * most common word. */
 async function selectKnowledge(question, { limit = MAX_SOURCES } = {}) {
   const questionTerms = terms(question);
   if (!questionTerms.size) return [];
 
-  const articles = await greenHubModel.list();
-  return articles
-    .map((article) => ({ article, score: scoreArticle(article, questionTerms) }))
+  const prepared = (await greenHubModel.list()).map((article) => ({
+    article,
+    fields: articleFields(article),
+  }));
+  if (!prepared.length) return [];
+
+  // How many articles contain each term at least once.
+  const documentFrequency = new Map();
+  for (const { fields } of prepared) {
+    const inThisArticle = new Set();
+    for (const field of fields) for (const term of field.terms) inThisArticle.add(term);
+    for (const term of inThisArticle) {
+      documentFrequency.set(term, (documentFrequency.get(term) || 0) + 1);
+    }
+  }
+
+  const documents = prepared.length;
+  const rarity = (term) => Math.log(1 + documents / (documentFrequency.get(term) || 1));
+
+  return prepared
+    .map(({ article, fields }) => {
+      let score = 0;
+      for (const field of fields) {
+        for (const term of field.terms) {
+          if (questionTerms.has(term)) score += field.weight * rarity(term);
+        }
+      }
+      return { article, score };
+    })
     .filter((entry) => entry.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)

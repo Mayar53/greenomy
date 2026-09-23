@@ -237,6 +237,16 @@ describe("the assistant is grounded in our own content", () => {
     );
   });
 
+  test("rarity weighting: a planning question beats the most repetitive guide", async () => {
+    const articles = await ctrl()._selectKnowledge("what should I plant in Erbil this autumn?");
+    assert.equal(articles[0].slug, "growing-in-iraq-and-kurdistan");
+  });
+
+  test("rarity weighting: a seed-saving question finds the seed guide", async () => {
+    const articles = await ctrl()._selectKnowledge("how do I save seeds from a pumpkin?");
+    assert.equal(articles[0].slug, "saving-your-own-seeds-extraction");
+  });
+
   test("the assistant sends Greenomy's own content to the model as CONTEXT", async () => {
     const realFetch = global.fetch;
     const previousKey = process.env.AI_API_KEY;
