@@ -65,6 +65,32 @@ for (const group of SYNONYM_GROUPS) {
   for (const word of group) SYNONYMS.set(word, canonical);
 }
 
+// Colloquial Arabic and Kurdish names for the plants in our catalog, mapped to
+// the English word so a question phrased locally still matches both the catalog
+// row (mentionedPlants) and the English guides. The catalog's own ar/ku names
+// are matched directly, without needing an alias.
+const PLANT_ALIASES = {
+  "بندورة": "tomato",
+  "طماطة": "tomato",
+  "كوسة": "zucchini",
+  "كوسا": "zucchini",
+  "کۆسا": "zucchini",
+  "يقطين": "pumpkin",
+  "کەدوو": "pumpkin",
+  "کادوو": "pumpkin",
+  "حبق": "basil",
+  "نعنع": "mint",
+  "شبنت": "dill",
+  "معدنوس": "parsley",
+  "برتقان": "orange",
+  "صبار": "aloe",
+  "بوتس": "pothos",
+  "ثیران": "snake",
+  "ثعبان": "snake",
+  "الثعبان": "snake",
+  "الحية": "snake",
+};
+
 /** A light English stem, so "tomatoes" meets "tomato" and "pots" meets "pot".
  * Scripts without this pattern (Arabic, Kurdish) are left alone. */
 function stem(word) {
@@ -85,7 +111,15 @@ function terms(text) {
     // Stopwords are checked before and after stemming, since stemming can change
     // a stopword into a non-stopword ("this" -> "thi").
     if (word.length < 2 || STOPWORDS.has(raw) || STOPWORDS.has(word)) continue;
-    found.add(SYNONYMS.get(word) || word);
+
+    // Arabic writes the definite article onto the noun — "الطماطم" is "tomato" —
+    // so the bare form is a term too.
+    const variants = [word];
+    if (word.startsWith("ال") && word.length > 3) variants.push(word.slice(2));
+
+    for (const variant of variants) {
+      found.add(SYNONYMS.get(variant) || PLANT_ALIASES[variant] || variant);
+    }
   }
   return found;
 }

@@ -214,6 +214,16 @@ describe("the assistant is grounded in our own content", () => {
     assert.ok(t.has("tomato"), "tomatoes should stem to tomato");
   });
 
+  test("local plant names reach the catalog and the guides", async () => {
+    assert.ok(ctrl()._terms("متى أزرع بندورة؟").has("tomato"), "the Iraqi name for tomato folds to tomato");
+
+    const plants = (await ctrl()._mentionedPlants("متى أزرع الطماطم؟")).map((p) => p.slug);
+    assert.ok(
+      plants.includes("tomato"),
+      `expected the tomato catalog row, got: ${plants.join(", ") || "(none)"}`
+    );
+  });
+
   test("a distinctive question retrieves the matching guide", async () => {
     const articles = await ctrl()._selectKnowledge("which crops suit saline soil?");
     const slugs = articles.map((a) => a.slug);

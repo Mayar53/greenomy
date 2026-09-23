@@ -399,10 +399,10 @@
     "body": [
       "Saving seed starts with the fruit you'd eat anyway: seed is taken from fruits picked at the ripeness you'd choose for the table — fully ripe for some crops, a little past ripe for others — but never from a diseased plant.",
       "For dry fruits — pods, capsules and cones — the work is mostly separation. Pods and capsules that split open as they dry can simply be spread out in the sun, then the seed shaken or beaten free. Lighter debris comes off by winnowing (dropping the material in a breeze so the seed falls and the chaff blows away) or by sieving, and hand-picking finishes the job. Beat gently: a cracked seed will not germinate.",
-      "For fleshy fruits the seed sits embedded in pulp, and the job is to separate it cleanly without letting it rot or sprout. Small amounts can be handled by hand — scooping the seed from pumpkins and squashes, scraping it out of cucumbers, or crushing and rinsing it free from brinjal and melons. The one nuisance is sliminess, which a brief rinse in a very weak acid solution removes so the seed can be washed and dried.",
+      "For fleshy fruits the seed sits embedded in pulp, and the traditional hand methods are matched to the fruit: macerating watermelon, crushing brinjal, scraping cucumber, separating muskmelon, and scooping pumpkins and squashes. The one nuisance is sliminess — a rinse of about 0.1% hydrochloric acid for two to three minutes breaks it down so the seed can be washed and dried. Chillies are the exception: there the seed is better dried and ground free than soaked and squeezed.",
       "The classic method for tomato and similar fruits is fermentation. Squeeze the pulp and seed into a jar, add a little water and leave it for a day or two. The good seed sinks; the pulp and any immature seed float and can be poured off. Rinse the settled seed, then dry it — first in the shade, then in the sun — before storing. Fermentation cleans seed well, but it can leave it slightly dull, and it must not be left so long that the seed starts to germinate.",
-      "A faster alternative for tomato is a short acid treatment, favoured by commercial growers because extraction and drying can be done the same day, more seed is recovered, and seed-borne pathogens on the surface are knocked back. A weaker alkali wash is also possible but tends to darken the seed coat, so it is usually reserved for small quantities.",
-      "However you extract them, seeds must be cleaned before storage. Remove all pod, capsule and pulp debris, and discard anything mouldy or damaged — damp seed left to ferment in the pod will rot in the jar. Then dry the seed thoroughly and store it cool and dry, labelled with the variety and the year. In a climate as hot as Iraq's, thorough drying is not optional: it is what keeps seed alive until the next season."
+      "A faster alternative for tomato is a short acid treatment — around 30 ml of hydrochloric acid per litre of seed and pulp, stirred and left for half an hour — favoured by commercial growers because extraction and drying can be done the same day, more seed is recovered, and seed-borne pathogens on the surface are knocked back. An alkali wash also works: the pulp mixed with an equal volume of 10% sodium carbonate solution for up to 48 hours. It tends to darken the seed coat, though, so it is usually kept for small quantities in cooler climates where fermentation is unreliable.",
+      "However you extract them, seeds must be cleaned before storage. Four methods do the job — floating the debris off in water (good seed sinks), winnowing in a breeze, sieving when the debris is finer than the seed, and plain hand-picking. Remove all pod, capsule and pulp debris, and discard anything mouldy or damaged — damp seed left to ferment in the pod will rot in the jar. Then dry the seed thoroughly and store it cool and dry, labelled with the variety and the year. In a climate as hot as Iraq's, thorough drying is not optional: it is what keeps seed alive until the next season."
     ],
     "i18n": {
       "ar": {
@@ -411,10 +411,10 @@
         "body": [
           "يبدأ حفظ البذور من الثمرة التي كنت ستأكلها أصلًا: تُؤخذ البذور من ثمار تُقطف بالنضج الذي تختاره للمائدة — ناضجة تمامًا في بعض المحاصيل، وأكثر من ذلك قليلًا في غيرها — لكن أبدًا من نبتة مريضة.",
           "أما الثمار الجافة — القرون والكبسولات والمخاريط — فالعمل فيها في الغالب فصل. القرون والكبسولات التي تنفتح وهي تجف يمكن ببساطة فردها في الشمس، ثم يُنفض البذر أو يُضرب. وتُزال الشوائب الأخف بالتذرية (إسقاط المادة في مهبّ الريح فيسقط البذر وتطير القشور) أو بالغربلة، وتُكمِل اليد العمل. اضرب بلطف: البذرة المتشققة لن تنبت.",
-          "أما الثمار اللحمية فالبذر مدفون في اللب، والمهم فصله نظيفًا دون أن يتعفن أو ينبت. الكميات الصغيرة تُعالج يدويًا — كشط البذر من القرع والكوسا، أو حكّه من الخيار، أو سحقه وشطفه من الباذنجان والشمّام. والمشكلة الوحيدة هي اللزوجة، ويُزيلها شطف قصير في محلول حمضي ضعيف جدًا حتى يُغسل البذر ويُجفف.",
+          "أما الثمار اللحمية فالبذر مدفون في اللب، والطرق اليدوية التقليدية تُطابق الثمرة: نقع البطيخ، وسحق الباذنجان، وحكّ الخيار، وفصل الشمّام، وكشط القرع والكوسا. والمشكلة الوحيدة هي اللزوجة — وشطف بنحو 0.1% من حمض الهيدروكلوريك لدقيقتين إلى ثلاث يُذيبها حتى يُغسل البذر ويُجفف. والفلفل الحار استثناء: بذره أفضل أن يُجفف ويُطحن فريًّا من أن يُنقع ويُعصر.",
           "الطريقة الكلاسيكية للطماطم وما شابهها هي التخمير. اعصر اللب والبذر في برطمان، أضف قليلًا من الماء واتركه يومًا أو يومين. البذر الجيد يترسّب؛ واللب والبذر غير الناضج يطفوان ويُصبان. اشطف البذر المترسّب ثم جفّفه — أولًا في الظل ثم في الشمس — قبل التخزين. ينظّف التخمير البذر جيدًا، لكنه قد يجعله باهتًا قليلًا، ويجب ألا يُترك طويلًا حتى يبدأ البذر بالإنبات.",
-          "البديل الأسرع للطماطم هو معالجة حمضية قصيرة، يفضّلها المنتجون التجاريون لأن الاستخلاص والتجفيف يتمّان في اليوم نفسه، ويُستعاد بذر أكثر، وتُضعف مسببات الأمراض المحمولة على سطح البذرة. والغسل القلوي الأضعف ممكن أيضًا لكنه يميل إلى تغميق غلاف البذرة، لذا يُقتصر عادة على الكميات الصغيرة.",
-          "كيفما استخلصتها، يجب تنظيف البذور قبل التخزين. أزل كل بقايا القرون والكبسولات واللب، وارمِ كل ما هو متعفن أو تالف — فالبذر الرطب المتخمّر في القرن يتعفن في الجرة. ثم جفّف البذور تمامًا واحفظها في مكان بارد وجاف مع تدوين الصنف والسنة. في مناخ حار كمناخ العراق، التجفيف الكامل ليس اختياريًا: إنه ما يُبقي البذر حيًا حتى الموسم القادم."
+          "البديل الأسرع للطماطم هو معالجة حمضية قصيرة — نحو 30 مل من حمض الهيدروكلوريك لكل لتر من البذر واللب، تُحرّك وتُترك نصف ساعة — يفضّلها المنتجون التجاريون لأن الاستخلاص والتجفيف يتمّان في اليوم نفسه، ويُستعاد بذر أكثر، وتُضعف مسببات الأمراض المحمولة على سطح البذرة. والغسل القلوي ممكن أيضًا: خلط اللب بحجم مساوٍ من محلول كربونات الصوديوم 10% حتى 48 ساعة. لكنه يميل إلى تغميق غلاف البذرة، لذا يُحفظ عادة للكميات الصغيرة في المناخات الأبرد حيث لا يكون التخمير موثوقًا.",
+          "كيفما استخلصتها، يجب تنظيف البذور قبل التخزين. أربع طرق تؤدي الغرض — طَفْو الشوائب في الماء (البذر الجيد يغرق)، والتذرية في مهبّ الريح، والغربلة عندما تكون الشوائب أدقّ من البذر، والانتقاء باليد. أزل كل بقايا القرون والكبسولات واللب، وارمِ كل ما هو متعفن أو تالف — فالبذر الرطب المتخمّر في القرن يتعفن في الجرة. ثم جفّف البذور تمامًا واحفظها في مكان بارد وجاف مع تدوين الصنف والسنة. في مناخ حار كمناخ العراق، التجفيف الكامل ليس اختياريًا: إنه ما يُبقي البذر حيًا حتى الموسم القادم."
         ]
       },
       "ku": {
@@ -423,10 +423,10 @@
         "body": [
           "پاراستنی تۆو لەو بەرهەمەوە دەست پێدەکات کە هەر بەنیازی خواردنی بوویت: تۆو لە بەرهەمێکەوە وەردەگیرێت کە بەو پێگەیشتنە هەڵدەدرێت کە بۆ سەفرەکە هەڵدەبژێریت — لە هەندێک بەرهەمدا بە تەواوی پێگەیشتوو، لە هەندێکی تردا کەمێک زیاتر — بەڵام هەرگیز لە ڕووەکێکی نەخۆشەوە نا.",
           "بۆ بەرهەمە وشکەکان — فەقێلە و کەپسوول و کۆنەکان — کارەکە زۆربەی جار جیاکردنەوەیە. فەقێلە و کەپسوولەکان کە بە وشکبوونەوە دەکرێنەوە بە سادەیی لە خۆردا بڵاو دەکرێنەوە، پاشان تۆوەکە دەهەژێنرێت یان دەلێدرێت. پاشماوەی سووک بە بایکردن یان بە بێخەڵان لادەبرێت، و دەستکاری کۆتایی پێدەهێنێت. بە نەرمی لێبدە: تۆوی شکاو شین نابێتەوە.",
-          "بۆ بەرهەمە گۆشتییەکان تۆو لە ناو گۆشتەکەدا نوقمە و کارەکە جیاکردنەوەیەکی پاکە بەبێ ئەوەی بڕزێت یان بشینێت. بڕی کەم بە دەست ئەنجام دەدرێت — کۆکردنەوەی تۆو لە کادوو و کۆسا، یان ڕاکێشانی لە خەیار، یان لێدان و شوشتنی لە بادمجان و کاڵەک. تەنها کێشە لینجییە، کە شوشتنی کورت لە گیراوەیەکی ترشی زۆر لاواز لایدەبەرێت.",
+          "بۆ بەرهەمە گۆشتییەکان تۆو لە ناو گۆشتەکەدا نوقمە، و ڕێگا دەستییەکانی کۆن لەگەڵ بەرهەمەکە دەگونجێن: تێکردنی شەمامە، لێدانی بادمجان، ڕاکێشانی خەیار، جیاکردنەوەی کاڵەک، و کۆکردنەوەی کادوو و کۆسا. تەنها کێشە لینجییە — شوشتنی نزیکەی 0.1% ترشی هایدرۆکلۆریک بۆ دوو بۆ سێ خولەک لایدەبەرێت تا تۆو بشۆرێت و وشک بکرێت. بیبەری تیژ جیاوازە: تۆوەکەی باشترە وشک بکرێت و بێخەڵ بکرێت لەوەی تێبکرێت و بگوشێت.",
           "ڕێگای کلاسیکی بۆ تەماتە و هاوشێوەکانی خەمیرکردنە. گۆشت و تۆوەکە بگوشە ناو بەربانێک، کەمێک ئاو زیاد بکە و ڕۆژێک یان دوو ڕۆژ جێی بهێڵە. تۆوی باش نیشتەو دەبێت؛ گۆشت و تۆوی نەگەیشتوو سەرئاو دەکەن و دەڕژێنرێن. تۆوی نیشتوو بشۆ، پاشان وشکی بکە — سەرەتا لە سێبەر و پاشان لە خۆر — پێش هەڵگرتن. خەمیرکردن تۆو باش پاک دەکاتەوە، بەڵام ڕەنگە کەمێک لاوازی بکات، و نابێت ئەوەندە درێژ بهێڵرێت کە تۆو دەست بکات بە شینبوونەوە.",
-          "هەڵبژاردەیەکی خێراتر بۆ تەماتە چارەسەری ترشی کورتە، کە بەرهەمهێنەرانی بازرگانی حەزی لێیە چونکە دەرهێنان و وشککردن لە هەمان ڕۆژدا دەکرێن، تۆوی زیاتر دەگەڕێتەوە، و نەخۆشییەکانی سەر ڕووکەشی تۆو لاواز دەکرێن. شوشتنی قەڵەمی لاوازتریش دەکرێت بەڵام ڕەنگی پۆشاکی تۆو تاریک دەکات.",
-          "هەر چۆنێک دەریهێنیت، دەبێت تۆو پێش هەڵگرتن پاک بکرێتەوە. هەموو پاشماوەی فەقێلە و کەپسوول و گۆشت لابەرە، و هەر شتێکی کەڵکێش یان تێکچوو فڕێ بدە. پاشان تۆوەکان بە تەواوی وشک بکە و لە شوێنێکی سارد و وشکدا هەڵبگرە لەگەڵ نووسینی جۆر و ساڵ. لە ئاووهەوایەکی گەرم وەک عێراقدا، وشککردنی تەواو بژاردەیی نییە."
+          "هەڵبژاردەیەکی خێراتر بۆ تەماتە چارەسەری ترشی کورتە — نزیکەی 30 مل ترشی هایدرۆکلۆریک بۆ هەر لیترێک تۆو و گۆشت، بە تێکەڵکردن و نیو کاتژمێر جێهێشتن — کە بەرهەمهێنەرانی بازرگانی حەزی لێیە چونکە دەرهێنان و وشککردن لە هەمان ڕۆژدا دەکرێن، تۆوی زیاتر دەگەڕێتەوە، و نەخۆشییەکانی سەر ڕووکەشی تۆو لاواز دەکرێن. شوشتنی قەڵەمیش دەکرێت: گۆشتەکە لەگەڵ قەبارەیەکی وەک یەک لە گیراوەی سۆدیۆم کاربۆنات 10% بۆ ماوەی 48 کاتژمێر. بەڵام ڕەنگی پۆشاکی تۆو تاریک دەکات، بۆیە زۆربەی جار بۆ بڕی کەم لە ئاووهەوای ساردتر کە خەمیرکردن متمانەی پێنییە بەکار دەهێنرێت.",
+          "هەر چۆنێک دەریهێنیت، دەبێت تۆو پێش هەڵگرتن پاک بکرێتەوە. چوار ڕێگا کارەکە دەکەن — سەرئاوکردنی پاشماوە لە ئاودا (تۆوی باش نوقم دەبێت)، بایکردن، بێخەڵکردن کاتێک پاشماوە لە تۆو وردترە، و هەڵچنین بە دەست. هەموو پاشماوەی فەقێلە و کەپسوول و گۆشت لابەرە، و هەر شتێکی کەڵکێش یان تێکچوو فڕێ بدە. پاشان تۆوەکان بە تەواوی وشک بکە و لە شوێنێکی سارد و وشکدا هەڵبگرە لەگەڵ نووسینی جۆر و ساڵ. لە ئاووهەوایەکی گەرم وەک عێراقدا، وشککردنی تەواو بژاردەیی نییە."
         ]
       }
     }
@@ -583,6 +583,99 @@
           "زەعتەر (٩٠ ڕۆژ). باشتر لە لقێک لە خاکی هەژار و چەوڵیدا دەگەشێت — خاکی دەوڵەمەندتر ڕووەکێکی نەرم و بێتام دروست دەکات. خۆری تەواو و ئاوی زۆر کەم؛ زۆر ئاودان زۆر زیاتر لە وشکەساڵی دەیکوژێت.",
           "پیازچە (٦٠ ڕۆژ). لە قووڵی 1 سم بچێنە، یان کۆمەڵێکی دامەزراو دابەش بکە. گەڵاکان لە بنکەوە ببڕە و یەکسەر دەگەڕێنەوە. ڕووەکێکی دڵنیاکەرەوەی پەنجەرەیە و سێبەری بەشەکی دەگرێت.",
           "شەبەت (٤٥ ڕۆژ). ڕاستەوخۆ لە قووڵی نیو سانتیمەتر بچێنە — حەزی لە گواستنەوە نییە. خێرا و سووکە، بۆیە هەر چەند هەفتەیەک ڕیزێکی کورت بچێنە بۆ ئەوەی هەمیشە گەڵای تازەت هەبێت، و ڕێگە بدە هەندێکیان گوڵ بکەن بۆ تۆو."
+        ]
+      }
+    }
+  },
+  {
+    "id": "gh-015",
+    "slug": "growing-fruit-trees-and-berries-in-iraq-and-kurdistan",
+    "category": "home-gardening",
+    "contentType": "article",
+    "readingTime": 6,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Growing Fruit Trees and Berries in Iraq and Kurdistan",
+    "description": "Six fruit trees and berries from our catalog: how long they really take, how to plant them, and what this climate gives them for free.",
+    "body": [
+      "Lemon tree (about three years to fruit). Buy a grafted sapling rather than growing one from seed — a seedling can take many years and may never fruit true. Plant in early spring in full sun and very free-draining soil, water deeply but let the ground dry between waterings, because citrus hate standing water. In the highlands, protect it from frost for its first winters, or grow it in a large pot you can move.",
+      "Orange tree (about three years). The same rules as lemon: a grafted sapling, spring planting, full sun and sharp drainage. Oranges are a little less cold-hardy than lemons, so inland in Kurdistan a pot that comes indoors for winter is often the practical choice.",
+      "Fig (about two years). The most forgiving fruit tree here. It tolerates drought, poor soil and a large container, and it fruits on the new season's growth — so a hard winter that kills the tips is not fatal. Plant in full sun and water sparingly once established, since too much water makes leaf at the expense of fruit.",
+      "Olive (about four years). It wants exactly what Iraq offers: long, dry, hot summers and mild winters. Plant young trees in spring in gritty, well-drained soil and water only while they establish. It is slow, but extremely long-lived and, once settled, drought-proof.",
+      "Pomegranate (about three years). It handles heat and drought better than almost any fruit, and will even fruit in a large container. Give it full sun and light watering; the fruit splits if watering is irregular after a dry spell, so keep it steady while the fruit swells.",
+      "Strawberry (about four months). The one fruit you can harvest in your first season, and happy in a pot or a hanging basket. Plant in autumn or early spring in rich soil and full sun, and keep the fruit off the ground with straw or the basket itself. Replace the plants every two or three years, when yields drop."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "زراعة أشجار الفاكهة والتوت في العراق وكردستان",
+        "description": "ستة من أشجار الفاكهة والتوت في كتالوجنا: كم تستغرق فعلًا، وكيف تزرعها، وما يمنحه هذا المناخ مجانًا.",
+        "body": [
+          "الليمون (نحو ثلاث سنوات حتى الإثمار). اشترِ شتلة مطعّمة بدل الزراعة بالبذرة — فالشتلة من البذرة قد تستغرق سنوات وربما لا تثمر أبدًا. ازرعه في أوائل الربيع في شمس كاملة وتربة جيدة التصريف جدًا، واسقِ بعمق لكن دع الأرض تجف بين الريات، فالحمضيات تكره الماء الراكد. وفي المرتفعات احمِه من الصقيع في شتواته الأولى، أو اربهِ في وعاء كبير قابل للنقل.",
+          "البرتقال (نحو ثلاث سنوات). القواعد نفسها: شتلة مطعّمة، وزراعة في الربيع، وشمس كاملة، وتصريف حاد. والبرتقال أقل تحملًا للبرد من الليمون قليلًا، لذا في كردستان الداخلية يكون الوعاء الذي يدخل الشتاء هو الخيار العملي غالبًا.",
+          "التين (نحو سنتين). أكثر أشجار الفاكهة تسامحًا هنا. يتحمل الجفاف والتربة الفقيرة والوعاء الكبير، ويثمر على نمو الموسم الجديد — فشتاء قاسٍ يقتل الأطراف ليس قاتلًا. ازرعه في شمس كاملة واسقِ باعتدال بعد ترسّخه، فكثرة الماء تُنتج ورقًا على حساب الثمر.",
+          "الزيتون (نحو أربع سنوات). يحب بالضبط ما يقدمه العراق: صيف طويل جاف وحار وشتاء معتدل. ازرع الأشجار الصغيرة في الربيع في تربة حصوية جيدة التصريف واسقِ فقط حتى تترسّخ. بطيء لكنه معمر جدًا، ومتى استقر صار مقاومًا للجفاف.",
+          "الرمان (نحو ثلاث سنوات). يتحمل الحرارة والجفاف أفضل من أي فاكهة تقريبًا، ويثمر حتى في وعاء كبير. امنحه شمسًا كاملة وريًّا خفيفًا؛ وتتشقق الثمرة إذا كان الري غير منتظم بعد فترة جفاف، فحافظ على انتظامه أثناء تضخم الثمرة.",
+          "الفراولة (نحو أربعة أشهر). الفاكهة الوحيدة التي يمكن حصادها في موسمك الأول، وتسعدها الأصص أو السلة المعلقة. ازرعها في الخريف أو أوائل الربيع في تربة غنية وشمس كاملة، وأبقِ الثمر بعيدًا عن الأرض بقش أو بالسلة نفسها. استبدل النباتات كل سنتين أو ثلاث عند هبوط الإنتاج."
+        ]
+      },
+      "ku": {
+        "title": "چاندنی دارەوەی بەرهەم و توو لە عێراق و کوردستاندا",
+        "description": "شەش دارەوەی بەرهەم و توو لە کەتەلۆگەکەمان: بەڕاستی چەند دەخایەنن، چۆن بیانچێنیت، و ئەم ئاووهەوا چ بەخۆڕایی پێیان دەدات.",
+        "body": [
+          "لیمۆ (نزیکەی سێ ساڵ تا بەرهەم). نەمامێکی پێوەنراو بکڕە لە جیاتی چاندن بە تۆو — نەمامی تۆو چەند ساڵێک دەخایەنێت و ڕەنگە هەرگیز بەرهەم نەدات. لە سەرەتای بەهاردا لە خۆری تەواو و خاکێکی زۆر باش-ئاوڕێژدا بچێنە، بە قووڵی ئاوی بدە بەڵام ڕێگە بدە زەوی لە نێوان ئاودانەکاندا وشک ببێت؛ مۆرک حەزی لە ئاوی وەستاو نییە. لە ناوچە بەرزەکاندا لە بەستەڵەک بپارێزە، یان لە قاپێکی گەورەدا بەخێوی بکە کە دەتوانیت بیگوازیتەوە.",
+          "پرتەقاڵ (نزیکەی سێ ساڵ). هەمان ڕێسا: نەمامی پێوەنراو، چاندن لە بەهاردا، خۆری تەواو، و ئاوڕێژی توند. پرتەقاڵ کەمێک کەمتر لە لیمۆ بەرگەی سەرما دەگرێت، بۆیە لە کوردستانی ناوەوە قاپێک کە لە زستاندا بێتە ژوورەوە زۆربەی جار هەڵبژاردەیەکی کردەییە.",
+          "هەنجیر (نزیکەی دوو ساڵ). لێبوردەترین دارەوەی بەرهەمە لێرە. بەرگەی وشکەساڵی و خاکی هەژار و قاپێکی گەورە دەگرێت، و لە گەشەی وەرزی نوێدا بەرهەم دەدات — بۆیە زستانێکی سەخت کە سەرەکان دەکوژێت کوشندە نییە. لە خۆری تەواودا بچێنە و دوای جێگیربوون کەم ئاوی بدە، چونکە ئاوی زۆر گەڵا بەرهەم دەکات لە جیاتی بەرهەم.",
+          "زەیتوون (نزیکەی چوار ساڵ). تەواو حەزی لەوەیە کە عێراق پێشکەشی دەکات: هاوینێکی درێژ و وشک و گەرم و زستانێکی نەرم. دارە گەنجەکان لە بەهاردا لە خاکێکی چەوڵی باش-ئاوڕێژدا بچێنە و تەنها تا جێگیربوون ئاویان بدە. هێواشە بەڵام زۆر درێژعومرە و دوای جێگیربوون بەرگەی وشکەساڵی دەگرێت.",
+          "هەنار (نزیکەی سێ ساڵ). بەرگەی گەرمی و وشکەساڵی باشتر لە نزیکەی هەموو بەرهەمێک دەگرێت، و تەنانەت لە قاپێکی گەورەشدا بەرهەم دەدات. خۆری تەواو و ئاودانی سووکی پێ بدە؛ بەرهەمەکە دەترشێت ئەگەر ئاودان دوای وشکەساڵی ڕێکوپێک نەبێت، بۆیە لە کاتی گەورەبوونی بەرهەمەکە ڕێکوپێکی بپارێزە.",
+          "فڕاولە (نزیکەی چوار مانگ). تاکە بەرهەم کە دەتوانیت لە یەکەم وەرزتدا کۆی بکەیتەوە، و لە قاپ یان سەبەتەی هەڵواسراودا دڵخۆشە. لە پاییز یان سەرەتای بەهاردا لە خاکێکی دەوڵەمەند و خۆری تەواودا بچێنە، و بەرهەمەکە بە کایی یان بە سەبەتەکە لە زەوی دوور بهێڵەوە. ڕووەکەکان هەر دوو-سێ ساڵ جارێک بگۆڕە کاتێک بەرهەم کەم دەبێتەوە."
+        ]
+      }
+    }
+  },
+  {
+    "id": "gh-016",
+    "slug": "houseplants-in-an-iraqi-home",
+    "category": "plant-care",
+    "contentType": "article",
+    "readingTime": 5,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Houseplants in an Iraqi Home",
+    "description": "The seven houseplants in our catalog, and the one mistake behind almost every one that dies: too much water.",
+    "body": [
+      "Pothos. The classic first houseplant. It copes with low light and missed waterings, and tells you when it is thirsty by drooping. Water when the top of the soil is dry; bright, indirect light keeps the leaves variegated.",
+      "Snake plant. Water it monthly at most — overwatering is the only realistic way to kill it. It tolerates shade and full sun alike, and it prefers to be crowded in its pot.",
+      "Spider plant. It throws out baby plantlets on runners that you can pot up and share. Give it bright, indirect light and water when the surface dries. Brown tips usually mean tap water or dry air rather than disease.",
+      "Aloe vera. It wants full sun and very free-draining, gritty soil — treat it like the desert plant it is. Water thoroughly, then let the soil dry completely. The gel inside the leaf soothes burns.",
+      "ZZ plant. It handles a dark corner and forgetful watering better than anything else. Water only when the soil is dry to the touch. The glossy leaves need an occasional wipe so they can breathe.",
+      "Peace lily. A dramatic drooper: it collapses when thirsty and recovers within hours of watering, which makes it an easy plant to learn on. It prefers indirect light and evenly moist soil, and flowers better when slightly crowded.",
+      "Monstera. It grows fast in bright, indirect light — keep it out of harsh midday sun or the leaves scorch. Water when the top few centimetres dry, and wipe the large leaves so they can photosynthesise."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "النباتات المنزلية في بيت عراقي",
+        "description": "النباتات المنزلية السبع في كتالوجنا، والخطأ الواحد وراء موت معظمها: الإفراط في الماء.",
+        "body": [
+          "البوتوس. النبتة المنزلية الأولى الكلاسيكية. يتحمل الإضاءة المنخفضة ونسيان الريات، ويخبرك بعطشه عندما يتهدّل. اسقِ عندما يجف سطح التربة؛ والإضاءة الساطعة غير المباشرة تحفظ تبرّج الأوراق.",
+          "نبتة الأفعى. اسقِها شهريًا على الأكثر — فالإفراط في الري هو الطريقة الواقعية الوحيدة لقتلها. تتحمل الظل والشمس الكاملة على حد سواء، وتفضّل أن يكون وعاؤها ضيقًا على جذورها.",
+          "نبتة العنكبوت. تُخرج نبتات صغيرة على مدادات يمكن زرعها ومشاركتها. امنحها إضاءة ساطعة غير مباشرة واسقِ عند جفاف السطح. والأطراف البنية تعني عادة ماء الصنبور أو جفاف الهواء لا مرضًا.",
+          "الألوفيرا. تريد شمسًا كاملة وتربة حصوية جيدة التصريف — عاملها كنبتة صحراوية كما هي. اسقِ جيدًا ثم دع التربة تجف تمامًا. والجلّ داخل الورقة يهدّئ الحروق.",
+          "نبتة زد زد. تتحمل الزاوية المعتمة ونسيان الري أفضل من أي شيء آخر. اسقِ فقط عندما تجف التربة عند اللمس. والأوراق اللامعة تحتاج مسحًا من حين لآخر لتتنفس.",
+          "زنبق السلام. متهدّل دراماتيكي — ينهار عند العطش ويتعافى خلال ساعات من الري، ما يجعله نبتة سهلة للتعلّم. يفضّل الإضاءة غير المباشرة وتربة رطبة باعتدال، ويزهر أفضل عندما تكون جذوره مضغوطة قليلًا.",
+          "المونستيرا. تنمو بسرعة في الإضاءة الساطعة غير المباشرة — أبعدها عن شمس الظهيرة القاسية وإلا احترقت الأوراق. اسقِ عند جفاف السنتيمترات العلوية، وامسح الأوراق الكبيرة لتتمكن من البناء الضوئي."
+        ]
+      },
+      "ku": {
+        "title": "ڕووەکە ماڵییەکان لە ماڵێکی عێراقیدا",
+        "description": "حەوت ڕووەکی ماڵیی کەتەلۆگەکەمان، و ئەو هەڵەیەی پشت زۆربەی ئەوانەی دەمرن: ئاوی زۆر.",
+        "body": [
+          "پۆتۆس. یەکەم ڕووەکی ماڵی کلاسیک. بەرگەی ڕووناکی کەم و لەبیرکردنی ئاودان دەگرێت، و کاتێک تینوو بێت بە شۆڕبوون پێت دەڵێت. کاتێک ڕووکەشی خاک وشک بوو ئاوی بدە؛ ڕووناکی ڕوون و ناڕاستەوخۆ ڕەنگی گەڵاکان دەپارێزێت.",
+          "ڕووەکی مار. لانیزۆر مانگانە ئاوی بدە — زۆر ئاودان تاکە ڕێگەی کردەییە بۆ کوشتنی. بەرگەی سێبەر و خۆری تەواو دەگرێت، و حەز دەکات ڕەگەکانی لە قاپەکەدا تەنگ بن.",
+          "ڕووەکی جاڵجاڵۆکە. لەسەر ڕەگە درێژەکان ڕووەکی بچووک دەردەکات کە دەتوانیت بیانچێنیت و بەش بکەیت. ڕووناکی ڕوون و ناڕاستەوخۆی پێ بدە و کاتێک ڕووکەش وشک بوو ئاوی بدە. سەرە قاوەیییەکان زۆربەی جار واتە ئاوی بەنداو یان هەوای وشک، نەک نەخۆشی.",
+          "ئەلۆی ڤێرا. خۆری تەواو و خاکێکی چەوڵی زۆر باش-ئاوڕێژ دەوێت — وەک ڕووەکێکی بیابانی مامەڵەی لەگەڵ بکە. بە تەواوی ئاوی بدە پاشان ڕێگە بدە خاک بە تەواوی وشک ببێت. جەڵی ناو گەڵاکە سووتان ئارام دەکاتەوە.",
+          "ڕووەکی ZZ. لە گۆشەی تاریک و لەبیرکردنی ئاودان باشتر لە هەموو شتێک خۆڕاگرە. تەنها کاتێک خاکەکە بە دەست وشک بوو ئاوی بدە. گەڵاکانی درەوشاوە هەندێک جار پاک بکەرەوە بۆ ئەوەی هەناسە بدەن.",
+          "زەنباقی ئاشتی. شۆڕبوونێکی دراماتیکی — کاتێک تینوو بێت دەشۆڕێت و لە چەند کاتژمێرێکدا لە دوای ئاودان چاک دەبێتەوە، ئەمەش فێربوونی لێ ئاسان دەکات. ڕووناکی ناڕاستەوخۆ و خاکی شێداری مامناوەند خۆش دەوێت، و کاتێک ڕەگەکانی کەمێک تەنگ بن باشتر گوڵ دەکات.",
+          "مۆنستێرا. لە ڕووناکی ڕوون و ناڕاستەوخۆدا خێرا دەگەشێت — لە خۆری توندی نیوەڕۆ دووریخەرەوە ئەگینا گەڵاکان دەسووتێن. کاتێک چەند سانتیمەتری سەرەوە وشک بوو ئاوی بدە، و گەڵا گەورەکان پاک بکەرەوە بۆ ئەوەی فۆتۆسینتێز بکەن."
         ]
       }
     }
