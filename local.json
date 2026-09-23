@@ -482,7 +482,8 @@
     "thinking": "Thinking...",
     "you": "You",
     "answerLabel": "Greenomy assistant",
-    "error": "Couldn't get an answer. Please try again."
+    "error": "Couldn't get an answer. Please try again.",
+    "sources": "Sources"
   },
   "identify": {
     "label": "Or identify the plant from a photo",

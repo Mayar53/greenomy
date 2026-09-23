@@ -718,3 +718,53 @@ html[dir="rtl"] .lang-switch { flex-direction: row-reverse; }
   display: block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.05em; color: var(--color-text-muted); margin-bottom: 4px;
 }
+.assistant-msg .assistant-sources {
+  display: block; margin-top: 8px; font-size: 0.78rem; color: var(--color-text-muted);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Plant recommendations (seed wizard step 1)                              */
+/* ---------------------------------------------------------------------- */
+.recommend {
+  border: 1px solid rgba(135, 169, 107, 0.35);
+  background: rgba(135, 169, 107, 0.07);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 26px;
+}
+.recommend-head { margin-bottom: 16px; }
+.recommend-title { font-size: 1.05rem; margin: 0 0 4px; }
+.recommend-conditions { font-size: 0.85rem; color: var(--color-text-muted); margin: 0; }
+
+.recommend-duration { margin-bottom: 18px; }
+.recommend-label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font: inherit; font-size: 0.82rem; cursor: pointer;
+  padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--beige-dark); background: var(--color-surface);
+  color: var(--color-text); transition: background 0.15s ease, border-color 0.15s ease;
+}
+.chip:hover { border-color: var(--color-primary); }
+.chip.is-active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+
+.recommend-list { display: grid; gap: 12px; }
+.recommend-card {
+  font: inherit; text-align: start; cursor: pointer;
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 14px 16px; border-radius: var(--radius-sm);
+  border: 1px solid var(--beige-dark); background: var(--color-surface);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.recommend-card:hover { border-color: var(--color-primary); transform: translateY(-1px); }
+.recommend-card-head { display: flex; align-items: center; gap: 8px; }
+.recommend-emoji { font-size: 1.3rem; }
+.recommend-days { margin-inline-start: auto; font-size: 0.78rem; color: var(--color-text-muted); white-space: nowrap; }
+.recommend-reasons { display: flex; flex-wrap: wrap; gap: 6px; }
+.reason-chip {
+  font-size: 0.72rem; padding: 3px 9px; border-radius: 999px;
+  background: rgba(135, 169, 107, 0.2); color: var(--sage-ink);
+}
+.reason-chip.is-caveat { background: var(--beige-dark); color: var(--color-text-muted); }
+.recommend-notes { font-size: 0.85rem; color: var(--color-text-muted); }
+.recommend-category { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-muted); }

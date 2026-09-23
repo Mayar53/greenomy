@@ -6,7 +6,8 @@ import { requireAuthOrRedirect, logout } from "./authservise.js";
 import { api, ApiError } from "./servisapi.js";
 import { listMyPlants } from "./serviseplant.js";
 import { listVerifications } from "./verifyservice.js";
-import { t } from "./language.js";
+import { t, localized, currentLanguage } from "./language.js";
+import { getGreenHubArticles } from "./contentservice.js";
 
 const state = {
   wallet: null,
@@ -257,9 +258,25 @@ function renderVerificationHistory() {
 }
 
 /* ------------------------------------------------------------- Assistant */
+/** Titles for the guides an answer was grounded in, so a reply can link back to
+ * what it drew on. Fetched once per session; failure just means no links. */
+let guideTitlesRequest = null;
+function guideTitles() {
+  if (!guideTitlesRequest) {
+    guideTitlesRequest = getGreenHubArticles()
+      .then(({ data }) => {
+        const titles = new Map();
+        (data || []).forEach((article) => titles.set(article.slug, localized(article, "title") || article.slug));
+        return titles;
+      })
+      .catch(() => new Map());
+  }
+  return guideTitlesRequest;
+}
+
 /** Built with textContent, never innerHTML: the reply is model output, so it
  * must never be treated as markup. */
-function appendAssistantMessage(thread, who, text) {
+function appendAssistantMessage(thread, who, text, sources = []) {
   if (!thread) return;
 
   const bubble = document.createElement("div");
@@ -270,6 +287,21 @@ function appendAssistantMessage(thread, who, text) {
   label.textContent = who === "you" ? t("assistant.you") : t("assistant.answerLabel");
 
   bubble.append(label, document.createTextNode(text));
+
+  if (sources.length) {
+    const line = document.createElement("span");
+    line.className = "assistant-sources";
+    line.append(`${t("assistant.sources")}: `);
+    sources.forEach((source, index) => {
+      if (index) line.append(", ");
+      const link = document.createElement("a");
+      link.href = `greenhub.html?slug=${encodeURIComponent(source.slug)}`;
+      link.textContent = source.title;
+      line.appendChild(link);
+    });
+    bubble.appendChild(line);
+  }
+
   thread.appendChild(bubble);
   thread.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
@@ -295,8 +327,13 @@ function initAssistant() {
     status.textContent = t("assistant.thinking");
 
     try {
-      const data = await api.post("/ai/assistant", { message });
-      appendAssistantMessage(thread, "bot", data.reply);
+      // The language is sent so a reply that falls back to our own guide text
+      // comes back in the language the member is reading.
+      const data = await api.post("/ai/assistant", { message, lang: currentLanguage() });
+
+      const titles = data.sources && data.sources.length ? await guideTitles() : null;
+      const sources = titles ? data.sources.map((slug) => ({ slug, title: titles.get(slug) || slug })) : [];
+      appendAssistantMessage(thread, "bot", data.reply, sources);
       status.className = "form-status";
       status.textContent = "";
     } catch (err) {
