@@ -44,7 +44,7 @@ const STOPWORDS = new Set([
 const SYNONYM_GROUPS = [
   ["water", "watering", "watered", "irrigate", "irrigation", "moisture", "سقي", "ري", "ماء", "ئاو", "ئاودان"],
   ["soil", "earth", "ground", "تربة", "تراب", "خاک", "زەوی"],
-  ["seed", "sowing", "sow", "seedling", "plant", "planting", "planted", "grow", "growing", "grows", "saving", "save", "storage", "fermentation", "ferment", "winnow", "بذور", "بذرة", "زراعة", "حفظ", "تخزين", "تۆو", "چاندن", "نەمام", "پاراستن"],
+  ["seed", "seeds", "sowing", "sow", "sown", "seedling", "seedlings", "save", "saving", "saved", "storage", "storing", "fermentation", "ferment", "winnow", "thresh", "بذور", "بذرة", "حفظ", "تخزين", "تۆو", "نەمام", "پاراستن"],
   ["climate", "weather", "مناخ", "طقس", "ئاووهەوا", "کەشوهەوا"],
   ["season", "seasons", "موسم", "مواسم", "وەرز", "وەرزەکان"],
   ["frost", "freeze", "freezing", "صقيع", "برد", "بەستەڵەک", "سەرما"],
@@ -82,25 +82,27 @@ function terms(text) {
   const found = new Set();
   for (const raw of String(text || "").toLowerCase().match(/[\p{L}\p{N}]+/gu) || []) {
     const word = stem(raw);
-    if (word.length < 2 || STOPWORDS.has(word)) continue;
+    // Stopwords are checked before and after stemming, since stemming can change
+    // a stopword into a non-stopword ("this" -> "thi").
+    if (word.length < 2 || STOPWORDS.has(raw) || STOPWORDS.has(word)) continue;
     found.add(SYNONYMS.get(word) || word);
   }
   return found;
 }
 
-/** An article's fields, weighted: a title match matters more than a body one.
- * Every locale is searched, so a question asked in Arabic matches an Arabic
- * translation. */
+/** An article's fields, weighted: the title says what a guide is *about*, so it
+ * counts for far more than a passing mention in the body. Every locale is
+ * searched, so a question asked in Arabic matches an Arabic translation. */
 function articleFields(article) {
   const fields = [
-    { text: article.title, weight: 3 },
-    { text: article.description, weight: 2 },
+    { text: article.title, weight: 6 },
+    { text: article.description, weight: 3 },
     { text: (article.body || []).join(" "), weight: 1 },
   ];
   for (const locale of Object.values(article.i18n || {})) {
     if (!locale) continue;
-    if (locale.title) fields.push({ text: locale.title, weight: 3 });
-    if (locale.description) fields.push({ text: locale.description, weight: 2 });
+    if (locale.title) fields.push({ text: locale.title, weight: 6 });
+    if (locale.description) fields.push({ text: locale.description, weight: 3 });
     if (Array.isArray(locale.body)) fields.push({ text: locale.body.join(" "), weight: 1 });
   }
   return fields.map((field) => ({ terms: terms(field.text), weight: field.weight }));
@@ -113,7 +115,7 @@ function articleFields(article) {
  * a single guide ("Erbil", "saline", "pumpkin") counts for a lot. That is what
  * keeps a vague question from landing on whichever guide happens to repeat the
  * most common word. */
-async function selectKnowledge(question, { limit = MAX_SOURCES } = {}) {
+async function rankKnowledge(question, { limit = MAX_SOURCES } = {}) {
   const questionTerms = terms(question);
   if (!questionTerms.size) return [];
 
@@ -134,7 +136,10 @@ async function selectKnowledge(question, { limit = MAX_SOURCES } = {}) {
   }
 
   const documents = prepared.length;
-  const rarity = (term) => Math.log(1 + documents / (documentFrequency.get(term) || 1));
+  // Classic IDF: a term that appears in every guide is worth nothing, a term in
+  // one guide is worth the most. Without this, "plant" — ubiquitous — would
+  // out-score the rare word that actually identifies the topic.
+  const rarity = (term) => Math.log(documents / (documentFrequency.get(term) || 1));
 
   return prepared
     .map(({ article, fields }) => {
@@ -148,8 +153,11 @@ async function selectKnowledge(question, { limit = MAX_SOURCES } = {}) {
     })
     .filter((entry) => entry.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
-    .map((entry) => entry.article);
+    .slice(0, limit);
+}
+
+async function selectKnowledge(question, options) {
+  return (await rankKnowledge(question, options)).map((entry) => entry.article);
 }
 
 /** Catalog rows for any plant the question names ("tomato", "basil", ...). */
@@ -325,3 +333,4 @@ exports.assistant = async (req, res) => {
 exports._selectKnowledge = selectKnowledge;
 exports._mentionedPlants = mentionedPlants;
 exports._terms = terms;
+exports._rankKnowledge = rankKnowledge;

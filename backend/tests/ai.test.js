@@ -247,6 +247,20 @@ describe("the assistant is grounded in our own content", () => {
     assert.equal(articles[0].slug, "saving-your-own-seeds-extraction");
   });
 
+  test("a crop-specific question reaches the per-plant guides", async () => {
+    const vegetables = (await ctrl()._selectKnowledge("how deep should I sow carrot seeds?")).map((a) => a.slug);
+    assert.ok(
+      vegetables.includes("growing-vegetables-in-iraq-and-kurdistan"),
+      `expected the vegetables guide, got: ${vegetables.join(", ") || "(none)"}`
+    );
+
+    const herbs = (await ctrl()._selectKnowledge("how often should I water rosemary?")).map((a) => a.slug);
+    assert.ok(
+      herbs.includes("growing-herbs-in-iraq-and-kurdistan"),
+      `expected the herbs guide, got: ${herbs.join(", ") || "(none)"}`
+    );
+  });
+
   test("the assistant sends Greenomy's own content to the model as CONTEXT", async () => {
     const realFetch = global.fetch;
     const previousKey = process.env.AI_API_KEY;

@@ -475,5 +475,116 @@
         ]
       }
     }
+  },
+  {
+    "id": "gh-013",
+    "slug": "growing-vegetables-in-iraq-and-kurdistan",
+    "category": "home-gardening",
+    "contentType": "article",
+    "readingTime": 8,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Growing Vegetables in Iraq and Kurdistan",
+    "description": "Sowing depth, spacing, water and the one risk that matters — for each of the eleven vegetables in our catalog, written for this climate.",
+    "body": [
+      "Tomato (about 70 days). Start indoors in late winter and plant out after the last frost. Give each plant 50–60 cm and a stake; water deeply and regularly, and feed once the first fruit sets. Blossom-end rot — the black patch on the base of the fruit — is a calcium and watering problem rather than a disease, so steady watering matters more than extra fertiliser.",
+      "Lettuce (45 days). Sow thinly about 1 cm deep and thin to 25 cm. In Iraq's heat lettuce is a cool-season crop: sow in autumn or early spring, give it afternoon shade, and pick the outer leaves so the heart keeps growing. Once it bolts, the leaves turn bitter.",
+      "Radish (25 days). Sow 1–2 cm deep, 3 cm apart, and thin to 5 cm. It is the fastest harvest here — ready in under a month. Dry spells make the roots woody and hot, so keep the soil damp.",
+      "Spinach (40 days). Sow 2 cm deep and thin to 15 cm. A cool-season crop that bolts quickly in heat: sow in autumn or late winter and pick young leaves. Partial shade and steady moisture stretch the season.",
+      "Cucumber (60 days). Sow after the soil has warmed, two or three seeds per spot, keeping the strongest. Train it up a trellis to save space. Water generously and regularly — bitter or misshapen fruit usually means the plant dried out between waterings.",
+      "Bell pepper (90 days). Start indoors in late winter, one plant per 40 cm, and stake it once it fruits. Peppers stop setting fruit in extreme heat, so the spring crop is the reliable one here; give afternoon shade in midsummer.",
+      "Carrot (75 days). Sow 1 cm deep, 5 cm apart, in deep stone-free soil — a container needs at least 25 cm of depth. Thin to 5 cm or the roots stay thin. Keep the surface damp until germination, which is slow.",
+      "Zucchini (55 days). Sow after the last frost, one plant per 60–90 cm, because it sprawls. Water deeply at the base rather than over the leaves, and pick the fruit young: left too long it becomes a marrow and the plant stops producing.",
+      "Spring onion (60 days). Sow 1 cm deep in rows, or simply regrow the white ends in a glass of water. Pull them when they are pencil-thick. Almost foolproof, and happy in partial shade.",
+      "Pea (65 days). Sow in cool weather, 3 cm deep and 10 cm apart, with something to climb. It fixes nitrogen, improving the ground for the crop that follows. In Iraq, autumn or very early spring sowing avoids the heat that stops it setting pods.",
+      "Pumpkin (about 100 days). It needs room — one plant can cover several square metres, so it suits a roof or a garden rather than a balcony. Sow after the frost, water heavily while the fruit swells, then stop watering as it ripens so it stores well."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "زراعة الخضروات في العراق وكردستان",
+        "description": "عمق الزراعة والمسافات والري وأهم خطر — لكل خضروات كتالوجنا الإحدى عشرة، مكتوب لهذا المناخ.",
+        "body": [
+          "الطماطم (نحو ٧٠ يومًا). ابدأها في الداخل في أواخر الشتاء وانقلها إلى الخارج بعد آخر صقيع. امنح كل نبتة 50–60 سم ودعامة؛ اسقِ بعمق وبانتظام، وسمّد بعد عقد أول ثمرة. وتعفّن مؤخرة الثمرة — البقعة السوداء عند قاعدتها — مشكلة كالسيوم وريّ لا مرض، لذا الانتظام في الري أهم من مزيد من السماد.",
+          "الخس (٤٥ يومًا). ازرعه خفيفًا على عمق 1 سم واخفّفه إلى 25 سم. في حرارة العراق الخس محصول موسم بارد: ازرعه في الخريف أو أوائل الربيع، وامنحه ظل الظهيرة، واقطف الأوراق الخارجية ليستمر القلب في النمو. ومتى أزهر صارت الأوراق مرة.",
+          "الفجل (٢٥ يومًا). ازرعه على عمق 1–2 سم وبتباعد 3 سم، واخفّفه إلى 5 سم. وهو أسرع حصاد هنا — جاهز في أقل من شهر. فترات الجفاف تجعل الجذور خشبية ولاذعة، لذا أبقِ التربة رطبة.",
+          "السبانخ (٤٠ يومًا). ازرعها على عمق 2 سم واخفّفها إلى 15 سم. محصول موسم بارد يُزهر سريعًا في الحرارة: ازرعه في الخريف أو أواخر الشتاء واقطف الأوراق صغيرة. الظل الجزئي والرطوبة المنتظمة يُطيلان الموسم.",
+          "الخيار (٦٠ يومًا). ازرعه بعد دفء التربة، بذرتين أو ثلاث في كل موضع مع إبقاء الأقوى. وجّهه على دعامة لتوفير المساحة. اسقِ بسخاء وبانتظام — الثمار المرّة أو المشوّهة تعني عادة أن النبتة جفّت بين الريات.",
+          "الفلفل الحلو (٩٠ يومًا). ابدأه في الداخل في أواخر الشتاء، نبتة واحدة لكل 40 سم، وادعمها عند الإثمار. يتوقف الفلفل عن عقد الثمار في الحرارة الشديدة، لذا محصول الربيع هو الموثوق هنا؛ وامنحه ظل الظهيرة في منتصف الصيف.",
+          "الجزر (٧٥ يومًا). ازرعه على عمق 1 سم وبتباعد 5 سم في تربة عميقة بلا حجارة — ويحتاج الوعاء 25 سم عمقًا على الأقل. اخفّفه إلى 5 سم وإلا بقيت الجذور رفيعة. أبقِ السطح رطبًا حتى الإنبات، فهو بطيء.",
+          "الكوسا (٥٥ يومًا). ازرعها بعد آخر صقيع، نبتة واحدة لكل 60–90 سم لأنها تنتشر. اسقِ بعمق عند القاعدة لا على الأوراق، واقطف الثمرة صغيرة: إن تُركت طويلًا تحوّلت إلى قرع كبير وتوقفت النبتة عن الإنتاج.",
+          "البصل الأخضر (٦٠ يومًا). ازرعه على عمق 1 سم في صفوف، أو ببساطة أعِد إنماء الأطراف البيضاء في كوب ماء. احصد بالشد عندما يصبح بسماكة القلم. يكاد لا يفشل، ويسعده الظل الجزئي.",
+          "البازلاء (٦٥ يومًا). ازرعها في الجو البارد على عمق 3 سم وبتباعد 10 سم مع شيء تتسلقه. تثبّت النيتروجين فتحسّن الأرض للمحصول التالي. وفي العراق، زراعة الخريف أو أوائل الربيع جدًا تتجنب الحرارة التي توقف عقد القرون.",
+          "القرع (نحو ١٠٠ يوم). يحتاج مساحة — نبتة واحدة قد تغطي عدة أمتار مربعة، لذا يناسب سطحًا أو حديقة أكثر من شرفة. ازرعه بعد الصقيع، واسقِ بكثافة أثناء تضخم الثمرة، ثم أوقف الري عند النضج ليبقى صالحًا للتخزين."
+        ]
+      },
+      "ku": {
+        "title": "چاندنی سەوزەوات لە عێراق و کوردستاندا",
+        "description": "قووڵی چاندن، دووری، ئاو، و گرنگترین مەترسی — بۆ هەر یەک لە یازدە سەوزەواتی کەتەلۆگەکەمان، بۆ ئەم ئاووهەوایە نووسراوە.",
+        "body": [
+          "تەماتە (نزیکەی ٧٠ ڕۆژ). لە ژوورەوە لە کۆتایی زستاندا دەست پێبکە و دوای کۆتا بەستەڵەک بیگوازەرەوە دەرەوە. بۆ هەر ڕووەکێک 50–60 سم و دارێکی پاڵپشت دابنێ؛ بە قووڵی و ڕێکوپێک ئاوی بدە، و دوای گرتنی یەکەم بەرهەم خۆراکی پێ بدە. ڕەشبوونی بنی بەرهەمەکە کێشەی کالسیۆم و ئاوە نەک نەخۆشی.",
+          "کاهوو (٤٥ ڕۆژ). بە تەنکی لە قووڵی 1 سم بچێنە و بۆ 25 سم تەنکی بکەرەوە. لە گەرمیی عێراقدا کاهوو بەرهەمی وەرزی ساردە: لە پاییز یان سەرەتای بەهاردا بچێنە، سێبەری دوای نیوەڕۆی پێ بدە، و گەڵا دەرەکییەکان بکۆڵەرەوە بۆ ئەوەی دڵەکە بەردەوام بێت.",
+          "تورپ (٢٥ ڕۆژ). لە قووڵی 1–2 سم و بە دووری 3 سم بچێنە، پاشان بۆ 5 سم تەنکی بکەرەوە. خێراترین بەرهەمە لێرە — لە کەمتر لە مانگێکدا ئامادە دەبێت. وشکەساڵی ڕەگەکان دارینە و تیژ دەکات، بۆیە خاکەکە شێدار بهێڵەوە.",
+          "ئیسپیناخ (٤٠ ڕۆژ). لە قووڵی 2 سم بچێنە و بۆ 15 سم تەنکی بکەرەوە. بەرهەمی وەرزی ساردە و لە گەرمیدا زوو گوڵ دەکات: لە پاییز یان کۆتایی زستاندا بچێنە و گەڵای گەنج بکۆڵەرەوە. سێبەری بەشەکی و شێی ڕێکوپێک وەرزەکە درێژ دەکەن.",
+          "خەیار (٦٠ ڕۆژ). دوای گەرمبوونی خاک بچێنە، دوو یان سێ تۆو لە هەر شوێنێک و بەهێزترینیانهێڵەوە. بە دارەوە بەرزی بکەرەوە بۆ پاراستنی شوێن. بە دەستاودەست ئاوی زۆر بدە — بەرهەمی تاڵ یان شێوەخراپ واتە ڕووەکەکە لە نێوان ئاودانەکاندا وشک بووە.",
+          "بیبەری شیرین (٩٠ ڕۆژ). لە ژوورەوە لە کۆتایی زستاندا دەست پێبکە، یەک ڕووەک بۆ هەر 40 سم، و کاتێک بەرهەمی هێنا پاڵپشتی بکە. بیبەر لە گەرمیی زۆردا واز لە بەرهەمهێنان دەهێنێت، بۆیە بەرهەمی بەهار لێرە دڵنیاترە؛ لە ناوەڕاستی هاویندا سێبەری دوای نیوەڕۆی پێ بدە.",
+          "گێزەر (٧٥ ڕۆژ). لە قووڵی 1 سم و بە دووری 5 سم لە خاکێکی قووڵ و بێ بەرد بچێنە — قاپەکە پێویستی بە لانیکەم 25 سم قووڵی هەیە. بۆ 5 سم تەنکی بکەرەوە ئەگینا ڕەگەکان تەنک دەمێننەوە. ڕووکەشەکە شێدار بهێڵەوە تا شینبوونەوە، کە هێواشە.",
+          "کەلەک (٥٥ ڕۆژ). دوای کۆتا بەستەڵەک بچێنە، یەک ڕووەک بۆ هەر 60–90 سم چونکە بڵاو دەبێتەوە. لە بنکەوە بە قووڵی ئاوی بدە نەک لەسەر گەڵاکان، و بەرهەمەکە گەنج بکۆڵەرەوە: ئەگەر زۆر بمێنێتەوە ڕووەکەکە واز لە بەرهەم دەهێنێت.",
+          "پیازی سەوز (٦٠ ڕۆژ). لە قووڵی 1 سم لە ڕیزدا بچێنە، یان بە سادەیی سەرە سپییەکان لە پەرداخێک ئاودا دووبارە بڕوێنە. کاتێک ئەستووری وەک قەڵەم بوو بکۆڵەرەوە. بە سەختی شکست دەهێنێت و سێبەری بەشەکی خۆش دەوێت.",
+          "باقڵا (٦٥ ڕۆژ). لە کەشوهەوای سارددا لە قووڵی 3 سم و بە دووری 10 سم لەگەڵ شتێک بۆ سەرکەوتن بچێنە. نایترۆجین جێگیر دەکات و زەوی بۆ بەرهەمی داهاتوو باشتر دەکات. لە عێراقدا چاندنی پاییز یان سەرەتای بەهار گەرمییەکە دەدۆزێتەوە.",
+          "کادوو (نزیکەی ١٠٠ ڕۆژ). شوێن دەوێت — یەک ڕووەک دەتوانێت چەند مەترێکی چوارگۆشە داپۆشێت، بۆیە بۆ سەربان یان باخ باشترە لە بەلکۆن. دوای بەستەڵەک بچێنە، لە کاتی گەورەبوونی بەرهەمەکە زۆر ئاوی بدە، و کاتێک پێگەیشت واز لە ئاودان بهێنە تا باش بمێنێتەوە."
+        ]
+      }
+    }
+  },
+  {
+    "id": "gh-014",
+    "slug": "growing-herbs-in-iraq-and-kurdistan",
+    "category": "home-gardening",
+    "contentType": "article",
+    "readingTime": 6,
+    "imageUrl": null,
+    "isPublished": true,
+    "title": "Growing Herbs in Iraq and Kurdistan",
+    "description": "The eight herbs in our catalog: how to sow each, how much sun and water it wants, and the mistake that kills it.",
+    "body": [
+      "Basil (60 days). Sow about half a centimetre deep once the soil has warmed, one plant per 20–25 cm. It loves heat and full sun. Pinch the tips constantly — basil left to flower stops making leaves.",
+      "Mint (60 days). Buy a plant or root a cutting rather than sowing seed. Keep it in its own pot: it spreads by runners and will take over a shared container. It tolerates partial shade and likes damp soil.",
+      "Parsley (75 days). Slow to germinate — up to three weeks — so keep the surface damp and be patient. Sow 1 cm deep, 15 cm apart. Cut the outer stems and it keeps producing for a year.",
+      "Coriander (50 days). Sow directly, 1 cm deep, little and often rather than one big sowing — it runs to seed as soon as the heat arrives. The seeds themselves are the spice, so a bolting plant is not a total loss.",
+      "Rosemary (about 120 days). Start from a cutting or a nursery plant; seed is slow and unreliable. Gritty, free-draining soil and full sun. It is a woody perennial that hates wet roots, so let the soil dry out completely between waterings.",
+      "Thyme (90 days). Grows best from a cutting in poor, gritty soil — richer soil makes a soft, tasteless plant. Full sun and very little water; overwatering kills it far more often than drought.",
+      "Chives (60 days). Sow 1 cm deep, or divide an established clump. Cut the leaves to the base and they come straight back. A reliable windowsill herb that tolerates partial shade.",
+      "Dill (45 days). Sow directly, half a centimetre deep — dill dislikes being transplanted. Feathery and quick, so sow a short row every few weeks for a steady supply of fresh leaves, and let a few plants go to seed for pickling."
+    ],
+    "i18n": {
+      "ar": {
+        "title": "زراعة الأعشاب في العراق وكردستان",
+        "description": "الأعشاب الثماني في كتالوجنا: كيف تزرع كل واحدة، وكم تريد من الشمس والماء، والخطأ الذي يقتلها.",
+        "body": [
+          "الريحان (٦٠ يومًا). ازرعه على عمق نصف سنتيمتر بعد دفء التربة، نبتة واحدة لكل 20–25 سم. يحب الحرارة والشمس الكاملة. اقطع القمم باستمرار — فالريحان المتروك ليُزهر يتوقف عن إنتاج الأوراق.",
+          "النعناع (٦٠ يومًا). اشترِ نبتة أو أنمِ عُقلة بدل زراعة البذور. ضعه في وعاء منفصل: فهو ينتشر بالمدادات ويغزو أي وعاء مشترك. يتحمل الظل الجزئي ويحب التربة الرطبة.",
+          "البقدونس (٧٥ يومًا). يتأخر في الإنبات — حتى ثلاثة أسابيع — لذا أبقِ السطح رطبًا وتحمّل. ازرعه على عمق 1 سم وبتباعد 15 سم. اقطع السيقان الخارجية فيظل يعطي لعام كامل.",
+          "الكزبرة (٥٠ يومًا). ازرعها مباشرة على عمق 1 سم، بكميات صغيرة ومتكررة بدل زرعة واحدة كبيرة — فهي تُزهر بمجرد وصول الحرارة. والبذور نفسها هي التوابل، فإزهار النبتة ليس خسارة كاملة.",
+          "إكليل الجبل (نحو ١٢٠ يومًا). ابدأه من عُقلة أو شتلة مشتل؛ فالبذور بطيئة وغير موثوقة. تربة حصوية جيدة التصريف وشمس كاملة. نبتة خشبية معمرة تكره الرطوبة، فاترك التربة تجف تمامًا بين الريات.",
+          "الزعتر (٩٠ يومًا). ينمو أفضل من عُقلة في تربة فقيرة حصوية — فالتربة الأغنى تنتج نبتة طرية بلا طعم. شمس كاملة وماء قليل جدًا؛ والإفراط في الري يقتله أكثر بكثير من الجفاف.",
+          "الثوم المعمر (٦٠ يومًا). ازرعه على عمق 1 سم، أو اقسم كتلة راسخة. اقطع الأوراق من القاعدة فتعود فورًا. عشبة موثوقة لحافة النافذة تتحمل الظل الجزئي.",
+          "الشبت (٤٥ يومًا). ازرعه مباشرة على عمق نصف سنتيمتر — فهو يكره النقل. سريع وخفيف، فازرع صفًا قصيرًا كل بضعة أسابيع لإمداد ثابت من الأوراق الطازجة، واترك بعضه يُزهر للبذر."
+        ]
+      },
+      "ku": {
+        "title": "چاندنی گیا لە عێراق و کوردستاندا",
+        "description": "هەشت گیاەکەی کەتەلۆگەکەمان: چۆن هەریەکەیان بچێنیت، چەند خۆر و ئاو دەوێت، و ئەو هەڵەیەی کە دەیکوژێت.",
+        "body": [
+          "ڕەیحان (٦٠ ڕۆژ). لە قووڵی نیو سانتیمەتر دوای گەرمبوونی خاک بچێنە، یەک ڕووەک بۆ هەر 20–25 سم. گەرمی و خۆری تەواو خۆش دەوێت. بەردەوام سەرەکانی ببڕە — ڕەیحانێک کە بهێڵرێت گوڵ بکات واز لە گەڵا هێنان دەهێنێت.",
+          "نەعناع (٦٠ ڕۆژ). نەمامێک بکڕە یان لقێک بڕوێنە لە جیاتی چاندنی تۆو. لە قاپێکی جیادا دایبنێ: بە ڕەگە درێژەکێشەکان بڵاو دەبێتەوە و قاپی هاوبەش داگیر دەکات. سێبەری بەشەکی و خاکی شێدار خۆش دەوێت.",
+          "مەعدەنۆس (٧٥ ڕۆژ). درەنگ دەشینێتەوە — تا سێ هەفتە — بۆیە ڕووکەشەکە شێدار بهێڵەوە و ئارام بە. لە قووڵی 1 سم و بە دووری 15 سم بچێنە. لقە دەرەکییەکان ببڕە و بۆ ساڵێک بەردەوام بەرهەم دەدات.",
+          "کەشنیز (٥٠ ڕۆژ). ڕاستەوخۆ لە قووڵی 1 سم بچێنە، بە بڕی کەم و بەردەوام لە جیاتی یەک چاندنی گەورە — هەر کە گەرمی بێت زوو گوڵ دەکات. تۆوەکە خۆی بەهاراتە، بۆیە گوڵکردن خەسارەی تەواو نییە.",
+          "ڕۆزماری (نزیکەی ١٢٠ ڕۆژ). لە لقێک یان نەمامی باخچە دەست پێبکە؛ تۆو هێواش و نادڵنیاکەرەوەیە. خاکی چەوڵی باش-ئاوڕێژ و خۆری تەواو. ڕووەکێکی دارینەی هەمیشەییە و ڕقی لە شێیەتی — ڕێگە بدە خاک بە تەواوی وشک ببێت لە نێوان ئاودانەکاندا.",
+          "زەعتەر (٩٠ ڕۆژ). باشتر لە لقێک لە خاکی هەژار و چەوڵیدا دەگەشێت — خاکی دەوڵەمەندتر ڕووەکێکی نەرم و بێتام دروست دەکات. خۆری تەواو و ئاوی زۆر کەم؛ زۆر ئاودان زۆر زیاتر لە وشکەساڵی دەیکوژێت.",
+          "پیازچە (٦٠ ڕۆژ). لە قووڵی 1 سم بچێنە، یان کۆمەڵێکی دامەزراو دابەش بکە. گەڵاکان لە بنکەوە ببڕە و یەکسەر دەگەڕێنەوە. ڕووەکێکی دڵنیاکەرەوەی پەنجەرەیە و سێبەری بەشەکی دەگرێت.",
+          "شەبەت (٤٥ ڕۆژ). ڕاستەوخۆ لە قووڵی نیو سانتیمەتر بچێنە — حەزی لە گواستنەوە نییە. خێرا و سووکە، بۆیە هەر چەند هەفتەیەک ڕیزێکی کورت بچێنە بۆ ئەوەی هەمیشە گەڵای تازەت هەبێت، و ڕێگە بدە هەندێکیان گوڵ بکەن بۆ تۆو."
+        ]
+      }
+    }
   }
 ]
