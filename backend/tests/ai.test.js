@@ -95,9 +95,15 @@ describe("provider failures are described honestly", () => {
     });
 
     await withStubbedProvider(429, quotaBody, async (calls) => {
+      // What a member sees must be about the feature and its timing — not
+      // operator advice they cannot act on (billing, VERIFICATION_PROVIDER).
       await assert.rejects(
         () => ai.chat({ messages: [{ role: "user", content: "hi" }] }),
-        /allowance for today is used up/i
+        (err) => {
+          assert.match(err.message, /daily limit/i);
+          assert.doesNotMatch(err.message, /billing|VERIFICATION_PROVIDER|busy/i);
+          return true;
+        }
       );
       // A daily cap cannot be waited out, so the same model must not be retried.
       assert.equal(calls(), 1, "should not burn attempts on an exhausted model");

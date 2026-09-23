@@ -108,8 +108,17 @@ async function chatOnce({ messages, maxTokens = 400, temperature = 0, model: req
     if (response.status === 429 || response.status === 503) {
       const dailyQuota = /PerDay/i.test(detail);
       if (dailyQuota) {
+        // This message reaches a member verbatim. The advice an *operator* needs
+        // ("add billing", "switch scorer") is not advice a member can act on, so
+        // it goes to the log and the response stays about the feature and timing.
+        console.error(
+          "AI daily quota exhausted for this model. Options: wait for the daily reset, " +
+            "add another model to AI_FALLBACK_MODELS (the cap is per model), enable billing " +
+            "at the provider, or change AI_MODEL/AI_API_KEY. Photo verification is unaffected " +
+            "when VERIFICATION_PROVIDER=heuristic."
+        );
         throw providerError(
-          "The free AI allowance for today is used up. It resets with a new day — or add billing to the AI provider, or set VERIFICATION_PROVIDER=heuristic to score photos without AI.",
+          "The AI feature has reached its provider's daily limit and should work again tomorrow.",
           false, // retrying the same model cannot help a daily cap
           true // ...but the cap is per model, so a sibling model may still have room
         );
