@@ -1,6 +1,7 @@
 // controllers/plants.controller.js
 const plantModel = require("../models/plant.model");
 const catalogModel = require("../models/plant-catalog.model");
+const journeyService = require("../services/journey.service");
 
 exports.list = async (req, res) => {
   res.json(await plantModel.listByUser(req.user.id));
@@ -38,6 +39,17 @@ exports.create = async (req, res) => {
     varietyId,
     customName,
   });
+
+  // A new plant starts its journey straight away — that is the point of the
+  // app. A failure here must not lose the plant the member just created.
+  try {
+    const { journey } = await journeyService.createForPlant(req.user.id, plant);
+    plant.journey_id = journey.journey_id;
+    plant.journey_stage = journey.current_stage;
+  } catch (err) {
+    console.warn(`Could not start a journey for plant ${plant.plant_id}: ${err.message}`);
+  }
+
   res.status(201).json(plant);
 };
 

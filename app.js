@@ -4,7 +4,7 @@
 // client (wallet, which is account-scoped like the /users/me calls in onboarding.js).
 import { requireAuthOrRedirect, logout } from "./authservise.js";
 import { api, ApiError } from "./servisapi.js";
-import { listMyPlants } from "./serviseplant.js";
+import { listMyPlants, listJourneys } from "./serviseplant.js";
 import { listVerifications } from "./verifyservice.js";
 import { t, localized, currentLanguage } from "./language.js";
 import { getGreenHubArticles } from "./contentservice.js";
@@ -17,6 +17,7 @@ const state = {
   notificationsLoaded: false,
   plants: [],
   verifications: [],
+  journeys: [],
   gardenLoaded: false,
   gardenError: false,
 };
@@ -356,10 +357,69 @@ function initAssistant() {
   });
 }
 
+/* ------------------------------------------------------------- Journeys */
+/** The stage label, localized when we have a translation for the stage key. */
+function stageLabel(milestone) {
+  if (!milestone) return "";
+  const key = `journey.stages.${milestone.stage_key}`;
+  const translated = t(key);
+  return translated === key ? milestone.label_en : translated;
+}
+
+function journeyItemHTML(journey) {
+  const milestones = journey.milestones || [];
+  const done = milestones.filter((milestone) => milestone.completed_at).length;
+  const complete = journey.status === "completed";
+  const next = milestones.find((milestone) => !milestone.completed_at) || null;
+  const stage = complete ? t("journey.complete") : stageLabel(next) || journey.current_stage;
+
+  const nextLine =
+    next && !complete
+      ? `<div class="plant-card-meta"><span>${escapeHtml(t("journey.next"))}: ${escapeHtml(stageLabel(next))}${
+          next.recommended_window ? ` · ${escapeHtml(next.recommended_window)}` : ""
+        }</span></div>`
+      : "";
+
+  return `
+    <article class="card plant-card">
+      <div class="plant-card-top">
+        <div class="plant-card-emoji" aria-hidden="true">🌱</div>
+        <div class="plant-card-id">
+          <strong>${escapeHtml(journey.plant_type)}</strong>
+          <p class="plant-card-loc">${escapeHtml(t("journey.stage"))}: ${escapeHtml(stage)}</p>
+        </div>
+        <span class="status-badge is-${complete ? "approved" : "pending"}">${done}/${milestones.length}</span>
+      </div>
+      ${nextLine}
+    </article>
+  `;
+}
+
+function renderJourneys() {
+  const host = document.querySelector("[data-journey-list]");
+  if (!host) return;
+
+  if (state.gardenError) {
+    host.innerHTML = "";
+    return;
+  }
+  if (!state.gardenLoaded) {
+    host.innerHTML = `<div class="loading-state"><span class="emoji">🌱</span>${escapeHtml(t("common.loading"))}</div>`;
+    return;
+  }
+  if (!state.journeys.length) {
+    host.innerHTML = `<div class="empty-state"><span class="emoji">🌱</span>${escapeHtml(t("garden.empty"))}</div>`;
+    return;
+  }
+
+  host.innerHTML = state.journeys.map(journeyItemHTML).join("");
+}
+
 function renderAll() {
   renderWallet();
   renderGarden();
   renderVerificationHistory();
+  renderJourneys();
   renderNotifications();
 }
 
@@ -415,9 +475,14 @@ async function loadWallet() {
 async function loadGarden() {
   if (!document.querySelector("[data-garden-grid]")) return;
   try {
-    const [plants, verifications] = await Promise.all([listMyPlants(), listVerifications()]);
+    const [plants, verifications, journeys] = await Promise.all([
+      listMyPlants(),
+      listVerifications(),
+      listJourneys(),
+    ]);
     state.plants = Array.isArray(plants) ? plants : [];
     state.verifications = Array.isArray(verifications) ? verifications : [];
+    state.journeys = Array.isArray(journeys) ? journeys : [];
     state.gardenLoaded = true;
   } catch (err) {
     if (isAuthError(err)) return gotoLogin();

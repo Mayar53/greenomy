@@ -29,6 +29,11 @@ export async function createPlant({
   });
 }
 
+// Growth journeys for the member's plants (see backend/routes/journeys.routes.js).
+export async function listJourneys() {
+  return api.get("/journeys");
+}
+
 export async function updatePlant(id, changes) {
   return api.patch(`/plants/${id}`, changes);
 }

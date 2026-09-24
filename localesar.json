@@ -477,6 +477,29 @@
     "passwordUpdated": "تم تحديث كلمة المرور",
     "loadError": "تعذّر تحميل ملفك الشخصي. يرجى المحاولة مرة أخرى."
   },
+  "journey": {
+    "title": "رحلات النمو",
+    "lead": "أين وصلت كل نبتة من نباتاتك في نموها.",
+    "stage": "المرحلة",
+    "next": "التالي",
+    "progress": "المحطات",
+    "complete": "مكتملة",
+    "stages": {
+      "planting": "الزراعة",
+      "germination": "الإنبات",
+      "seedling": "الشتلة",
+      "vegetative": "النمو الخضري",
+      "flowering": "الإزهار",
+      "fruiting": "تكوّن الثمار",
+      "podding": "تكوّن القرون",
+      "leaf-growth": "نمو الأوراق",
+      "root-development": "تكوّن الجذور",
+      "establishment": "التجذّر",
+      "fruit-development": "تكوّن الثمار",
+      "harvest": "الحصاد",
+      "mature": "نبات مكتمل"
+    }
+  },
   "assistant": {
     "title": "اسأل عن حديقتك",
     "lead": "صِف مشكلة أو اطرح سؤالًا — المساعد يعرف ما تزرعه.",

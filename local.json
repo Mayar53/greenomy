@@ -477,6 +477,29 @@
     "passwordUpdated": "Password updated",
     "loadError": "Couldn't load your profile. Please try again."
   },
+  "journey": {
+    "title": "Growth journeys",
+    "lead": "Where each of your plants is in its growth.",
+    "stage": "Stage",
+    "next": "Next",
+    "progress": "Milestones",
+    "complete": "Completed",
+    "stages": {
+      "planting": "Planting",
+      "germination": "Germination",
+      "seedling": "Seedling",
+      "vegetative": "Vegetative growth",
+      "flowering": "Flowering",
+      "fruiting": "Fruit development",
+      "podding": "Pod development",
+      "leaf-growth": "Leaf growth",
+      "root-development": "Root development",
+      "establishment": "Establishment",
+      "fruit-development": "Fruit development",
+      "harvest": "Harvest",
+      "mature": "Mature"
+    }
+  },
   "assistant": {
     "title": "Ask about your garden",
     "lead": "Describe a problem or ask a question — the assistant knows what you're growing.",

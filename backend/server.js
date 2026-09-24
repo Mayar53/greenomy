@@ -72,6 +72,7 @@ app.use("/api/waitlist", waitlistRoutes);
 app.use("/api/partners", partnerRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/ai", require("./routes/ai.routes"));
+app.use("/api/journeys", require("./routes/journeys.routes"));
 app.use("/api", require("./routes/recommendations.routes"));
 
 // Development-only: exposes the mail outbox so password-reset links can be
