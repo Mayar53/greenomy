@@ -1,0 +1,834 @@
+[
+  {
+    "id": "pl-tomato",
+    "name": "Tomato",
+    "slug": "tomato",
+    "category": "vegetables",
+    "emoji": "🍅",
+    "daysToHarvest": 70,
+    "difficulty": "medium",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "high",
+    "climates": ["temperate", "subtropical", "mediterranean", "continental"],
+    "plantingMonths": [3, 4, 5],
+    "notes": "Needs 6+ hours of sun and steady watering. Pinch out side shoots for bigger fruit.",
+    "i18n": {
+      "ar": {
+        "name": "طماطم",
+        "notes": "تحتاج ٦ ساعات شمس على الأقل وريًّا منتظمًا. اقتلع الأفرع الجانبية لثمار أكبر."
+      },
+      "ku": {
+        "name": "تەماتە",
+        "notes": "پێویستی بە ٦ کاتژمێر خۆر و ئاوی ڕێکوپێک هەیە. لقە لاوەکییەکان لابە بۆ بەرهەمی گەورەتر."
+      }
+    }
+  },
+  {
+    "id": "pl-lettuce",
+    "name": "Lettuce",
+    "slug": "lettuce",
+    "category": "vegetables",
+    "emoji": "🥬",
+    "daysToHarvest": 45,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "partial",
+    "water": "medium",
+    "climates": ["temperate", "mediterranean", "continental", "subtropical"],
+    "plantingMonths": [3, 4, 5, 8, 9],
+    "notes": "Happy in partial shade — ideal for a balcony that only gets morning sun.",
+    "i18n": {
+      "ar": {
+        "name": "خس",
+        "notes": "تنمو جيدًا في الظل الجزئي — مثالية لشرفة تصلها شمس الصباح فقط."
+      },
+      "ku": {
+        "name": "کاهوو",
+        "notes": "لە سێبەری بەشیدا باش دەگەشێت — گونجاوە بۆ بەلکۆنێک کە تەنها خۆری بەیانیانی پێدەگات."
+      }
+    }
+  },
+  {
+    "id": "pl-radish",
+    "name": "Radish",
+    "slug": "radish",
+    "category": "vegetables",
+    "emoji": "🌶️",
+    "daysToHarvest": 25,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "medium",
+    "climates": ["temperate", "continental", "mediterranean"],
+    "plantingMonths": [3, 4, 5, 8, 9],
+    "notes": "The fastest harvest here — ready in under a month, perfect for beginners.",
+    "i18n": {
+      "ar": {
+        "name": "فجل",
+        "notes": "أسرع حصاد هنا — جاهز في أقل من شهر، مثالي للمبتدئين."
+      },
+      "ku": {
+        "name": "تورپ",
+        "notes": "خێراترین بەرهەم لێرە — لە کەمتر لە مانگێکدا ئامادەیە، گونجاوە بۆ دەستپێکەران."
+      }
+    }
+  },
+  {
+    "id": "pl-spinach",
+    "name": "Spinach",
+    "slug": "spinach",
+    "category": "vegetables",
+    "emoji": "🍃",
+    "daysToHarvest": 40,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "partial",
+    "water": "medium",
+    "climates": ["temperate", "continental"],
+    "plantingMonths": [3, 4, 9, 10],
+    "notes": "A cool-season crop — it bolts and turns bitter once the heat arrives.",
+    "i18n": {
+      "ar": {
+        "name": "سبانخ",
+        "notes": "محصول موسم بارد — يزهر ويصبح مرًّا عند قدوم الحرارة."
+      },
+      "ku": {
+        "name": "ئیسپاناخ",
+        "notes": "بەرهەمی وەرزی ساردە — کاتێک گەرمی دێت گوڵ دەکات و تاڵ دەبێت."
+      }
+    }
+  },
+  {
+    "id": "pl-cucumber",
+    "name": "Cucumber",
+    "slug": "cucumber",
+    "category": "vegetables",
+    "emoji": "🥒",
+    "daysToHarvest": 60,
+    "difficulty": "medium",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "high",
+    "climates": ["subtropical", "temperate", "mediterranean"],
+    "plantingMonths": [4, 5, 6],
+    "notes": "Trained up a trellis it takes almost no floor space on a balcony.",
+    "i18n": {
+      "ar": {
+        "name": "خيار",
+        "notes": "عند توجيهه على دعامة لا يستهلك تقريبًا أي مساحة أرضية على الشرفة."
+      },
+      "ku": {
+        "name": "خەیار",
+        "notes": "کاتێک بە دارەوە بەرز دەکرێتەوە، بە نزیکەیی هیچ شوێنی زەوی داگیر ناکات لە بەلکۆن."
+      }
+    }
+  },
+  {
+    "id": "pl-bell-pepper",
+    "name": "Bell Pepper",
+    "slug": "bell-pepper",
+    "category": "vegetables",
+    "emoji": "🫑",
+    "daysToHarvest": 90,
+    "difficulty": "medium",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "medium",
+    "climates": ["subtropical", "mediterranean", "temperate"],
+    "plantingMonths": [3, 4, 5],
+    "notes": "Slow to start but keeps fruiting for months once it gets going.",
+    "i18n": {
+      "ar": {
+        "name": "فلفل حلو",
+        "notes": "يبدأ ببطء لكنه يظل مثمرًا لأشهر بمجرد أن ينطلق."
+      },
+      "ku": {
+        "name": "بیبەری شیرین",
+        "notes": "بە هێواشی دەست پێدەکات، بەڵام کاتێک دەست پێکرد بۆ مانگەکان بەردەوام بەرهەم دەدات."
+      }
+    }
+  },
+  {
+    "id": "pl-carrot",
+    "name": "Carrot",
+    "slug": "carrot",
+    "category": "vegetables",
+    "emoji": "🥕",
+    "daysToHarvest": 75,
+    "difficulty": "easy",
+    "indoor": false,
+    "outdoor": true,
+    "sun": "full",
+    "water": "medium",
+    "climates": ["temperate", "continental", "mediterranean"],
+    "plantingMonths": [3, 4, 5, 6],
+    "notes": "Wants a deep container — at least 25 cm of loose soil, no stones.",
+    "i18n": {
+      "ar": {
+        "name": "جزر",
+        "notes": "يحتاج وعاءً عميقًا — ٢٥ سم على الأقل من تراب رخو بلا حجارة."
+      },
+      "ku": {
+        "name": "گێزەر",
+        "notes": "قاپێکی قووڵ دەوێت — بە لایەنی کەم ٢٥ سم خاکی نەرم بەبێ بەرد."
+      }
+    }
+  },
+  {
+    "id": "pl-zucchini",
+    "name": "Zucchini",
+    "slug": "zucchini",
+    "category": "vegetables",
+    "emoji": "🥒",
+    "daysToHarvest": 55,
+    "difficulty": "easy",
+    "indoor": false,
+    "outdoor": true,
+    "sun": "full",
+    "water": "high",
+    "climates": ["temperate", "mediterranean", "subtropical"],
+    "plantingMonths": [4, 5, 6],
+    "notes": "Very generous — one plant can out-produce a whole household.",
+    "i18n": {
+      "ar": {
+        "name": "كوسا",
+        "notes": "سخية جدًا — نبتة واحدة قد تفي احتياج منزل كامل."
+      },
+      "ku": {
+        "name": "کەلەک",
+        "notes": "زۆر بەرهەمدارە — یەک ڕووەک دەتوانێت پێداویستی ماڵێکی تەواو دابین بکات."
+      }
+    }
+  },
+  {
+    "id": "pl-spring-onion",
+    "name": "Spring Onion",
+    "slug": "spring-onion",
+    "category": "vegetables",
+    "emoji": "🧅",
+    "daysToHarvest": 60,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "partial",
+    "water": "medium",
+    "climates": ["temperate", "mediterranean", "subtropical", "continental"],
+    "plantingMonths": [],
+    "notes": "You can regrow the white ends in a glass of water — no soil needed.",
+    "i18n": {
+      "ar": {
+        "name": "بصل أخضر",
+        "notes": "يمكنك إعادة إنماء الأطراف البيضاء في كوب ماء — دون حاجة إلى تراب."
+      },
+      "ku": {
+        "name": "پیازی سەوز",
+        "notes": "دەتوانیت سەرە سپییەکان لە پەرداخێک ئاودا دووبارە بڕوێنیت — بێ خاک."
+      }
+    }
+  },
+  {
+    "id": "pl-pea",
+    "name": "Pea",
+    "slug": "pea",
+    "category": "vegetables",
+    "emoji": "🫛",
+    "daysToHarvest": 65,
+    "difficulty": "easy",
+    "indoor": false,
+    "outdoor": true,
+    "sun": "partial",
+    "water": "medium",
+    "climates": ["temperate", "continental"],
+    "plantingMonths": [3, 4, 10],
+    "notes": "Sow in cool weather; it fixes nitrogen and improves the soil for next year.",
+    "i18n": {
+      "ar": {
+        "name": "بازلاء",
+        "notes": "ازرعها في الجو البارد؛ تثبّت النيتروجين وتحسّن التربة للعام القادم."
+      },
+      "ku": {
+        "name": "باقڵا",
+        "notes": "لە کەشوهەوای سارددا بیانچێنە؛ نایترۆجین جێگیر دەکەن و خاک بۆ ساڵی داهاتوو باشتر دەکەن."
+      }
+    }
+  },
+  {
+    "id": "pl-pumpkin",
+    "name": "Pumpkin",
+    "slug": "pumpkin",
+    "category": "vegetables",
+    "emoji": "🎃",
+    "daysToHarvest": 100,
+    "difficulty": "medium",
+    "indoor": false,
+    "outdoor": true,
+    "sun": "full",
+    "water": "high",
+    "climates": ["temperate", "subtropical", "continental"],
+    "plantingMonths": [4, 5],
+    "notes": "Needs room to sprawl — better on a roof or garden than a small balcony.",
+    "i18n": {
+      "ar": {
+        "name": "قرع",
+        "notes": "يحتاج مساحة للانتشار — أفضل على سطح أو حديقة من شرفة صغيرة."
+      },
+      "ku": {
+        "name": "کەدوو",
+        "notes": "شوێنی فراوان دەوێت بۆ بڵاوبوونەوە — باشترە لە سەربان یان باخچە تا بەلکۆنێکی بچووک."
+      }
+    }
+  },
+  {
+    "id": "pl-basil",
+    "name": "Basil",
+    "slug": "basil",
+    "category": "herbs",
+    "emoji": "🌿",
+    "daysToHarvest": 60,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "medium",
+    "climates": ["subtropical", "mediterranean", "temperate", "tropical"],
+    "plantingMonths": [4, 5, 6],
+    "notes": "Loves heat and a sunny windowsill. Pinch the tips or it will go to flower.",
+    "i18n": {
+      "ar": {
+        "name": "ريحان",
+        "notes": "يحب الحرارة وحافة نافذة مشمسة. اقطع القمم وإلا أزهر."
+      },
+      "ku": {
+        "name": "ڕەیحان",
+        "notes": "گەرمی و پەنجەرەی خۆرهەڵات دەوێت. سەرەکانی ببڕە ئەگینا گوڵ دەکات."
+      }
+    }
+  },
+  {
+    "id": "pl-mint",
+    "name": "Mint",
+    "slug": "mint",
+    "category": "herbs",
+    "emoji": "🌱",
+    "daysToHarvest": 60,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "partial",
+    "water": "high",
+    "climates": ["temperate", "mediterranean", "subtropical", "continental", "tropical"],
+    "plantingMonths": [3, 4, 5, 6],
+    "notes": "Almost unkillable, but keep it in its own pot — it takes over everything.",
+    "i18n": {
+      "ar": {
+        "name": "نعناع",
+        "notes": "يكاد لا يموت، لكن ضعه في وعاء منفصل — فهو يزحف على كل شيء."
+      },
+      "ku": {
+        "name": "نەعناع",
+        "notes": "بە سەختی دەمرێت، بەڵام لە قاپێکی جیادا بیپارێزە — هەموو شتێک داگیر دەکات."
+      }
+    }
+  },
+  {
+    "id": "pl-parsley",
+    "name": "Parsley",
+    "slug": "parsley",
+    "category": "herbs",
+    "emoji": "🌿",
+    "daysToHarvest": 75,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "partial",
+    "water": "medium",
+    "climates": ["temperate", "mediterranean", "continental"],
+    "plantingMonths": [3, 4, 5],
+    "notes": "Slow to germinate — be patient, then it keeps producing for a year.",
+    "i18n": {
+      "ar": {
+        "name": "بقدونس",
+        "notes": "يتأخر في الإنبات — تحلَّ بالصبر، ثم يظل يعطي لعام كامل."
+      },
+      "ku": {
+        "name": "مەعدەنۆس",
+        "notes": "درەنگ سەوز دەبێت — ئارام بە، پاشان بۆ ساڵێک بەردەوام بەرهەم دەدات."
+      }
+    }
+  },
+  {
+    "id": "pl-coriander",
+    "name": "Coriander",
+    "slug": "coriander",
+    "category": "herbs",
+    "emoji": "🌿",
+    "daysToHarvest": 50,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "partial",
+    "water": "medium",
+    "climates": ["temperate", "mediterranean", "subtropical", "continental"],
+    "plantingMonths": [3, 4, 5, 9],
+    "notes": "Sow little and often — it runs to seed quickly in heat.",
+    "i18n": {
+      "ar": {
+        "name": "كزبرة",
+        "notes": "ازرع كميات صغيرة ومتكررة — فهي تزهر سريعًا في الحرارة."
+      },
+      "ku": {
+        "name": "کەشنیز",
+        "notes": "کەم و بەردەوام بیانچێنە — لە گەرمیدا زوو گوڵ دەکات."
+      }
+    }
+  },
+  {
+    "id": "pl-rosemary",
+    "name": "Rosemary",
+    "slug": "rosemary",
+    "category": "herbs",
+    "emoji": "🌿",
+    "daysToHarvest": 120,
+    "difficulty": "medium",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "low",
+    "climates": ["mediterranean", "subtropical", "temperate", "arid"],
+    "plantingMonths": [3, 4, 5],
+    "notes": "A woody perennial that hates wet roots — let the soil dry out between waterings.",
+    "i18n": {
+      "ar": {
+        "name": "إكليل الجبل",
+        "notes": "نبتة خشبية معمرة تكره الرطوبة — اترك التربة تجف بين الريات."
+      },
+      "ku": {
+        "name": "ڕۆزماری",
+        "notes": "ڕووەکێکی دارینەی هەمیشەییە و ڕقی لە شێیەتی — ڕێگە بدە خاک لە نێوان ئاودانەکاندا وشک بێت."
+      }
+    }
+  },
+  {
+    "id": "pl-thyme",
+    "name": "Thyme",
+    "slug": "thyme",
+    "category": "herbs",
+    "emoji": "🌿",
+    "daysToHarvest": 90,
+    "difficulty": "medium",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "low",
+    "climates": ["mediterranean", "temperate", "arid", "subtropical"],
+    "plantingMonths": [3, 4, 5],
+    "notes": "Thrives on neglect and poor, gritty soil. Overwatering is the usual killer.",
+    "i18n": {
+      "ar": {
+        "name": "زعتر",
+        "notes": "ينمو جيدًا بالإهمال وفي تربة فقيرة رملية. الإفراط في الري هو القاتل المعتاد."
+      },
+      "ku": {
+        "name": "زەعتەر",
+        "notes": "بە پشتگوێخستن و خاکی هەژار و لمی باش دەگەشێت. زۆر ئاودان زۆرجار دەیکوژێت."
+      }
+    }
+  },
+  {
+    "id": "pl-chives",
+    "name": "Chives",
+    "slug": "chives",
+    "category": "herbs",
+    "emoji": "🌿",
+    "daysToHarvest": 60,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "partial",
+    "water": "medium",
+    "climates": ["temperate", "continental", "mediterranean"],
+    "plantingMonths": [3, 4, 5],
+    "notes": "Cut it and it comes straight back — a reliable windowsill herb.",
+    "i18n": {
+      "ar": {
+        "name": "ثوم معمر",
+        "notes": "اقطعه فيعود فورًا — عشبة موثوقة لحافة النافذة."
+      },
+      "ku": {
+        "name": "پیازچە",
+        "notes": "بیبڕە و یەکسەر دەگەڕێتەوە — ڕووەکێکی دڵنیاکەرەوەیە بۆ پەنجەرە."
+      }
+    }
+  },
+  {
+    "id": "pl-dill",
+    "name": "Dill",
+    "slug": "dill",
+    "category": "herbs",
+    "emoji": "🌿",
+    "daysToHarvest": 45,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "medium",
+    "climates": ["temperate", "continental"],
+    "plantingMonths": [3, 4, 5, 6],
+    "notes": "Feathery and quick. Sow directly — it dislikes being moved.",
+    "i18n": {
+      "ar": {
+        "name": "شبت",
+        "notes": "سريع النمو. ازرعه مباشرة — فهو لا يحب النقل."
+      },
+      "ku": {
+        "name": "شەبەت",
+        "notes": "خێرایە. ڕاستەوخۆ بیانچێنە — حەزی لە گواستنەوە نییە."
+      }
+    }
+  },
+  {
+    "id": "pl-lemon-tree",
+    "name": "Lemon Tree",
+    "slug": "lemon-tree",
+    "category": "fruit-trees",
+    "emoji": "🍋",
+    "daysToHarvest": 1095,
+    "difficulty": "hard",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "medium",
+    "climates": ["mediterranean", "subtropical", "tropical"],
+    "plantingMonths": [3, 4, 5],
+    "notes": "A long commitment — years before the first fruit, but it lives for decades.",
+    "i18n": {
+      "ar": {
+        "name": "ليمون",
+        "notes": "التزام طويل — سنوات قبل أول ثمرة، لكنه يعيش عقودًا."
+      },
+      "ku": {
+        "name": "لیمۆ",
+        "notes": "پابەندبوونێکی درێژخایەنە — چەند ساڵێک پێش یەکەم بەرهەم، بەڵام دەیان ساڵ دەژیت."
+      }
+    }
+  },
+  {
+    "id": "pl-orange-tree",
+    "name": "Orange Tree",
+    "slug": "orange-tree",
+    "category": "fruit-trees",
+    "emoji": "🍊",
+    "daysToHarvest": 1095,
+    "difficulty": "hard",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "medium",
+    "climates": ["subtropical", "mediterranean", "tropical"],
+    "plantingMonths": [3, 4, 5],
+    "notes": "Grown from seed it can take years and may never fruit — a grafted sapling is surer.",
+    "i18n": {
+      "ar": {
+        "name": "برتقال",
+        "notes": "من البذرة قد يستغرق سنوات وربما لا يثمر — الشتلة المطعّمة أكثر ضمانًا."
+      },
+      "ku": {
+        "name": "پرتەقاڵ",
+        "notes": "لە تۆوەوە چەند ساڵێک دەخایەنێت و ڕەنگە هەرگیز بەرهەم نەدات — نەمامی پێوەنراو دڵنیاترە."
+      }
+    }
+  },
+  {
+    "id": "pl-fig",
+    "name": "Fig",
+    "slug": "fig",
+    "category": "fruit-trees",
+    "emoji": "🫐",
+    "daysToHarvest": 730,
+    "difficulty": "medium",
+    "indoor": false,
+    "outdoor": true,
+    "sun": "full",
+    "water": "low",
+    "climates": ["mediterranean", "subtropical", "temperate"],
+    "plantingMonths": [3, 4],
+    "notes": "Tolerates a large pot and dry summers better than most fruit trees.",
+    "i18n": {
+      "ar": {
+        "name": "تين",
+        "notes": "يتحمل الأصص الكبيرة والصيف الجاف أفضل من معظم أشجار الفاكهة."
+      },
+      "ku": {
+        "name": "هەنجیر",
+        "notes": "لە قاپی گەورە و هاوینی وشکدا باشتر لە زۆربەی دارەوەی بەرهەمەکان خۆڕاگرە."
+      }
+    }
+  },
+  {
+    "id": "pl-olive",
+    "name": "Olive",
+    "slug": "olive",
+    "category": "fruit-trees",
+    "emoji": "🫒",
+    "daysToHarvest": 1460,
+    "difficulty": "hard",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "low",
+    "climates": ["mediterranean", "subtropical", "arid"],
+    "plantingMonths": [3, 4, 5],
+    "notes": "Loves long dry summers. Slow, but extremely long-lived and drought-proof.",
+    "i18n": {
+      "ar": {
+        "name": "زيتون",
+        "notes": "يحب الصيف الطويل الجاف. بطيء النمو لكنه معمر جدًا ومقاوم للجفاف."
+      },
+      "ku": {
+        "name": "زەیتوون",
+        "notes": "هاوینی درێژ و وشکی خۆش دەوێت. هێواشە، بەڵام زۆر درێژعومر و بەرگەی وشکەساڵی دەگرێت."
+      }
+    }
+  },
+  {
+    "id": "pl-pomegranate",
+    "name": "Pomegranate",
+    "slug": "pomegranate",
+    "category": "fruit-trees",
+    "emoji": "🍎",
+    "daysToHarvest": 1095,
+    "difficulty": "medium",
+    "indoor": false,
+    "outdoor": true,
+    "sun": "full",
+    "water": "low",
+    "climates": ["mediterranean", "subtropical", "arid", "continental"],
+    "plantingMonths": [3, 4, 5],
+    "notes": "Handles heat and drought well, and fruits in a large container.",
+    "i18n": {
+      "ar": {
+        "name": "رمان",
+        "notes": "يتحمل الحرارة والجفاف جيدًا، ويثمر في وعاء كبير."
+      },
+      "ku": {
+        "name": "هەنار",
+        "notes": "بەرگەی گەرمی و وشکەساڵی باش دەگرێت، و لە قاپی گەورەدا بەرهەم دەدات."
+      }
+    }
+  },
+  {
+    "id": "pl-strawberry",
+    "name": "Strawberry",
+    "slug": "strawberry",
+    "category": "fruit-trees",
+    "emoji": "🍓",
+    "daysToHarvest": 120,
+    "difficulty": "medium",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "medium",
+    "climates": ["temperate", "mediterranean", "continental", "subtropical"],
+    "plantingMonths": [3, 4, 9],
+    "notes": "A fruit you can actually harvest in one season — good in a hanging basket.",
+    "i18n": {
+      "ar": {
+        "name": "فراولة",
+        "notes": "فاكهة يمكن حصادها في موسم واحد — جيدة في سلة معلقة."
+      },
+      "ku": {
+        "name": "فڕاوەڵە",
+        "notes": "بەرهەمێک کە دەتوانیت لە یەک وەرزدا کۆی بکەیتەوە — باشە لە سەبەتەی هەڵواسراو."
+      }
+    }
+  },
+  {
+    "id": "pl-pothos",
+    "name": "Pothos",
+    "slug": "pothos",
+    "category": "houseplants",
+    "emoji": "🪴",
+    "daysToHarvest": 90,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": false,
+    "sun": "shade",
+    "water": "low",
+    "climates": ["tropical", "subtropical"],
+    "plantingMonths": [],
+    "notes": "Forgiving of low light and missed waterings — the classic first houseplant.",
+    "i18n": {
+      "ar": {
+        "name": "بوتوس",
+        "notes": "يتحمل الإضاءة المنخفضة ونسيان الري — النبتة المنزلية الأولى الكلاسيكية."
+      },
+      "ku": {
+        "name": "پۆتۆس",
+        "notes": "بەرگەی ڕووناکی کەم و لەبیرکردنی ئاودان دەگرێت — یەکەم ڕووەکی ماڵی کلاسیک."
+      }
+    }
+  },
+  {
+    "id": "pl-snake-plant",
+    "name": "Snake Plant",
+    "slug": "snake-plant",
+    "category": "houseplants",
+    "emoji": "🌵",
+    "daysToHarvest": 120,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": false,
+    "sun": "shade",
+    "water": "low",
+    "climates": ["arid", "tropical", "subtropical"],
+    "plantingMonths": [],
+    "notes": "Water it monthly at most — overwatering is the only way to kill it.",
+    "i18n": {
+      "ar": {
+        "name": "نبتة الأفعى",
+        "notes": "اسقِها شهريًا على الأكثر — الإفراط في الري هو الطريقة الوحيدة لقتلها."
+      },
+      "ku": {
+        "name": "ڕووەکی مار",
+        "notes": "لانیزۆر مانگانە ئاوی بدە — زۆر ئاودان تاکە ڕێگەیە بۆ کوشتنی."
+      }
+    }
+  },
+  {
+    "id": "pl-spider-plant",
+    "name": "Spider Plant",
+    "slug": "spider-plant",
+    "category": "houseplants",
+    "emoji": "🪴",
+    "daysToHarvest": 90,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": false,
+    "sun": "partial",
+    "water": "medium",
+    "climates": ["tropical", "subtropical", "temperate"],
+    "plantingMonths": [],
+    "notes": "Throws out baby plantlets you can pot up and share.",
+    "i18n": {
+      "ar": {
+        "name": "نبتة العنكبوت",
+        "notes": "تنتج نبتات صغيرة يمكن زرعها ومشاركتها."
+      },
+      "ku": {
+        "name": "ڕووەکی جاڵجاڵۆکە",
+        "notes": "ڕووەکی بچووک دەردەکات کە دەتوانیت بیانچێنیت و بەش بکەیت."
+      }
+    }
+  },
+  {
+    "id": "pl-aloe-vera",
+    "name": "Aloe Vera",
+    "slug": "aloe-vera",
+    "category": "houseplants",
+    "emoji": "🌵",
+    "daysToHarvest": 180,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": true,
+    "sun": "full",
+    "water": "low",
+    "climates": ["arid", "mediterranean", "subtropical", "tropical"],
+    "plantingMonths": [],
+    "notes": "Wants sun and very free-draining soil. The gel inside soothes burns.",
+    "i18n": {
+      "ar": {
+        "name": "ألوفيرا",
+        "notes": "تحب الشمس والتربة جيدة التصريف. الجل بداخلها يهدئ الحروق."
+      },
+      "ku": {
+        "name": "ئەلۆی ڤێرا",
+        "notes": "خۆر و خاکی زۆر بەئاسانی ئاوڕێژ دەوێت. جەلەکەی ناوی سووتان ئارام دەکاتەوە."
+      }
+    }
+  },
+  {
+    "id": "pl-zz-plant",
+    "name": "ZZ Plant",
+    "slug": "zz-plant",
+    "category": "houseplants",
+    "emoji": "🪴",
+    "daysToHarvest": 120,
+    "difficulty": "easy",
+    "indoor": true,
+    "outdoor": false,
+    "sun": "shade",
+    "water": "low",
+    "climates": ["tropical", "subtropical"],
+    "plantingMonths": [],
+    "notes": "Handles a dark corner and forgetful watering better than anything else.",
+    "i18n": {
+      "ar": {
+        "name": "نبتة زد زد",
+        "notes": "تتحمل الزوايا المعتمة ونسيان الري أفضل من أي نبتة أخرى."
+      },
+      "ku": {
+        "name": "ڕووەکی ZZ",
+        "notes": "لە گۆشەی تاریک و لەبیرکردنی ئاودان باشتر لە هەموو ڕووەکێکی تر خۆڕاگرە."
+      }
+    }
+  },
+  {
+    "id": "pl-peace-lily",
+    "name": "Peace Lily",
+    "slug": "peace-lily",
+    "category": "houseplants",
+    "emoji": "🌸",
+    "daysToHarvest": 90,
+    "difficulty": "medium",
+    "indoor": true,
+    "outdoor": false,
+    "sun": "shade",
+    "water": "high",
+    "climates": ["tropical", "subtropical"],
+    "plantingMonths": [],
+    "notes": "Droops dramatically when thirsty, then recovers within hours of watering.",
+    "i18n": {
+      "ar": {
+        "name": "زنبق السلام",
+        "notes": "تذبل بشكل ملحوظ عند العطش، ثم تتعافى خلال ساعات من الري."
+      },
+      "ku": {
+        "name": "زەنباقی ئاشتی",
+        "notes": "کاتێک تینوو بێت زۆر شۆڕ دەبێت، پاشان لە چەند کاتژمێرێکدا لە دوای ئاودان چاک دەبێتەوە."
+      }
+    }
+  },
+  {
+    "id": "pl-monstera",
+    "name": "Monstera",
+    "slug": "monstera",
+    "category": "houseplants",
+    "emoji": "🌿",
+    "daysToHarvest": 120,
+    "difficulty": "medium",
+    "indoor": true,
+    "outdoor": false,
+    "sun": "partial",
+    "water": "medium",
+    "climates": ["tropical", "subtropical"],
+    "plantingMonths": [],
+    "notes": "Grows fast in bright indirect light. Wipe the leaves so they can breathe.",
+    "i18n": {
+      "ar": {
+        "name": "مونستيرا",
+        "notes": "تنمو بسرعة في إضاءة ساطعة غير مباشرة. امسح الأوراق لتتنفس."
+      },
+      "ku": {
+        "name": "مۆنستێرا",
+        "notes": "لە ڕووناکی ڕاستەوخۆی ناڕاستدا خێرا دەگەشێت. گەڵاکان پاک بکەرەوە بۆ ئەوەی هەناسە بدەن."
+      }
+    }
+  }
+]

@@ -19,12 +19,15 @@ function activeStore() {
 
 function normalizeUser(raw) {
   if (!raw) return raw;
-  const { user_id, full_name, total_points, created_at, updated_at, ...rest } = raw;
+  const { user_id, full_name, total_points, plant_types, created_at, updated_at, ...rest } = raw;
   return {
     ...rest,
     userId: user_id ?? rest.userId,
     fullName: full_name ?? rest.fullName,
     totalPoints: total_points ?? rest.totalPoints,
+    // Preferences persisted by the onboarding wizard (experience and interests
+    // already pass through in rest).
+    plantTypes: plant_types ?? rest.plantTypes ?? [],
     createdAt: created_at ?? rest.createdAt,
     updatedAt: updated_at ?? rest.updatedAt,
   };

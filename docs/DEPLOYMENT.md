@@ -110,6 +110,34 @@ If a provider call fails (outage, timeout, bad key) verification still
 succeeds: the controller falls back to the heuristic scorer and records
 `ai_provider: "heuristic"` on the record.
 
+## Weather (plant recommendations)
+Powers the "recommended for you" block in the seed wizard. Two providers:
+
+- `WEATHER_PROVIDER=open-meteo` (default) — keyless geocoding + a 7-day
+  forecast, cached in-process for an hour.
+- `WEATHER_PROVIDER=offline` — a built-in city→climate table and nothing else.
+  No network at all.
+
+An unresolvable city, a timeout or a provider error all fall back to the climate
+table automatically, so the recommender always answers. Tests force `offline`
+(see `backend/tests/helpers.js`) so the suite never touches the network.
+
+### ⚠️ Licence — decide before launch
+**Open-Meteo's free tier is for non-commercial use only.** Its data is CC BY 4.0
+(attribution required), and their pricing page states that commercial clients
+need a commercial licence.
+
+Greenomy is a commercial platform, so before launch either:
+1. buy the commercial plan and set `WEATHER_API_KEY` — the service then uses
+   their `customer-api` host with `apikey`, as their docs require; or
+2. self-host Open-Meteo (AGPL), setting `WEATHER_BASE_URL`.
+
+Both are config-only changes. Development and the prototype are unaffected.
+**This needs an owner on the business side, not just an engineering decision.**
+
+Related knobs: `WEATHER_CACHE_TTL_MS` (default 3600000), `WEATHER_TIMEOUT_MS`
+(default 8000).
+
 ## Not yet implemented
 - CI/CD pipeline
 - Log aggregation / monitoring

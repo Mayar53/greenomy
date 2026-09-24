@@ -75,16 +75,47 @@ function renderSummary() {
   `;
 }
 
+/* Preference tiles. The same toggle behaviour as the onboarding wizard, which
+ * lives in onboarding.js and isn't loaded on this page. */
+function initTileGroup(container) {
+  container.addEventListener("click", (e) => {
+    const tile = e.target.closest(".option-tile");
+    if (!tile) return;
+    if (!container.hasAttribute("data-multi")) {
+      container.querySelectorAll(".option-tile").forEach((t) => t.setAttribute("aria-pressed", "false"));
+    }
+    tile.setAttribute("aria-pressed", tile.getAttribute("aria-pressed") === "true" ? "false" : "true");
+  });
+}
+
+function selectedValues(container) {
+  if (!container) return [];
+  return Array.from(container.querySelectorAll('.option-tile[aria-pressed="true"]')).map((t) => t.dataset.value);
+}
+
+function setTileSelection(container, values) {
+  if (!container) return;
+  const wanted = new Set(values || []);
+  container.querySelectorAll(".option-tile").forEach((tile) => {
+    tile.setAttribute("aria-pressed", wanted.has(tile.dataset.value) ? "true" : "false");
+  });
+}
+
 function fillProfileForm() {
   const form = document.querySelector("[data-profile-form]");
   if (!form || !user) return;
   form.querySelector("#fullName").value = user.fullName || "";
   form.querySelector("#city").value = user.city || "";
+  setTileSelection(form.querySelector('[data-tile-group="experience"]'), user.experience ? [user.experience] : []);
+  setTileSelection(form.querySelector('[data-tile-group="plantTypes"]'), user.plantTypes);
+  setTileSelection(form.querySelector('[data-tile-group="interests"]'), user.interests);
 }
 
 function initProfileForm() {
   const form = document.querySelector("[data-profile-form]");
   if (!form) return;
+
+  form.querySelectorAll("[data-tile-group]").forEach(initTileGroup);
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -100,11 +131,22 @@ function initProfileForm() {
     }
     setFieldError(nameInput, "");
 
+    // Sent explicitly (including empty arrays) so clearing a preference sticks.
+    const experience = selectedValues(form.querySelector('[data-tile-group="experience"]'))[0] || null;
+    const plantTypes = selectedValues(form.querySelector('[data-tile-group="plantTypes"]'));
+    const interests = selectedValues(form.querySelector('[data-tile-group="interests"]'));
+
     submitBtn.disabled = true;
     setStatus(status, "loading", t("wizard.saving"));
 
     try {
-      await api.patch("/users/me", { fullName, city: cityInput.value.trim() });
+      await api.patch("/users/me", {
+        fullName,
+        city: cityInput.value.trim(),
+        experience,
+        plantTypes,
+        interests,
+      });
       // Re-read rather than merging: the API returns snake_case and
       // fetchCurrentUser is what normalises it.
       user = await fetchCurrentUser();

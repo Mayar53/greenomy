@@ -3,7 +3,7 @@ const { query } = require("../config/db");
 
 // password_hash is deliberately never selected by the public helpers.
 const PUBLIC_COLUMNS =
-  "user_id, full_name, email, city, total_points, role, status, created_at, updated_at";
+  "user_id, full_name, email, city, total_points, role, status, experience, plant_types, interests, created_at, updated_at";
 
 /** Used by login only — the one place that needs the hash. */
 async function findByEmail(email) {
@@ -29,16 +29,32 @@ async function create({ fullName, email, passwordHash, city, role = "user" }) {
   return rows[0];
 }
 
-/** Partial update — a missing field leaves the column untouched. */
-async function updateProfile(userId, { fullName, city }) {
+/**
+ * Partial update — a missing field leaves the column untouched.
+ *
+ * `experience`, `plantTypes` and `interests` are the preferences the onboarding
+ * wizard collects (and used to throw away). They are only written when sent, so
+ * the profile form can still PATCH just a name or city.
+ */
+async function updateProfile(userId, { fullName, city, experience, plantTypes, interests }) {
   const { rows } = await query(
     `UPDATE users
-        SET full_name  = COALESCE($2, full_name),
-            city       = COALESCE($3, city),
-            updated_at = now()
+        SET full_name   = COALESCE($2, full_name),
+            city        = COALESCE($3, city),
+            experience  = COALESCE($4, experience),
+            plant_types = COALESCE($5, plant_types),
+            interests   = COALESCE($6, interests),
+            updated_at  = now()
       WHERE user_id = $1
       RETURNING ${PUBLIC_COLUMNS}`,
-    [userId, fullName || null, city || null]
+    [
+      userId,
+      fullName || null,
+      city || null,
+      experience || null,
+      Array.isArray(plantTypes) ? plantTypes : null,
+      Array.isArray(interests) ? interests : null,
+    ]
   );
   return rows[0] || null;
 }

@@ -1,5 +1,6 @@
 // database/seed.js — idempotent reference data: admin account, partners,
-// rewards and Green Hub articles. Safe to re-run; everything upserts.
+// rewards, Green Hub articles and the plant catalog. Safe to re-run;
+// everything upserts.
 require("dotenv").config();
 const path = require("path");
 const bcrypt = require("bcrypt");
@@ -7,6 +8,7 @@ const { pool, withTransaction, assertConfigured } = require("../config/db");
 
 const rewardsSeed = require(path.join(__dirname, "../../rewards.json"));
 const greenHubSeed = require(path.join(__dirname, "../../greenhub.json"));
+const plantCatalogSeed = require(path.join(__dirname, "../../plants.json"));
 
 const DEV_ADMIN_EMAIL = "admin@greenomy.app";
 const DEV_ADMIN_PASSWORD = "admin12345";
@@ -112,6 +114,53 @@ async function seedGreenHub(client) {
   console.log(`green hub ${greenHubSeed.length}`);
 }
 
+async function seedPlantCatalog(client) {
+  for (const plant of plantCatalogSeed) {
+    await client.query(
+      `INSERT INTO plant_catalog (id, name, slug, category, emoji, days_to_harvest, difficulty,
+                                  indoor, outdoor, sun, water, climates, planting_months,
+                                  notes, i18n, is_active)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+       ON CONFLICT (id) DO UPDATE
+         SET name            = EXCLUDED.name,
+             slug            = EXCLUDED.slug,
+             category        = EXCLUDED.category,
+             emoji           = EXCLUDED.emoji,
+             days_to_harvest = EXCLUDED.days_to_harvest,
+             difficulty      = EXCLUDED.difficulty,
+             indoor          = EXCLUDED.indoor,
+             outdoor         = EXCLUDED.outdoor,
+             sun             = EXCLUDED.sun,
+             water           = EXCLUDED.water,
+             climates        = EXCLUDED.climates,
+             planting_months = EXCLUDED.planting_months,
+             notes           = EXCLUDED.notes,
+             i18n            = EXCLUDED.i18n,
+             is_active       = EXCLUDED.is_active,
+             updated_at      = now()`,
+      [
+        plant.id,
+        plant.name,
+        plant.slug,
+        plant.category,
+        plant.emoji || null,
+        plant.daysToHarvest,
+        plant.difficulty,
+        plant.indoor === true,
+        plant.outdoor === true,
+        plant.sun,
+        plant.water,
+        plant.climates || [],
+        plant.plantingMonths || [],
+        plant.notes || null,
+        plant.i18n ? JSON.stringify(plant.i18n) : null,
+        plant.isActive !== false,
+      ]
+    );
+  }
+  console.log(`catalog   ${plantCatalogSeed.length}`);
+}
+
 async function main() {
   assertConfigured();
 
@@ -120,6 +169,7 @@ async function main() {
     await seedPartners(client);
     await seedRewards(client);
     await seedGreenHub(client);
+    await seedPlantCatalog(client);
   });
   console.log("\nSeed complete.");
 }

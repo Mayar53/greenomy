@@ -41,6 +41,10 @@ function createTestDatabase() {
   process.env.AI_FALLBACK_MODELS = "";
   process.env.AI_MAX_ATTEMPTS = "1";
 
+  // Same reasoning for weather: the offline climate table means no test depends
+  // on the network, on a city resolving, or on Open-Meteo's availability.
+  process.env.WEATHER_PROVIDER = "offline";
+
   for (const script of ["database/migrate.js", "database/seed.js"]) {
     execFileSync(process.execPath, [script], { cwd: BACKEND, env: process.env, stdio: "pipe" });
   }

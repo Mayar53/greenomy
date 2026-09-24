@@ -34,7 +34,15 @@ the project root) or a managed provider (set `DATABASE_SSL=true`).
 | total_points | integer default 0 | `CHECK (total_points >= 0)` |
 | role | text | `user` \| `admin` \| `super_admin` |
 | status | text | `active` \| `suspended` |
+| experience | text nullable | `beginner` \| `some-experience` \| `experienced` \| `expert` — compared against a plant's difficulty |
+| plant_types | text[] | preferred categories; the recommender's preference signal |
+| interests | text[] | sustainability interests from onboarding |
 | created_at / updated_at | timestamptz | |
+
+`experience`, `plant_types` and `interests` are the answers the onboarding wizard
+collects. They were previously written to `sessionStorage` and discarded when the
+wizard finished; since `004_plant_catalog.sql` they persist and drive the
+recommendations.
 
 ## plants
 | column | type |
@@ -137,6 +145,29 @@ supersedes any outstanding one.
 | token_id | uuid PK | user_id FK → users | token (**unique**) | platform (`web`/`ios`/`android`) | created_at | last_seen_at |
 
 Push delivery targets these; re-registering a device refreshes its row.
+
+## plant_catalog
+Reference data for every plant the recommender can suggest. Seeded from
+`plants.json` (migration `004_plant_catalog.sql`); never written by the app.
+
+| column | type | notes |
+|---|---|---|
+| id | text PK | e.g. `pl-tomato` |
+| name | text | English name; other locales live in `i18n` |
+| slug | text UNIQUE | |
+| category | text CHECK | `vegetables` / `herbs` / `fruit-trees` / `houseplants` — the same values the onboarding preference tiles use |
+| emoji | text | |
+| days_to_harvest | integer CHECK > 0 | drives the duration filter |
+| difficulty | text CHECK | `easy` / `medium` / `hard`, compared against the member's experience |
+| indoor / outdoor | boolean | at least one space must match |
+| sun | text CHECK | `full` / `partial` / `shade` |
+| water | text CHECK | `low` / `medium` / `high` |
+| climates | text[] | zones it suits, e.g. `{temperate,mediterranean}` |
+| planting_months | int[] | northern-hemisphere months; **empty means any month** |
+| notes | text | one growing tip |
+| i18n | jsonb | `ar` / `ku` name + notes, keyed like `rewards.i18n` |
+| is_active | boolean | |
+| created_at / updated_at | timestamptz | |
 
 ## schema_migrations
 Created by the migration runner: `filename text PK`, `applied_at timestamptz`.

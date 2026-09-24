@@ -41,6 +41,22 @@ backend answers from the retrieved guide itself and reports `answeredBy: "guide"
 rather than `"ai"`, so the feature still works. `lang` (`en`/`ar`/`ku`) picks
 which translation that answer is drawn from.
 
+## Recommendations
+| Method | Path | Auth | Notes |
+|---|---|---|---|
+| GET | /recommendations | user | `?duration=weeks\|months\|season\|any` and `?space=indoor\|outdoor\|both` → `{ conditions, appliedPreference, recommendations }` |
+| GET | /catalog | – | the plant catalog the recommendations are drawn from |
+
+The ranking is **deterministic** (`services/recommendation.service.js`), scored
+against climate, season, duration, stored preferences, experience and space.
+No AI is involved, so a recommendation can never invent a plant, a season or a
+harvest time. Two factors are hard filters (a plant that can't live in the space
+they have, one that takes longer than they'll wait); the rest only affect order.
+
+`conditions.source` is `open-meteo` or `climate-table` — the latter whenever the
+live lookup is unavailable or the city isn't recognised, in which case
+`conditions.approximate` is `true` and the request still succeeds.
+
 ## Development
 | GET /dev/mail | – | development only — the outbox of emails the app would have sent (password-reset links). Not mounted when `NODE_ENV=production`. |
 

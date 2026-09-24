@@ -41,6 +41,31 @@
       <div data-step>
         <h1 data-i18n="wizard.seedStep1Title">What are you planting?</h1>
         <p class="section-lead" style="margin-bottom: 20px;" data-i18n="wizard.seedStep1Lead">Choose the seed or plant you'd like to start tracking.</p>
+
+        <!-- Ranked from the plant catalog by city + climate, the current
+             season, how long they'll wait, and their stored preferences.
+             Hidden if the recommender can't be reached — the tiles below
+             always work. -->
+        <section class="recommend" data-recommend hidden aria-labelledby="recommendTitle">
+          <div class="recommend-head">
+            <h2 class="recommend-title" id="recommendTitle" data-i18n="recommend.title">Recommended for you</h2>
+            <p class="recommend-conditions" data-recommend-conditions></p>
+          </div>
+
+          <div class="recommend-duration">
+            <span class="recommend-label" id="durationLabel" data-i18n="recommend.durationLabel">How long will you wait for a harvest?</span>
+            <div class="chip-row" data-recommend-duration role="group" aria-labelledby="durationLabel">
+              <button type="button" class="chip" data-value="weeks" aria-pressed="false" data-i18n="recommend.durationWeeks">A few weeks</button>
+              <button type="button" class="chip" data-value="months" aria-pressed="false" data-i18n="recommend.durationMonths">A few months</button>
+              <button type="button" class="chip" data-value="season" aria-pressed="false" data-i18n="recommend.durationSeason">Up to a season</button>
+              <button type="button" class="chip" data-value="any" aria-pressed="false" data-i18n="recommend.durationAny">No rush</button>
+            </div>
+          </div>
+
+          <div class="recommend-list" data-recommend-list></div>
+          <div class="form-status" data-recommend-status role="status" aria-live="polite"></div>
+        </section>
+
         <div class="option-grid" data-tile-group="plantType">
           <button type="button" class="option-tile" data-value="Tomato" aria-pressed="false">
             <span class="tile-emoji">🍅</span><strong data-i18n="wizard.plantTomato">Tomato</strong><span data-i18n="wizard.plantTomatoDesc">Vegetable</span>

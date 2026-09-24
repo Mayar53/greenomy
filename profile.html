@@ -63,6 +63,62 @@
               <span class="field-error" role="alert"></span>
             </div>
 
+            <!-- Preferences the recommender ranks against. Same tile values as
+                 eco-profile.html, so the two stay interchangeable. -->
+            <div class="form-field">
+              <label data-i18n="wizard.experience">Experience Level</label>
+              <div class="option-grid" data-tile-group="experience">
+                <button type="button" class="option-tile" data-value="beginner" aria-pressed="false">
+                  <span class="tile-emoji">🌱</span><strong data-i18n="wizard.expBeginner">Beginner</strong>
+                </button>
+                <button type="button" class="option-tile" data-value="some-experience" aria-pressed="false">
+                  <span class="tile-emoji">🪴</span><strong data-i18n="wizard.expSome">Some Experience</strong>
+                </button>
+                <button type="button" class="option-tile" data-value="experienced" aria-pressed="false">
+                  <span class="tile-emoji">🌳</span><strong data-i18n="wizard.expExperienced">Experienced</strong>
+                </button>
+                <button type="button" class="option-tile" data-value="expert" aria-pressed="false">
+                  <span class="tile-emoji">🌿</span><strong data-i18n="wizard.expExpert">Expert</strong>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label><span data-i18n="wizard.plantTypes">Preferred Plant Types</span> <span style="font-weight:400; color: var(--color-text-muted);" data-i18n="wizard.pickAny">(pick any)</span></label>
+              <div class="option-grid" data-tile-group="plantTypes" data-multi>
+                <button type="button" class="option-tile" data-value="vegetables" aria-pressed="false">
+                  <span class="tile-emoji">🍅</span><strong data-i18n="wizard.plantVeg">Vegetables</strong>
+                </button>
+                <button type="button" class="option-tile" data-value="herbs" aria-pressed="false">
+                  <span class="tile-emoji">🌿</span><strong data-i18n="wizard.plantHerbs">Herbs</strong>
+                </button>
+                <button type="button" class="option-tile" data-value="fruit-trees" aria-pressed="false">
+                  <span class="tile-emoji">🍊</span><strong data-i18n="wizard.plantFruit">Fruit Trees</strong>
+                </button>
+                <button type="button" class="option-tile" data-value="houseplants" aria-pressed="false">
+                  <span class="tile-emoji">🪴</span><strong data-i18n="wizard.plantHouse">Houseplants</strong>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label><span data-i18n="wizard.interests">Sustainability Interests</span> <span style="font-weight:400; color: var(--color-text-muted);" data-i18n="wizard.pickAny">(pick any)</span></label>
+              <div class="option-grid" data-tile-group="interests" data-multi>
+                <button type="button" class="option-tile" data-value="food-recycling" aria-pressed="false">
+                  <span class="tile-emoji">♻️</span><strong data-i18n="wizard.intFood">Food Recycling</strong>
+                </button>
+                <button type="button" class="option-tile" data-value="composting" aria-pressed="false">
+                  <span class="tile-emoji">🪱</span><strong data-i18n="wizard.intCompost">Composting</strong>
+                </button>
+                <button type="button" class="option-tile" data-value="urban-greening" aria-pressed="false">
+                  <span class="tile-emoji">🏙️</span><strong data-i18n="wizard.intUrban">Urban Greening</strong>
+                </button>
+                <button type="button" class="option-tile" data-value="zero-waste" aria-pressed="false">
+                  <span class="tile-emoji">🌍</span><strong data-i18n="wizard.intZero">Zero Waste</strong>
+                </button>
+              </div>
+            </div>
+
             <button type="submit" class="btn btn-primary" data-i18n="profile.save">Save changes</button>
             <div class="form-status" data-form-status role="status" aria-live="polite"></div>
           </form>

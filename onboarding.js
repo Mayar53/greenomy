@@ -5,7 +5,7 @@
 import { requireAuthOrRedirect } from "./authservise.js";
 import { api, ApiError } from "./servisapi.js";
 import { createPlant } from "./serviseplant.js";
-import { t } from "./language.js";
+import { t, localized } from "./language.js";
 
 const DRAFT_KEY = "greenomy:onboarding-draft";
 
@@ -71,8 +71,10 @@ function initEcoProfilePage() {
     status.textContent = t("wizard.saving");
 
     try {
-      await api.patch("/users/me", { fullName, city });
-      saveDraft({ fullName, city, experience, plantTypes, interests });
+      // The preferences now persist on the account instead of being dropped —
+      // the recommender on the next page ranks against them.
+      await api.patch("/users/me", { fullName, city, experience, plantTypes, interests });
+      saveDraft({ fullName, city });
       window.location.href = "new-seed.html";
     } catch (err) {
       status.className = "form-status is-error";
@@ -302,8 +304,158 @@ function initIdentify() {
   });
 }
 
+/* ------------------------------------------------------------------ */
+/* Recommended for you (new-seed.html step 1)                          */
+/*                                                                     */
+/* Ranked server-side from the plant catalog by the member's city and  */
+/* climate, the current season, how long they'll wait, and the         */
+/* preferences they just gave. Picking a card selects that plant and   */
+/* carries on with the wizard.                                         */
+/* ------------------------------------------------------------------ */
+const DURATION_DEFAULT = "months";
+const POSITIVE_REASONS = ["climateMatch", "inSeason", "matchesPreference", "fitsDuration", "fitsExperience", "fitsSpace"];
+const CAVEAT_REASONS = ["outOfSeason", "differentClimate", "outsidePreference", "needsExperience"];
+
+function reasonChip(code, isCaveat) {
+  const chip = document.createElement("span");
+  chip.className = isCaveat ? "reason-chip is-caveat" : "reason-chip";
+  chip.textContent = t(`recommend.reason.${code}`);
+  return chip;
+}
+
+function recommendationCard(item, onPick) {
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = "recommend-card";
+  card.dataset.value = item.name;
+
+  const head = document.createElement("span");
+  head.className = "recommend-card-head";
+
+  const emoji = document.createElement("span");
+  emoji.className = "recommend-emoji";
+  emoji.textContent = item.emoji || "🌱";
+
+  const name = document.createElement("strong");
+  name.textContent = localized(item, "name") || item.name;
+
+  const days = document.createElement("span");
+  days.className = "recommend-days";
+  days.textContent = `${item.daysToHarvest} ${t("recommend.daysUnit")}`;
+
+  head.append(emoji, name, days);
+
+  const reasons = document.createElement("span");
+  reasons.className = "recommend-reasons";
+  item.reasons
+    .filter((code) => POSITIVE_REASONS.includes(code))
+    .slice(0, 3)
+    .forEach((code) => reasons.appendChild(reasonChip(code, false)));
+  item.reasons
+    .filter((code) => CAVEAT_REASONS.includes(code))
+    .slice(0, 1)
+    .forEach((code) => reasons.appendChild(reasonChip(code, true)));
+
+  const notes = document.createElement("span");
+  notes.className = "recommend-notes";
+  notes.textContent = localized(item, "notes") || item.notes || "";
+
+  const category = document.createElement("span");
+  category.className = "recommend-category";
+  category.textContent = `${t(`category.${item.category}`)} · ${t(`difficulty.${item.difficulty}`)}`;
+
+  card.append(head, reasons, notes, category);
+  card.addEventListener("click", () => onPick(item));
+  return card;
+}
+
+function renderRecommendations(container, payload) {
+  const list = container.querySelector("[data-recommend-list]");
+  const conditionsEl = container.querySelector("[data-recommend-conditions]");
+
+  // "Erbil · autumn · 24°C · subtropical"
+  const conditions = payload.conditions || {};
+  const parts = [];
+  if (conditions.city) parts.push(conditions.city);
+  if (conditions.season) parts.push(t(`season.${conditions.season}`));
+  if (typeof conditions.current?.temperature === "number") {
+    parts.push(`${Math.round(conditions.current.temperature)}°C`);
+  }
+  if (conditions.climate) parts.push(t(`climate.${conditions.climate}`));
+  if (conditions.approximate) parts.push(t("recommend.approximate"));
+  conditionsEl.textContent = parts.join(" · ");
+
+  list.replaceChildren();
+
+  const group = document.querySelector('[data-tile-group="plantType"]');
+  for (const item of payload.recommendations) {
+    list.appendChild(
+      recommendationCard(item, (chosen) => {
+        selectPlantType(group, chosen.name);
+        // Reuse the wizard's own Continue handler, which reads the selection.
+        const next = document.querySelector("[data-seed-wizard] [data-next]");
+        if (next) next.click();
+      })
+    );
+  }
+}
+
+async function loadRecommendations(container, duration) {
+  const status = container.querySelector("[data-recommend-status]");
+  status.className = "form-status is-loading";
+  status.textContent = t("recommend.loading");
+
+  try {
+    const payload = await api.get(`/recommendations?duration=${encodeURIComponent(duration)}`);
+    renderRecommendations(container, payload);
+    container.hidden = false;
+    status.className = "form-status";
+    status.textContent = "";
+  } catch (err) {
+    // The recommender is a bonus — if it fails the wizard's own tiles still work.
+    container.hidden = true;
+    console.warn("Recommendations unavailable:", err.message);
+  }
+}
+
+function initRecommendations() {
+  const container = document.querySelector("[data-recommend]");
+  if (!container) return;
+  if (!requireAuthOrRedirect("login.html")) return;
+
+  const durationGroup = container.querySelector("[data-recommend-duration]");
+  let duration = DURATION_DEFAULT;
+
+  function markActive() {
+    durationGroup.querySelectorAll("[data-value]").forEach((chip) => {
+      chip.classList.toggle("is-active", chip.dataset.value === duration);
+      chip.setAttribute("aria-pressed", chip.dataset.value === duration ? "true" : "false");
+    });
+  }
+
+  durationGroup.addEventListener("click", (e) => {
+    const chip = e.target.closest("[data-value]");
+    if (!chip) return;
+    duration = chip.dataset.value;
+    markActive();
+    loadRecommendations(container, duration);
+  });
+
+  markActive();
+  loadRecommendations(container, duration);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initEcoProfilePage();
   initNewSeedWizard();
   initIdentify();
+  initRecommendations();
+});
+document.addEventListener("greenomy:translated", () => {
+  // Re-render so the chips, names and reasons follow a language switch.
+  const container = document.querySelector("[data-recommend]");
+  if (container && !container.hidden) {
+    const active = container.querySelector("[data-recommend-duration] [aria-pressed='true']");
+    loadRecommendations(container, active ? active.dataset.value : DURATION_DEFAULT);
+  }
 });
