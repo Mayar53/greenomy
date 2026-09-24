@@ -102,12 +102,35 @@ PostgreSQL — it exits with a clear message if it can't connect.
 database in a temp dir, migrates and seeds it, and exercises auth, the points
 ledger, redemption concurrency, notifications, the admin dashboard, the security
 hardening, the plant catalog and alias search, journeys, photo verification with
-duplicate detection, and the reward engine (157 tests).
+duplicate detection, and the reward engine (181 tests).
 
 **Frontend** — any static file server from the project root, e.g.:
 ```
 npx serve .
 ```
+
+**Use it on your phone.** Run the whole stack bound to your network and open the
+address it prints:
+```
+$env:WEB_HOST="0.0.0.0"; npm start
+#   On your phone:  http://192.168.68.115:5173   (same Wi-Fi)
+```
+The site and the API are served from that one address — `/api` is proxied to the
+API on the same port — so a phone needs no CORS setup and no second port. (Opening
+the site from localhost keeps using `http://localhost:4000/api`, so Live Server on
+:5500 still works there.)
+
+**The in-app camera needs https.** Browsers only expose a camera in a secure
+context, and `http://192.168.x.x` is not one: the page says so and offers
+"Choose a photo" instead, which does work over http. For the camera itself, serve
+the same port over https — with your own certificate, or behind a tunnel:
+```
+$env:WEB_CERT="cert.pem"; $env:WEB_KEY="key.pem"; $env:WEB_HOST="0.0.0.0"; npm start
+npx localtunnel --port 5173      # https://<name>.loca.lt → the same /api proxy
+```
+Both serve the API from the same origin, so nothing else is required. If you serve
+the site some other way from another device (Live Server on :5500, say), set
+`window.GREENOMY_API_BASE_URL` before `main.js` loads.
 
 ## Project structure
 Flat at the project root: one HTML file per page, one JS module per concern

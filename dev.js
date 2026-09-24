@@ -9,6 +9,8 @@
 // Both run until you press Ctrl+C.
 const { spawn } = require("child_process");
 const http = require("http");
+const https = require("https");
+const os = require("os");
 const fs = require("fs");
 const path = require("path");
 
@@ -18,6 +20,28 @@ const API_PORT = Number(process.env.PORT || 4000);
 // Localhost only by default: this server publishes the whole project directory,
 // so it should not be reachable from the network. Override with WEB_HOST=0.0.0.0.
 const WEB_HOST = process.env.WEB_HOST || "127.0.0.1";
+
+// Optional HTTPS. A phone only exposes its camera in a secure context, so the
+// in-app camera cannot work over plain http on a LAN address:
+//   $env:WEB_CERT="cert.pem"; $env:WEB_KEY="key.pem"; npm start
+// Any PEM pair will do (mkcert can make one your phone will trust).
+const WEB_CERT = process.env.WEB_CERT || "";
+const WEB_KEY = process.env.WEB_KEY || "";
+const useHttps = Boolean(WEB_CERT && WEB_KEY);
+const scheme = useHttps ? "https" : "http";
+const apiTarget = "127.0.0.1";
+
+/** Every non-internal IPv4 address, so the printed URL can be typed into a
+ * phone instead of being guessed. */
+function lanAddresses() {
+  const found = [];
+  for (const list of Object.values(os.networkInterfaces())) {
+    for (const iface of list || []) {
+      if ((iface.family === "IPv4" || iface.family === 4) && !iface.internal) found.push(iface.address);
+    }
+  }
+  return found;
+}
 
 // Never serve these, even though they live inside the project: secrets, the
 // local database, dependencies, and server-side files.
@@ -52,9 +76,44 @@ const CONTENT_TYPES = {
   ".webmanifest": "application/manifest+json",
 };
 
+/**
+ * Forward /api to the local API. Serving the API from this port as well means
+ * the whole app is ONE origin, which is what lets an https tunnel (or a cert on
+ * the LAN) work end to end — and therefore lets a phone use its camera, since a
+ * secure context cannot call a plain-http API on another port.
+ */
+function proxyToApi(req, res) {
+  const upstream = http.request(
+    {
+      host: apiTarget,
+      port: API_PORT,
+      path: req.url,
+      method: req.method,
+      headers: { ...req.headers, host: `${apiTarget}:${API_PORT}` },
+    },
+    (response) => {
+      res.writeHead(response.statusCode || 502, response.headers);
+      response.pipe(res);
+    }
+  );
+
+  upstream.on("error", () => {
+    res.writeHead(502, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(JSON.stringify({ error: "The API is not running — start it from backend/ (npm start)." }));
+  });
+
+  req.pipe(upstream);
+}
+
 /** Minimal static file server — enough for this no-build-step frontend. */
 function serveStatic(req, res) {
   const requestPath = decodeURIComponent((req.url || "/").split("?")[0]);
+
+  if (requestPath === "/api" || requestPath.startsWith("/api/")) {
+    proxyToApi(req, res);
+    return;
+  }
+
   const filePath = path.resolve(ROOT, requestPath === "/" ? "index.html" : `.${requestPath}`);
   const relativePath = path.relative(ROOT, filePath);
 
@@ -93,7 +152,20 @@ api.on("exit", (code) => {
   process.exit(code || 0);
 });
 
-const web = http.createServer(serveStatic);
+let web;
+if (useHttps) {
+  let tls;
+  try {
+    tls = { cert: fs.readFileSync(WEB_CERT), key: fs.readFileSync(WEB_KEY) };
+  } catch (err) {
+    console.error(`\nCannot read the https certificate (WEB_CERT / WEB_KEY): ${err.message}\n`);
+    process.exit(1);
+  }
+  web = https.createServer(tls, serveStatic);
+} else {
+  web = http.createServer(serveStatic);
+}
+
 web.on("error", (err) => {
   if (err.code === "EADDRINUSE") {
     console.error(`\nPort ${WEB_PORT} is already in use — something else is serving the site.`);
@@ -105,8 +177,26 @@ web.on("error", (err) => {
 });
 
 web.listen(WEB_PORT, WEB_HOST, () => {
-  console.log(`\n  Website:  http://localhost:${WEB_PORT}`);
-  console.log(`  API:      http://localhost:${API_PORT}/api`);
+  const localOnly = WEB_HOST === "127.0.0.1" || WEB_HOST === "localhost";
+
+  console.log(`\n  Website:  ${scheme}://localhost:${WEB_PORT}`);
+  console.log(`  API:      ${scheme}://localhost:${WEB_PORT}/api  (proxied to :${API_PORT})`);
+
+  if (localOnly) {
+    console.log("\n  On a phone: this server is localhost-only. Restart it to reach it from the LAN:");
+    console.log(`    $env:WEB_HOST="0.0.0.0"; npm start`);
+  } else {
+    for (const address of lanAddresses()) {
+      console.log(`  On your phone:  ${scheme}://${address}:${WEB_PORT}   (same Wi-Fi)`);
+    }
+  }
+
+  if (!useHttps) {
+    console.log("\n  Note: over plain http a phone gets no in-app camera (browsers require a");
+    console.log("  secure context) — it can still choose a photo from the gallery. For the");
+    console.log("  camera, serve over https with WEB_CERT / WEB_KEY, or use an https tunnel.");
+  }
+
   console.log("\n  Press Ctrl+C to stop both.\n");
 });
 

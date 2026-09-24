@@ -133,14 +133,16 @@ function showCaptured() {
 }
 
 async function startCamera() {
-  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    cameraStatus(t("verify.cameraUnavailable"), true);
-    return;
-  }
-  // Browsers expose the camera only in a secure context (https, or localhost).
-  // Reached over a LAN address this looks like a broken camera, so say why.
+  // A secure context is checked FIRST. Outside one the browser does not even
+  // expose navigator.mediaDevices, so testing that first blames the camera for
+  // something the browser withheld — which is exactly what a phone opened over
+  // plain http on a LAN address sees.
   if (!window.isSecureContext) {
     cameraStatus(t("verify.cameraInsecure"), true);
+    return;
+  }
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    cameraStatus(t("verify.cameraUnavailable"), true);
     return;
   }
   try {

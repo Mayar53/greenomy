@@ -56,6 +56,11 @@ Partner logos and article images are external URLs and need no storage here.
 - `NODE_ENV=production` refuses to start unless `JWT_SECRET` is set to a real
   value, and an unset `CORS_ORIGIN` then allows *no* browser origin rather than
   falling back to a wildcard.
+- Outside production, an origin on a private network (`10.x`, `192.168.x`,
+  `172.16–31.x`, `*.local`, loopback) is also accepted, so testing from a phone on
+  the same Wi-Fi does not need the DHCP address pasted into `CORS_ORIGIN`. In
+  production only the explicit list counts. Note that `npm start` serves the site
+  and the API from one origin anyway, which avoids CORS entirely.
 - Content-Security-Policy belongs on the static host, not the API. A policy
   that fits this frontend (Google Fonts, the cdnjs QR library, inline
   `style` attributes):

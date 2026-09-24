@@ -286,7 +286,7 @@
     "chooseFile": "Choose a photo",
     "cameraUnavailable": "Camera unavailable — you can choose a photo instead.",
     "cameraStarting": "Camera is starting — one moment.",
-    "cameraInsecure": "The camera needs a secure (https) connection. Choose a photo instead, or open the site on localhost.",
+    "cameraInsecure": "The camera needs a secure (https) connection, so it is unavailable on this address. Choose a photo from your gallery instead — or open the site over https.",
     "addLocation": "Attach my location",
     "locationAdded": "Location attached",
     "locationDenied": "Location not available",

@@ -43,8 +43,31 @@ const allowedOrigins = (process.env.CORS_ORIGIN || "")
 const corsOrigin = allowedOrigins.length ? allowedOrigins : isProduction ? [] : "*";
 const corsWildcard = corsOrigin === "*" || (Array.isArray(corsOrigin) && corsOrigin.includes("*"));
 
+// In development a phone on the same Wi-Fi loads the site from
+// http://192.168.x.x:5173, and that origin is not in anyone's CORS_ORIGIN. A
+// DHCP address would go stale in .env the moment the router changed, so in
+// non-production a private-network origin is accepted too. Production is
+// untouched: there the explicit list is the only thing that counts.
+const PRIVATE_NETWORK_HOST =
+  /^(localhost|127\.\d+\.\d+\.\d+|::1|10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+|[^/]+\.local)$/i;
+
+function isLocalNetworkOrigin(origin) {
+  if (isProduction || !origin) return false;
+  try {
+    return PRIVATE_NETWORK_HOST.test(new URL(origin).hostname);
+  } catch {
+    return false;
+  }
+}
+
 app.use(cors({
-  origin: corsWildcard ? "*" : corsOrigin,
+  origin(origin, callback) {
+    if (!origin) return callback(null, true); // same-origin requests and non-browser clients
+    if (corsWildcard) return callback(null, true);
+    if (corsOrigin.includes(origin)) return callback(null, true);
+    if (isLocalNetworkOrigin(origin)) return callback(null, true);
+    return callback(null, false); // no CORS headers -> the browser blocks it
+  },
   credentials: true,
 }));
 app.use(express.json({ limit: "5mb" }));

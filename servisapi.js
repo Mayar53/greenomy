@@ -2,7 +2,36 @@
 // Frontend pages never call fetch() directly against backend routes;
 // they go through the service layer, which goes through this client.
 
-const API_BASE_URL = window.GREENOMY_API_BASE_URL || "http://localhost:4000/api";
+const API_PORT = 4000;
+
+/**
+ * Where the API lives, worked out from how this page was served — so the same
+ * static site works on a laptop, on a phone and behind an https tunnel with no
+ * build step:
+ *
+ *   window.GREENOMY_API_BASE_URL   an explicit override always wins
+ *   localhost / 127.0.0.1          http://localhost:4000/api — works with either
+ *                                  `npm start` or a Live Server on :5500
+ *   anything else                  /api on this same origin
+ *
+ * The last case is the phone one, and same-origin is deliberate: `npm start`
+ * (dev.js) serves the API under /api on the same port, so a phone gets no CORS
+ * to negotiate, no mixed content over https, and no browser block on reaching a
+ * second port. Reaching the API directly at <host>:4000 from a page on the LAN
+ * is blocked by Chrome's local-network rules, so that route is avoided.
+ */
+function resolveApiBase() {
+  if (window.GREENOMY_API_BASE_URL) return window.GREENOMY_API_BASE_URL;
+
+  const { protocol, hostname } = window.location;
+  if (protocol === "file:") return `http://localhost:${API_PORT}/api`;
+  if (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1" || hostname === "[::1]") {
+    return `http://localhost:${API_PORT}/api`;
+  }
+  return "/api";
+}
+
+const API_BASE_URL = resolveApiBase();
 
 class ApiError extends Error {
   constructor(message, status, payload) {
