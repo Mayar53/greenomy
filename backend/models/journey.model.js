@@ -6,9 +6,9 @@ const { query } = require("../config/db");
 // Single line on purpose: listByUser() prefixes each column with "j.".
 const JOURNEY_COLUMNS =
   "journey_id, user_plant_id, user_id, started_at, expected_duration_days, current_stage, status, completed_at, created_at, updated_at";
-const MILESTONE_COLUMNS = `milestone_id, journey_id, stage_key, label_en, sort_order,
-                           expected_day_from, expected_day_to, recommended_window, completed_at,
-                           verification_status, verification_id`;
+// Single line on purpose: milestoneForUser() prefixes each column with "m.".
+const MILESTONE_COLUMNS =
+  "milestone_id, journey_id, stage_key, label_en, sort_order, expected_day_from, expected_day_to, recommended_window, completed_at, verification_status, verification_id";
 
 /** Must run inside withTransaction — the journey and its milestones land together. */
 async function create(client, { userId, userPlantId, expectedDurationDays, currentStage }) {
@@ -81,6 +81,32 @@ async function listMilestones(journeyId) {
   return rows;
 }
 
+/** A milestone plus its journey, scoped to the owner — so a photo can be tied
+ * to a milestone without the client naming the journey. */
+async function milestoneForUser(milestoneId, userId) {
+  const { rows } = await query(
+    `SELECT m.${MILESTONE_COLUMNS.split(", ").join(", m.")}, j.journey_id, j.user_id, j.status AS journey_status
+       FROM journey_milestones m
+       JOIN journeys j ON j.journey_id = m.journey_id
+      WHERE m.milestone_id = $1 AND j.user_id = $2`,
+    [milestoneId, userId]
+  );
+  return rows[0] || null;
+}
+
+/** Must run inside withTransaction. */
+async function setMilestoneVerification(client, milestoneId, { verificationId, verificationStatus }) {
+  const { rows } = await client.query(
+    `UPDATE journey_milestones
+        SET verification_id = COALESCE($2, verification_id),
+            verification_status = COALESCE($3, verification_status)
+      WHERE milestone_id = $1
+      RETURNING ${MILESTONE_COLUMNS}`,
+    [milestoneId, verificationId || null, verificationStatus || null]
+  );
+  return rows[0] || null;
+}
+
 async function findMilestone(journeyId, milestoneId) {
   const { rows } = await query(
     `SELECT ${MILESTONE_COLUMNS} FROM journey_milestones WHERE journey_id = $1 AND milestone_id = $2`,
@@ -132,6 +158,8 @@ module.exports = {
   listByUser,
   listMilestones,
   findMilestone,
+  milestoneForUser,
+  setMilestoneVerification,
   completeMilestone,
   setStage,
   complete,

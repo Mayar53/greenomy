@@ -4,23 +4,26 @@
 // the server (backend/services/verification-provider.js).
 import { requireAuthOrRedirect, fetchCurrentUser } from "./authservise.js";
 import { listMyPlants } from "./serviseplant.js";
-import { submitVerification } from "./verifyservice.js";
+import { submitVerificationFile, issueChallenge } from "./verifyservice.js";
 import { ApiError } from "./servisapi.js";
 import { t } from "./language.js";
 
 const SAMPLE = 160;      // analysis size, longest edge (px)
 const PREVIEW_MAX = 720; // stored photo size, longest edge (px)
-const MAX_UPLOAD_BYTES = 5 * 1024 * 1024; // matches the API's 5mb JSON body limit
+const MAX_UPLOAD_BYTES = 5 * 1024 * 1024; // client-side guard, below the server's IMAGE_MAX_BYTES
 
 let stream = null;
 let photoDataUrl = null;
 let pixelStats = null;
 let coords = null;
+let challengeId = null;
 
 const el = {
   empty: document.querySelector("[data-verify-empty]"),
   form: document.querySelector("[data-verify-form]"),
   select: document.querySelector("[data-plant-select]"),
+  challengeBox: document.querySelector("[data-challenge-box]"),
+  challengeCode: document.querySelector("[data-challenge-code]"),
   video: document.querySelector("[data-camera-video]"),
   preview: document.querySelector("[data-camera-preview]"),
   placeholder: document.querySelector("[data-camera-placeholder]"),
@@ -214,6 +217,24 @@ function retake() {
   setStatus("", "");
 }
 
+/** Fetches a fresh code for the chosen plant. The code is a trust signal, not a
+ * requirement for an ordinary garden photo — if it cannot be fetched, the photo
+ * still submits. */
+async function loadChallenge(plantId) {
+  challengeId = null;
+  if (el.challengeBox) el.challengeBox.hidden = true;
+  if (!plantId) return;
+
+  try {
+    const challenge = await issueChallenge(plantId);
+    challengeId = challenge.challengeId;
+    if (el.challengeCode) el.challengeCode.textContent = challenge.code;
+    if (el.challengeBox) el.challengeBox.hidden = false;
+  } catch {
+    // no code shown; the submission still works
+  }
+}
+
 function attachLocation() {
   if (!navigator.geolocation) {
     cameraStatus(t("verify.locationDenied"), true);
@@ -243,6 +264,7 @@ function showResult(record) {
   el.scoreValue.textContent = `${confidence}%`;
   el.result.classList.toggle("is-approved", approved);
   el.verdict.textContent = approved ? t("verify.approved") : t("verify.pending");
+  if (record.requires_review) el.verdict.textContent += ` · ${t("verify.reviewNote")}`;
   el.verdict.className = `verify-verdict ${approved ? "is-approved" : "is-pending"}`;
   el.points.textContent = "";
   if (approved) {
@@ -271,12 +293,15 @@ async function submit() {
   setStatus("loading", t("verify.analyzing"));
 
   try {
-    const record = await submitVerification({
+    // Send the file itself as multipart; the server measures the real bytes, so
+    // no client-side pixel stats are trusted or sent.
+    const blob = await (await fetch(photoDataUrl)).blob();
+    const record = await submitVerificationFile({
       plantId,
-      imageUrl: photoDataUrl,
+      blob,
       gpsLat: coords ? coords.lat : undefined,
       gpsLong: coords ? coords.lon : undefined,
-      pixelStats,
+      challengeId,
     });
     showResult(record);
   } catch (err) {
@@ -306,6 +331,10 @@ async function init() {
       el.select.appendChild(option);
     });
     el.form.hidden = false;
+
+    // A code per attempt: shown for the chosen plant, refreshed on change.
+    el.select.addEventListener("change", () => loadChallenge(el.select.value));
+    loadChallenge(el.select.value);
   } catch (err) {
     if (err instanceof ApiError && err.status === 401) {
       window.location.href = "login.html";
@@ -324,6 +353,7 @@ async function init() {
     el.result.hidden = true;
     el.form.hidden = false;
     retake();
+    loadChallenge(el.select.value); // the previous code was consumed
   });
 }
 

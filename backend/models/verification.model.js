@@ -6,8 +6,10 @@ async function create(client, v) {
   const { rows } = await client.query(
     `INSERT INTO verifications
        (plant_id, user_id, image_url, gps_lat, gps_long, captured_at,
-        ai_confidence_score, ai_provider, ai_metrics, approval_status)
-     VALUES ($1, $2, $3, $4, $5, now(), $6, $7, $8, $9)
+        ai_confidence_score, ai_provider, ai_metrics, approval_status,
+        image_sha256, storage_path, challenge_id, milestone_id,
+        duplicate_status, requires_review, verification_result)
+     VALUES ($1, $2, $3, $4, $5, now(), $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
      RETURNING *`,
     [
       v.plantId,
@@ -19,6 +21,13 @@ async function create(client, v) {
       v.provider || null,
       v.metrics ? JSON.stringify(v.metrics) : null,
       v.approvalStatus,
+      v.imageSha256 || null,
+      v.storagePath || null,
+      v.challengeId || null,
+      v.milestoneId || null,
+      v.duplicateStatus || "none",
+      v.requiresReview === true,
+      v.verificationResult ? JSON.stringify(v.verificationResult) : null,
     ]
   );
   return rows[0];
@@ -88,6 +97,16 @@ async function reject(client, verificationId, adminId, reason) {
   return rows[0] || null;
 }
 
+/** How many photos this member has already submitted for a plant — the
+ * "have we seen this plant before" signal for journey consistency. */
+async function countForPlant(userId, plantId) {
+  const { rows } = await query(
+    "SELECT count(*)::int AS n FROM verifications WHERE user_id = $1 AND plant_id = $2",
+    [userId, plantId]
+  );
+  return rows[0].n;
+}
+
 async function countApprovedByUser(userId) {
   const { rows } = await query(
     `SELECT count(*)::int AS n
@@ -106,5 +125,6 @@ module.exports = {
   listPending,
   approve,
   reject,
+  countForPlant,
   countApprovedByUser,
 };

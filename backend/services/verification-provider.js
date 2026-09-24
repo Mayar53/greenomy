@@ -91,6 +91,62 @@ class AIVerificationProvider {
   }
 }
 
+// ------------------------------------------------------- multi-signal ------
+// The challenge and plant-identity checks need a vision model, and are only
+// attempted when one is configured. Everything else (image integrity, hashes,
+// duplicates) is computed locally, so a submission is still triaged with no key
+// — it just cannot be auto-verified, so it goes to review instead.
+const MULTI_SIGNAL_SYSTEM = "You check photos for a plant-growing challenge. Reply with JSON only — no prose, no code fences.";
+
+function multiSignalPrompt(plantName, challengeCode) {
+  return [
+    "You are checking ONE photo submitted for a plant-growing challenge.",
+    plantName ? `It should show a living ${plantName} plant being grown.` : "It should show a living plant being grown.",
+    challengeCode
+      ? `It should ALSO show the code "${challengeCode}" — handwritten or printed — somewhere clearly in the frame.`
+      : "",
+    "",
+    "Reply with ONLY this JSON shape:",
+    '{"plantMatch": <true|false|null>, "challengePassed": <true|false|null>, "confidence": <0-1>, "reason": "<one short sentence>"}',
+    "plantMatch: does the plant look like what was expected? Use null if you cannot tell.",
+    challengeCode ? "challengePassed: is the code clearly visible and correct? Use null if you cannot tell." : "challengePassed: null.",
+    "confidence: how certain you are this is a genuine photo of a growing plant.",
+    "Never guess — use null rather than inventing an answer.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+const asTriState = (value) => (value === true ? true : value === false ? false : null);
+
+/**
+ * Optional vision check of the challenge code and the plant identity.
+ * Returns null when no model is configured; throws only on a provider failure
+ * (the caller treats that as "unknown", never as a pass).
+ */
+async function verifyPhoto({ imageUrl, plantName, challengeCode }) {
+  if (!ai.isConfigured()) return null;
+
+  const reply = await ai.chat({
+    messages: [
+      { role: "system", content: MULTI_SIGNAL_SYSTEM },
+      { role: "user", content: ai.userContent(multiSignalPrompt(plantName, challengeCode), imageUrl) },
+    ],
+    maxTokens: 1000,
+  });
+
+  const parsed = ai.parseJson(reply);
+  const confidence = Number(parsed.confidence);
+
+  return {
+    plantMatch: asTriState(parsed.plantMatch),
+    challengePassed: asTriState(parsed.challengePassed),
+    confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(1, confidence)) : null,
+    reason: typeof parsed.reason === "string" ? parsed.reason.slice(0, 300) : null,
+    provider: "ai",
+  };
+}
+
 function getVerificationProvider() {
   const configured = (process.env.VERIFICATION_PROVIDER || "").trim().toLowerCase();
   if (configured === "mock") return new MockVerificationProvider();
@@ -109,6 +165,8 @@ function getVerificationProvider() {
 
 module.exports = {
   getVerificationProvider,
+  verifyPhoto,
+  multiSignalPrompt,
   MockVerificationProvider,
   HeuristicVerificationProvider,
   AIVerificationProvider,

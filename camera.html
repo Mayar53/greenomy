@@ -58,6 +58,15 @@
           <select id="plantId" name="plantId" data-plant-select></select>
         </div>
 
+        <!-- A fresh code each attempt: the photo has to show it, so an old or
+             borrowed photo cannot be reused. -->
+        <div class="verify-challenge" data-challenge-box hidden>
+          <p class="form-note" data-i18n="verify.challengeLead">
+            Write or show this code somewhere in the photo — it changes every time.
+          </p>
+          <div class="challenge-code" data-challenge-code aria-live="polite">----</div>
+        </div>
+
         <div class="verify-stage" data-camera-stage>
           <video data-camera-video playsinline muted autoplay hidden></video>
           <img data-camera-preview alt="" hidden />

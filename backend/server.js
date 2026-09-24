@@ -94,6 +94,13 @@ app.use((err, req, res, next) => {
   if (err && err.code === "22P02") {
     return res.status(400).json({ error: "Invalid request" });
   }
+  // A rejected upload is the client's problem, not an internal error.
+  if (err && err.name === "MulterError") {
+    const status = err.code === "LIMIT_FILE_SIZE" ? 413 : 400;
+    return res.status(status).json({
+      error: err.code === "LIMIT_FILE_SIZE" ? "The image is larger than the allowed size" : "Invalid upload",
+    });
+  }
 
   const status = err.status || 500;
   // Client errors are expected and handled; only unexpected failures are worth

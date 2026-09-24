@@ -272,6 +272,8 @@
     "lead": "Take a photo of your plant. The checker looks for real greenery and a bright, sharp shot, then awards points.",
     "hint": "Tip: fill the frame with leaves, keep it bright, and avoid blur.",
     "choosePlant": "Which plant is this?",
+    "challengeLead": "Write or show this code somewhere in the photo — it changes every time.",
+    "reviewNote": "sent for review",
     "noPlants": "You don't have a plant yet.",
     "noPlantsCta": "Plant your first seed",
     "startCamera": "Start camera",

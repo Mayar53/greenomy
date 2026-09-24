@@ -11,6 +11,9 @@ backend/.env
 .pgdata/
 backend/.pgdata/
 
+# Verification images written by the API (content-addressed, never committed)
+backend/uploads/
+
 # OS / editor
 Thumbs.db
 desktop.ini

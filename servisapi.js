@@ -67,11 +67,39 @@ async function request(method, path, { body, params, auth = true } = {}) {
   return payload;
 }
 
+/** multipart/form-data upload. Kept separate from request() because the browser
+ * must set the multipart Content-Type (with its boundary) itself — setting it
+ * by hand breaks the upload. */
+async function requestForm(path, formData) {
+  const url = new URL(`${API_BASE_URL}${path}`, window.location.origin);
+  const headers = {};
+  const token = getAuthToken();
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  let response;
+  try {
+    response = await fetch(url.toString(), { method: "POST", headers, body: formData });
+  } catch {
+    throw new ApiError(await networkErrorMessage(), 0, null);
+  }
+
+  const contentType = response.headers.get("content-type") || "";
+  const payload = contentType.includes("application/json") ? await response.json().catch(() => null) : null;
+
+  if (!response.ok) {
+    const message = (payload && (payload.message || payload.error)) || `Request failed (${response.status})`;
+    throw new ApiError(message, response.status, payload);
+  }
+
+  return payload;
+}
+
 export const api = {
   get: (path, opts) => request("GET", path, opts),
   post: (path, body, opts) => request("POST", path, { ...opts, body }),
   patch: (path, body, opts) => request("PATCH", path, { ...opts, body }),
   delete: (path, opts) => request("DELETE", path, opts),
+  postForm: (path, formData) => requestForm(path, formData),
 };
 
 export { ApiError };
