@@ -35,13 +35,6 @@ async function listByPlants(plantIds) {
   return rows;
 }
 
-async function listSources() {
-  const { rows } = await query(
-    `SELECT source_id, name, url, organization, type, accessed_at FROM knowledge_sources ORDER BY source_id`
-  );
-  return rows;
-}
-
 async function listVarieties(plantId) {
   const { rows } = await query(
     `SELECT variety_id, plant_id, name, description, growth_duration_days,
@@ -54,4 +47,4 @@ async function listVarieties(plantId) {
   return rows;
 }
 
-module.exports = { listByPlant, listByPlants, listSources, listVarieties };
+module.exports = { listByPlant, listByPlants, listVarieties };

@@ -7,7 +7,8 @@ set `window.GREENOMY_API_BASE_URL` (before `main.js` loads) to the deployed
 API's URL if it isn't served from the same origin under `/api`.
 
 ## Backend
-1. `cd backend && npm install`
+1. `cd backend && npm install` (installs `sharp`, which ships prebuilt binaries
+   — no system packages required)
 2. Copy `.env.example` → `backend/.env` and fill in real values, especially
    `DATABASE_URL` and `JWT_SECRET`.
 3. Provide PostgreSQL. `DB_DRIVER` selects the driver: `pglite` runs Postgres
@@ -32,9 +33,22 @@ API's URL if it isn't served from the same origin under `/api`.
 - Use different `JWT_SECRET` and `DATABASE_URL` values per environment.
 
 ## Storage & media
-Verification photos, partner logos, and article images should go to
-object storage (the `.env.example` `STORAGE_*` variables assume an S3-
-compatible bucket), not the application server's local disk.
+Verification photos are measured and stored by `services/image.service.js`:
+
+- the **original** bytes are written to `IMAGE_STORAGE_DIR` (default
+  `backend/uploads/`, gitignored), content-addressed by SHA-256 — identical
+  bytes never produce a second file, and the filename cannot be used for path
+  traversal;
+- the database row keeps only a **bounded preview** (≤640px JPEG data URL), so
+  rows stay small while the member's history still renders;
+- originals are served through the authenticated
+  `GET /api/verifications/:id/image` — there is no public static directory, so
+  GPS-tagged originals are never publicly reachable.
+
+`IMAGE_MAX_BYTES` caps an upload (default 8 MB; the JSON body limit is 5 MB).
+`IMAGE_STORAGE_DIR` should point at a volume/disk that persists across deploys.
+
+Partner logos and article images are external URLs and need no storage here.
 
 ## Security
 - The API sets `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`,
@@ -90,6 +104,22 @@ Everything AI is off until a key exists; nothing else in the app depends on it.
 - `AI_MODEL` — defaults to `gpt-4o-mini`. Use a vision-capable model.
 - `VERIFICATION_PROVIDER=ai` switches photo scoring from the offline heuristic
   to the model. Without a key it silently keeps using the heuristic.
+- `AI_MAX_HISTORY` (default 8) is how many earlier turns the assistant replays;
+  `AI_RATE_LIMIT_PER_MIN` (default 12) is the per-minute burst cap. Neither is a
+  question limit.
+
+**The challenge code.** A reward-eligible (milestone) photo must show a fresh
+code from `POST /api/verifications/challenge`. Confirming that code needs a
+vision model: with no key the code cannot be *verified*, so the photo is marked
+`requires_review` and queued rather than auto-approving. That is deliberate —
+the system never pretends to have proof it does not have. An operator can still
+approve it from the admin queue.
+
+**Facts vs the model.** Exact values (germination, durations, temperatures, pH,
+seasons, harvest windows) come from `plant_knowledge` / `plant_catalog`, each
+with a `knowledge_sources` reference. The assistant is instructed to use only
+those numbers and to say when it does not have one. To add facts, extend
+`plants.json` and re-seed (`npm run seed`) — no code change.
 
 **Grounding — how to teach the assistant.** The assistant answers from Green Hub
 articles, not from the model's memory. Publish an article (see `greenhub.json`
@@ -143,6 +173,10 @@ Related knobs: `WEATHER_CACHE_TTL_MS` (default 3600000), `WEATHER_TIMEOUT_MS`
 - Log aggregation / monitoring
 - CDN / image optimization pipeline
 - Frontend tests (the suite in `backend/tests/` is API-only)
+- Internet-wide reverse-image search. Duplicate detection compares against
+  **this platform's** stored images plus provenance (challenge code, hashes);
+  it cannot know an image was taken from Google Images. Suspicious images are
+  flagged for review, never auto-declared fraud.
 
 This file should be expanded as those pieces are actually built, rather
 than describing infrastructure that doesn't exist yet.

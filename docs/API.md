@@ -21,31 +21,41 @@ nothing in these routes is web-specific.
 | Method | Path | Auth | Notes |
 |---|---|---|---|
 | POST | /ai/identify | user | `{ imageUrl }` → `{ plantType, confidence, alternatives }` |
-| POST | /ai/assistant | user | `{ message, lang? }` → `{ reply, sources, answeredBy }` — answered from Greenomy's own content plus the member's plants |
+| POST | /ai/assistant | user | `{ message, lang?, history? }` → `{ reply, sources, answeredBy, intent, language }` — answered from Greenomy's own content plus the member's plants. `history` (recent `{role, content}` turns, bounded server-side) continues a conversation; there is no message cap |
 
-Both are rate-limited (40 per 15 min) because every call costs money at the
-provider. Without a key, `identify` returns **503**; the assistant does not —
-see below.
+Both are rate-limited (a rolling 15-minute cap and a per-minute burst cap)
+because every call costs money at the provider. This is cost protection, not a
+question limit — a conversation may continue freely within it. Without a key,
+`identify` returns **503**; the assistant does not — see below.
 
-The assistant does not answer from the model's general memory. Each request
-retrieves the relevant **Green Hub articles** (keyword/synonym matching over
-title, description, body and translations — no vector store), the catalog facts
-for any plant the question names, the member's own plants and their local
-conditions, and puts them in front of the model as **CONTEXT**. `sources` lists
-the slugs of the guides that grounded the answer. When the CONTEXT doesn't cover
-the question, the model says so instead of inventing an answer. To teach it
+The assistant answers through an explicit pipeline: **language → entities
+(plant and variety) → intent → retrieval → conditions → member context →
+context builder → model**. Each request retrieves the relevant **Green Hub
+articles** (keyword/synonym/stem matching over title, description, body and
+translations — no vector store), the catalog facts and **sourced knowledge rows**
+for any plant the question names (exact values, never the model's memory), the
+member's own plants, and conditions **only when the question depends on them**.
+`sources` lists the slugs of the guides that grounded the answer. To teach it
 something new, add a Green Hub article — no code change needed.
+
+Retrieved text and the member's message are treated as **untrusted data**: they
+are delimited in the prompt and cannot override the system rules, so a guide (or
+a message) cannot turn the assistant into anything else.
+
+`lang` (`en`/`ar`/`ku`) is used when supplied; otherwise the language is detected
+from the message, and the model is told to reply in that language and match the
+member's dialect (Iraqi Arabic stays Iraqi Arabic, Kurdish stays Kurdish).
 
 If the model is unavailable — no key, a spent daily quota, an outage — the
 backend answers from the retrieved guide itself and reports `answeredBy: "guide"`
-rather than `"ai"`, so the feature still works. `lang` (`en`/`ar`/`ku`) picks
-which translation that answer is drawn from.
+rather than `"ai"`, so the feature still works.
 
 ## Recommendations
 | Method | Path | Auth | Notes |
 |---|---|---|---|
 | GET | /recommendations | user | `?duration=weeks\|months\|season\|any` and `?space=indoor\|outdoor\|both` → `{ conditions, appliedPreference, recommendations }` |
-| GET | /catalog | – | the plant catalog the recommendations are drawn from |
+
+The recommendation catalog is served by `GET /catalog` (see **Catalog** above).
 
 The ranking is **deterministic** (`services/recommendation.service.js`), scored
 against climate, season, duration, stored preferences, experience and space.
@@ -62,20 +72,52 @@ live lookup is unavailable or the city isn't recognised, in which case
 
 ## Users
 | GET /users/me | user |
-| PATCH /users/me | user | `{ fullName?, city? }` |
+| PATCH /users/me | user | `{ fullName?, city?, experience?, plantTypes?, interests? }` |
 | GET /users/me/impact | user | plants grown, verified photos, est. CO₂ |
 
 ## Plants
 | GET /plants | user | current user's plants |
-| POST /plants | user | `{ plantType, plantingMethod?, plantingDate?, location? }` |
+| POST /plants | user | `{ canonicalPlantId }` **or** `{ plantType }` / `{ customName }`, plus `plantingMethod?`, `plantingDate?`, `location?`, `varietyId?`. A catalog plant also starts its growth journey |
 | GET /plants/:id | user | |
 | PATCH /plants/:id | user | |
 | DELETE /plants/:id | user | |
 
+## Catalog
+| GET /catalog | – | active catalog rows |
+| GET /catalog/search?q=&lang=&category=&limit= | – | alias-aware search: English, scientific, MSA, Iraqi and Kurdish names all resolve to one canonical plant |
+| GET /catalog/:slug | – | one plant with its `varieties` and sourced `knowledge` |
+
+## Journeys
+| GET /journeys | user | the member's journeys, each with its milestones |
+| POST /journeys | user | `{ plantId }` — starts (or returns) that plant's journey |
+| GET /journeys/:id | user | |
+| POST /journeys/:id/milestones/:milestoneId/complete | user | marks a milestone reached (idempotent) |
+
+Milestone windows are computed from the plant's own germination period and
+days-to-harvest — stage-based, not a fixed calendar.
+
 ## Verifications
-| POST /verifications | user | `{ plantId, imageUrl, gpsLat?, gpsLong? }` — scored by the verification provider; ≥85% confidence auto-approves and awards points, otherwise queued as `pending` |
+| POST /verifications | user | multipart (`image` file, `plantId`, `challengeId?`, `milestoneId?`, `gpsLat?`, `gpsLong?`) or the legacy JSON `{ plantId, imageUrl, … }`. The server measures the real bytes |
+| POST /verifications/challenge | user | `{ plantId? }` → `{ challengeId, code, expiresAt }` — a fresh code to show in the photo |
 | GET /verifications/:id | user | |
+| GET /verifications/:id/image | user | the stored **original** photo, owner only |
 | GET /verifications/history | user | |
+
+The decision uses several signals, not one model:
+
+- **integrity** — sha256 plus perceptual hashes (aHash/dHash/pHash) and
+  green/brightness/sharpness stats, all computed server-side from the bytes;
+- **duplicates** — exact (sha256) and near (perceptual Hamming distance) matches
+  against **every** user's submissions;
+- **challenge** — a fresh, expiring, single-use code a reward-eligible
+  (milestone) photo must show;
+- **identity** — the expected plant, when a vision model is configured.
+
+A plain photo auto-approves at ≥85% confidence. A duplicate, or a milestone
+photo whose code could not be confirmed, is marked `requires_review` and queued
+— never auto-declared fraud. `verification_result` records the signals so an
+admin can see why. Points are awarded by the reward engine on approval, and the
+award is idempotent.
 
 ## Admin verification queue
 | GET /admin/verifications | admin | pending queue |

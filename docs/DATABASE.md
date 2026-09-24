@@ -1,27 +1,29 @@
 # Greenomy — Database Schema (PostgreSQL)
 
 This is the **live** schema, not a target. It is created by
-`backend/database/migrations/001_init.sql` and queried through
+`backend/database/migrations/*.sql` (001–008) and queried through
 `backend/models/*.model.js`.
 
 ```
 cd backend
 npm run migrate   # applies database/migrations/*.sql (tracked in schema_migrations)
-npm run seed      # admin account, partners, rewards, Green Hub articles
+npm run seed      # admin, partners, rewards, Green Hub, plant catalog, aliases,
+                  # varieties, knowledge, stage templates — then links existing plants
 ```
 
 Point `DATABASE_URL` at a local Docker instance (`docker compose up -d db` at
 the project root) or a managed provider (set `DATABASE_SSL=true`).
 
 ## Conventions
-- Primary keys are `uuid` with `DEFAULT gen_random_uuid()` — **except
-  `rewards.reward_id`**, which is `text` holding the stable `rw-001` ids from
-  `rewards.json`. That keeps seeding idempotent and the existing frontend ids
-  valid.
+- Primary keys are `uuid` with `DEFAULT gen_random_uuid()` — **except**
+  `rewards.reward_id` (text, the stable `rw-001` ids) and `plant_catalog.id`
+  (text, e.g. `pl-tomato`), both so seeding stays idempotent.
 - User-owned rows cascade on user delete.
 - `users.total_points` is a cached sum kept in sync by the backend inside the
   same transaction that writes `point_transactions`; the ledger remains the
   auditable record.
+- Structured reference facts carry a **source** (`knowledge_sources`) — the
+  database, not the model, is the source of truth for exact values.
 
 ## users
 | column | type | notes |
@@ -34,149 +36,243 @@ the project root) or a managed provider (set `DATABASE_SSL=true`).
 | total_points | integer default 0 | `CHECK (total_points >= 0)` |
 | role | text | `user` \| `admin` \| `super_admin` |
 | status | text | `active` \| `suspended` |
-| experience | text nullable | `beginner` \| `some-experience` \| `experienced` \| `expert` — compared against a plant's difficulty |
-| plant_types | text[] | preferred categories; the recommender's preference signal |
+| experience | text nullable | `beginner` \| `some-experience` \| `experienced` \| `expert` |
+| plant_types | text[] | preferred categories |
 | interests | text[] | sustainability interests from onboarding |
 | created_at / updated_at | timestamptz | |
-
-`experience`, `plant_types` and `interests` are the answers the onboarding wizard
-collects. They were previously written to `sessionStorage` and discarded when the
-wizard finished; since `004_plant_catalog.sql` they persist and drive the
-recommendations.
 
 ## plants
 | column | type |
 |---|---|
 | plant_id | uuid PK |
 | user_id | uuid FK → users |
-| plant_type | text |
-| **planting_method** | text |
+| plant_type | text (display name) |
+| planting_method | text |
 | stage | text (`seed`/`sprout`/`plant`) |
 | planting_date | timestamptz |
-| **location** | text |
+| location | text |
 | last_watered / next_watering | timestamptz |
 | status | text |
+| **canonical_plant_id** | text FK → plant_catalog (nullable) |
+| **variety_id** | uuid FK → plant_varieties (nullable) |
+| **custom_name** | text (a plant outside the catalog) |
 | created_at / updated_at | timestamptz |
 
-## verifications
-| column | type |
-|---|---|
-| verification_id | uuid PK |
-| plant_id | uuid FK → plants |
-| user_id | uuid FK → users |
-| image_url | text (base64 data URL today) |
-| gps_lat / gps_long | double precision |
-| captured_at | timestamptz |
-| ai_confidence_score | numeric(4,2) |
-| **ai_provider** | text |
-| **ai_metrics** | jsonb |
-| approval_status | text (`pending`/`approved`/`rejected`) |
-| admin_reviewed_by | uuid FK → users (nullable) |
-| rejection_reason | text |
-| created_at / reviewed_at | timestamptz |
-
-GPS is stored for internal verification and aggregate stats only — never
-exposed at full precision through a public API response.
-
-## partners
-| partner_id | uuid PK | name | text **unique** (makes seeding idempotent) | logo_url | website | description | contact_email | is_active | created_at |
-
-## rewards
-| column | type | notes |
-|---|---|---|
-| reward_id | **text PK** | the `rw-001` id from `rewards.json` |
-| partner_id | uuid FK → partners | nullable |
-| partner | text | denormalised display name returned by the API |
-| category | text | `restaurant` \| `courses` \| `supplies` \| `university` |
-| title / description | text | English base copy |
-| image_url | text | |
-| points_required | integer | |
-| expires_at | timestamptz | |
-| is_active | boolean | |
-| i18n | jsonb | per-record AR/KU translations |
-| created_at / updated_at | timestamptz | |
-
-## redemptions
-| redemption_id | uuid PK | user_id FK | reward_id FK → rewards | partner_id FK | points_spent | qr_code_hash (nullable) | redemption_token **unique** | is_used | expires_at | used_at | created_at |
-
-`redemption_token` is the only thing encoded in the QR. It is opaque,
-single-use and time-limited. Consumption is a conditional UPDATE
-(`WHERE is_used = false AND expires_at > now()`), so two simultaneous scans
-resolve to exactly one winner.
-
-## point_transactions
-| transaction_id | uuid PK | user_id FK | amount (signed) | transaction_type | description | reference_id | created_at |
-
-Every points change — earned or spent — is written here inside the same
-transaction as the `users.total_points` update.
-
-## waitlist
-| waitlist_id | uuid PK | full_name | email **unique** | city | gardening_interests | created_at |
-
-The unique index is the authority; a duplicate is mapped to HTTP 409.
-
-## green_hub_content
-| column | type |
-|---|---|
-| content_id | uuid PK |
-| slug | text **unique** |
-| title | text |
-| description | text |
-| category | text (`food-seed-recycling`/`home-gardening`/`plant-care`) |
-| content_type | text (`article`) |
-| **body** | jsonb (array of paragraphs) |
-| image_url / video_url | text |
-| reading_time | integer |
-| is_published | boolean |
-| **i18n** | jsonb (per-record AR/KU translations) |
-| created_at / updated_at | timestamptz |
-
-## notifications
-| notification_id | uuid PK | user_id FK | title | message | type (`watering`/`growth`/`reward`/`verification`) | is_read | created_at |
-
-## password_resets
-| reset_id | uuid PK | user_id FK → users | token_hash (SHA-256, **unique**) | expires_at | used_at | created_at |
-
-Only the hash of a reset token is stored, so a database leak yields no working
-links. Tokens are single-use and expire after 30 minutes; requesting a new link
-supersedes any outstanding one.
-
-## device_tokens
-| token_id | uuid PK | user_id FK → users | token (**unique**) | platform (`web`/`ios`/`android`) | created_at | last_seen_at |
-
-Push delivery targets these; re-registering a device refreshes its row.
+`canonical_plant_id` is filled by the seeder's idempotent backfill
+(`normalizeExistingPlants`): a free-text `plant_type` is resolved through the
+alias table and linked, **without** deleting or merging the member's row. An
+unresolvable name simply stays unlinked.
 
 ## plant_catalog
-Reference data for every plant the recommender can suggest. Seeded from
-`plants.json` (migration `004_plant_catalog.sql`); never written by the app.
+The canonical catalog — **one row per plant**. Every other spelling is an alias.
 
 | column | type | notes |
 |---|---|---|
 | id | text PK | e.g. `pl-tomato` |
-| name | text | English name; other locales live in `i18n` |
-| slug | text UNIQUE | |
-| category | text CHECK | `vegetables` / `herbs` / `fruit-trees` / `houseplants` — the same values the onboarding preference tiles use |
+| name / slug | text / text unique | |
+| scientific_name / accepted_name / family | text | taxonomy (Kew POWO) |
+| category | text CHECK | `vegetables` / `herbs` / `fruit-trees` / `houseplants` |
 | emoji | text | |
-| days_to_harvest | integer CHECK > 0 | drives the duration filter |
-| difficulty | text CHECK | `easy` / `medium` / `hard`, compared against the member's experience |
-| indoor / outdoor | boolean | at least one space must match |
-| sun | text CHECK | `full` / `partial` / `shade` |
-| water | text CHECK | `low` / `medium` / `high` |
-| climates | text[] | zones it suits, e.g. `{temperate,mediterranean}` |
-| planting_months | int[] | northern-hemisphere months; **empty means any month** |
-| notes | text | one growing tip |
-| i18n | jsonb | `ar` / `ku` name + notes, keyed like `rewards.i18n` |
+| days_to_harvest / growth_duration_days | integer | |
+| germination_duration_days | integer | journey scheduling |
+| temp_min_c / temp_max_c | numeric(5,1) | |
+| soil_preferences / soil_ph_min / soil_ph_max | text / numeric(3,1) | |
+| water / water_preferences | text CHECK / text | |
+| sun / sunlight_preferences | text CHECK / text | |
+| planting_season / harvest_window | text | |
+| climates | text[] | zones it suits |
+| planting_months | int[] | northern-hemisphere; **empty = any month** |
+| seed_available | boolean | |
+| stage_template | text | which `plant_growth_stages` template to use |
+| notes / description | text | |
+| i18n | jsonb | `ar` / `ku` name + notes |
 | is_active | boolean | |
 | created_at / updated_at | timestamptz | |
 
+## plant_aliases
+Every name a plant answers to, folded to one canonical row.
+
+| column | type | notes |
+|---|---|---|
+| alias_id | uuid PK | |
+| plant_id | text FK → plant_catalog | |
+| language | text | `en` / `ar` / `ku` |
+| alias | text | the name as written |
+| normalized_alias | text | lowercased, letter-unified, article-stripped |
+| source | text | e.g. `powo`, `greenomy` |
+| **UNIQUE (normalized_alias, language)** | | an alias resolves to exactly one plant |
+
+`tomato`, `tomatoes`, `طماطم`, `طماطة`, `بندورة`, `تەماتە` and
+`Solanum lycopersicum` are all rows here pointing at `pl-tomato`.
+
+## plant_varieties
+| column | type |
+|---|---|
+| variety_id | uuid PK |
+| plant_id | text FK → plant_catalog |
+| name | text (UNIQUE per plant) |
+| description / special_requirements | text |
+| growth_duration_days | integer |
+| i18n | jsonb |
+| created_at / updated_at | timestamptz |
+
+## knowledge_sources
+Provenance for every structured fact.
+
+| column | type |
+|---|---|
+| source_id | text PK (e.g. `powo`, `ecocrop`, `fao-calendar`, `greenomy`) |
+| name / url / organization / type | text |
+| accessed_at | date |
+| created_at | timestamptz |
+
+## plant_knowledge
+| column | type | notes |
+|---|---|---|
+| knowledge_id | uuid PK | |
+| plant_id | text FK → plant_catalog | |
+| knowledge_type | text | e.g. `germination_duration_days`, `temperature_range`, `soil_ph_range` |
+| value | jsonb | scalar or `{min,max}` |
+| unit | text | |
+| source_id | text FK → knowledge_sources (**NOT NULL**, default `greenomy`) | |
+| confidence | numeric(3,2) | |
+| updated_at | timestamptz | |
+| **UNIQUE (plant_id, knowledge_type, source_id)** | | makes re-seeding idempotent |
+
+The assistant is instructed to answer exact values **only** from here (and from
+the catalog columns), never from its own memory.
+
+## plant_growth_stages
+The stages a journey walks through. `plant_id` NULL = a template row.
+
+| column | type | notes |
+|---|---|---|
+| stage_id | uuid PK | |
+| plant_id | text FK → plant_catalog (nullable) | NULL = template |
+| template | text | e.g. `annual-vegetable`, `fruit-tree`, `houseplant` |
+| stage_key | text | `planting`, `germination`, `flowering`, `harvest`, … |
+| label_en / label_ar / label_ku | text | |
+| sort_order | integer | |
+| expected_day_from / expected_day_to | integer | set per journey, not per template |
+| description | text | |
+
+Unique index on `(template, stage_key, COALESCE(plant_id,''))`.
+
+## journeys
+| column | type | notes |
+|---|---|---|
+| journey_id | uuid PK | |
+| user_plant_id | uuid FK → plants | **UNIQUE** — one journey per plant |
+| user_id | uuid FK → users | |
+| started_at | timestamptz | |
+| expected_duration_days | integer | the plant's days-to-harvest |
+| current_stage | text | furthest milestone reached |
+| status | text | `active` / `completed` / `abandoned` |
+| completed_at | timestamptz | |
+| created_at / updated_at | timestamptz | |
+
+## journey_milestones
+| column | type | notes |
+|---|---|---|
+| milestone_id | uuid PK | |
+| journey_id | uuid FK → journeys | UNIQUE (journey_id, stage_key) |
+| stage_key / label_en / sort_order | text / text / integer | |
+| expected_day_from / expected_day_to | integer | interpolated from germination → harvest |
+| recommended_window | text | e.g. `Days 7–20` |
+| completed_at | timestamptz | |
+| verification_status | text | `none` / `pending` / `verified` / `rejected` |
+| verification_id | uuid FK → verifications | evidence |
+| created_at | timestamptz | |
+
+## verifications
+| column | type | notes |
+|---|---|---|
+| verification_id | uuid PK | |
+| plant_id | uuid FK → plants | |
+| user_id | uuid FK → users | |
+| image_url | text | **bounded JPEG preview** (data URL); the original is on disk |
+| **storage_path** | text | content-addressed filename (`<sha256>.<ext>`) |
+| **image_sha256** | text | identity hash of the bytes |
+| gps_lat / gps_long | double precision | internal only |
+| captured_at | timestamptz | |
+| ai_confidence_score | numeric(4,2) | |
+| ai_provider | text | `heuristic` \| `ai` \| `mock` |
+| ai_metrics | jsonb | |
+| approval_status | text | `pending` / `approved` / `rejected` |
+| **challenge_id** | uuid FK → verification_challenges | the code shown in the photo |
+| **milestone_id** | uuid FK → journey_milestones | what this photo is evidence for |
+| **duplicate_status** | text | `none` / `exact` / `near` / `review` |
+| **requires_review** | boolean | flagged for a human |
+| **verification_result** | jsonb | `{plantMatch, challengePassed, duplicate, crossUser, journeyConsistency, suspicious, requiresReview, confidence, …}` |
+| admin_reviewed_by / rejection_reason | uuid / text | |
+| created_at / reviewed_at | timestamptz | |
+
+## verification_challenges
+Per-attempt codes. A reward-eligible (milestone) photo must show one.
+
+| column | type | notes |
+|---|---|---|
+| challenge_id | uuid PK | |
+| user_id | uuid FK → users | |
+| plant_id | uuid FK → plants (nullable) | |
+| code | text | fresh random digits per attempt |
+| issued_at / expires_at | timestamptz | short-lived |
+| used_at | timestamptz | single use (conditional UPDATE) |
+
+## verification_images
+The hash record for every submitted image — the duplicate-detection corpus.
+
+| column | type | notes |
+|---|---|---|
+| image_id | uuid PK | |
+| verification_id | uuid FK → verifications (nullable) | linked after creation |
+| user_id | uuid FK → users | |
+| sha256 | text (indexed, **not unique**) | exact-identity; duplicates are recorded, not rejected |
+| phash / dhash / ahash | text | 64-bit perceptual hashes, hex |
+| width / height / bytes / mime | integer / text | |
+| storage_path | text | |
+| created_at | timestamptz | |
+
+Duplicate detection reads this table **across all users**, so re-uploading
+someone else's photo is caught too.
+
+## reward_awards
+The idempotency ledger for points: what has already been paid.
+
+| column | type | notes |
+|---|---|---|
+| award_id | uuid PK | |
+| user_id | uuid FK → users | |
+| journey_id / milestone_id | uuid FKs (nullable) | |
+| award_type | text CHECK | `photo_verified` \| `milestone_planting` \| `milestone_growth` \| `journey_completed` |
+| points | integer CHECK > 0 | |
+| reference_id | text **NOT NULL** | verification / milestone / journey id |
+| created_at | timestamptz | |
+| **UNIQUE (user_id, award_type, reference_id)** | | a replayed approval pays nothing |
+
+## partners / rewards / redemptions / point_transactions / waitlist
+Unchanged from the original schema. `rewards.reward_id` is text (`rw-001`);
+`redemption_token` is single-use and opaque; `point_transactions` is the signed
+ledger.
+
+## green_hub_content / notifications / password_resets / device_tokens
+Unchanged. See migrations 001–003.
+
 ## schema_migrations
-Created by the migration runner: `filename text PK`, `applied_at timestamptz`.
+`filename text PK`, `applied_at timestamptz`.
 
 ---
 
 ### Indexing notes
-- `users.email`, `waitlist.email`, `partners.name`, `green_hub_content.slug`,
-  `redemptions.redemption_token` — unique indexes
-- `plants.user_id`, `verifications.user_id`, `verifications.plant_id` — dashboard/history queries
-- `verifications.approval_status` — the admin queue (`WHERE approval_status = 'pending'`)
-- `rewards.category`, `green_hub_content.category` — store and Hub filters
+- Unique: `users.email`, `waitlist.email`, `partners.name`,
+  `green_hub_content.slug`, `redemptions.redemption_token`,
+  `plant_catalog.slug`, `plant_aliases(normalized_alias, language)`,
+  `plant_knowledge(plant_id, knowledge_type, source_id)`,
+  `journeys.user_plant_id`, `journey_milestones(journey_id, stage_key)`,
+  `reward_awards(user_id, award_type, reference_id)`
+- Lookup: `plants.user_id`, `plants.canonical_plant_id`, `verifications.user_id`,
+  `verifications.plant_id`, `verifications.approval_status`,
+  `verifications.image_sha256`, `verifications.requires_review`,
+  `verification_images.sha256`, `verification_images.user_id`,
+  `journeys.user_id`, `journey_milestones.journey_id`,
+  `reward_awards.user_id`, `reward_awards.journey_id`

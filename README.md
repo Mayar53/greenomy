@@ -6,15 +6,19 @@ partner businesses.
 
 Nature × Technology × Community.
 
-## Status: Phases 1–5 built
+## Status: Phases 1–7 built, plus the platform upgrade
 
 The public marketing site, auth/onboarding, the user app, the admin review
-queue and the partner portal are all working, on real PostgreSQL.
+queue and the partner portal all work on real PostgreSQL — and the plant
+catalog, growth journeys, photo verification and reward engine have been taken
+to production grade (canonical plant identity and aliases, sourced agronomic
+facts, multi-signal verification with duplicate protection, and idempotent
+rewards). See `docs/ARCHITECTURE.md`.
 
 **Built and working:**
 - Public pages: `index.html`, `about.html`, `greenhub.html`, `rewards.html`, `contact.html`
 - Full design system (`style.css`, `responsive.css`, `auth.css`) — sage/beige/burgundy/gold palette, mobile-first down to 375px
-- Trilingual UI — English, Arabic and Kurdish (Sorani) — with live RTL/LTR switching (`language.js`, `local.json`, `localesar.json`, `localeku.json`); 491 keys with full parity
+- Trilingual UI — English, Arabic and Kurdish (Sorani) — with live RTL/LTR switching (`language.js`, `local.json`, `localesar.json`, `localeku.json`); 523 keys with full parity
 - Auth: signup (with confirm-password) and login against the API, JWT sessions with "remember me"
 - Account: `profile.html` — account summary, name/city editing and password change
 - Password reset: `forgot-password.html` → single-use, hashed, 30-minute token → `reset-password.html`. The mail provider is swappable; with none configured the message is logged and readable at `GET /api/dev/mail` (development only)
@@ -28,16 +32,36 @@ queue and the partner portal are all working, on real PostgreSQL.
 - Notifications — created on verification, admin decision and redemption events; shown on the wallet page and fanned out through a swappable push provider (console in development, FCM when configured) with device-token registration
 - Hardening — server-side password strength and email validation, security headers, non-wildcard CORS in production, a real JWT secret requirement in production, and WCAG AA contrast fixes (14 pages audited with axe-core, 0 violations)
 - SEO — `robots.txt`, `sitemap.xml`, canonical URLs, OG image and Twitter card on the public pages
-- **Plant recommendations** — the seed wizard suggests what to grow, ranked from a
-  32-plant catalog by the member's city and climate, the current season, how long
+- **Plant recommendations** — the seed wizard suggests what to grow, ranked from
+  the catalog by the member's city and climate, the current season, how long
   they'll wait for a harvest, and the preferences they chose at onboarding. Live
   weather comes from Open-Meteo (keyless) with a built-in climate table as
   fallback, so it works offline. The ranking is deterministic — no AI decides
   what to plant, because a model that invents a harvest time is worse than no
   suggestion at all
-- **AI (optional)** — three features, all off until `AI_API_KEY` is set: real photo verification (a vision model replaces the pixel heuristic and explains its verdict), plant identification from a photo in the seed wizard, and a gardening assistant on the garden page that knows what you're growing. Provider-agnostic (any OpenAI-compatible endpoint), and every path degrades gracefully without a key
+- **Canonical plant catalog** — 63 plants, one row each, with taxonomy (Kew
+  POWO), varieties, sourced agronomic facts (FAO ECOCROP / crop calendars) and
+  **aliases in English, MSA, Iraqi Arabic and Kurdish**: `tomato`, `tomatoes`,
+  `طماطم`, `طماطة`, `بندورة` and `Solanum lycopersicum` all resolve to one
+  plant. The seed wizard searches the catalog instead of offering four fixed
+  tiles, and existing free-text plants are linked by an idempotent backfill
+- **Growth journeys** — a plant becomes a journey with stage-based milestones
+  whose windows are computed from that plant's germination period and
+  days-to-harvest (a radish and a lemon tree get genuinely different schedules).
+  Progress is shown on the garden page
+- **Photo verification** — measured server-side (`sharp`): a SHA-256 identity
+  hash, perceptual hashes that survive resizing/recompression, and a fresh
+  single-use challenge code. Duplicates are detected **across all users**;
+  a flagged or unconfirmed photo queues for review instead of being called
+  fraud. Originals are stored content-addressed on disk behind an authenticated
+  route; the row keeps only a small preview
+- **Reward engine** — points are a deterministic server-side rule applied
+  idempotently (`reward_awards` unique key), so a replayed approval or a
+  resubmitted photo pays nothing. One photo pays for the one milestone it
+  evidences; the journey completion bonus is separate
+- **AI (optional)** — three features, all off until `AI_API_KEY` is set: real photo verification (a vision model adds challenge/identity signals to the deterministic ones), plant identification from a photo in the seed wizard, and a gardening assistant on the garden page that knows what you're growing. The assistant runs an explicit pipeline (language → entities → intent → retrieval → conditions → context), continues a conversation, understands Iraqi Arabic and Kurdish, and answers exact values only from the sourced knowledge rows. Provider-agnostic (any OpenAI-compatible endpoint), and every path degrades gracefully without a key
 - Express REST API on **PostgreSQL** — migrations (`npm run migrate`), seed (`npm run seed`), `models/*.model.js`, and atomic points/redemption transactions
-- 80 API tests (`cd backend && npm test`)
+- 157 API tests (`cd backend && npm test`)
 - Docs: `docs/ARCHITECTURE.md`, `docs/DATABASE.md`, `docs/API.md`, `docs/DEPLOYMENT.md`
 
 **Not yet built:**
@@ -46,7 +70,10 @@ queue and the partner portal are all working, on real PostgreSQL.
 - Email verification — the reset flow is done, but an address isn't verified at signup
 - Push delivery — the provider seam and device registration are in place, but `FcmPushProvider` throws rather than sending (no Firebase project yet), and nothing on the web client registers a device token
 - Frontend tests — the API suite covers the backend; the UI was verified by hand in a browser
-- Smaller gaps: real multipart photo upload (photos are still capped base64 data URLs), weekly growth reports, and the seed wizard's tiles are still a fixed four rather than driven by the catalog
+- Internet-wide reverse-image search — duplicate detection compares against this
+  platform's stored images plus provenance (challenge code, hashes), so it cannot
+  know an image came from Google Images. Suspicious images go to review
+- Weekly growth reports
 
 ## Running it
 
@@ -73,8 +100,9 @@ PostgreSQL — it exits with a clear message if it can't connect.
 
 **Tests** — `cd backend && npm test`. The API suite boots a throwaway PGlite
 database in a temp dir, migrates and seeds it, and exercises auth, the points
-ledger, redemption concurrency, notifications, the admin dashboard and the
-security hardening (38 tests).
+ledger, redemption concurrency, notifications, the admin dashboard, the security
+hardening, the plant catalog and alias search, journeys, photo verification with
+duplicate detection, and the reward engine (157 tests).
 
 **Frontend** — any static file server from the project root, e.g.:
 ```

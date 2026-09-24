@@ -28,20 +28,4 @@ async function create(client, award) {
   return rows[0] || null;
 }
 
-async function listByUser(userId) {
-  const { rows } = await query(
-    `SELECT ${COLUMNS} FROM reward_awards WHERE user_id = $1 ORDER BY created_at DESC`,
-    [userId]
-  );
-  return rows;
-}
-
-async function hasAward(userId, awardType, referenceId) {
-  const { rows } = await query(
-    "SELECT 1 FROM reward_awards WHERE user_id = $1 AND award_type = $2 AND reference_id = $3",
-    [userId, awardType, referenceId]
-  );
-  return rows.length > 0;
-}
-
-module.exports = { create, listByUser, hasAward };
+module.exports = { create };

@@ -23,13 +23,11 @@ none of the backend logic is web-specific.
 - JS is modular (`type="module"`): one file per concern (`navigation.js`,
   `language.js`, `plants.js`, `camera.js`, …), never one giant script.
 - Pages never call `fetch()` against `/api/*` directly — they call a
-  function in `js/services/*.js`, which calls the shared client in
-  `js/services/api.js`. This is what lets the backend evolve (auth scheme,
-  base URL, retry logic) without touching page code.
-- Until a real API is reachable, service modules fall back to the JSON
-  files in `data/` so the UI is fully testable in isolation. Each fallback
-  is explicit in code (`source: "demo"` vs `"api"`) — nothing is silently
-  faked in production.
+  service module (`servisapi.js`, `serviseplant.js`, `verifyservice.js`,
+  `authservise.js`, …) at the project root. This is what lets the backend
+  evolve (auth scheme, base URL, retry logic) without touching page code.
+- The API is the only source of truth — there is no demo-data fallback. A
+  failed request surfaces as an error state, never as fabricated content.
 
 ## Backend
 - `routes/` map HTTP verbs+paths to controllers only — no logic lives here.
@@ -44,9 +42,42 @@ none of the backend logic is web-specific.
   (`user` / `admin` / `super_admin`) — the frontend's own role checks are
   UX only and are never trusted.
 - `services/verification-provider.js` is a swappable interface: a
-  `MockVerificationProvider` for local development and an
-  `AIVerificationProvider` stub for the real computer-vision integration,
-  so the app is never hard-wired to one AI vendor.
+  `MockVerificationProvider` for local development, an offline
+  `HeuristicVerificationProvider` (the default) and an
+  `AIVerificationProvider` for a real vision model — so the app is never
+  hard-wired to one AI vendor. `verifyPhoto()` adds optional
+  challenge/identity signals when a model is configured.
+- `services/recommendation.service.js` ranks the catalog deterministically;
+  `services/journey.service.js` builds a plant's milestone schedule;
+  `services/image.service.js` measures and stores photos; `services/
+  duplicate.service.js` compares hashes; `services/reward-engine.service.js`
+  is the only place points are decided. Controllers orchestrate these and
+  stay thin.
+
+## Plant identity
+- One `plant_catalog` row per plant; every other spelling (English plural,
+  scientific name, MSA/Iraqi/Kurdish colloquial) is a `plant_aliases` row.
+  `services/plant-normalize.service.js` folds names the same way for the
+  catalog search, the assistant's retrieval and the seeder's backfill, so a
+  name resolves identically everywhere.
+- Structured facts live in `plant_knowledge`, each with a `knowledge_sources`
+  reference, and are the **source of truth for exact values**. The model is
+  told to answer exact numbers only from there.
+
+## Verification & rewards
+- A photo is measured server-side (`image.service.js`): sha256 (exact
+  identity) plus perceptual hashes (near-duplicate) and pixel stats. The
+  original is stored content-addressed on disk; the row keeps a small preview.
+- `duplicate.service.js` compares against **every** user's images, so a
+  re-uploaded or recompressed photo is flagged. A near match is marked for
+  review, never auto-declared fraud.
+- A reward-eligible milestone photo must show a fresh, expiring, single-use
+  `verification_challenges` code. Without a configured vision model the code
+  cannot be *confirmed*, so the photo queues for review instead of
+  auto-approving.
+- `reward-engine.service.js` pays points from the verification result inside
+  the same transaction, guarded by `reward_awards`' unique key — so a replayed
+  approval or a resubmitted photo pays nothing.
 
 ## Points & rewards integrity
 - Points are only ever changed by the backend, and every change is written
@@ -73,12 +104,20 @@ none of the backend logic is web-specific.
 - CSS handles direction-sensitive layout under `html[dir="rtl"]` selectors
   in `style.css` rather than duplicating styles per language.
 
-## Next phases (see README)
-Phases 1–7 are largely built: the public site, auth/onboarding, the user app
-(wallet + garden + camera verification), reward redemption with a QR, the
-partner portal, the admin dashboard, and the Phase 7 hardening pass
-(notifications, security headers, WCAG AA fixes, SEO). What remains is real
-push delivery through Firebase and a frontend test suite.
+## Growth journeys
+- A plant can become a `journeys` row (one per plant) whose
+  `journey_milestones` come from `plant_growth_stages` — the plant's own
+  template, or per-plant overrides. Windows are interpolated between the
+  plant's germination period and days-to-harvest, and starting from a seedling
+  or cutting skips germination, so schedules are configurable rather than a
+  fixed calendar.
+- Evidence is a verified photo: approving a milestone photo completes that
+  milestone, advances the journey and pays its reward.
+
+## What remains
+- Real push delivery through Firebase, and a frontend test suite (the suite in
+  `backend/tests/` is API-only). Everything else in Phases 1–7 plus the
+  catalog/journey/verification/reward work above is built.
 
 `services/push.service.js` follows the same swappable-provider shape as
 `services/verification-provider.js`: `getPushProvider()` returns a console

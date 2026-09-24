@@ -432,4 +432,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { main, normalizeExistingPlants, derivedKnowledge, aliasRowsFor };
+module.exports = { normalizeExistingPlants };

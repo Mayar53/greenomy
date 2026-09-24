@@ -8,13 +8,11 @@ import { submitVerificationFile, issueChallenge } from "./verifyservice.js";
 import { ApiError } from "./servisapi.js";
 import { t } from "./language.js";
 
-const SAMPLE = 160;      // analysis size, longest edge (px)
-const PREVIEW_MAX = 720; // stored photo size, longest edge (px)
+const PREVIEW_MAX = 720; // preview size, longest edge (px)
 const MAX_UPLOAD_BYTES = 5 * 1024 * 1024; // client-side guard, below the server's IMAGE_MAX_BYTES
 
 let stream = null;
 let photoDataUrl = null;
-let pixelStats = null;
 let coords = null;
 let challengeId = null;
 
@@ -73,49 +71,11 @@ function toDataUrl(source, width, height) {
   return canvas.toDataURL("image/jpeg", 0.72);
 }
 
-/** Draws the photo small, then reads the pixels back to describe it. */
-function analyse(source, width, height) {
-  const scale = Math.min(1, SAMPLE / Math.max(width, height));
-  const w = Math.max(1, Math.round(width * scale));
-  const h = Math.max(1, Math.round(height * scale));
-  const canvas = document.createElement("canvas");
-  canvas.width = w;
-  canvas.height = h;
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  ctx.drawImage(source, 0, 0, w, h);
-  const { data } = ctx.getImageData(0, 0, w, h);
-
-  const lum = new Float32Array(w * h);
-  let green = 0;
-  let lumSum = 0;
-
-  for (let i = 0, p = 0; i < data.length; i += 4, p += 1) {
-    const r = data[i];
-    const g = data[i + 1];
-    const b = data[i + 2];
-    const l = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-    lum[p] = l;
-    lumSum += l;
-    if (g > 40 && g > r * 1.08 && g > b * 1.05) green += 1;
-  }
-
-  let gradient = 0;
-  for (let y = 1; y < h; y += 1) {
-    for (let x = 1; x < w; x += 1) {
-      const i = y * w + x;
-      gradient += Math.abs(lum[i] - lum[i - 1]) + Math.abs(lum[i] - lum[i - w]);
-    }
-  }
-
-  const total = w * h;
-  const edges = (w - 1) * (h - 1);
-  pixelStats = {
-    greenRatio: Number((green / total).toFixed(4)),
-    brightness: Number((lumSum / total / 255).toFixed(4)),
-    sharpness: Number((gradient / edges).toFixed(2)),
-  };
+/** Renders the captured frame to the preview that gets uploaded. The server
+ * measures the real bytes, so the browser only prepares the image — nothing it
+ * computes here is trusted or sent. */
+function preparePhoto(source, width, height) {
   photoDataUrl = toDataUrl(source, width, height);
-  return pixelStats;
 }
 
 function showCaptured() {
@@ -175,7 +135,7 @@ function captureFrame() {
     cameraStatus(t("verify.cameraStarting"), true);
     return;
   }
-  analyse(el.video, el.video.videoWidth, el.video.videoHeight);
+  preparePhoto(el.video, el.video.videoWidth, el.video.videoHeight);
   stopStream();
   showCaptured();
 }
@@ -196,7 +156,7 @@ function loadFile(file) {
 
   const img = new Image();
   img.onload = () => {
-    analyse(img, img.naturalWidth, img.naturalHeight);
+    preparePhoto(img, img.naturalWidth, img.naturalHeight);
     URL.revokeObjectURL(img.src);
     showCaptured();
   };
@@ -206,7 +166,6 @@ function loadFile(file) {
 
 function retake() {
   photoDataUrl = null;
-  pixelStats = null;
   el.preview.hidden = true;
   el.preview.removeAttribute("src");
   el.placeholder.hidden = false;
@@ -279,7 +238,7 @@ function showResult(record) {
 }
 
 async function submit() {
-  if (!photoDataUrl || !pixelStats) {
+  if (!photoDataUrl) {
     setStatus("error", t("verify.noPhoto"));
     return;
   }

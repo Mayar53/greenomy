@@ -30,11 +30,4 @@ async function listForPlant(plantId, template) {
   return [];
 }
 
-async function listTemplates() {
-  const { rows } = await query(
-    `SELECT ${COLUMNS} FROM plant_growth_stages WHERE plant_id IS NULL ORDER BY template, sort_order`
-  );
-  return rows;
-}
-
-module.exports = { listForPlant, listTemplates };
+module.exports = { listForPlant };

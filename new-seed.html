@@ -91,8 +91,10 @@
           <div class="recommend-list" data-plant-results></div>
           <div class="form-status" data-plant-status role="status" aria-live="polite"></div>
 
-          <!-- Filled in by the picker; read by the wizard's Continue handler. -->
-          <div class="option-grid" data-tile-group="plantType" hidden></div>
+          <!-- Filled in by the picker; read by the wizard's Continue handler.
+               No .option-grid class: its `display: grid` would override the
+               `hidden` attribute and leave the holder visible. -->
+          <div data-tile-group="plantType" hidden></div>
         </div>
         <div class="form-field" style="margin-top: 20px;">
           <label for="seedPhoto" data-i18n="identify.label">Or identify the plant from a photo</label>

@@ -58,12 +58,4 @@ async function listHashes(limit = 2000) {
   return rows;
 }
 
-async function findByVerification(verificationId) {
-  const { rows } = await query(
-    `SELECT ${COLUMNS} FROM verification_images WHERE verification_id = $1 LIMIT 1`,
-    [verificationId]
-  );
-  return rows[0] || null;
-}
-
-module.exports = { create, linkVerification, findBySha256, listHashes, findByVerification };
+module.exports = { create, linkVerification, findBySha256, listHashes };
