@@ -18,7 +18,7 @@ rewards). See `docs/ARCHITECTURE.md`.
 **Built and working:**
 - Public pages: `index.html`, `about.html`, `greenhub.html`, `rewards.html`, `contact.html`
 - Full design system (`style.css`, `responsive.css`, `auth.css`) — sage/beige/burgundy/gold palette, mobile-first down to 375px
-- Trilingual UI — English, Arabic and Kurdish (Sorani) — with live RTL/LTR switching (`language.js`, `local.json`, `localesar.json`, `localeku.json`); 523 keys with full parity
+- Trilingual UI — English, Arabic and Kurdish (Sorani) — with live RTL/LTR switching (`language.js`, `local.json`, `localesar.json`, `localeku.json`); 519 keys with full parity
 - Auth: signup (with confirm-password) and login against the API, JWT sessions with "remember me"
 - Account: `profile.html` — account summary, name/city editing and password change
 - Password reset: `forgot-password.html` → single-use, hashed, 30-minute token → `reset-password.html`. The mail provider is swappable; with none configured the message is logged and readable at `GET /api/dev/mail` (development only)

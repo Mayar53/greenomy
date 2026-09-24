@@ -200,6 +200,10 @@ p { margin: 0 0 1em; color: var(--color-text-muted); }
 
 .header-actions { display: flex; align-items: center; gap: 10px; }
 
+/* The auth-aware header swaps these controls; [hidden] must win over .btn's
+   own `display`, exactly as it does not for .option-grid. */
+[data-auth][hidden] { display: none; }
+
 .lang-switch {
   display: flex; align-items: center; gap: 4px;
   border: 1px solid var(--color-border);
@@ -572,7 +576,7 @@ section.section-tight { padding: 56px 0; }
 /* Footer                                                                  */
 /* ---------------------------------------------------------------------- */
 .site-footer { background: var(--charcoal); color: rgba(255,255,255,0.75); padding: 64px 0 32px; margin-top: 90px; }
-.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(2, 1fr); gap: 32px; margin-bottom: 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; margin-bottom: 40px; }
 .site-footer h3 { color: #fff; font-size: 0.95rem; margin-bottom: 16px; }
 .site-footer a { color: rgba(255,255,255,0.7); font-size: 0.92rem; display: block; padding: 6px 0; transition: color var(--transition); }
 .site-footer a:hover { color: var(--gold-light); }
