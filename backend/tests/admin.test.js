@@ -40,8 +40,10 @@ describe("admin dashboard", () => {
     assert.equal(res.status, 200);
 
     const admin = res.body.find((u) => u.email === h.ADMIN_EMAIL);
-    assert.ok(admin, "the seeded admin should be listed");
-    assert.equal(admin.role, "admin");
+    assert.ok(admin, "the seeded account should be listed");
+    // The seeded account is the OWNER: super_admin, which holds every permission
+    // rather than carrying a permission list of its own.
+    assert.equal(admin.role, "super_admin");
     assert.equal(admin.password_hash, undefined);
   });
 

@@ -10,6 +10,8 @@ backend/.env
 # Local database created by the PGlite dev driver
 .pgdata/
 backend/.pgdata/
+# Kept when a database has to be re-initialised: unreadable, but not thrown away.
+backend/.pgdata.broken/
 
 # Verification images written by the API (content-addressed, never committed)
 backend/uploads/

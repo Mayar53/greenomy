@@ -2,6 +2,7 @@
 // Frontend role checks are for UX only; every protected route re-checks here.
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
+const permissions = require("../services/permissions.service");
 
 /**
  * Verifies the bearer token, then loads the account so that role and status
@@ -30,13 +31,14 @@ async function requireAuth(req, res, next) {
       return res.status(403).json({ error: "This account is suspended" });
     }
 
-    req.user = { id: user.user_id, role: user.role };
+    req.user = { id: user.user_id, role: user.role, permissions: user.permissions || [] };
     next();
   } catch (err) {
     next(err);
   }
 }
 
+/** Are you staff at all? */
 function requireRole(...roles) {
   return (req, res, next) => {
     if (!req.user || !roles.includes(req.user.role)) {
@@ -46,4 +48,18 @@ function requireRole(...roles) {
   };
 }
 
-module.exports = { requireAuth, requireRole };
+/**
+ * May you touch this part of the dashboard? Read from the DATABASE (via
+ * requireAuth) on every request, so revoking a permission takes effect on the
+ * next call rather than when the token expires. super_admin passes everything.
+ */
+function requirePermission(...needed) {
+  return (req, res, next) => {
+    if (!req.user || !needed.every((permission) => permissions.can(req.user, permission))) {
+      return res.status(403).json({ error: "Insufficient permissions" });
+    }
+    next();
+  };
+}
+
+module.exports = { requireAuth, requireRole, requirePermission };

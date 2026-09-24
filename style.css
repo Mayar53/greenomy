@@ -536,6 +536,23 @@ section.section-tight { padding: 56px 0; }
 .admin-form .admin-form-wide { grid-column: 1 / -1; }
 .admin-form .btn { height: fit-content; }
 
+/* Admins — the permission checkboxes, rendered from the API's own catalogue. */
+.admin-subhead { margin-top: 48px; }
+.perm-grid {
+  display: grid; gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.perm-option {
+  display: flex; align-items: flex-start; gap: 9px;
+  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+  padding: 10px 12px; background: #fff; cursor: pointer;
+}
+.perm-option input { width: 16px; height: 16px; margin: 3px 0 0; accent-color: var(--sage-ink); flex: none; }
+.perm-option strong { display: block; font-size: 0.85rem; }
+.perm-option span span { font-size: 0.77rem; color: var(--color-text-muted); }
+.perm-option[data-locked="true"] { opacity: 0.55; cursor: not-allowed; }
+.perm-cell { display: flex; flex-wrap: wrap; gap: 4px; }
+
 .stat-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 .stat-card { text-align: center; padding: 20px; }
 .stat-card strong { display: block; font-size: 1.7rem; font-weight: 800; color: var(--charcoal); }

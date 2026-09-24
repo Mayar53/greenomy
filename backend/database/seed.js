@@ -11,30 +11,61 @@ const greenHubSeed = require(path.join(__dirname, "../../greenhub.json"));
 const plantSeed = require(path.join(__dirname, "../../plants.json"));
 const plantNormalize = require("../services/plant-normalize.service");
 
-const DEV_ADMIN_EMAIL = "admin@greenomy.app";
+// The owner account. Override with ADMIN_SEED_EMAIL / ADMIN_SEED_PASSWORD.
+const DEV_ADMIN_EMAIL = "mayarraws@gmail.com";
 const DEV_ADMIN_PASSWORD = "admin12345";
 
+/**
+ * The owner account — the one account that can add other admins.
+ *
+ * Two cases, deliberately different:
+ *   * no account for that email yet — create it with the seed password, so a
+ *     fresh database has a way in;
+ *   * the account already exists — PROMOTE it and leave the password alone.
+ *     Re-seeding must never overwrite the owner's own password with a default.
+ *
+ * It is stored as super_admin with no permission rows: `super_admin` holds every
+ * permission by definition (services/permissions.service.js), and it is the
+ * account that can fix a bad grant — which is exactly why nothing may edit it.
+ */
 async function seedAdmin(client) {
   const isProd = process.env.NODE_ENV === "production";
-  const email = process.env.ADMIN_SEED_EMAIL || (isProd ? null : DEV_ADMIN_EMAIL);
+  const email = (process.env.ADMIN_SEED_EMAIL || (isProd ? "" : DEV_ADMIN_EMAIL)).trim().toLowerCase();
   const password = process.env.ADMIN_SEED_PASSWORD || (isProd ? null : DEV_ADMIN_PASSWORD);
 
-  if (!email || !password) {
-    console.warn("No admin configured (ADMIN_SEED_EMAIL / ADMIN_SEED_PASSWORD) — skipping admin.");
+  if (!email) {
+    console.warn("No owner configured (ADMIN_SEED_EMAIL) — skipping the owner account.");
+    return;
+  }
+
+  const { rows } = await client.query("SELECT user_id FROM users WHERE email = $1", [email]);
+
+  if (rows[0]) {
+    await client.query(
+      `UPDATE users
+          SET role        = 'super_admin',
+              status      = 'active',
+              permissions = '{}',
+              updated_at  = now()
+        WHERE user_id = $1`,
+      [rows[0].user_id]
+    );
+    console.log(`owner     ${email} (super_admin — password left unchanged)`);
+    return;
+  }
+
+  if (!password) {
+    console.warn(`No account for ${email} and no ADMIN_SEED_PASSWORD — skipping the owner account.`);
     return;
   }
 
   const passwordHash = await bcrypt.hash(password, 12);
   await client.query(
     `INSERT INTO users (full_name, email, password_hash, role, status)
-     VALUES ('Greenomy Admin', $1, $2, 'admin', 'active')
-     ON CONFLICT (email) DO UPDATE
-       SET password_hash = EXCLUDED.password_hash,
-           role          = 'admin',
-           status        = 'active'`,
+     VALUES ('Greenomy Owner', $1, $2, 'super_admin', 'active')`,
     [email, passwordHash]
   );
-  console.log(`admin     ${email}`);
+  console.log(`owner     ${email} (created as super_admin)`);
 }
 
 async function seedPartners(client) {

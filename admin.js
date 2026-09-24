@@ -93,6 +93,12 @@ function emptyState() {
   return `<div class="empty-state">${iconMarkup("inbox")}${escapeHtml(t("admin.emptyTable"))}</div>`;
 }
 
+/** Staff, but not for THIS area. Kept apart from denyAccess(): saying "you don't
+ * have admin access" to an admin who merely lacks one permission would be wrong. */
+function forbiddenState() {
+  return `<div class="empty-state">${iconMarkup("lock")}${escapeHtml(t("admin.needsPermission"))}</div>`;
+}
+
 function denyAccess() {
   const denied = host("[data-admin-denied]");
   if (denied) denied.hidden = false;
@@ -112,7 +118,6 @@ async function withBusy(button, fn) {
     await fn();
   } catch (err) {
     if (isAuthError(err)) return toLogin();
-    if (isForbidden(err)) return denyAccess();
     window.alert(errorText(err));
   } finally {
     if (button && document.body.contains(button)) button.disabled = false;
@@ -184,7 +189,7 @@ function initQueue() {
       queue = await api.get("/admin/verifications");
     } catch (err) {
       if (isAuthError(err)) return toLogin();
-      if (isForbidden(err)) return denyAccess();
+      if (isForbidden(err)) return setContent("[data-admin-queue]", forbiddenState());
       queue = [];
       setContent("[data-admin-queue]", errorState());
       return;
@@ -281,7 +286,7 @@ function initUsers() {
       users = await api.get("/admin/users");
     } catch (err) {
       if (isAuthError(err)) return toLogin();
-      if (isForbidden(err)) return denyAccess();
+      if (isForbidden(err)) return setContent("[data-admin-users]", forbiddenState());
       return setContent("[data-admin-users]", errorState());
     }
     render();
@@ -295,6 +300,218 @@ function initUsers() {
         status: button.getAttribute("data-status"),
       });
       users = users.map((u) => (u.user_id === updated.user_id ? updated : u));
+      render();
+    });
+  });
+
+  renderCurrent = render;
+  return load();
+}
+
+/* ---------------------------------------------------------------- admins */
+/* Who is staff, and what each of them may do.
+ *
+ * The checkbox list comes from the API's own catalogue (/admin/permissions), so it
+ * cannot drift from what the server enforces, and a capability the caller does not
+ * hold is DISABLED rather than hidden — seeing it greyed out is more honest than it
+ * quietly missing. Only an admin holding admins.manage gets this far; the API
+ * refuses everyone else whatever this file does.
+ */
+// One key per capability, so the catalogue stays translatable: the API sends
+// permission keys and English descriptions, and these are the localised versions.
+const PERMISSION_LABELS = {
+  "users.manage": "admin.permUsers",
+  "admins.manage": "admin.permAdmins",
+  "verifications.review": "admin.permVerifications",
+  "rewards.manage": "admin.permRewards",
+  "partners.manage": "admin.permPartners",
+  "content.manage": "admin.permContent",
+  "analytics.view": "admin.permAnalytics",
+};
+
+function permissionLabel(key) {
+  const labelKey = PERMISSION_LABELS[key];
+  if (!labelKey) return key;
+  const translated = t(labelKey);
+  return translated === labelKey ? key : translated;
+}
+
+function permissionDescription(key, fallback) {
+  const labelKey = PERMISSION_LABELS[key];
+  if (!labelKey) return fallback;
+  const translated = t(`${labelKey}Desc`);
+  return translated === `${labelKey}Desc` ? fallback : translated;
+}
+
+function initAdmins() {
+  const root = host("[data-admin-admins]");
+  if (!root) return;
+
+  let catalogue = null; // every capability, with its description
+  let mine = [];        // what the signed-in admin holds
+  let admins = null;    // the staff list
+  let editing = null;   // the admin whose permissions the form is editing
+  let notice = null;
+
+  const isMe = (admin) => me && admin.id === me.id;
+  // An admin who holds something you do not is not yours to edit: the API refuses
+  // it, and offering the button would only produce that refusal.
+  const canEdit = (admin) =>
+    admin.role !== "super_admin" && !isMe(admin) && admin.permissions.every((key) => mine.includes(key));
+
+  function permissionsHTML(selected) {
+    return Object.entries(catalogue)
+      .map(([key, description]) => {
+        const allowed = mine.includes(key);
+        return `
+          <label class="perm-option"${allowed ? "" : ' data-locked="true"'}>
+            <input type="checkbox" name="permission" value="${escapeHtml(key)}"${selected.includes(key) ? " checked" : ""}${allowed ? "" : " disabled"} />
+            <span>
+              <strong>${escapeHtml(permissionLabel(key))}</strong>
+              <span>${escapeHtml(permissionDescription(key, description))}${allowed ? "" : ` — ${escapeHtml(t("admin.ownerOnly"))}`}</span>
+            </span>
+          </label>`;
+      })
+      .join("");
+  }
+
+  function permissionPills(admin) {
+    if (admin.role === "super_admin") return pill(t("admin.allPermissions"), "is-on");
+    if (!admin.permissions.length) return pill(t("admin.noPermissions"), "is-off");
+    return admin.permissions
+      .map((key) => `<span class="pill is-on">${escapeHtml(permissionLabel(key))}</span>`)
+      .join("");
+  }
+
+  function rowHTML(admin) {
+    const actions = canEdit(admin)
+      ? `<button type="button" class="btn btn-secondary" data-edit-admin="${escapeHtml(admin.id)}">${escapeHtml(t("admin.editPermissions"))}</button>
+         <button type="button" class="btn btn-secondary" data-remove-admin="${escapeHtml(admin.id)}">${escapeHtml(t("admin.removeAdmin"))}</button>`
+      : isMe(admin) || admin.role === "super_admin"
+        ? ""
+        : `<span class="pill is-off">${escapeHtml(t("admin.ownerOnly"))}</span>`;
+
+    return `
+      <tr>
+        <td>${escapeHtml(admin.fullName)}${isMe(admin) ? ` <span class="pill is-off">${escapeHtml(t("admin.you"))}</span>` : ""}</td>
+        <td>${escapeHtml(admin.email)}</td>
+        <td>${escapeHtml(t(ROLE_LABELS[admin.role] || "admin.roleUser"))}</td>
+        <td class="perm-cell">${permissionPills(admin)}</td>
+        <td class="actions">${actions}</td>
+      </tr>`;
+  }
+
+  const render = () => {
+    if (!catalogue || admins === null) return;
+
+    const person = editing ? admins.find((a) => a.id === editing) : null;
+    const checked = person ? person.permissions : [];
+
+    root.hidden = false;
+    root.innerHTML = `
+      <div class="section-head admin-subhead">
+        <h2 class="heading-md">${escapeHtml(t("admin.adminsTitle"))}</h2>
+        <p class="section-lead">${escapeHtml(t("admin.adminsLead"))}</p>
+      </div>
+      ${notice ? `<p class="form-status is-error">${escapeHtml(notice)}</p>` : ""}
+      <form class="admin-form" data-admin-form>
+        <div class="form-field">
+          <label for="adminEmail">${escapeHtml(t("admin.adminEmail"))}</label>
+          <input id="adminEmail" name="email" type="email" autocomplete="off" required
+                 value="${person ? escapeHtml(person.email) : ""}"${person ? " readonly" : ""} />
+        </div>
+        <div class="form-field admin-form-wide">
+          <label>${escapeHtml(t("admin.adminPermissions"))}</label>
+          <div class="perm-grid">${permissionsHTML(checked)}</div>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          ${escapeHtml(person ? t("admin.savePermissions") : t("admin.addAdmin"))}
+        </button>
+        ${person ? `<button type="button" class="btn btn-secondary" data-cancel-edit>${escapeHtml(t("admin.cancel"))}</button>` : ""}
+      </form>
+      ${
+        admins.length
+          ? `<div class="table-wrap"><table class="admin-table">
+              <thead><tr>
+                <th>${escapeHtml(t("admin.colName"))}</th>
+                <th>${escapeHtml(t("admin.colEmail"))}</th>
+                <th>${escapeHtml(t("admin.colRole"))}</th>
+                <th>${escapeHtml(t("admin.colPermissions"))}</th>
+                <th><span class="visually-hidden">${escapeHtml(t("admin.colActions"))}</span></th>
+              </tr></thead>
+              <tbody>${admins.map(rowHTML).join("")}</tbody>
+            </table></div>`
+          : emptyState()
+      }`;
+  };
+
+  const load = async () => {
+    try {
+      const meta = await api.get("/admin/permissions");
+      catalogue = meta.catalogue || {};
+      mine = meta.mine || [];
+    } catch (err) {
+      if (isAuthError(err)) return toLogin();
+      return; // no admins.manage — the section stays out of the way
+    }
+    if (!mine.includes("admins.manage")) return;
+
+    try {
+      admins = await api.get("/admin/admins");
+    } catch (err) {
+      if (isAuthError(err)) return toLogin();
+      admins = [];
+      notice = errorText(err);
+    }
+    render();
+  };
+
+  root.addEventListener("submit", (e) => {
+    const form = e.target.closest("[data-admin-form]");
+    if (!form) return;
+    e.preventDefault();
+
+    const button = form.querySelector('button[type="submit"]');
+    const permissions = Array.from(root.querySelectorAll('input[name="permission"]:checked')).map((el) => el.value);
+    const email = readField(form, "email").toLowerCase();
+
+    withBusy(button, async () => {
+      if (editing) {
+        const updated = await api.patch(`/admin/admins/${encodeURIComponent(editing)}`, { permissions });
+        admins = admins.map((a) => (a.id === updated.id ? updated : a));
+        editing = null;
+      } else {
+        const created = await api.post("/admin/admins", { email, permissions });
+        admins = [...admins, created];
+      }
+      notice = null;
+      render();
+    });
+  });
+
+  root.addEventListener("click", (e) => {
+    const edit = e.target.closest("[data-edit-admin]");
+    if (edit) {
+      editing = edit.getAttribute("data-edit-admin");
+      notice = null;
+      render();
+      return;
+    }
+    if (e.target.closest("[data-cancel-edit]")) {
+      editing = null;
+      render();
+      return;
+    }
+    const remove = e.target.closest("[data-remove-admin]");
+    if (!remove) return;
+
+    const admin = admins.find((a) => a.id === remove.getAttribute("data-remove-admin"));
+    if (!admin || !window.confirm(`${t("admin.removeAdminConfirm")} ${admin.email}`)) return;
+
+    withBusy(remove, async () => {
+      const updated = await api.delete(`/admin/admins/${encodeURIComponent(admin.id)}`);
+      admins = admins.map((a) => (a.id === updated.id ? updated : a));
+      if (editing === updated.id) editing = null;
       render();
     });
   });
@@ -348,7 +565,7 @@ function initPartners() {
       partners = await api.get("/admin/partners");
     } catch (err) {
       if (isAuthError(err)) return toLogin();
-      if (isForbidden(err)) return denyAccess();
+      if (isForbidden(err)) return setContent("[data-admin-partners]", forbiddenState());
       return setContent("[data-admin-partners]", errorState());
     }
     render();
@@ -436,7 +653,7 @@ function initRewards() {
       rewards = await api.get("/admin/rewards");
     } catch (err) {
       if (isAuthError(err)) return toLogin();
-      if (isForbidden(err)) return denyAccess();
+      if (isForbidden(err)) return setContent("[data-admin-rewards]", forbiddenState());
       return setContent("[data-admin-rewards]", errorState());
     }
     render();
@@ -524,7 +741,7 @@ function initContent() {
       articles = await api.get("/admin/content");
     } catch (err) {
       if (isAuthError(err)) return toLogin();
-      if (isForbidden(err)) return denyAccess();
+      if (isForbidden(err)) return setContent("[data-admin-content]", forbiddenState());
       return setContent("[data-admin-content]", errorState());
     }
     render();
@@ -651,7 +868,7 @@ function initAnalytics() {
       data = await api.get("/admin/analytics");
     } catch (err) {
       if (isAuthError(err)) return toLogin();
-      if (isForbidden(err)) return denyAccess();
+      if (isForbidden(err)) return setContent("[data-admin-analytics]", forbiddenState());
       return setContent("[data-admin-analytics]", errorState());
     }
     render();
@@ -708,7 +925,13 @@ async function boot(init) {
 
 document.addEventListener("DOMContentLoaded", () => {
   if (host("[data-admin-queue]")) return boot(initQueue);
-  if (host("[data-admin-users]")) return boot(initUsers);
+  // The users page also hosts admin management — both sections, one boot.
+  if (host("[data-admin-users]")) {
+    return boot(async () => {
+      await initUsers();
+      await initAdmins();
+    });
+  }
   if (host("[data-admin-partners]")) return boot(initPartners);
   if (host("[data-admin-rewards]")) return boot(initRewards);
   if (host("[data-admin-content]")) return boot(initContent);

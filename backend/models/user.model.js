@@ -3,7 +3,7 @@ const { query } = require("../config/db");
 
 // password_hash is deliberately never selected by the public helpers.
 const PUBLIC_COLUMNS =
-  "user_id, full_name, email, city, total_points, role, status, experience, plant_types, interests, created_at, updated_at";
+  "user_id, full_name, email, city, total_points, role, status, permissions, experience, plant_types, interests, created_at, updated_at";
 
 /** Used by login only — the one place that needs the hash. */
 async function findByEmail(email) {
@@ -129,6 +129,35 @@ async function updateAdmin(userId, { role, status }) {
   return rows[0] || null;
 }
 
+/** Staff, for the admin-management screen. */
+async function listAdmins() {
+  const { rows } = await query(
+    `SELECT ${PUBLIC_COLUMNS} FROM users
+      WHERE role IN ('admin', 'super_admin')
+      ORDER BY role DESC, email`
+  );
+  return rows;
+}
+
+/**
+ * Sets an admin's role and permission list.
+ *
+ * The list is sent whole rather than patched, so unticking a box really removes
+ * that capability (an empty array clears it — COALESCE only skips a null).
+ */
+async function setAdminAccess(userId, { role, permissions }) {
+  const { rows } = await query(
+    `UPDATE users
+        SET role        = COALESCE($2, role),
+            permissions = COALESCE($3, permissions),
+            updated_at  = now()
+      WHERE user_id = $1
+      RETURNING ${PUBLIC_COLUMNS}`,
+    [userId, role || null, Array.isArray(permissions) ? permissions : null]
+  );
+  return rows[0] || null;
+}
+
 module.exports = {
   findByEmail,
   findById,
@@ -141,4 +170,6 @@ module.exports = {
   count,
   listAll,
   updateAdmin,
+  listAdmins,
+  setAdminAccess,
 };
