@@ -153,8 +153,8 @@ describe("suspicious and rejected submissions earn nothing", () => {
 
     const second = await h.submitRawPhoto(api.base, token, plant.plant_id, imageUrl);
     assert.equal(second.body.duplicate_status, "exact");
-    assert.equal(second.body.approval_status, "pending");
-    assert.equal(second.body.requires_review, true);
+    assert.equal(second.body.approval_status, "rejected", "the exact same bytes are refused");
+    assert.equal(second.body.verification_result.reasonCode, "duplicate");
     assert.equal(await walletOf(token), afterFirst, "the duplicate earned nothing");
   });
 

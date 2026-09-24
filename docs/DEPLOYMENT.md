@@ -121,6 +121,25 @@ with a `knowledge_sources` reference. The assistant is instructed to use only
 those numbers and to say when it does not have one. To add facts, extend
 `plants.json` and re-seed (`npm run seed`) — no code change.
 
+**Did the member take this photo?** A plant photo downloaded from the internet
+passes "is there a plant?" perfectly, so that question is asked separately in
+`services/provenance.service.js`:
+
+- offline signals (always available): filename families compared against camera
+  (`IMG_`, `DSC`, `PXL_`), screenshot and stock-library names; editor/generator
+  software or "screenshot" text in the metadata; screen-shaped dimensions; flat
+  UI bars top and bottom; low resolution; an extension that disagrees with the
+  bytes;
+- the vision model's `captured` / `screenshot` / `watermark` verdicts, when a
+  model is configured.
+
+Weak signals are never enough on their own — **a missing EXIF is treated as
+neutral, not suspicious**, because most phones and social apps strip it, and a
+single odd filename does not block anyone. Two independent hints, a flat-bar
+screenshot signature, a stock/screenshot filename, or the model saying the image
+was not captured will refuse the photo (or hold it for review, when it is merely
+uncertain). Every signal is recorded on the verification record.
+
 **Grounding — how to teach the assistant.** The assistant answers from Green Hub
 articles, not from the model's memory. Publish an article (see `greenhub.json`
 or the admin Content page) and it becomes available to the assistant on the next
@@ -173,10 +192,17 @@ Related knobs: `WEATHER_CACHE_TTL_MS` (default 3600000), `WEATHER_TIMEOUT_MS`
 - Log aggregation / monitoring
 - CDN / image optimization pipeline
 - Frontend tests (the suite in `backend/tests/` is API-only)
-- Internet-wide reverse-image search. Duplicate detection compares against
-  **this platform's** stored images plus provenance (challenge code, hashes);
-  it cannot know an image was taken from Google Images. Suspicious images are
-  flagged for review, never auto-declared fraud.
+- **Internet-wide reverse-image search.** Provenance can never be *proven*:
+  metadata is trivially stripped or edited, filenames can be renamed, and a
+  plant photographed against a plain wall resembles a screenshot. Duplicate
+  detection sees only images already stored on **this platform**; the offline
+  signals see what the bytes and the file name reveal. An image pulled from a
+  search engine, renamed, and re-saved may therefore pass — that is a real
+  limitation, not an oversight. No image is ever declared fraudulent
+  automatically, and a member can always submit a new photo.
+- Adding a reverse-image-search provider would mean sending members' photos to a
+  third party and is a privacy decision for the business, not just a technical
+  one — see the note about photos leaving the server above.
 
 This file should be expanded as those pieces are actually built, rather
 than describing infrastructure that doesn't exist yet.

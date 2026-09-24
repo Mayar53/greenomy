@@ -637,6 +637,8 @@ html[dir="rtl"] .lang-switch { flex-direction: row-reverse; }
 .verify-verdict { font-weight: 700; margin-bottom: 6px; }
 .verify-verdict.is-approved { color: var(--sage-ink); }
 .verify-verdict.is-pending { color: #a8661b; }
+.verify-verdict.is-rejected { color: var(--color-error); }
+.verify-result.is-rejected .score-ring { border-color: var(--color-error); }
 .verify-points { font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 18px; }
 
 /* ---------------------------------------------------------------------- */

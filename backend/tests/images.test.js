@@ -48,7 +48,7 @@ describe("integrity is measured from the real bytes", () => {
     assert.equal(res.status, 400);
   });
 
-  test("a dim, detail-free photo queues for review instead of approving", async () => {
+  test("a photo with no plant in it is rejected, not approved", async () => {
     const { token, plant } = await member("DIMPHOTO");
     const res = await h.submitRawPhoto(
       api.base,
@@ -57,7 +57,8 @@ describe("integrity is measured from the real bytes", () => {
       await h.photoDataUrl("DIMPHOTO", { green: false })
     );
     assert.equal(res.status, 201);
-    assert.equal(res.body.approval_status, "pending");
+    assert.equal(res.body.approval_status, "rejected");
+    assert.equal(res.body.verification_result.reasonCode, "no_plant");
   });
 });
 
@@ -72,8 +73,8 @@ describe("duplicate protection", () => {
     const second = await h.submitRawPhoto(api.base, token, plant.plant_id, imageUrl);
     assert.equal(second.status, 201);
     assert.equal(second.body.duplicate_status, "exact");
-    assert.equal(second.body.requires_review, true);
-    assert.equal(second.body.approval_status, "pending", "a duplicate is never auto-approved");
+    assert.equal(second.body.approval_status, "rejected", "identical bytes already submitted are refused");
+    assert.equal(second.body.verification_result.reasonCode, "duplicate");
   });
 
   test("a duplicate is caught across members, not just your own history", async () => {
@@ -86,7 +87,7 @@ describe("duplicate protection", () => {
 
     assert.equal(res.body.duplicate_status, "exact");
     assert.equal(res.body.verification_result.crossUser, true);
-    assert.equal(res.body.requires_review, true);
+    assert.equal(res.body.approval_status, "rejected", "another member's photo is refused too");
   });
 
   test("a recompressed copy is caught as a near duplicate", async () => {
@@ -247,5 +248,371 @@ describe("the original photo", () => {
       token: stranger.token,
     });
     assert.equal(theirs.status, 404);
+  });
+});
+
+/** Uploads a fixture under a specific filename (multipart), so the
+ * filename-based signals can be exercised. */
+async function submitNamed(token, plantId, dataUrl, name) {
+  const buffer = Buffer.from(dataUrl.split(",")[1], "base64");
+  const type = dataUrl.startsWith("data:image/png") ? "image/png" : "image/jpeg";
+  return h.postMultipart(api.base, "/verifications", {
+    token,
+    file: { buffer, type, name },
+    fields: { plantId },
+  });
+}
+
+describe("originality: images that did not come from the member's camera", () => {
+  test("a screenshot is rejected as a screenshot, even with no filename", async () => {
+    const { token, plant } = await member("SHOT");
+    const res = await h.submitRawPhoto(api.base, token, plant.plant_id, await h.screenshotDataUrl());
+
+    assert.equal(res.status, 201);
+    assert.equal(res.body.approval_status, "rejected");
+    assert.equal(res.body.verification_result.reasonCode, "screenshot");
+    assert.ok(
+      res.body.verification_result.provenance.indicators.includes("screenshot_signature"),
+      "the screenshot signature should be recorded on the result"
+    );
+  });
+
+  test("a stock-library filename is rejected as sourced", async () => {
+    const { token, plant } = await member("STOCK");
+    const res = await submitNamed(
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("STOCK", { green: true }),
+      "shutterstock_123456789.jpg"
+    );
+
+    assert.equal(res.status, 201);
+    assert.equal(res.body.approval_status, "rejected");
+    assert.equal(res.body.verification_result.reasonCode, "likely_sourced");
+    assert.ok(res.body.verification_result.provenance.indicators.includes("stock_filename"));
+  });
+
+  test("a photographed screenshot filename is rejected too", async () => {
+    const { token, plant } = await member("SHOTNAME");
+    const res = await submitNamed(
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("SHOTNAME", { green: true }),
+      "Screenshot 2026-09-24 at 10.00.00.jpg"
+    );
+    assert.equal(res.body.approval_status, "rejected");
+    assert.equal(res.body.verification_result.reasonCode, "screenshot");
+  });
+
+  test("a generic filename alone is not a rejection", async () => {
+    const { token, plant } = await member("GENERIC");
+    const res = await submitNamed(
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("GENERIC", { green: true }),
+      "image (1).jpg"
+    );
+
+    assert.equal(res.status, 201);
+    assert.equal(res.body.approval_status, "approved", "one weak hint must not block a member");
+    assert.ok(res.body.verification_result.provenance.indicators.includes("generic_filename"));
+  });
+
+  test("a renamed file (png extension, jpeg bytes) is not rejected on that alone", async () => {
+    const { token, plant } = await member("RENAMED");
+    const res = await submitNamed(
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("RENAMED", { green: true }),
+      "plant.png"
+    );
+
+    assert.equal(res.body.approval_status, "approved");
+    assert.ok(res.body.verification_result.provenance.indicators.includes("renamed_file"));
+  });
+});
+
+describe("legitimate camera photos still pass", () => {
+  test("a camera photo with no EXIF at all is accepted", async () => {
+    const { token, plant } = await member("NOEXIF");
+    const res = await h.submitRawPhoto(
+      api.base,
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("NOEXIF", { green: true })
+    );
+
+    assert.equal(res.body.approval_status, "approved");
+    assert.equal(res.body.verification_result.provenance.checks.hasExif, false, "no metadata is not a strike");
+    assert.equal(res.body.verification_result.provenance.verdict, "neutral");
+  });
+
+  test("a phone-named camera image with stripped metadata is accepted", async () => {
+    const { token, plant } = await member("PHONENAME");
+    const res = await submitNamed(
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("PHONENAME", { green: true }),
+      "IMG_20260924_101500.jpg"
+    );
+
+    assert.equal(res.body.approval_status, "approved");
+    assert.ok(res.body.verification_result.provenance.positive.includes("camera_filename"));
+  });
+
+  test("a real but unusable plant photo is held for review, not accepted", async () => {
+    const { token, plant } = await member("POOR");
+    const res = await h.submitRawPhoto(api.base, token, plant.plant_id, await h.blurryPlantDataUrl());
+
+    assert.equal(res.body.approval_status, "pending");
+    assert.equal(res.body.requires_review, true);
+    assert.equal(res.body.verification_result.plantMatch, null, "no model, so the plant is only inferred");
+  });
+
+  test("a very low-resolution plant photo is held for review", async () => {
+    const { token, plant } = await member("LOWRES");
+    const res = await h.submitRawPhoto(
+      api.base,
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("LOWRES", { green: true, width: 160, height: 120 })
+    );
+
+    assert.equal(res.body.approval_status, "pending");
+    assert.ok(res.body.verification_result.provenance.indicators.includes("low_resolution"));
+  });
+});
+
+describe("the model's capture verdict is enforced, not just the plant match", () => {
+  /** Stubs only the provider call, so the test client's own HTTP still works. */
+  async function withModelReply(payload, run) {
+    const realFetch = global.fetch;
+    const previousKey = process.env.AI_API_KEY;
+    process.env.AI_API_KEY = "test-key";
+
+    global.fetch = async (url, options) => {
+      if (!String(url).includes("/chat/completions")) return realFetch(url, options);
+      return {
+        ok: true,
+        status: 200,
+        json: async () => ({ choices: [{ message: { content: JSON.stringify(payload) } }] }),
+      };
+    };
+
+    try {
+      await run();
+    } finally {
+      global.fetch = realFetch;
+      if (previousKey === undefined) delete process.env.AI_API_KEY;
+      else process.env.AI_API_KEY = previousKey;
+    }
+  }
+
+  test("a downloaded plant photo is rejected even though a plant is visible", async () => {
+    await withModelReply(
+      { plantMatch: true, captured: false, screenshot: false, watermark: false, confidence: 0.95, reason: "stock-style studio shot" },
+      async () => {
+        const { token, plant } = await member("DOWNLOADED");
+        const res = await h.submitRawPhoto(
+          api.base,
+          token,
+          plant.plant_id,
+          await h.photoDataUrl("DOWNLOADED", { green: true })
+        );
+
+        assert.equal(res.body.verification_result.plantMatch, true, "the plant check did pass");
+        assert.equal(res.body.approval_status, "rejected", "but the image is not the member's own");
+        assert.equal(res.body.verification_result.reasonCode, "likely_sourced");
+      }
+    );
+  });
+
+  test("a watermark rejects the photo", async () => {
+    await withModelReply(
+      { plantMatch: true, captured: true, screenshot: false, watermark: true, confidence: 0.9, reason: "watermarked" },
+      async () => {
+        const { token, plant } = await member("WATERMARK");
+        const res = await h.submitRawPhoto(
+          api.base,
+          token,
+          plant.plant_id,
+          await h.photoDataUrl("WATERMARK", { green: true })
+        );
+        assert.equal(res.body.approval_status, "rejected");
+      }
+    );
+  });
+
+  test("no plant detected by the model rejects a clean, original photo", async () => {
+    await withModelReply(
+      { plantMatch: false, captured: true, screenshot: false, watermark: false, confidence: 0.9, reason: "no plant here" },
+      async () => {
+        const { token, plant } = await member("NOPLANT");
+        const res = await h.submitRawPhoto(
+          api.base,
+          token,
+          plant.plant_id,
+          await h.photoDataUrl("NOPLANT", { green: true })
+        );
+        assert.equal(res.body.approval_status, "rejected");
+        assert.equal(res.body.verification_result.reasonCode, "no_plant");
+      }
+    );
+  });
+
+  test("an unsure model never auto-accepts — it queues", async () => {
+    await withModelReply(
+      { plantMatch: true, captured: null, screenshot: null, watermark: null, confidence: 0.9, reason: "cannot tell" },
+      async () => {
+        const { token, plant } = await member("UNSURE");
+        const res = await h.submitRawPhoto(
+          api.base,
+          token,
+          plant.plant_id,
+          await h.photoDataUrl("UNSURE", { green: true })
+        );
+        assert.equal(res.body.approval_status, "pending");
+        assert.equal(res.body.requires_review, true);
+      }
+    );
+  });
+
+  test("an original photo the model confirms is approved", async () => {
+    await withModelReply(
+      { plantMatch: true, captured: true, screenshot: false, watermark: false, confidence: 0.92, reason: "looks like a home photo" },
+      async () => {
+        const { token, plant } = await member("ORIGINAL");
+        const res = await h.submitRawPhoto(
+          api.base,
+          token,
+          plant.plant_id,
+          await h.photoDataUrl("ORIGINAL", { green: true })
+        );
+        assert.equal(res.body.approval_status, "approved");
+        assert.equal(res.body.verification_result.captured, true);
+      }
+    );
+  });
+});
+
+describe("the decision cannot be made from the client", () => {
+  test("client-supplied verdict fields are ignored", async () => {
+    const { token, plant } = await member("BYPASS");
+    const res = await h.post(api.base, "/verifications", {
+      token,
+      body: {
+        plantId: plant.plant_id,
+        imageUrl: await h.photoDataUrl("BYPASS", { green: false }),
+        // A member cannot assert their own result.
+        verified: true,
+        approvalStatus: "approved",
+        approval_status: "approved",
+        confidence: 1,
+        requires_review: false,
+      },
+    });
+
+    assert.equal(res.status, 201);
+    assert.equal(res.body.approval_status, "rejected", "the server's own decision stands");
+    assert.equal(res.body.verification_result.reasonCode, "no_plant");
+  });
+});
+
+describe("the decision policy in isolation", () => {
+  const ctrl = () => require("../controllers/verifications.controller");
+
+  const base = {
+    analysis: { pixelStats: { greenRatio: 0.6 } },
+    duplicates: { status: "none", matches: [] },
+    milestone: null,
+    challengePassed: null,
+    confidence: 0.9,
+  };
+
+  test("a plant match alone never accepts when provenance is suspicious", () => {
+    const outcome = ctrl()._decide({
+      ...base,
+      signals: { plantMatch: true, captured: true, screenshot: false, watermark: false },
+      provenance: { verdict: "suspicious", reasonCode: "screenshot" },
+    });
+    assert.equal(outcome.approvalStatus, "rejected");
+    assert.equal(outcome.reasonCode, "screenshot");
+  });
+
+  test("no plant signal at all rejects", () => {
+    const outcome = ctrl()._decide({
+      ...base,
+      analysis: { pixelStats: { greenRatio: 0 } },
+      signals: null,
+      provenance: { verdict: "neutral" },
+    });
+    assert.equal(outcome.approvalStatus, "rejected");
+    assert.equal(outcome.reasonCode, "no_plant");
+  });
+
+  test("an uncertain provenance verdict queues instead of accepting", () => {
+    const outcome = ctrl()._decide({
+      ...base,
+      signals: null,
+      provenance: { verdict: "uncertain", reasonCode: "uncertain" },
+    });
+    assert.equal(outcome.approvalStatus, "pending");
+    assert.equal(outcome.requiresReview, true);
+  });
+
+  test("a milestone photo is never auto-accepted", () => {
+    const outcome = ctrl()._decide({
+      ...base,
+      signals: null,
+      provenance: { verdict: "neutral" },
+      milestone: { milestone_id: "m1" },
+      challengePassed: true,
+    });
+    assert.equal(outcome.approvalStatus, "pending");
+  });
+
+  test("an approved plant photo is the only path to acceptance", () => {
+    const outcome = ctrl()._decide({
+      ...base,
+      signals: null,
+      provenance: { verdict: "neutral" },
+    });
+    assert.equal(outcome.approvalStatus, "approved");
+    assert.equal(outcome.reasonCode, "ok");
+  });
+});
+
+describe("provenance signals in isolation", () => {
+  const provenance = require("../services/provenance.service");
+
+  test("filename families are recognised", () => {
+    assert.equal(provenance.extensionMismatch("plant.png", "jpeg"), true);
+    assert.equal(provenance.extensionMismatch("plant.jpg", "jpeg"), false);
+    assert.equal(provenance.looksLikeScreenSize(1280, 960), true);
+    assert.equal(provenance.looksLikeScreenSize(4032, 3024), false);
+  });
+
+  test("missing metadata is neutral, never suspicious", () => {
+    const result = provenance.assess({
+      analysis: { format: "jpeg", width: 4032, height: 3024, metadata: { hasExif: false, text: "" }, bandStats: { top: 900, center: 1200, bottom: 800 } },
+      filename: null,
+    });
+    assert.equal(result.verdict, "neutral");
+    assert.deepEqual(result.indicators, []);
+  });
+
+  test("a screenshot signature needs several signals to agree", () => {
+    // Busy screen-shaped PNG with flat bars and no metadata -> suspicious.
+    const shot = provenance.assess({
+      analysis: { format: "png", width: 1280, height: 720, metadata: { hasExif: false, text: "" }, bandStats: { top: 0, center: 400, bottom: 0 } },
+    });
+    assert.equal(shot.verdict, "suspicious");
+    assert.equal(shot.reasonCode, "screenshot");
+
+    // The same flat bars on a JPEG with camera metadata are just a plain photo.
+    const photo = provenance.assess({
+      analysis: { format: "jpeg", width: 4032, height: 3024, metadata: { hasExif: true, text: "apple iphone" }, bandStats: { top: 0, center: 400, bottom: 0 } },
+    });
+    assert.notEqual(photo.verdict, "suspicious");
   });
 });

@@ -100,16 +100,26 @@ const MULTI_SIGNAL_SYSTEM = "You check photos for a plant-growing challenge. Rep
 
 function multiSignalPrompt(plantName, challengeCode) {
   return [
-    "You are checking ONE photo submitted for a plant-growing challenge.",
-    plantName ? `It should show a living ${plantName} plant being grown.` : "It should show a living plant being grown.",
+    "You are checking ONE photo submitted for a plant-growing challenge. There are TWO SEPARATE questions, and an image can pass one while failing the other:",
+    "  (1) PLANT — does it show a real, living plant being grown?",
+    "  (2) ORIGINAL — does it look like a photo this person actually took themselves, rather than something taken from the internet: a stock/library photo, a screenshot, a social-media repost, or a heavily edited/generated image?",
+    plantName ? `The plant is expected to be a ${plantName}.` : "",
     challengeCode
-      ? `It should ALSO show the code "${challengeCode}" — handwritten or printed — somewhere clearly in the frame.`
+      ? `The photo should ALSO show the code "${challengeCode}" — handwritten or printed — somewhere clearly in the frame.`
       : "",
     "",
+    "Signals that an image is NOT the person's own photo: perfectly uniform or studio-white backgrounds; watermarks, stock credits or price tags; logos; screenshot UI (status bars, buttons, browser chrome); drawn-on text; heavy artificial colour grading; a scene that looks like a shop, catalogue or poster rather than someone's home.",
+    "A photo of a plant downloaded from the internet IS still a plant: answer plantMatch true and captured false for it. Never let a plant match alone decide the result.",
+    "",
     "Reply with ONLY this JSON shape:",
-    '{"plantMatch": <true|false|null>, "challengePassed": <true|false|null>, "confidence": <0-1>, "reason": "<one short sentence>"}',
-    "plantMatch: does the plant look like what was expected? Use null if you cannot tell.",
-    challengeCode ? "challengePassed: is the code clearly visible and correct? Use null if you cannot tell." : "challengePassed: null.",
+    '{"plantMatch": <true|false|null>, "captured": <true|false|null>, "screenshot": <true|false|null>, "watermark": <true|false|null>, "challengePassed": <true|false|null>, "confidence": <0-1>, "reason": "<one short sentence>"}',
+    "plantMatch: is there a real plant being grown? null if you cannot tell.",
+    "captured: does it look like an original photo taken by the person submitting it? null if you cannot tell.",
+    "screenshot: does it show screen/UI elements, i.e. is it a screen capture? null if unsure.",
+    "watermark: is there a watermark, stock-image credit, price tag or large overlaid text? null if unsure.",
+    challengeCode
+      ? "challengePassed: is the code clearly visible and correct? null if you cannot tell."
+      : "challengePassed: null.",
     "confidence: how certain you are this is a genuine photo of a growing plant.",
     "Never guess — use null rather than inventing an answer.",
   ]
@@ -139,7 +149,12 @@ async function verifyPhoto({ imageUrl, plantName, challengeCode }) {
   const confidence = Number(parsed.confidence);
 
   return {
+    // Question 1: is there a plant?
     plantMatch: asTriState(parsed.plantMatch),
+    // Question 2: does it look like the member's own photo?
+    captured: asTriState(parsed.captured),
+    screenshot: asTriState(parsed.screenshot),
+    watermark: asTriState(parsed.watermark),
     challengePassed: asTriState(parsed.challengePassed),
     confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(1, confidence)) : null,
     reason: typeof parsed.reason === "string" ? parsed.reason.slice(0, 300) : null,

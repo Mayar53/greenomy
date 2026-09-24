@@ -13,6 +13,10 @@ const MAX_UPLOAD_BYTES = 5 * 1024 * 1024; // client-side guard, below the server
 
 let stream = null;
 let photoDataUrl = null;
+// The member's own file, when they chose one. It is uploaded as-is: re-encoding
+// it here would throw away the format, the filename and the full resolution,
+// all of which the server uses to judge whether the photo is really theirs.
+let photoFile = null;
 let coords = null;
 let challengeId = null;
 
@@ -135,6 +139,7 @@ function captureFrame() {
     cameraStatus(t("verify.cameraStarting"), true);
     return;
   }
+  photoFile = null; // a canvas capture has no original file
   preparePhoto(el.video, el.video.videoWidth, el.video.videoHeight);
   stopStream();
   showCaptured();
@@ -154,6 +159,7 @@ function loadFile(file) {
     return;
   }
 
+  photoFile = file;
   const img = new Image();
   img.onload = () => {
     preparePhoto(img, img.naturalWidth, img.naturalHeight);
@@ -166,6 +172,7 @@ function loadFile(file) {
 
 function retake() {
   photoDataUrl = null;
+  photoFile = null;
   el.preview.hidden = true;
   el.preview.removeAttribute("src");
   el.placeholder.hidden = false;
@@ -215,16 +222,39 @@ function attachLocation() {
   );
 }
 
+/** The server's reason code decides which explanation the member sees, so a
+ * refusal always tells them what to fix rather than just "no". */
+const REASON_KEYS = {
+  no_plant: "verify.reasonNoPlant",
+  likely_sourced: "verify.reasonLikelySourced",
+  screenshot: "verify.reasonScreenshot",
+  duplicate: "verify.reasonDuplicate",
+  low_quality: "verify.reasonLowQuality",
+  uncertain: "verify.reasonLowQuality",
+};
+
+function verdictText(record, approved, rejected) {
+  const reasonKey = REASON_KEYS[(record.verification_result || {}).reasonCode];
+  if (reasonKey) return t(reasonKey);
+  if (approved) return t("verify.approved");
+  if (rejected) return t("verify.rejected");
+
+  const pending = t("verify.pending");
+  return record.requires_review ? `${pending} · ${t("verify.reviewNote")}` : pending;
+}
+
 function showResult(record) {
   const confidence = Math.round((record.ai_confidence_score || 0) * 100);
   const approved = record.approval_status === "approved";
+  const rejected = record.approval_status === "rejected";
+
   el.form.hidden = true;
   el.result.hidden = false;
   el.scoreValue.textContent = `${confidence}%`;
   el.result.classList.toggle("is-approved", approved);
-  el.verdict.textContent = approved ? t("verify.approved") : t("verify.pending");
-  if (record.requires_review) el.verdict.textContent += ` · ${t("verify.reviewNote")}`;
-  el.verdict.className = `verify-verdict ${approved ? "is-approved" : "is-pending"}`;
+  el.result.classList.toggle("is-rejected", rejected);
+  el.verdict.textContent = verdictText(record, approved, rejected);
+  el.verdict.className = `verify-verdict ${approved ? "is-approved" : rejected ? "is-rejected" : "is-pending"}`;
   el.points.textContent = "";
   if (approved) {
     fetchCurrentUser()
@@ -253,11 +283,13 @@ async function submit() {
 
   try {
     // Send the file itself as multipart; the server measures the real bytes, so
-    // no client-side pixel stats are trusted or sent.
-    const blob = await (await fetch(photoDataUrl)).blob();
+    // no client-side pixel stats are trusted or sent. A chosen file goes up
+    // untouched — camera frames are all we have to encode.
+    const blob = photoFile || (await (await fetch(photoDataUrl)).blob());
     const record = await submitVerificationFile({
       plantId,
       blob,
+      filename: photoFile ? photoFile.name : "camera-capture.jpg",
       gpsLat: coords ? coords.lat : undefined,
       gpsLong: coords ? coords.lon : undefined,
       challengeId,

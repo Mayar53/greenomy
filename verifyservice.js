@@ -7,10 +7,12 @@ export async function listVerifications() {
 
 /** Uploads the actual image file (multipart), rather than a base64 string. The
  * server measures the bytes itself, so no client-side pixel stats are sent. */
-export async function submitVerificationFile({ plantId, blob, gpsLat, gpsLong, challengeId, milestoneId }) {
+export async function submitVerificationFile({ plantId, blob, filename, gpsLat, gpsLong, challengeId, milestoneId }) {
   const form = new FormData();
   form.append("plantId", plantId);
-  form.append("image", blob, "plant.jpg");
+  // Keep the member's own filename: the server uses it (one of several signals)
+  // to tell a camera photo from a screenshot or a download.
+  form.append("image", blob, filename || "plant.jpg");
   if (gpsLat != null) form.append("gpsLat", String(gpsLat));
   if (gpsLong != null) form.append("gpsLong", String(gpsLong));
   if (challengeId) form.append("challengeId", challengeId);

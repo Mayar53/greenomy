@@ -22,6 +22,7 @@ const imageModel = require("../models/verification-image.model");
 const journeyModel = require("../models/journey.model");
 const imageService = require("../services/image.service");
 const duplicateService = require("../services/duplicate.service");
+const provenanceService = require("../services/provenance.service");
 const ai = require("../services/ai.service");
 const { getVerificationProvider, HeuristicVerificationProvider, verifyPhoto } = require("../services/verification-provider");
 const rewardEngine = require("../services/reward-engine.service");
@@ -30,6 +31,82 @@ const { notify } = require("../services/notification.service");
 const AUTO_APPROVE_THRESHOLD = 0.85;
 const CHALLENGE_TTL_MS = Number(process.env.CHALLENGE_TTL_MS || 30 * 60 * 1000);
 const CHALLENGE_LENGTH = Math.min(Math.max(Number(process.env.CHALLENGE_LENGTH || 4), 3), 8);
+
+// Foliage floors. A frame with essentially no green in it is not a growing
+// plant; a frame that is only faintly green is not evidence either. Both are
+// only consulted when no vision model is configured to judge the plant itself.
+const NO_PLANT_GREEN_RATIO = Number(process.env.VERIFY_MIN_GREEN_RATIO || 0.1);
+const STRONG_GREEN_RATIO = Number(process.env.VERIFY_STRONG_GREEN_RATIO || 0.25);
+
+/**
+ * The single place the outcome is decided, from signals already computed for
+ * this submission. Pure — no I/O — so the policy can be tested directly.
+ *
+ * Order matters. A clear "no plant" or a clear provenance red flag rejects;
+ * anything we cannot stand behind goes to a human; only a plant we can see WITH
+ * no red flags is accepted. A plant match alone is never enough — that is the
+ * entire point of the second question.
+ */
+function decideVerification({ analysis, signals, provenance, duplicates, milestone, challengePassed, confidence }) {
+  const greenery = Number(analysis.pixelStats && analysis.pixelStats.greenRatio) || 0;
+  const plantMatch = signals ? signals.plantMatch : null;
+
+  // 1. No plant -> reject.
+  if (plantMatch === false) {
+    return { approvalStatus: "rejected", requiresReview: false, reasonCode: "no_plant" };
+  }
+  // With no model at all, pixel greenery is the only plant signal available.
+  if (!signals && greenery < NO_PLANT_GREEN_RATIO) {
+    return { approvalStatus: "rejected", requiresReview: false, reasonCode: "no_plant" };
+  }
+
+  // 2. Clear evidence the image came from somewhere else -> reject. The model's
+  //    own "not captured / screenshot / watermark" verdicts count, as do the
+  //    offline filename and screenshot signatures.
+  const modelSuspicious =
+    Boolean(signals) && (signals.captured === false || signals.screenshot === true || signals.watermark === true);
+  if (provenance.verdict === "suspicious" || modelSuspicious) {
+    return {
+      approvalStatus: "rejected",
+      requiresReview: false,
+      reasonCode: provenance.verdict === "suspicious" ? provenance.reasonCode || "likely_sourced" : "likely_sourced",
+    };
+  }
+
+  // 3. Bytes we have already stored -> reject.
+  if (duplicates.status === "exact") {
+    return { approvalStatus: "rejected", requiresReview: false, reasonCode: "duplicate" };
+  }
+
+  // 4. Anything uncertain goes to a human rather than being accepted.
+  if (provenance.verdict === "uncertain") {
+    return { approvalStatus: "pending", requiresReview: true, reasonCode: provenance.reasonCode || "uncertain" };
+  }
+  if (signals && (plantMatch === null || signals.captured === null)) {
+    return { approvalStatus: "pending", requiresReview: true, reasonCode: "uncertain" };
+  }
+  if (!signals && greenery < STRONG_GREEN_RATIO) {
+    return { approvalStatus: "pending", requiresReview: true, reasonCode: "low_quality" };
+  }
+  if (duplicates.status === "near") {
+    return { approvalStatus: "pending", requiresReview: true, reasonCode: "duplicate" };
+  }
+  if (milestone) {
+    // Reward-eligible: never auto-paid here — the code/photo needs a human
+    // (or a vision model that confirmed the code) before points move.
+    return {
+      approvalStatus: "pending",
+      requiresReview: true,
+      reasonCode: challengePassed === true ? "milestone_review" : "challenge_unverified",
+    };
+  }
+
+  // 5. Plant present and nothing suspicious -> the existing confidence rule.
+  if (confidence >= AUTO_APPROVE_THRESHOLD) {
+    return { approvalStatus: "approved", requiresReview: false, reasonCode: "ok" };
+  }
+  return { approvalStatus: "pending", requiresReview: true, reasonCode: "low_quality" };
+}
 
 /** A fresh, unpredictable code — never a static one, hence crypto.randomInt. */
 function generateChallengeCode() {
@@ -154,6 +231,14 @@ exports.submit = async (req, res) => {
     }
   }
 
+  // 6. Originality / provenance. The offline signals are always available; the
+  //    model's capture verdict (when there is a model) is merged in by the
+  //    decision below.
+  const provenance = provenanceService.assess({
+    analysis,
+    filename: req.file && req.file.originalname ? req.file.originalname : null,
+  });
+
   const plantMatch = signals ? signals.plantMatch : null;
   const challengePassed = signals ? signals.challengePassed : null;
   const confidence =
@@ -161,33 +246,57 @@ exports.submit = async (req, res) => {
       ? Math.max(scored.confidence, signals.confidence)
       : scored.confidence;
 
+  const decision = decideVerification({
+    analysis,
+    signals,
+    provenance,
+    duplicates,
+    milestone,
+    challengePassed,
+    confidence,
+  });
+  const approvalStatus = decision.approvalStatus;
+  const requiresReview = decision.requiresReview;
+
   const duplicate = duplicates.status !== "none";
   const crossUser = duplicates.matches.some((match) => match.user_id !== req.user.id);
   const priorPhotos = await verificationModel.countForPlant(req.user.id, plantId);
   const journeyConsistency = duplicate ? "unknown" : priorPhotos > 0 ? "plausible" : "first";
+  const suspicious =
+    duplicate ||
+    provenance.verdict === "suspicious" ||
+    Boolean(signals && (signals.captured === false || signals.screenshot === true || signals.watermark === true));
 
-  // 6. Decide. A duplicate, or an unconfirmed milestone, always goes to a human.
-  //    A plain garden photo keeps the existing confidence rule.
-  let approvalStatus;
-  if (duplicate || milestone) approvalStatus = "pending";
-  else approvalStatus = confidence >= AUTO_APPROVE_THRESHOLD ? "approved" : "pending";
-
-  const requiresReview = duplicate || (Boolean(milestone) && challengePassed !== true);
-
+  // The full internal result. Kept on the record so an admin can see WHY a photo
+  // was accepted, rejected or held — never just a bare score.
   const verificationResult = {
+    decision: approvalStatus,
+    reasonCode: decision.reasonCode,
+    // Question 1 — is there a plant?
     plantMatch,
+    plantConfidence: signals && signals.confidence != null ? signals.confidence : confidence,
+    // Question 2 — does it look like the member's own photo?
+    captured: signals ? signals.captured : null,
+    screenshot: signals ? signals.screenshot : null,
+    watermark: signals ? signals.watermark : null,
+    provenance: {
+      score: provenance.score,
+      verdict: provenance.verdict,
+      indicators: provenance.indicators,
+      positive: provenance.positive,
+      checks: provenance.checks,
+    },
+    // Supporting signals
     challengePassed,
     duplicate: duplicates.status,
     crossUser,
     journeyConsistency,
-    suspicious: duplicate,
+    suspicious,
     requiresReview,
     confidence,
     reason: signals ? signals.reason : (scored.metrics && scored.metrics.reason) || null,
-    duplicateMatches: duplicates.matches.map((match) => ({
-      verification_id: match.verification_id,
-      distance: match.distance,
-    })),
+    // Counts only: another member's verification id is not this member's business.
+    duplicateMatches: { count: duplicates.matches.length, crossUser },
   };
 
   // 7. One transaction: consume the challenge, record the image, record the
@@ -237,9 +346,11 @@ exports.submit = async (req, res) => {
     await imageModel.linkVerification(client, image.image_id, record.verification_id);
 
     if (milestone) {
+      // A rejected milestone photo reopens the milestone so the member can try
+      // again; anything else waits for the review decision.
       await journeyModel.setMilestoneVerification(client, milestone.milestone_id, {
         verificationId: record.verification_id,
-        verificationStatus: "pending",
+        verificationStatus: approvalStatus === "rejected" ? "rejected" : "pending",
       });
     }
 
@@ -252,10 +363,14 @@ exports.submit = async (req, res) => {
     return record;
   });
 
-  await notify({
-    userId: req.user.id,
-    type: approvalStatus === "approved" ? "verification_approved" : "verification_pending",
-  });
+  const notificationType =
+    approvalStatus === "approved"
+      ? "verification_approved"
+      : approvalStatus === "rejected"
+        ? "verification_rejected"
+        : "verification_pending";
+
+  await notify({ userId: req.user.id, type: notificationType });
 
   res.status(201).json(verification);
 };
@@ -297,3 +412,4 @@ exports.image = async (req, res) => {
 
 // Exported for tests.
 exports._generateChallengeCode = generateChallengeCode;
+exports._decide = decideVerification;

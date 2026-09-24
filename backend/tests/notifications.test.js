@@ -22,6 +22,10 @@ async function unread(token) {
   return res.body.unread;
 }
 
+/** A plant photo too low-resolution to verify — it queues for review. (A photo
+ * with no plant in it at all is rejected outright and would not queue.) */
+const pendingImage = (tag) => h.photoDataUrl(tag, { green: true, width: 160, height: 120 });
+
 describe("notifications", () => {
   test("the verification outcome creates a notification", async () => {
     const { token } = await h.signup(api.base);
@@ -37,7 +41,7 @@ describe("notifications", () => {
     assert.equal(list.body[0].type, "verification_approved");
     assert.equal(list.body[0].is_read, false);
 
-    await h.submitPhoto(api.base, token, plant.plant_id, h.DIM_PHOTO, "N2");
+    await h.submitRawPhoto(api.base, token, plant.plant_id, await pendingImage("N2"));
     assert.equal(await unread(token), 2, "a queued photo should also notify");
 
     const types = (await h.get(api.base, "/notifications", { token })).body.map((n) => n.type);
@@ -48,7 +52,7 @@ describe("notifications", () => {
     const { token } = await h.signup(api.base);
     const plant = await h.createPlant(api.base, token);
     await h.submitPhoto(api.base, token, plant.plant_id, h.SHARP_GREEN_PHOTO, "R1");
-    await h.submitPhoto(api.base, token, plant.plant_id, h.DIM_PHOTO, "R2");
+    await h.submitRawPhoto(api.base, token, plant.plant_id, await pendingImage("R2"));
 
     const list = await h.get(api.base, "/notifications", { token });
     assert.equal(list.body.length, 2);
@@ -70,7 +74,7 @@ describe("notifications", () => {
   test("an admin decision notifies the owner", async () => {
     const { token } = await h.signup(api.base);
     const plant = await h.createPlant(api.base, token);
-    const queued = await h.submitPhoto(api.base, token, plant.plant_id, h.DIM_PHOTO, "ADMIN");
+    const queued = await h.submitRawPhoto(api.base, token, plant.plant_id, await pendingImage("ADMIN"));
     const admin = await h.loginAdmin(api.base);
 
     await h.post(api.base, "/notifications/read-all", { token, body: {} });

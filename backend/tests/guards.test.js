@@ -27,7 +27,10 @@ describe("guards and admin queue", () => {
   test("the seeded admin can approve, and the same photo can't be paid twice", async () => {
     const { token } = await h.signup(api.base);
     const plant = await h.createPlant(api.base, token);
-    const queued = await h.submitPhoto(api.base, token, plant.plant_id, h.DIM_PHOTO, "QUEUE");
+    // A plant photo too low-resolution to verify queues for a human. (A photo
+    // with no plant in it at all is rejected outright, so it never queues.)
+    const lowRes = await h.photoDataUrl("QUEUE", { green: true, width: 160, height: 120 });
+    const queued = await h.submitRawPhoto(api.base, token, plant.plant_id, lowRes);
     assert.equal(queued.body.approval_status, "pending");
 
     const admin = await h.loginAdmin(api.base);
@@ -62,7 +65,8 @@ describe("guards and admin queue", () => {
   test("rejecting records the reason and awards nothing", async () => {
     const { token } = await h.signup(api.base);
     const plant = await h.createPlant(api.base, token);
-    const queued = await h.submitPhoto(api.base, token, plant.plant_id, h.DIM_PHOTO, "REJ");
+    const lowRes = await h.photoDataUrl("REJ", { green: true, width: 160, height: 120 });
+    const queued = await h.submitRawPhoto(api.base, token, plant.plant_id, lowRes);
     const admin = await h.loginAdmin(api.base);
 
     const rejected = await h.post(

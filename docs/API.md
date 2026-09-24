@@ -103,21 +103,41 @@ days-to-harvest — stage-based, not a fixed calendar.
 | GET /verifications/:id/image | user | the stored **original** photo, owner only |
 | GET /verifications/history | user | |
 
-The decision uses several signals, not one model:
+The decision uses several signals, not one model, and asks **two separate
+questions**: *is there a plant?* and *is this the member's own photo?*
 
-- **integrity** — sha256 plus perceptual hashes (aHash/dHash/pHash) and
-  green/brightness/sharpness stats, all computed server-side from the bytes;
+- **integrity** — sha256 plus perceptual hashes (aHash/dHash/pHash), dimensions,
+  green/brightness/sharpness stats and EXIF/XMP/IPTC metadata, all computed
+  server-side from the bytes. Corrupt, unreadable, unsupported or degenerate
+  files are refused with a 400;
 - **duplicates** — exact (sha256) and near (perceptual Hamming distance) matches
   against **every** user's submissions;
+- **provenance / originality** — `services/provenance.service.js` estimates
+  whether the image came from the member's own camera: filename families
+  (screenshot / stock-library / download vs camera), editor or generator
+  software in the metadata, screen-shaped dimensions, flat UI bars top and
+  bottom, low resolution, an extension that does not match the bytes. Each
+  signal is weak alone, so a single hint never rejects — several have to agree;
+- **identity & capture** — when a vision model is configured, its `plantMatch`,
+  `captured`, `screenshot` and `watermark` verdicts;
 - **challenge** — a fresh, expiring, single-use code a reward-eligible
-  (milestone) photo must show;
-- **identity** — the expected plant, when a vision model is configured.
+  (milestone) photo must show.
 
-A plain photo auto-approves at ≥85% confidence. A duplicate, or a milestone
-photo whose code could not be confirmed, is marked `requires_review` and queued
-— never auto-declared fraud. `verification_result` records the signals so an
-admin can see why. Points are awarded by the reward engine on approval, and the
-award is idempotent.
+`approval_status` follows from those:
+
+| situation | outcome |
+|---|---|
+| no plant (model says so, or no model and no foliage at all) | `rejected` (`no_plant`) |
+| provenance red flag, or the model says not captured / screenshot / watermark | `rejected` (`likely_sourced`, `screenshot`) |
+| identical bytes already stored | `rejected` (`duplicate`) |
+| uncertain — near-duplicate, low resolution, poor quality, unconfirmed code, or an unsure model | `pending` + `requires_review` |
+| plant present and nothing suspicious (≥85% confidence) | `approved` |
+
+A plant match alone is never enough: a downloaded photo of a plant passes the
+plant check and is still refused. Nothing is ever claimed as certain, and
+`verification_result` records the decision, the reason code and every signal so
+an admin can see why. Points are awarded by the reward engine on approval, and
+the award is idempotent.
 
 ## Admin verification queue
 | GET /admin/verifications | admin | pending queue |

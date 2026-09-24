@@ -173,21 +173,21 @@ function seeded(seed) {
 
 const clamp8 = (value) => Math.max(0, Math.min(255, Math.round(value)));
 
-async function photoDataUrl(tag = "PHOTO", { green = true } = {}) {
-  const size = 96;
-  const blocks = 6; // 16px blocks — low-frequency content that survives re-encoding
-  const raw = Buffer.alloc(size * size * 3);
-  const cell = size / blocks;
+async function photoDataUrl(tag = "PHOTO", { green = true, width = 512, height = 384 } = {}) {
+  const blocks = 6;
+  const raw = Buffer.alloc(width * height * 3);
+  const cellX = width / blocks;
+  const cellY = height / blocks;
 
   // Per-tag block levels: different tags paint a genuinely different picture, so
   // their perceptual hashes are far apart (and no two tags are byte-identical).
   const random = seeded(fnv1a(String(tag)));
   const levels = Array.from({ length: blocks * blocks }, () => random() % 8);
 
-  for (let y = 0; y < size; y += 1) {
-    for (let x = 0; x < size; x += 1) {
-      const i = (y * size + x) * 3;
-      const level = levels[Math.floor(y / cell) * blocks + Math.floor(x / cell)];
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      const i = (y * width + x) * 3;
+      const level = levels[Math.floor(y / cellY) * blocks + Math.floor(x / cellX)];
 
       if (!green) {
         const grey = clamp8(95 + level * 3);
@@ -197,18 +197,68 @@ async function photoDataUrl(tag = "PHOTO", { green = true } = {}) {
         continue;
       }
 
-      // A 1px checkerboard gives the frame real detail (sharpness); it averages
-      // out in the 32x32 hash downsample, so the block layout drives the hash.
-      const detail = (x + y) % 2 === 0 ? 25 : -25;
+      // A checkerboard gives the frame real detail (sharpness). The cell is a
+      // few pixels wide so the detail survives being downscaled for analysis,
+      // while still averaging out in the 32x32 hash downsample — the block
+      // layout is what drives the hash.
+      const detailCell = 6;
+      const detail = (Math.floor(x / detailCell) + Math.floor(y / detailCell)) % 2 === 0 ? 25 : -25;
       raw[i] = clamp8(10 + level * 8 + detail);
       raw[i + 1] = clamp8(120 + level * 16 + detail);
       raw[i + 2] = clamp8(10 + level * 6 + detail);
     }
   }
 
-  const buffer = await sharp(raw, { raw: { width: size, height: size, channels: 3 } })
+  const buffer = await sharp(raw, { raw: { width, height, channels: 3 } })
     .jpeg({ quality: 88 })
     .toBuffer();
+  return `data:image/jpeg;base64,${buffer.toString("base64")}`;
+}
+
+/**
+ * A screenshot: lossless PNG (a phone camera does not produce PNG), a common
+ * screen size, and flat UI bars top and bottom with busy content between them.
+ */
+async function screenshotDataUrl(width = 800, height = 600) {
+  const raw = Buffer.alloc(width * height * 3);
+  const bar = Math.round(height * 0.12);
+
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      const i = (y * width + x) * 3;
+      if (y < bar || y >= height - bar) {
+        // A flat UI bar. Few colours keep the PNG small.
+        raw[i] = 245;
+        raw[i + 1] = 246;
+        raw[i + 2] = 248;
+      } else {
+        // Busy "page content": wide vertical stripes, cheap to compress but
+        // high-variance, which is what the UI-band check looks for.
+        const light = Math.floor(x / 32) % 2 === 0;
+        raw[i] = light ? 70 : 30;
+        raw[i + 1] = light ? 190 : 110;
+        raw[i + 2] = light ? 70 : 30;
+      }
+    }
+  }
+
+  const buffer = await sharp(raw, { raw: { width, height, channels: 3 } }).png().toBuffer();
+  return `data:image/png;base64,${buffer.toString("base64")}`;
+}
+
+/** A dark, soft-focus green frame — a real plant photo, but too poor to trust. */
+async function blurryPlantDataUrl(width = 512, height = 384) {
+  const raw = Buffer.alloc(width * height * 3);
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      const i = (y * width + x) * 3;
+      const shade = 30 + Math.round((x / width) * 18);
+      raw[i] = shade;
+      raw[i + 1] = clamp8(88 + (y / height) * 16);
+      raw[i + 2] = shade;
+    }
+  }
+  const buffer = await sharp(raw, { raw: { width, height, channels: 3 } }).jpeg({ quality: 70 }).toBuffer();
   return `data:image/jpeg;base64,${buffer.toString("base64")}`;
 }
 
@@ -295,6 +345,8 @@ module.exports = {
   issueChallenge,
   postMultipart,
   photoDataUrl,
+  screenshotDataUrl,
+  blurryPlantDataUrl,
   reencodeDataUrl,
   uniqueEmail,
 };

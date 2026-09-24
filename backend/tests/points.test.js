@@ -18,17 +18,32 @@ after(async () => {
 });
 
 describe("points and redemption", () => {
-  test("a below-threshold photo queues and earns nothing", async () => {
+  test("a photo with no plant in it is rejected and earns nothing", async () => {
     const { token } = await h.signup(api.base);
     const plant = await h.createPlant(api.base, token);
 
     const submitted = await h.submitPhoto(api.base, token, plant.plant_id, h.DIM_PHOTO, "LOW");
     assert.equal(submitted.status, 201);
-    assert.equal(submitted.body.approval_status, "pending");
+    assert.equal(submitted.body.approval_status, "rejected");
+    assert.equal(submitted.body.verification_result.reasonCode, "no_plant");
 
     const wallet = await h.get(api.base, "/wallet", { token });
     assert.equal(wallet.body.currentPoints, 0);
     assert.equal(wallet.body.totalEarned, 0);
+  });
+
+  test("a plant photo too poor to verify queues for review and earns nothing", async () => {
+    const { token } = await h.signup(api.base);
+    const plant = await h.createPlant(api.base, token);
+
+    const imageUrl = await h.photoDataUrl("TINY", { green: true, width: 160, height: 120 });
+    const submitted = await h.submitRawPhoto(api.base, token, plant.plant_id, imageUrl);
+    assert.equal(submitted.status, 201);
+    assert.equal(submitted.body.approval_status, "pending");
+    assert.equal(submitted.body.requires_review, true);
+
+    const wallet = await h.get(api.base, "/wallet", { token });
+    assert.equal(wallet.body.currentPoints, 0);
   });
 
   test("an auto-approved photo awards 30 points and writes one ledger row", async () => {
