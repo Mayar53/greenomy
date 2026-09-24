@@ -38,7 +38,7 @@ const entry = (over = {}) => ({
   name: "X",
   slug: "x",
   category: "vegetables",
-  emoji: "🌱",
+  icon: "sprout",
   days_to_harvest: 60,
   difficulty: "easy",
   indoor: true,

@@ -9,7 +9,7 @@ const { query } = require("../config/db");
 const aliasModel = require("./plant-alias.model");
 const plantNormalize = require("../services/plant-normalize.service");
 
-const CATALOG_COLUMNS = `id, name, slug, category, emoji, days_to_harvest, difficulty,
+const CATALOG_COLUMNS = `id, name, slug, category, icon, days_to_harvest, difficulty,
                          indoor, outdoor, sun, water, climates, planting_months,
                          notes, i18n, scientific_name, accepted_name, family, description,
                          growth_duration_days, germination_duration_days, temp_min_c, temp_max_c,

@@ -8,6 +8,7 @@ import { listMyPlants, listJourneys } from "./serviseplant.js";
 import { listVerifications } from "./verifyservice.js";
 import { t, localized, currentLanguage } from "./language.js";
 import { getGreenHubArticles } from "./contentservice.js";
+import { iconMarkup, plantIcon } from "./icons.js";
 
 const state = {
   wallet: null,
@@ -22,7 +23,6 @@ const state = {
   gardenError: false,
 };
 
-const PLANT_EMOJI = { Tomato: "🍅", Basil: "🌿", "Orange Tree": "🍊", Pothos: "🪴" };
 const STAGE_KEYS = { seed: "garden.stageSeed", sprout: "garden.stageSprout", plant: "garden.stagePlant" };
 const TX_KEYS = {
   verification_approved: "wallet.txVerification",
@@ -74,7 +74,7 @@ function renderWallet() {
     return;
   }
   if (!state.wallet) {
-    summary.innerHTML = `<div class="loading-state"><span class="emoji">🏆</span>${escapeHtml(t("common.loading"))}</div>`;
+    summary.innerHTML = `<div class="loading-state">${iconMarkup("trophy")}${escapeHtml(t("common.loading"))}</div>`;
     return;
   }
 
@@ -116,7 +116,7 @@ function renderHistory() {
   if (!host) return;
 
   if (!state.transactions.length) {
-    host.innerHTML = `<div class="empty-state"><span class="emoji">🏆</span>${escapeHtml(t("wallet.empty"))}</div>`;
+    host.innerHTML = `<div class="empty-state">${iconMarkup("trophy")}${escapeHtml(t("wallet.empty"))}</div>`;
     return;
   }
 
@@ -144,11 +144,11 @@ function renderNotifications() {
   if (!host) return;
 
   if (!state.notificationsLoaded) {
-    host.innerHTML = `<div class="loading-state"><span class="emoji">🔔</span>${escapeHtml(t("common.loading"))}</div>`;
+    host.innerHTML = `<div class="loading-state">${iconMarkup("bell")}${escapeHtml(t("common.loading"))}</div>`;
     return;
   }
   if (!state.notifications.length) {
-    host.innerHTML = `<div class="empty-state"><span class="emoji">🔔</span>${escapeHtml(t("notifications.empty"))}</div>`;
+    host.innerHTML = `<div class="empty-state">${iconMarkup("bell")}${escapeHtml(t("notifications.empty"))}</div>`;
     return;
   }
 
@@ -173,13 +173,12 @@ function latestVerification(plantId) {
 function plantCardHTML(plant) {
   const verification = latestVerification(plant.plant_id);
   const status = verification ? verification.approval_status : "none";
-  const emoji = PLANT_EMOJI[plant.plant_type] || "🌱";
   const stage = t(STAGE_KEYS[plant.stage] || "garden.stageSeed");
 
   return `
     <article class="card plant-card">
       <div class="plant-card-top">
-        <div class="plant-card-emoji" aria-hidden="true">${emoji}</div>
+        <div class="plant-card-icon" aria-hidden="true">${iconMarkup(plantIcon(plant))}</div>
         <div class="plant-card-id">
           <strong>${escapeHtml(plant.plant_type)}</strong>
           <p class="plant-card-loc">${escapeHtml(plant.location || t("garden.notSet"))}</p>
@@ -204,13 +203,13 @@ function renderGarden() {
     return;
   }
   if (!state.gardenLoaded) {
-    grid.innerHTML = `<div class="loading-state"><span class="emoji">🌱</span>${escapeHtml(t("common.loading"))}</div>`;
+    grid.innerHTML = `<div class="loading-state">${iconMarkup("sprout")}${escapeHtml(t("common.loading"))}</div>`;
     return;
   }
   if (!state.plants.length) {
     grid.innerHTML = `
       <div class="empty-state">
-        <span class="emoji">🌱</span>
+        ${iconMarkup("sprout")}
         <p>${escapeHtml(t("garden.empty"))}</p>
         <a href="new-seed.html" class="btn btn-primary">${escapeHtml(t("garden.emptyCta"))}</a>
       </div>`;
@@ -250,11 +249,11 @@ function renderVerificationHistory() {
     return;
   }
   if (!state.gardenLoaded) {
-    host.innerHTML = `<div class="loading-state"><span class="emoji">📷</span>${escapeHtml(t("common.loading"))}</div>`;
+    host.innerHTML = `<div class="loading-state">${iconMarkup("camera")}${escapeHtml(t("common.loading"))}</div>`;
     return;
   }
   if (!state.verifications.length) {
-    host.innerHTML = `<div class="empty-state"><span class="emoji">📷</span>${escapeHtml(t("garden.historyEmpty"))}</div>`;
+    host.innerHTML = `<div class="empty-state">${iconMarkup("camera")}${escapeHtml(t("garden.historyEmpty"))}</div>`;
     return;
   }
 
@@ -387,7 +386,7 @@ function journeyItemHTML(journey) {
   return `
     <article class="card plant-card">
       <div class="plant-card-top">
-        <div class="plant-card-emoji" aria-hidden="true">🌱</div>
+        <div class="plant-card-icon" aria-hidden="true">${iconMarkup(plantIcon(journey))}</div>
         <div class="plant-card-id">
           <strong>${escapeHtml(journey.plant_type)}</strong>
           <p class="plant-card-loc">${escapeHtml(t("journey.stage"))}: ${escapeHtml(stage)}</p>
@@ -408,11 +407,11 @@ function renderJourneys() {
     return;
   }
   if (!state.gardenLoaded) {
-    host.innerHTML = `<div class="loading-state"><span class="emoji">🌱</span>${escapeHtml(t("common.loading"))}</div>`;
+    host.innerHTML = `<div class="loading-state">${iconMarkup("sprout")}${escapeHtml(t("common.loading"))}</div>`;
     return;
   }
   if (!state.journeys.length) {
-    host.innerHTML = `<div class="empty-state"><span class="emoji">🌱</span>${escapeHtml(t("garden.empty"))}</div>`;
+    host.innerHTML = `<div class="empty-state">${iconMarkup("sprout")}${escapeHtml(t("garden.empty"))}</div>`;
     return;
   }
 

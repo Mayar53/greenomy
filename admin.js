@@ -4,6 +4,7 @@
 import { requireAuthOrRedirect, logout } from "./authservise.js";
 import { api, ApiError } from "./servisapi.js";
 import { t } from "./language.js";
+import { iconMarkup } from "./icons.js";
 
 const ADMIN_ROLES = ["admin", "super_admin"];
 
@@ -80,8 +81,8 @@ function setContent(selector, html) {
   if (el) el.innerHTML = html;
 }
 
-function loadingState(emoji) {
-  return `<div class="loading-state"><span class="emoji">${emoji}</span>${escapeHtml(t("common.loading"))}</div>`;
+function loadingState(icon) {
+  return `<div class="loading-state">${iconMarkup(icon)}${escapeHtml(t("common.loading"))}</div>`;
 }
 
 function errorState() {
@@ -89,7 +90,7 @@ function errorState() {
 }
 
 function emptyState() {
-  return `<div class="empty-state"><span class="emoji">📭</span>${escapeHtml(t("admin.emptyTable"))}</div>`;
+  return `<div class="empty-state">${iconMarkup("inbox")}${escapeHtml(t("admin.emptyTable"))}</div>`;
 }
 
 function denyAccess() {
@@ -171,8 +172,8 @@ function initQueue() {
       setContent("[data-admin-queue]", `<p class="form-status is-error">${escapeHtml(notice)}</p>`);
       notice = null;
     }
-    if (queue === null) return setContent("[data-admin-queue]", loadingState("🔎"));
-    if (!queue.length) return setContent("[data-admin-queue]", `<div class="empty-state"><span class="emoji">✅</span>${escapeHtml(t("admin.empty"))}</div>`);
+    if (queue === null) return setContent("[data-admin-queue]", loadingState("search"));
+    if (!queue.length) return setContent("[data-admin-queue]", `<div class="empty-state">${iconMarkup("check")}${escapeHtml(t("admin.empty"))}</div>`);
     setContent("[data-admin-queue]", `<div class="tx-list">${queue.map(reviewItemHTML).join("")}</div>`);
   };
 
@@ -255,7 +256,7 @@ function initUsers() {
   let users = null;
 
   const render = () => {
-    if (users === null) return setContent("[data-admin-users]", loadingState("👥"));
+    if (users === null) return setContent("[data-admin-users]", loadingState("users"));
     if (!users.length) return setContent("[data-admin-users]", emptyState());
     setContent(
       "[data-admin-users]",
@@ -323,7 +324,7 @@ function initPartners() {
   let partners = null;
 
   const render = () => {
-    if (partners === null) return setContent("[data-admin-partners]", loadingState("🤝"));
+    if (partners === null) return setContent("[data-admin-partners]", loadingState("store"));
     if (!partners.length) return setContent("[data-admin-partners]", emptyState());
     setContent(
       "[data-admin-partners]",
@@ -410,7 +411,7 @@ function initRewards() {
   let rewards = null;
 
   const render = () => {
-    if (rewards === null) return setContent("[data-admin-rewards]", loadingState("🎁"));
+    if (rewards === null) return setContent("[data-admin-rewards]", loadingState("gift"));
     if (!rewards.length) return setContent("[data-admin-rewards]", emptyState());
     setContent(
       "[data-admin-rewards]",
@@ -499,7 +500,7 @@ function initContent() {
   let articles = null;
 
   const render = () => {
-    if (articles === null) return setContent("[data-admin-content]", loadingState("📰"));
+    if (articles === null) return setContent("[data-admin-content]", loadingState("file"));
     if (!articles.length) return setContent("[data-admin-content]", emptyState());
     setContent(
       "[data-admin-content]",
@@ -586,7 +587,7 @@ function statCard(value, label) {
 
 function chartHTML(byDay) {
   if (!byDay || !byDay.length) {
-    return `<div class="empty-state"><span class="emoji">📈</span>${escapeHtml(t("admin.noActivity"))}</div>`;
+    return `<div class="empty-state">${iconMarkup("chart")}${escapeHtml(t("admin.noActivity"))}</div>`;
   }
   const max = Math.max(...byDay.map((d) => d.count), 1);
   const bars = byDay
@@ -603,7 +604,7 @@ function initAnalytics() {
   let data = null;
 
   const render = () => {
-    if (data === null) return setContent("[data-admin-analytics]", loadingState("📊"));
+    if (data === null) return setContent("[data-admin-analytics]", loadingState("chart"));
 
     setContent(
       "[data-admin-analytics]",

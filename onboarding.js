@@ -3,6 +3,7 @@
 // onboarding → eco-profile → new-seed, then persisted for real
 // (PATCH /users/me, POST /plants) at each page's completion.
 import { requireAuthOrRedirect } from "./authservise.js";
+import { iconMarkup, plantIcon } from "./icons.js";
 import { api, ApiError } from "./servisapi.js";
 import { createPlant } from "./serviseplant.js";
 import { t, localized, currentLanguage } from "./language.js";
@@ -142,7 +143,7 @@ function initNewSeedWizard() {
       : "—";
     summary.innerHTML = `
       <div class="card plant-preview-card">
-        <div class="plant-preview-emoji">🌱</div>
+        <div class="plant-preview-icon">${iconMarkup(plantIcon({ name: draft.seed.plantType }))}</div>
         <div>
           <strong>${plantType}</strong>
           <p style="margin:2px 0 0; font-size:0.88rem;">
@@ -265,14 +266,15 @@ function selectPlantType(group, value) {
   tile.dataset.value = value;
   tile.setAttribute("aria-pressed", "true");
 
-  const emoji = document.createElement("span");
-  emoji.className = "tile-emoji";
-  emoji.textContent = "🌱";
+  const icon = document.createElement("span");
+  icon.className = "tile-icon";
+  icon.setAttribute("aria-hidden", "true");
+  icon.innerHTML = iconMarkup(plantIcon({ name: value }));
 
   const name = document.createElement("strong");
   name.textContent = value;
 
-  tile.append(emoji, name);
+  tile.append(icon, name);
   group.appendChild(tile);
 }
 
@@ -304,9 +306,10 @@ function plantResultCard(plant, onPick) {
   const head = document.createElement("span");
   head.className = "recommend-card-head";
 
-  const emoji = document.createElement("span");
-  emoji.className = "recommend-emoji";
-  emoji.textContent = plant.emoji || "🌱";
+  const icon = document.createElement("span");
+  icon.className = "recommend-icon";
+  icon.setAttribute("aria-hidden", "true");
+  icon.innerHTML = iconMarkup(plantIcon(plant));
 
   const name = document.createElement("strong");
   name.textContent = localized(plant, "name") || plant.name;
@@ -315,7 +318,7 @@ function plantResultCard(plant, onPick) {
   days.className = "recommend-days";
   days.textContent = `${plant.days_to_harvest} ${t("recommend.daysUnit")}`;
 
-  head.append(emoji, name, days);
+  head.append(icon, name, days);
 
   const meta = document.createElement("span");
   meta.className = "recommend-notes";
@@ -492,9 +495,10 @@ function recommendationCard(item, onPick) {
   const head = document.createElement("span");
   head.className = "recommend-card-head";
 
-  const emoji = document.createElement("span");
-  emoji.className = "recommend-emoji";
-  emoji.textContent = item.emoji || "🌱";
+  const icon = document.createElement("span");
+  icon.className = "recommend-icon";
+  icon.setAttribute("aria-hidden", "true");
+  icon.innerHTML = iconMarkup(plantIcon(item));
 
   const name = document.createElement("strong");
   name.textContent = localized(item, "name") || item.name;
@@ -503,7 +507,7 @@ function recommendationCard(item, onPick) {
   days.className = "recommend-days";
   days.textContent = `${item.daysToHarvest} ${t("recommend.daysUnit")}`;
 
-  head.append(emoji, name, days);
+  head.append(icon, name, days);
 
   const reasons = document.createElement("span");
   reasons.className = "recommend-reasons";

@@ -56,7 +56,14 @@ html[lang="ku"] {
 /* ---------------------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Phones: don't inflate text when the screen turns, and keep an anchored
+     section clear of the sticky header. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + 12px);
+}
 
 body {
   margin: 0;
@@ -65,6 +72,10 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  /* `clip`, not `hidden`: it stops the sideways scroll a too-wide child would
+     otherwise cause, without turning the body into a scroll container (which
+     would break the sticky header). */
+  overflow-x: clip;
 }
 
 img { max-width: 100%; display: block; }
@@ -295,6 +306,22 @@ p { margin: 0 0 1em; color: var(--color-text-muted); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
 
+/* ---------------------------------------------------------------------- */
+/* Icons (see icons.js)                                                    */
+/*                                                                        */
+/* Sized in `em` on purpose: every wrapper below already sets a font-size,  */
+/* so the icon inherits exactly the size the emoji had and no layout moves. */
+/* ---------------------------------------------------------------------- */
+.icon {
+  display: inline-block; width: 1em; height: 1em; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round;
+  vertical-align: -0.125em;
+}
+.icon-badge .icon { width: 24px; height: 24px; vertical-align: 0; }
+.modal-close .icon { width: 18px; height: 18px; vertical-align: 0; }
+.points-tag .icon { width: 1.05em; height: 1.05em; vertical-align: -0.15em; }
+
 .icon-badge {
   width: 48px; height: 48px; border-radius: 14px;
   background: rgba(135,169,107,0.15);
@@ -396,6 +423,8 @@ section.section-tight { padding: 56px 0; }
   position: relative; z-index: 1;
   width: 100%; max-width: 420px;
   max-height: calc(100vh - 40px); overflow-y: auto;
+  /* dvh follows the phone's real visible height as its toolbars come and go. */
+  max-height: calc(100dvh - 40px);
 }
 .modal-card:hover { transform: none; box-shadow: var(--shadow); }
 .modal-close {
@@ -570,7 +599,7 @@ section.section-tight { padding: 56px 0; }
   border: 1px dashed var(--color-border);
   color: var(--color-text-muted);
 }
-.empty-state .emoji, .loading-state .emoji { font-size: 2rem; display: block; margin-bottom: 12px; }
+.empty-state .state-icon, .loading-state .state-icon { font-size: 2rem; display: block; margin-bottom: 12px; }
 
 /* ---------------------------------------------------------------------- */
 /* Footer                                                                  */
@@ -625,7 +654,7 @@ html[dir="rtl"] .lang-switch { flex-direction: row-reverse; }
   display: flex; flex-direction: column; align-items: center; gap: 8px;
   padding: 16px; text-align: center;
 }
-.verify-placeholder .emoji { font-size: 3rem; opacity: 0.35; }
+.verify-placeholder .state-icon { font-size: 3rem; opacity: 0.35; }
 .verify-placeholder-text { font-size: 0.85rem; color: var(--color-text-muted); }
 
 /* Viewfinder — corner edges and a centre reticle, drawn over the video and the
@@ -736,7 +765,7 @@ html[dir="rtl"] .lang-switch { flex-direction: row-reverse; }
 
 .plant-card { display: flex; flex-direction: column; gap: 16px; }
 .plant-card-top { display: flex; align-items: center; gap: 14px; }
-.plant-card-emoji {
+.plant-card-icon {
   width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
   background: rgba(135,169,107,0.14);
   display: flex; align-items: center; justify-content: center;
@@ -821,7 +850,7 @@ html[dir="rtl"] .lang-switch { flex-direction: row-reverse; }
 }
 .recommend-card:hover { border-color: var(--color-primary); transform: translateY(-1px); }
 .recommend-card-head { display: flex; align-items: center; gap: 8px; }
-.recommend-emoji { font-size: 1.3rem; }
+.recommend-icon { font-size: 1.3rem; }
 .recommend-days { margin-inline-start: auto; font-size: 0.78rem; color: var(--color-text-muted); white-space: nowrap; }
 .recommend-reasons { display: flex; flex-wrap: wrap; gap: 6px; }
 .reason-chip {

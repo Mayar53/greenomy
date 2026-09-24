@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title data-i18n="adminTab.partners">Partners — Greenomy</title>
@@ -15,7 +15,7 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand"><img class="brand-mark" src="logo-mark.png" alt="" /> Greenomy</a>
+      <a href="index.html" class="brand"><img class="brand-mark" src="logo-mark.png" alt="" /> <span class="brand-name">Greenomy</span></a>
       <div class="header-actions" style="margin-inline-start: auto;">
         <div class="lang-switch" role="group" aria-label="Language">
           <button type="button" data-lang-option="en" aria-pressed="true">EN</button>
@@ -47,7 +47,7 @@
         </div>
 
         <div class="empty-state" data-admin-denied hidden>
-          <span class="emoji">🔒</span><span data-i18n="admin.notAuthorized">You don't have admin access to this page.</span>
+          <span class="icon-slot" aria-hidden="true" data-icon="lock"></span><span data-i18n="admin.notAuthorized">You don't have admin access to this page.</span>
         </div>
 
         <div data-admin-host>

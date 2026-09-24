@@ -1,5 +1,7 @@
 .auth-shell {
   min-height: calc(100vh - var(--header-height));
+  /* dvh follows the phone's real visible height as its toolbars come and go. */
+  min-height: calc(100dvh - var(--header-height));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,7 +96,7 @@
   border-color: var(--sage);
   background: rgba(135,169,107,0.08);
 }
-.option-tile .tile-emoji { font-size: 1.4rem; display: block; margin-bottom: 8px; }
+.option-tile .tile-icon { font-size: 1.4rem; display: block; margin-bottom: 8px; }
 .option-tile strong { display: block; font-size: 0.95rem; }
 .option-tile span { font-size: 0.82rem; color: var(--color-text-muted); }
 
@@ -104,7 +106,7 @@
 }
 
 .plant-preview-card { display: flex; align-items: center; gap: 16px; padding: 20px; }
-.plant-preview-emoji {
+.plant-preview-icon {
   width: 56px; height: 56px; border-radius: 14px;
   background: rgba(135,169,107,0.14);
   display: flex; align-items: center; justify-content: center;

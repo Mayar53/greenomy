@@ -1,6 +1,7 @@
 // green-hub.js — Green Hub article grid + category filters + article view
 import { getGreenHubArticles } from "./contentservice.js";
 import { t, localized } from "./language.js";
+import { iconMarkup } from "./icons.js";
 
 const CATEGORY_LABELS = {
   all: "greenHub.filterAll",
@@ -31,7 +32,7 @@ function articleCardHTML(article) {
         </div>
         <h2>${escapeHtml(title)}</h2>
         <p>${escapeHtml(localized(article, "description"))}</p>
-        <a class="btn-ghost reading-time" href="greenhub.html?slug=${encodeURIComponent(article.slug)}">${t("greenHub.readMore")} →</a>
+        <a class="btn-ghost reading-time" href="greenhub.html?slug=${encodeURIComponent(article.slug)}">${t("greenHub.readMore")} ${iconMarkup("chevronRight")}</a>
       </div>
     </article>
   `;
@@ -47,7 +48,7 @@ function articleViewHTML(article) {
 
   return `
     <article class="card article-card" style="grid-column: 1 / -1;">
-      <a class="btn-ghost" href="greenhub.html">← ${t("greenHub.backToList")}</a>
+      <a class="btn-ghost" href="greenhub.html">${iconMarkup("chevronLeft")} ${t("greenHub.backToList")}</a>
       <div class="article-meta" style="margin-top:16px;">
         <span>${t(CATEGORY_LABELS[article.category] || "greenHub.filterAll")}</span>
         <span>${article.readingTime} ${t("greenHub.minRead")}</span>
@@ -68,12 +69,12 @@ async function renderArticles(category = "all") {
   const grid = document.querySelector("[data-hub-grid]");
   if (!grid) return;
 
-  grid.innerHTML = `<div class="loading-state"><span class="emoji">🌱</span>${t("common.loading")}</div>`;
+  grid.innerHTML = `<div class="loading-state">${iconMarkup("sprout")}${t("common.loading")}</div>`;
 
   try {
     const data = await loadArticles(category);
     if (!data.length) {
-      grid.innerHTML = `<div class="empty-state"><span class="emoji">🌱</span>${t("common.emptyGeneric")}</div>`;
+      grid.innerHTML = `<div class="empty-state">${iconMarkup("sprout")}${t("common.emptyGeneric")}</div>`;
       return;
     }
     grid.innerHTML = data.map(articleCardHTML).join("");
@@ -89,13 +90,13 @@ async function renderArticle(slug) {
   const bar = document.querySelector("[data-hub-filters]");
   if (bar) bar.setAttribute("hidden", "");
 
-  grid.innerHTML = `<div class="loading-state"><span class="emoji">🌱</span>${t("common.loading")}</div>`;
+  grid.innerHTML = `<div class="loading-state">${iconMarkup("sprout")}${t("common.loading")}</div>`;
 
   try {
     const data = await loadArticles("all");
     const article = data.find((a) => a.slug === slug);
     if (!article) {
-      grid.innerHTML = `<div class="empty-state"><span class="emoji">🌱</span>${t("common.emptyGeneric")}</div>`;
+      grid.innerHTML = `<div class="empty-state">${iconMarkup("sprout")}${t("common.emptyGeneric")}</div>`;
       return;
     }
     grid.innerHTML = articleViewHTML(article);

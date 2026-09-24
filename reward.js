@@ -5,6 +5,7 @@ import { getRewards } from "./contentservice.js";
 import { api, ApiError } from "./servisapi.js";
 import { isAuthenticated } from "./authservise.js";
 import { t, localized } from "./language.js";
+import { iconMarkup } from "./icons.js";
 
 const CATEGORY_LABELS = {
   restaurant: "rewards.catRestaurant",
@@ -81,7 +82,7 @@ function rewardCardHTML(reward) {
       <span class="category-tag">${escapeHtml(categoryLabel(reward.category))}</span>
       <h2>${escapeHtml(localized(reward, "title"))}</h2>
       <p>${escapeHtml(localized(reward, "description"))}</p>
-      <span class="points-tag">🏆 ${Number(reward.pointsRequired).toLocaleString()} ${escapeHtml(t("rewards.pointsRequired"))}</span>
+      <span class="points-tag">${iconMarkup("trophy")} ${Number(reward.pointsRequired).toLocaleString()} ${escapeHtml(t("rewards.pointsRequired"))}</span>
       <div class="reward-footer">
         <span>${escapeHtml(t("rewards.expires"))}: ${escapeHtml(reward.expiresAt || "—")}</span>
       </div>
@@ -100,7 +101,7 @@ function renderRewards() {
 
   const list = visibleRewards();
   if (!list.length) {
-    grid.innerHTML = `<div class="empty-state"><span class="emoji">🎁</span>${escapeHtml(t("rewards.emptyFilter"))}</div>`;
+    grid.innerHTML = `<div class="empty-state">${iconMarkup("gift")}${escapeHtml(t("rewards.emptyFilter"))}</div>`;
     return;
   }
   grid.innerHTML = list.map(rewardCardHTML).join("");
@@ -110,7 +111,7 @@ async function loadRewards() {
   const grid = document.querySelector("[data-rewards-grid]");
   if (!grid) return;
 
-  grid.innerHTML = `<div class="loading-state"><span class="emoji">🎁</span>${escapeHtml(t("common.loading"))}</div>`;
+  grid.innerHTML = `<div class="loading-state">${iconMarkup("gift")}${escapeHtml(t("common.loading"))}</div>`;
   try {
     const { data } = await getRewards();
     rewards = (Array.isArray(data) ? data : []).map(normalizeReward);
@@ -187,7 +188,7 @@ async function beginRedeem(rewardId) {
   if (!reward) return;
   if (!isAuthenticated()) return toLogin();
 
-  openModal(`<div class="loading-state"><span class="emoji">🎁</span>${escapeHtml(t("common.loading"))}</div>`);
+  openModal(`<div class="loading-state">${iconMarkup("gift")}${escapeHtml(t("common.loading"))}</div>`);
 
   let available;
   try {

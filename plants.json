@@ -101,7 +101,7 @@
 
   "plants": [
     {
-      "id": "pl-tomato", "name": "Tomato", "slug": "tomato", "category": "vegetables", "emoji": "🍅",
+      "id": "pl-tomato", "name": "Tomato", "slug": "tomato", "category": "vegetables", "icon": "fruit",
       "scientificName": "Solanum lycopersicum", "family": "Solanaceae",
       "daysToHarvest": 70, "germinationDays": 7, "tempMin": 15, "tempMax": 29,
       "soilPreferences": "Rich, well-drained loam", "soilPhMin": 6.0, "soilPhMax": 6.8,
@@ -122,7 +122,7 @@
       ]
     },
     {
-      "id": "pl-lettuce", "name": "Lettuce", "slug": "lettuce", "category": "vegetables", "emoji": "🥬",
+      "id": "pl-lettuce", "name": "Lettuce", "slug": "lettuce", "category": "vegetables", "icon": "leafy",
       "scientificName": "Lactuca sativa", "family": "Asteraceae",
       "daysToHarvest": 45, "germinationDays": 7, "tempMin": 10, "tempMax": 22,
       "soilPreferences": "Moist, fertile loam", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -138,7 +138,7 @@
       "aliases": [["en", "Salad"], ["ar", "خس بلدي"]]
     },
     {
-      "id": "pl-radish", "name": "Radish", "slug": "radish", "category": "vegetables", "emoji": "🌶️",
+      "id": "pl-radish", "name": "Radish", "slug": "radish", "category": "vegetables", "icon": "root",
       "scientificName": "Raphanus sativus", "family": "Brassicaceae",
       "daysToHarvest": 25, "germinationDays": 4, "tempMin": 10, "tempMax": 20,
       "soilPreferences": "Loose, stone-free soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -154,7 +154,7 @@
       "aliases": [["en", "Radishes"], ["ar", "فجل أحمر"]]
     },
     {
-      "id": "pl-spinach", "name": "Spinach", "slug": "spinach", "category": "vegetables", "emoji": "🍃",
+      "id": "pl-spinach", "name": "Spinach", "slug": "spinach", "category": "vegetables", "icon": "leafy",
       "scientificName": "Spinacia oleracea", "family": "Amaranthaceae",
       "daysToHarvest": 40, "germinationDays": 8, "tempMin": 10, "tempMax": 20,
       "soilPreferences": "Rich, moisture-retentive soil", "soilPhMin": 6.5, "soilPhMax": 7.5,
@@ -170,7 +170,7 @@
       "aliases": [["en", "Baby spinach"]]
     },
     {
-      "id": "pl-cucumber", "name": "Cucumber", "slug": "cucumber", "category": "vegetables", "emoji": "🥒",
+      "id": "pl-cucumber", "name": "Cucumber", "slug": "cucumber", "category": "vegetables", "icon": "fruit",
       "scientificName": "Cucumis sativus", "family": "Cucurbitaceae",
       "daysToHarvest": 60, "germinationDays": 6, "tempMin": 18, "tempMax": 32,
       "soilPreferences": "Fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -190,7 +190,7 @@
       ]
     },
     {
-      "id": "pl-bell-pepper", "name": "Bell Pepper", "slug": "bell-pepper", "category": "vegetables", "emoji": "🫑",
+      "id": "pl-bell-pepper", "name": "Bell Pepper", "slug": "bell-pepper", "category": "vegetables", "icon": "fruit",
       "scientificName": "Capsicum annuum", "family": "Solanaceae",
       "daysToHarvest": 90, "germinationDays": 12, "tempMin": 18, "tempMax": 30,
       "soilPreferences": "Rich, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 6.8,
@@ -206,7 +206,7 @@
       "aliases": [["en", "Sweet pepper"], ["en", "Capsicum"], ["ar", "فلفل رومي"], ["ku", "بیبەر"]]
     },
     {
-      "id": "pl-carrot", "name": "Carrot", "slug": "carrot", "category": "vegetables", "emoji": "🥕",
+      "id": "pl-carrot", "name": "Carrot", "slug": "carrot", "category": "vegetables", "icon": "root",
       "scientificName": "Daucus carota", "family": "Apiaceae",
       "daysToHarvest": 75, "germinationDays": 12, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Deep, loose, stone-free soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -222,7 +222,7 @@
       "aliases": [["en", "Carrots"]]
     },
     {
-      "id": "pl-zucchini", "name": "Zucchini", "slug": "zucchini", "category": "vegetables", "emoji": "🥒",
+      "id": "pl-zucchini", "name": "Zucchini", "slug": "zucchini", "category": "vegetables", "icon": "fruit",
       "scientificName": "Cucurbita pepo", "family": "Cucurbitaceae",
       "daysToHarvest": 55, "germinationDays": 6, "tempMin": 18, "tempMax": 30,
       "soilPreferences": "Rich, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -238,7 +238,7 @@
       "aliases": [["en", "Courgette"], ["en", "Zucchini squash"], ["ar", "كوسة"], ["ku", "کۆسا"]]
     },
     {
-      "id": "pl-spring-onion", "name": "Spring Onion", "slug": "spring-onion", "category": "vegetables", "emoji": "🧅",
+      "id": "pl-spring-onion", "name": "Spring Onion", "slug": "spring-onion", "category": "vegetables", "icon": "root",
       "scientificName": "Allium fistulosum", "family": "Amaryllidaceae",
       "daysToHarvest": 60, "germinationDays": 10, "tempMin": 13, "tempMax": 28,
       "soilPreferences": "Loose, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -254,7 +254,7 @@
       "aliases": [["en", "Green onion"], ["en", "Scallion"], ["ar", "بصل أخضر بلدي"]]
     },
     {
-      "id": "pl-pea", "name": "Pea", "slug": "pea", "category": "vegetables", "emoji": "🫛",
+      "id": "pl-pea", "name": "Pea", "slug": "pea", "category": "vegetables", "icon": "fruit",
       "scientificName": "Pisum sativum", "family": "Fabaceae",
       "daysToHarvest": 65, "germinationDays": 10, "tempMin": 10, "tempMax": 20,
       "soilPreferences": "Well-drained, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -270,7 +270,7 @@
       "aliases": [["en", "Garden pea"], ["en", "Peas"]]
     },
     {
-      "id": "pl-pumpkin", "name": "Pumpkin", "slug": "pumpkin", "category": "vegetables", "emoji": "🎃",
+      "id": "pl-pumpkin", "name": "Pumpkin", "slug": "pumpkin", "category": "vegetables", "icon": "fruit",
       "scientificName": "Cucurbita maxima", "family": "Cucurbitaceae",
       "daysToHarvest": 100, "germinationDays": 7, "tempMin": 18, "tempMax": 32,
       "soilPreferences": "Rich, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -286,7 +286,7 @@
       "aliases": [["en", "Pumpkins"], ["ar", "يقطين"], ["ku", "کادوو"]]
     },
     {
-      "id": "pl-basil", "name": "Basil", "slug": "basil", "category": "herbs", "emoji": "🌿",
+      "id": "pl-basil", "name": "Basil", "slug": "basil", "category": "herbs", "icon": "herb",
       "scientificName": "Ocimum basilicum", "family": "Lamiaceae",
       "daysToHarvest": 60, "germinationDays": 8, "tempMin": 18, "tempMax": 30,
       "soilPreferences": "Light, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -302,7 +302,7 @@
       "aliases": [["en", "Sweet basil"], ["ar", "حبق"], ["ar", "ريحان أخضر"]]
     },
     {
-      "id": "pl-mint", "name": "Mint", "slug": "mint", "category": "herbs", "emoji": "🌱",
+      "id": "pl-mint", "name": "Mint", "slug": "mint", "category": "herbs", "icon": "herb",
       "scientificName": "Mentha spicata", "family": "Lamiaceae",
       "daysToHarvest": 60, "germinationDays": 12, "tempMin": 15, "tempMax": 28,
       "soilPreferences": "Moist, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -318,7 +318,7 @@
       "aliases": [["en", "Spearmint"], ["ar", "نعنع"]]
     },
     {
-      "id": "pl-parsley", "name": "Parsley", "slug": "parsley", "category": "herbs", "emoji": "🌿",
+      "id": "pl-parsley", "name": "Parsley", "slug": "parsley", "category": "herbs", "icon": "herb",
       "scientificName": "Petroselinum crispum", "family": "Apiaceae",
       "daysToHarvest": 75, "germinationDays": 21, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Moist, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -334,7 +334,7 @@
       "aliases": [["ar", "معدنوس"]]
     },
     {
-      "id": "pl-coriander", "name": "Coriander", "slug": "coriander", "category": "herbs", "emoji": "🌿",
+      "id": "pl-coriander", "name": "Coriander", "slug": "coriander", "category": "herbs", "icon": "herb",
       "scientificName": "Coriandrum sativum", "family": "Apiaceae",
       "daysToHarvest": 50, "germinationDays": 10, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Light, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -350,7 +350,7 @@
       "aliases": [["en", "Cilantro"], ["ar", "كسبرة"], ["ar", "كزبرة خضراء"]]
     },
     {
-      "id": "pl-rosemary", "name": "Rosemary", "slug": "rosemary", "category": "herbs", "emoji": "🌿",
+      "id": "pl-rosemary", "name": "Rosemary", "slug": "rosemary", "category": "herbs", "icon": "herb",
       "scientificName": "Salvia rosmarinus", "family": "Lamiaceae",
       "daysToHarvest": 120, "germinationDays": 21, "tempMin": 15, "tempMax": 30,
       "soilPreferences": "Gritty, sharply drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -366,7 +366,7 @@
       "aliases": [["ar", "روزماري"], ["ar", "حصالبان"]]
     },
     {
-      "id": "pl-thyme", "name": "Thyme", "slug": "thyme", "category": "herbs", "emoji": "🌿",
+      "id": "pl-thyme", "name": "Thyme", "slug": "thyme", "category": "herbs", "icon": "herb",
       "scientificName": "Thymus vulgaris", "family": "Lamiaceae",
       "daysToHarvest": 90, "germinationDays": 14, "tempMin": 15, "tempMax": 28,
       "soilPreferences": "Poor, gritty, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 8.0,
@@ -382,7 +382,7 @@
       "aliases": [["ar", "جعتر"]]
     },
     {
-      "id": "pl-chives", "name": "Chives", "slug": "chives", "category": "herbs", "emoji": "🌿",
+      "id": "pl-chives", "name": "Chives", "slug": "chives", "category": "herbs", "icon": "herb",
       "scientificName": "Allium schoenoprasum", "family": "Amaryllidaceae",
       "daysToHarvest": 60, "germinationDays": 14, "tempMin": 13, "tempMax": 24,
       "soilPreferences": "Moist, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -398,7 +398,7 @@
       "aliases": [["en", "Chive"]]
     },
     {
-      "id": "pl-dill", "name": "Dill", "slug": "dill", "category": "herbs", "emoji": "🌿",
+      "id": "pl-dill", "name": "Dill", "slug": "dill", "category": "herbs", "icon": "herb",
       "scientificName": "Anethum graveolens", "family": "Apiaceae",
       "daysToHarvest": 45, "germinationDays": 10, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Light, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -414,7 +414,7 @@
       "aliases": [["ar", "شبنت"]]
     },
     {
-      "id": "pl-lemon-tree", "name": "Lemon Tree", "slug": "lemon-tree", "category": "fruit-trees", "emoji": "🍋",
+      "id": "pl-lemon-tree", "name": "Lemon Tree", "slug": "lemon-tree", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Citrus limon", "family": "Rutaceae",
       "daysToHarvest": 1095, "germinationDays": 21, "tempMin": 15, "tempMax": 30,
       "soilPreferences": "Well-drained, slightly acidic soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -430,7 +430,7 @@
       "aliases": [["en", "Lemon"], ["en", "Lemon tree"]]
     },
     {
-      "id": "pl-orange-tree", "name": "Orange Tree", "slug": "orange-tree", "category": "fruit-trees", "emoji": "🍊",
+      "id": "pl-orange-tree", "name": "Orange Tree", "slug": "orange-tree", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Citrus sinensis", "family": "Rutaceae",
       "daysToHarvest": 1095, "germinationDays": 21, "tempMin": 15, "tempMax": 32,
       "soilPreferences": "Well-drained, slightly acidic soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -446,7 +446,7 @@
       "aliases": [["en", "Orange"], ["ar", "برتقان"]]
     },
     {
-      "id": "pl-fig", "name": "Fig", "slug": "fig", "category": "fruit-trees", "emoji": "🫐",
+      "id": "pl-fig", "name": "Fig", "slug": "fig", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Ficus carica", "family": "Moraceae",
       "daysToHarvest": 730, "germinationDays": 21, "tempMin": 15, "tempMax": 32,
       "soilPreferences": "Tolerates poor, dry, alkaline soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -462,7 +462,7 @@
       "aliases": [["en", "Fig tree"]]
     },
     {
-      "id": "pl-olive", "name": "Olive", "slug": "olive", "category": "fruit-trees", "emoji": "🫒",
+      "id": "pl-olive", "name": "Olive", "slug": "olive", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Olea europaea", "family": "Oleaceae",
       "daysToHarvest": 1460, "germinationDays": 30, "tempMin": 15, "tempMax": 32,
       "soilPreferences": "Light, stony, well-drained soil", "soilPhMin": 6.5, "soilPhMax": 8.0,
@@ -478,7 +478,7 @@
       "aliases": [["en", "Olive tree"]]
     },
     {
-      "id": "pl-pomegranate", "name": "Pomegranate", "slug": "pomegranate", "category": "fruit-trees", "emoji": "🍎",
+      "id": "pl-pomegranate", "name": "Pomegranate", "slug": "pomegranate", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Punica granatum", "family": "Lythraceae",
       "daysToHarvest": 1095, "germinationDays": 21, "tempMin": 15, "tempMax": 32,
       "soilPreferences": "Tolerant of poor, alkaline soil", "soilPhMin": 5.5, "soilPhMax": 7.0,
@@ -494,7 +494,7 @@
       "aliases": [["en", "Pomegranate tree"]]
     },
     {
-      "id": "pl-strawberry", "name": "Strawberry", "slug": "strawberry", "category": "fruit-trees", "emoji": "🍓",
+      "id": "pl-strawberry", "name": "Strawberry", "slug": "strawberry", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Fragaria ananassa", "family": "Rosaceae",
       "daysToHarvest": 120, "germinationDays": 21, "tempMin": 15, "tempMax": 26,
       "soilPreferences": "Rich, well-drained, slightly acidic soil", "soilPhMin": 5.5, "soilPhMax": 6.5,
@@ -510,7 +510,7 @@
       "aliases": [["en", "Strawberries"]]
     },
     {
-      "id": "pl-pothos", "name": "Pothos", "slug": "pothos", "category": "houseplants", "emoji": "🪴",
+      "id": "pl-pothos", "name": "Pothos", "slug": "pothos", "category": "houseplants", "icon": "pot",
       "scientificName": "Epipremnum aureum", "family": "Araceae",
       "daysToHarvest": 90, "germinationDays": 14, "tempMin": 18, "tempMax": 28,
       "soilPreferences": "Any well-drained potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -526,7 +526,7 @@
       "aliases": [["en", "Devil's ivy"], ["en", "Golden pothos"]]
     },
     {
-      "id": "pl-snake-plant", "name": "Snake Plant", "slug": "snake-plant", "category": "houseplants", "emoji": "🌵",
+      "id": "pl-snake-plant", "name": "Snake Plant", "slug": "snake-plant", "category": "houseplants", "icon": "pot",
       "scientificName": "Dracaena trifasciata", "family": "Asparagaceae",
       "daysToHarvest": 120, "germinationDays": 21, "tempMin": 15, "tempMax": 30,
       "soilPreferences": "Free-draining, sandy potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -542,7 +542,7 @@
       "aliases": [["en", "Sansevieria"], ["ar", "ثعبان"], ["ku", "ثیران"]]
     },
     {
-      "id": "pl-spider-plant", "name": "Spider Plant", "slug": "spider-plant", "category": "houseplants", "emoji": "🪴",
+      "id": "pl-spider-plant", "name": "Spider Plant", "slug": "spider-plant", "category": "houseplants", "icon": "pot",
       "scientificName": "Chlorophytum comosum", "family": "Asparagaceae",
       "daysToHarvest": 90, "germinationDays": 14, "tempMin": 15, "tempMax": 26,
       "soilPreferences": "Any well-drained potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -558,7 +558,7 @@
       "aliases": [["en", "Airplane plant"]]
     },
     {
-      "id": "pl-aloe-vera", "name": "Aloe Vera", "slug": "aloe-vera", "category": "houseplants", "emoji": "🌵",
+      "id": "pl-aloe-vera", "name": "Aloe Vera", "slug": "aloe-vera", "category": "houseplants", "icon": "pot",
       "scientificName": "Aloe vera", "family": "Asphodelaceae",
       "daysToHarvest": 180, "germinationDays": 21, "tempMin": 13, "tempMax": 27,
       "soilPreferences": "Sandy, very free-draining mix", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -574,7 +574,7 @@
       "aliases": [["en", "Aloe"], ["ar", "صبار"]]
     },
     {
-      "id": "pl-zz-plant", "name": "ZZ Plant", "slug": "zz-plant", "category": "houseplants", "emoji": "🪴",
+      "id": "pl-zz-plant", "name": "ZZ Plant", "slug": "zz-plant", "category": "houseplants", "icon": "pot",
       "scientificName": "Zamioculcas zamiifolia", "family": "Araceae",
       "daysToHarvest": 120, "germinationDays": 21, "tempMin": 18, "tempMax": 26,
       "soilPreferences": "Any well-drained potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -590,7 +590,7 @@
       "aliases": [["en", "Zanzibar gem"]]
     },
     {
-      "id": "pl-peace-lily", "name": "Peace Lily", "slug": "peace-lily", "category": "houseplants", "emoji": "🌸",
+      "id": "pl-peace-lily", "name": "Peace Lily", "slug": "peace-lily", "category": "houseplants", "icon": "pot",
       "scientificName": "Spathiphyllum wallisii", "family": "Araceae",
       "daysToHarvest": 90, "germinationDays": 21, "tempMin": 18, "tempMax": 27,
       "soilPreferences": "Rich, moisture-retentive potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -606,7 +606,7 @@
       "aliases": [["en", "Spathiphyllum"]]
     },
     {
-      "id": "pl-monstera", "name": "Monstera", "slug": "monstera", "category": "houseplants", "emoji": "🌿",
+      "id": "pl-monstera", "name": "Monstera", "slug": "monstera", "category": "houseplants", "icon": "pot",
       "scientificName": "Monstera deliciosa", "family": "Araceae",
       "daysToHarvest": 120, "germinationDays": 21, "tempMin": 18, "tempMax": 28,
       "soilPreferences": "Rich, well-drained, airy mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -622,7 +622,7 @@
       "aliases": [["en", "Swiss cheese plant"]]
     },
     {
-      "id": "pl-eggplant", "name": "Eggplant", "slug": "eggplant", "category": "vegetables", "emoji": "🍆",
+      "id": "pl-eggplant", "name": "Eggplant", "slug": "eggplant", "category": "vegetables", "icon": "fruit",
       "scientificName": "Solanum melongena", "family": "Solanaceae",
       "daysToHarvest": 75, "germinationDays": 10, "tempMin": 20, "tempMax": 32,
       "soilPreferences": "Rich, well-drained soil", "soilPhMin": 5.8, "soilPhMax": 6.8,
@@ -642,7 +642,7 @@
       ]
     },
     {
-      "id": "pl-chili-pepper", "name": "Chili Pepper", "slug": "chili-pepper", "category": "vegetables", "emoji": "🌶️",
+      "id": "pl-chili-pepper", "name": "Chili Pepper", "slug": "chili-pepper", "category": "vegetables", "icon": "fruit",
       "scientificName": "Capsicum annuum", "family": "Solanaceae",
       "daysToHarvest": 80, "germinationDays": 12, "tempMin": 18, "tempMax": 32,
       "soilPreferences": "Rich, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 6.8,
@@ -658,7 +658,7 @@
       "aliases": [["en", "Chilli"], ["en", "Hot pepper"], ["ar", "فلفل حراق"]]
     },
     {
-      "id": "pl-beetroot", "name": "Beetroot", "slug": "beetroot", "category": "vegetables", "emoji": "🍠",
+      "id": "pl-beetroot", "name": "Beetroot", "slug": "beetroot", "category": "vegetables", "icon": "root",
       "scientificName": "Beta vulgaris", "family": "Amaranthaceae",
       "daysToHarvest": 60, "germinationDays": 10, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Loose, fertile, stone-free soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -674,7 +674,7 @@
       "aliases": [["en", "Beet"], ["ar", "بنجر"]]
     },
     {
-      "id": "pl-turnip", "name": "Turnip", "slug": "turnip", "category": "vegetables", "emoji": "🥬",
+      "id": "pl-turnip", "name": "Turnip", "slug": "turnip", "category": "vegetables", "icon": "root",
       "scientificName": "Brassica rapa", "family": "Brassicaceae",
       "daysToHarvest": 50, "germinationDays": 6, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Loose, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -690,7 +690,7 @@
       "aliases": [["en", "Turnips"]]
     },
     {
-      "id": "pl-onion", "name": "Onion", "slug": "onion", "category": "vegetables", "emoji": "🧅",
+      "id": "pl-onion", "name": "Onion", "slug": "onion", "category": "vegetables", "icon": "root",
       "scientificName": "Allium cepa", "family": "Amaryllidaceae",
       "daysToHarvest": 100, "germinationDays": 10, "tempMin": 13, "tempMax": 28,
       "soilPreferences": "Loose, fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -706,7 +706,7 @@
       "aliases": [["en", "Onions"], ["en", "Bulb onion"]]
     },
     {
-      "id": "pl-garlic", "name": "Garlic", "slug": "garlic", "category": "vegetables", "emoji": "🧄",
+      "id": "pl-garlic", "name": "Garlic", "slug": "garlic", "category": "vegetables", "icon": "root",
       "scientificName": "Allium sativum", "family": "Amaryllidaceae",
       "daysToHarvest": 180, "germinationDays": 14, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Loose, fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -722,7 +722,7 @@
       "aliases": [["en", "Garlic bulbs"]]
     },
     {
-      "id": "pl-leek", "name": "Leek", "slug": "leek", "category": "vegetables", "emoji": "🧅",
+      "id": "pl-leek", "name": "Leek", "slug": "leek", "category": "vegetables", "icon": "root",
       "scientificName": "Allium ampeloprasum", "family": "Amaryllidaceae",
       "daysToHarvest": 120, "germinationDays": 12, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Deep, fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -738,7 +738,7 @@
       "aliases": [["en", "Leeks"]]
     },
     {
-      "id": "pl-potato", "name": "Potato", "slug": "potato", "category": "vegetables", "emoji": "🥔",
+      "id": "pl-potato", "name": "Potato", "slug": "potato", "category": "vegetables", "icon": "root",
       "scientificName": "Solanum tuberosum", "family": "Solanaceae",
       "daysToHarvest": 90, "germinationDays": 14, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Loose, slightly acidic, fertile soil", "soilPhMin": 5.0, "soilPhMax": 6.5,
@@ -754,7 +754,7 @@
       "aliases": [["en", "Potatoes"], ["en", "Spud"], ["ar", "بطاطس"]]
     },
     {
-      "id": "pl-sweet-potato", "name": "Sweet Potato", "slug": "sweet-potato", "category": "vegetables", "emoji": "🍠",
+      "id": "pl-sweet-potato", "name": "Sweet Potato", "slug": "sweet-potato", "category": "vegetables", "icon": "root",
       "scientificName": "Ipomoea batatas", "family": "Convolvulaceae",
       "daysToHarvest": 120, "germinationDays": 14, "tempMin": 20, "tempMax": 30,
       "soilPreferences": "Loose, sandy, well-drained soil", "soilPhMin": 5.5, "soilPhMax": 6.5,
@@ -770,7 +770,7 @@
       "aliases": [["en", "Kumara"]]
     },
     {
-      "id": "pl-broad-bean", "name": "Broad Bean", "slug": "broad-bean", "category": "vegetables", "emoji": "🫘",
+      "id": "pl-broad-bean", "name": "Broad Bean", "slug": "broad-bean", "category": "vegetables", "icon": "fruit",
       "scientificName": "Vicia faba", "family": "Fabaceae",
       "daysToHarvest": 90, "germinationDays": 12, "tempMin": 10, "tempMax": 20,
       "soilPreferences": "Fertile, moisture-retentive soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -786,7 +786,7 @@
       "aliases": [["en", "Fava bean"], ["en", "Broad beans"], ["ar", "فول بلدي"]]
     },
     {
-      "id": "pl-green-bean", "name": "Green Bean", "slug": "green-bean", "category": "vegetables", "emoji": "🫛",
+      "id": "pl-green-bean", "name": "Green Bean", "slug": "green-bean", "category": "vegetables", "icon": "fruit",
       "scientificName": "Phaseolus vulgaris", "family": "Fabaceae",
       "daysToHarvest": 55, "germinationDays": 7, "tempMin": 15, "tempMax": 28,
       "soilPreferences": "Fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -802,7 +802,7 @@
       "aliases": [["en", "French bean"], ["en", "String bean"], ["ku", "لۆبیای سەوز"]]
     },
     {
-      "id": "pl-okra", "name": "Okra", "slug": "okra", "category": "vegetables", "emoji": "🥒",
+      "id": "pl-okra", "name": "Okra", "slug": "okra", "category": "vegetables", "icon": "fruit",
       "scientificName": "Abelmoschus esculentus", "family": "Malvaceae",
       "daysToHarvest": 60, "germinationDays": 10, "tempMin": 22, "tempMax": 35,
       "soilPreferences": "Rich, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -818,7 +818,7 @@
       "aliases": [["en", "Lady's finger"], ["en", "Okro"]]
     },
     {
-      "id": "pl-corn", "name": "Corn", "slug": "corn", "category": "vegetables", "emoji": "🌽",
+      "id": "pl-corn", "name": "Corn", "slug": "corn", "category": "vegetables", "icon": "fruit",
       "scientificName": "Zea mays", "family": "Poaceae",
       "daysToHarvest": 90, "germinationDays": 7, "tempMin": 18, "tempMax": 32,
       "soilPreferences": "Rich, fertile, well-drained soil", "soilPhMin": 5.8, "soilPhMax": 7.0,
@@ -834,7 +834,7 @@
       "aliases": [["en", "Maize"], ["en", "Sweet corn"], ["ar", "ذرة حلوة"]]
     },
     {
-      "id": "pl-cabbage", "name": "Cabbage", "slug": "cabbage", "category": "vegetables", "emoji": "🥬",
+      "id": "pl-cabbage", "name": "Cabbage", "slug": "cabbage", "category": "vegetables", "icon": "leafy",
       "scientificName": "Brassica oleracea", "family": "Brassicaceae",
       "daysToHarvest": 90, "germinationDays": 8, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Fertile, firm, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -850,7 +850,7 @@
       "aliases": [["en", "Cabbages"], ["ar", "كرنب"]]
     },
     {
-      "id": "pl-cauliflower", "name": "Cauliflower", "slug": "cauliflower", "category": "vegetables", "emoji": "🥦",
+      "id": "pl-cauliflower", "name": "Cauliflower", "slug": "cauliflower", "category": "vegetables", "icon": "leafy",
       "scientificName": "Brassica oleracea", "family": "Brassicaceae",
       "daysToHarvest": 90, "germinationDays": 8, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Fertile, firm, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -866,7 +866,7 @@
       "aliases": [["en", "Cauliflowers"]]
     },
     {
-      "id": "pl-broccoli", "name": "Broccoli", "slug": "broccoli", "category": "vegetables", "emoji": "🥦",
+      "id": "pl-broccoli", "name": "Broccoli", "slug": "broccoli", "category": "vegetables", "icon": "leafy",
       "scientificName": "Brassica oleracea", "family": "Brassicaceae",
       "daysToHarvest": 80, "germinationDays": 8, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Fertile, firm, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -882,7 +882,7 @@
       "aliases": [["en", "Calabrese"]]
     },
     {
-      "id": "pl-arugula", "name": "Arugula", "slug": "arugula", "category": "vegetables", "emoji": "🥬",
+      "id": "pl-arugula", "name": "Arugula", "slug": "arugula", "category": "vegetables", "icon": "leafy",
       "scientificName": "Eruca vesicaria", "family": "Brassicaceae",
       "daysToHarvest": 35, "germinationDays": 5, "tempMin": 10, "tempMax": 22,
       "soilPreferences": "Any fertile, moist soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -898,7 +898,7 @@
       "aliases": [["en", "Rocket"], ["en", "Rucola"], ["ar", "روكا"], ["ar", "جرجير بلدي"]]
     },
     {
-      "id": "pl-swiss-chard", "name": "Swiss Chard", "slug": "swiss-chard", "category": "vegetables", "emoji": "🥬",
+      "id": "pl-swiss-chard", "name": "Swiss Chard", "slug": "swiss-chard", "category": "vegetables", "icon": "leafy",
       "scientificName": "Beta vulgaris", "family": "Amaranthaceae",
       "daysToHarvest": 55, "germinationDays": 8, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Rich, moist, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -914,7 +914,7 @@
       "aliases": [["en", "Chard"], ["en", "Silverbeet"], ["ar", "سلق أخضر"]]
     },
     {
-      "id": "pl-celery", "name": "Celery", "slug": "celery", "category": "vegetables", "emoji": "🥬",
+      "id": "pl-celery", "name": "Celery", "slug": "celery", "category": "vegetables", "icon": "leafy",
       "scientificName": "Apium graveolens", "family": "Apiaceae",
       "daysToHarvest": 120, "germinationDays": 18, "tempMin": 13, "tempMax": 24,
       "soilPreferences": "Rich, moisture-retentive soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -930,7 +930,7 @@
       "aliases": [["en", "Celery stalks"]]
     },
     {
-      "id": "pl-fennel", "name": "Fennel", "slug": "fennel", "category": "herbs", "emoji": "🌿",
+      "id": "pl-fennel", "name": "Fennel", "slug": "fennel", "category": "herbs", "icon": "herb",
       "scientificName": "Foeniculum vulgare", "family": "Apiaceae",
       "daysToHarvest": 90, "germinationDays": 10, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Well-drained, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -946,7 +946,7 @@
       "aliases": [["en", "Florence fennel"], ["ar", "شمرة"]]
     },
     {
-      "id": "pl-oregano", "name": "Oregano", "slug": "oregano", "category": "herbs", "emoji": "🌿",
+      "id": "pl-oregano", "name": "Oregano", "slug": "oregano", "category": "herbs", "icon": "herb",
       "scientificName": "Origanum vulgare", "family": "Lamiaceae",
       "daysToHarvest": 90, "germinationDays": 14, "tempMin": 15, "tempMax": 28,
       "soilPreferences": "Light, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 8.0,
@@ -962,7 +962,7 @@
       "aliases": [["en", "Wild marjoram"], ["ar", "زعتر بري"]]
     },
     {
-      "id": "pl-sage", "name": "Sage", "slug": "sage", "category": "herbs", "emoji": "🌿",
+      "id": "pl-sage", "name": "Sage", "slug": "sage", "category": "herbs", "icon": "herb",
       "scientificName": "Salvia officinalis", "family": "Lamiaceae",
       "daysToHarvest": 90, "germinationDays": 14, "tempMin": 15, "tempMax": 28,
       "soilPreferences": "Light, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -978,7 +978,7 @@
       "aliases": [["en", "Garden sage"], ["en", "Common sage"]]
     },
     {
-      "id": "pl-lavender", "name": "Lavender", "slug": "lavender", "category": "herbs", "emoji": "💜",
+      "id": "pl-lavender", "name": "Lavender", "slug": "lavender", "category": "herbs", "icon": "herb",
       "scientificName": "Lavandula angustifolia", "family": "Lamiaceae",
       "daysToHarvest": 120, "germinationDays": 21, "tempMin": 15, "tempMax": 30,
       "soilPreferences": "Poor, gritty, sharply drained soil", "soilPhMin": 6.5, "soilPhMax": 8.0,
@@ -994,7 +994,7 @@
       "aliases": [["en", "English lavender"]]
     },
     {
-      "id": "pl-lemon-balm", "name": "Lemon Balm", "slug": "lemon-balm", "category": "herbs", "emoji": "🌿",
+      "id": "pl-lemon-balm", "name": "Lemon Balm", "slug": "lemon-balm", "category": "herbs", "icon": "herb",
       "scientificName": "Melissa officinalis", "family": "Lamiaceae",
       "daysToHarvest": 70, "germinationDays": 14, "tempMin": 15, "tempMax": 28,
       "soilPreferences": "Moist, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -1010,7 +1010,7 @@
       "aliases": [["en", "Melissa"], ["en", "Lemon balm herb"]]
     },
     {
-      "id": "pl-grape", "name": "Grape", "slug": "grape", "category": "fruit-trees", "emoji": "🍇",
+      "id": "pl-grape", "name": "Grape", "slug": "grape", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Vitis vinifera", "family": "Vitaceae",
       "daysToHarvest": 730, "germinationDays": 30, "tempMin": 15, "tempMax": 30,
       "soilPreferences": "Well-drained, stony, poor soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
@@ -1026,7 +1026,7 @@
       "aliases": [["en", "Grape vine"], ["en", "Vine"]]
     },
     {
-      "id": "pl-apple", "name": "Apple", "slug": "apple", "category": "fruit-trees", "emoji": "🍎",
+      "id": "pl-apple", "name": "Apple", "slug": "apple", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Malus domestica", "family": "Rosaceae",
       "daysToHarvest": 1460, "germinationDays": 30, "tempMin": 10, "tempMax": 24,
       "soilPreferences": "Deep, fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -1042,7 +1042,7 @@
       "aliases": [["en", "Apple tree"]]
     },
     {
-      "id": "pl-apricot", "name": "Apricot", "slug": "apricot", "category": "fruit-trees", "emoji": "🍑",
+      "id": "pl-apricot", "name": "Apricot", "slug": "apricot", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Prunus armeniaca", "family": "Rosaceae",
       "daysToHarvest": 1095, "germinationDays": 30, "tempMin": 10, "tempMax": 28,
       "soilPreferences": "Deep, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -1058,7 +1058,7 @@
       "aliases": [["en", "Apricot tree"]]
     },
     {
-      "id": "pl-peach", "name": "Peach", "slug": "peach", "category": "fruit-trees", "emoji": "🍑",
+      "id": "pl-peach", "name": "Peach", "slug": "peach", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Prunus persica", "family": "Rosaceae",
       "daysToHarvest": 1095, "germinationDays": 30, "tempMin": 10, "tempMax": 28,
       "soilPreferences": "Deep, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -1074,7 +1074,7 @@
       "aliases": [["en", "Peach tree"]]
     },
     {
-      "id": "pl-date-palm", "name": "Date Palm", "slug": "date-palm", "category": "fruit-trees", "emoji": "🌴",
+      "id": "pl-date-palm", "name": "Date Palm", "slug": "date-palm", "category": "fruit-trees", "icon": "tree",
       "scientificName": "Phoenix dactylifera", "family": "Arecaceae",
       "daysToHarvest": 1825, "germinationDays": 60, "tempMin": 20, "tempMax": 40,
       "soilPreferences": "Deep, sandy, well-drained soil", "soilPhMin": 6.5, "soilPhMax": 8.0,
@@ -1090,7 +1090,7 @@
       "aliases": [["en", "Date"], ["ar", "نخلة"]]
     },
     {
-      "id": "pl-jade-plant", "name": "Jade Plant", "slug": "jade-plant", "category": "houseplants", "emoji": "🪴",
+      "id": "pl-jade-plant", "name": "Jade Plant", "slug": "jade-plant", "category": "houseplants", "icon": "pot",
       "scientificName": "Crassula ovata", "family": "Crassulaceae",
       "daysToHarvest": 180, "germinationDays": 21, "tempMin": 15, "tempMax": 27,
       "soilPreferences": "Gritty, sharply drained mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
@@ -1106,7 +1106,7 @@
       "aliases": [["en", "Money plant"], ["en", "Lucky plant"]]
     },
     {
-      "id": "pl-rubber-plant", "name": "Rubber Plant", "slug": "rubber-plant", "category": "houseplants", "emoji": "🪴",
+      "id": "pl-rubber-plant", "name": "Rubber Plant", "slug": "rubber-plant", "category": "houseplants", "icon": "pot",
       "scientificName": "Ficus elastica", "family": "Moraceae",
       "daysToHarvest": 150, "germinationDays": 21, "tempMin": 18, "tempMax": 27,
       "soilPreferences": "Well-drained potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,

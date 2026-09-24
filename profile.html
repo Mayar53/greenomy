@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title data-i18n="profile.title">My Profile — Greenomy</title>
@@ -15,7 +15,7 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="brand"><img class="brand-mark" src="logo-mark.png" alt="" /> Greenomy</a>
+      <a href="index.html" class="brand"><img class="brand-mark" src="logo-mark.png" alt="" /> <span class="brand-name">Greenomy</span></a>
       <nav class="main-nav" aria-label="Primary">
         <a href="index.html" data-i18n="nav.home">Home</a>
         <a href="garden.html" data-i18n="nav.garden">My Garden</a>
@@ -69,16 +69,16 @@
               <label data-i18n="wizard.experience">Experience Level</label>
               <div class="option-grid" data-tile-group="experience">
                 <button type="button" class="option-tile" data-value="beginner" aria-pressed="false">
-                  <span class="tile-emoji">🌱</span><strong data-i18n="wizard.expBeginner">Beginner</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="sprout"></span><strong data-i18n="wizard.expBeginner">Beginner</strong>
                 </button>
                 <button type="button" class="option-tile" data-value="some-experience" aria-pressed="false">
-                  <span class="tile-emoji">🪴</span><strong data-i18n="wizard.expSome">Some Experience</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="pot"></span><strong data-i18n="wizard.expSome">Some Experience</strong>
                 </button>
                 <button type="button" class="option-tile" data-value="experienced" aria-pressed="false">
-                  <span class="tile-emoji">🌳</span><strong data-i18n="wizard.expExperienced">Experienced</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="tree"></span><strong data-i18n="wizard.expExperienced">Experienced</strong>
                 </button>
                 <button type="button" class="option-tile" data-value="expert" aria-pressed="false">
-                  <span class="tile-emoji">🌿</span><strong data-i18n="wizard.expExpert">Expert</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="leaf"></span><strong data-i18n="wizard.expExpert">Expert</strong>
                 </button>
               </div>
             </div>
@@ -87,16 +87,16 @@
               <label><span data-i18n="wizard.plantTypes">Preferred Plant Types</span> <span style="font-weight:400; color: var(--color-text-muted);" data-i18n="wizard.pickAny">(pick any)</span></label>
               <div class="option-grid" data-tile-group="plantTypes" data-multi>
                 <button type="button" class="option-tile" data-value="vegetables" aria-pressed="false">
-                  <span class="tile-emoji">🍅</span><strong data-i18n="wizard.plantVeg">Vegetables</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="fruit"></span><strong data-i18n="wizard.plantVeg">Vegetables</strong>
                 </button>
                 <button type="button" class="option-tile" data-value="herbs" aria-pressed="false">
-                  <span class="tile-emoji">🌿</span><strong data-i18n="wizard.plantHerbs">Herbs</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="herb"></span><strong data-i18n="wizard.plantHerbs">Herbs</strong>
                 </button>
                 <button type="button" class="option-tile" data-value="fruit-trees" aria-pressed="false">
-                  <span class="tile-emoji">🍊</span><strong data-i18n="wizard.plantFruit">Fruit Trees</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="tree"></span><strong data-i18n="wizard.plantFruit">Fruit Trees</strong>
                 </button>
                 <button type="button" class="option-tile" data-value="houseplants" aria-pressed="false">
-                  <span class="tile-emoji">🪴</span><strong data-i18n="wizard.plantHouse">Houseplants</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="pot"></span><strong data-i18n="wizard.plantHouse">Houseplants</strong>
                 </button>
               </div>
             </div>
@@ -105,16 +105,16 @@
               <label><span data-i18n="wizard.interests">Sustainability Interests</span> <span style="font-weight:400; color: var(--color-text-muted);" data-i18n="wizard.pickAny">(pick any)</span></label>
               <div class="option-grid" data-tile-group="interests" data-multi>
                 <button type="button" class="option-tile" data-value="food-recycling" aria-pressed="false">
-                  <span class="tile-emoji">♻️</span><strong data-i18n="wizard.intFood">Food Recycling</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="recycle"></span><strong data-i18n="wizard.intFood">Food Recycling</strong>
                 </button>
                 <button type="button" class="option-tile" data-value="composting" aria-pressed="false">
-                  <span class="tile-emoji">🪱</span><strong data-i18n="wizard.intCompost">Composting</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="compost"></span><strong data-i18n="wizard.intCompost">Composting</strong>
                 </button>
                 <button type="button" class="option-tile" data-value="urban-greening" aria-pressed="false">
-                  <span class="tile-emoji">🏙️</span><strong data-i18n="wizard.intUrban">Urban Greening</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="city"></span><strong data-i18n="wizard.intUrban">Urban Greening</strong>
                 </button>
                 <button type="button" class="option-tile" data-value="zero-waste" aria-pressed="false">
-                  <span class="tile-emoji">🌍</span><strong data-i18n="wizard.intZero">Zero Waste</strong>
+                  <span class="tile-icon" aria-hidden="true" data-icon="globe"></span><strong data-i18n="wizard.intZero">Zero Waste</strong>
                 </button>
               </div>
             </div>
@@ -158,7 +158,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="index.html" class="brand" style="color:#fff;"><img class="brand-mark" src="logo-mark.png" alt="" /> Greenomy</a>
+          <a href="index.html" class="brand" style="color:#fff;"><img class="brand-mark" src="logo-mark.png" alt="" /> <span class="brand-name">Greenomy</span></a>
           <p data-i18n="footer.mission">Environmental technology made warm and human.</p>
         </div>
         <div>

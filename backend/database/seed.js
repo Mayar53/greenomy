@@ -205,7 +205,7 @@ async function seedPlantCatalog(client) {
   for (const plant of plantSeed.plants) {
     await client.query(
       `INSERT INTO plant_catalog
-         (id, name, slug, category, emoji, days_to_harvest, difficulty, indoor, outdoor,
+         (id, name, slug, category, icon, days_to_harvest, difficulty, indoor, outdoor,
           sun, water, climates, planting_months, notes, i18n, scientific_name, accepted_name,
           family, description, growth_duration_days, germination_duration_days, temp_min_c,
           temp_max_c, soil_preferences, soil_ph_min, soil_ph_max, water_preferences,
@@ -214,7 +214,7 @@ async function seedPlantCatalog(client) {
                $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33)
        ON CONFLICT (id) DO UPDATE
          SET name = EXCLUDED.name, slug = EXCLUDED.slug, category = EXCLUDED.category,
-             emoji = EXCLUDED.emoji, days_to_harvest = EXCLUDED.days_to_harvest,
+             icon = EXCLUDED.icon, days_to_harvest = EXCLUDED.days_to_harvest,
              difficulty = EXCLUDED.difficulty, indoor = EXCLUDED.indoor, outdoor = EXCLUDED.outdoor,
              sun = EXCLUDED.sun, water = EXCLUDED.water, climates = EXCLUDED.climates,
              planting_months = EXCLUDED.planting_months, notes = EXCLUDED.notes, i18n = EXCLUDED.i18n,
@@ -234,7 +234,7 @@ async function seedPlantCatalog(client) {
         plant.name,
         plant.slug,
         plant.category,
-        plant.emoji || null,
+        plant.icon || null,
         plant.daysToHarvest,
         plant.difficulty,
         plant.indoor === true,

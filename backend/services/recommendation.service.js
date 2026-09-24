@@ -140,7 +140,7 @@ function recommend(catalog, ctx, limit = 6) {
     name: entry.name,
     slug: entry.slug,
     category: entry.category,
-    emoji: entry.emoji,
+    icon: entry.icon,
     daysToHarvest: entry.days_to_harvest,
     difficulty: entry.difficulty,
     sun: entry.sun,

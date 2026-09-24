@@ -6,6 +6,7 @@
 import { requireAuthOrRedirect, changePassword, logout, fetchCurrentUser } from "./authservise.js";
 import { api, ApiError } from "./servisapi.js";
 import { t } from "./language.js";
+import { iconMarkup } from "./icons.js";
 
 const ROLE_LABELS = {
   user: "admin.roleUser",
@@ -60,7 +61,7 @@ function renderSummary() {
   if (!host) return;
 
   if (!user) {
-    host.innerHTML = `<div class="loading-state"><span class="emoji">👤</span>${escapeHtml(t("common.loading"))}</div>`;
+    host.innerHTML = `<div class="loading-state">${iconMarkup("user")}${escapeHtml(t("common.loading"))}</div>`;
     return;
   }
 
