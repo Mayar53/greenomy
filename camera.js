@@ -26,9 +26,12 @@ const el = {
   select: document.querySelector("[data-plant-select]"),
   challengeBox: document.querySelector("[data-challenge-box]"),
   challengeCode: document.querySelector("[data-challenge-code]"),
+  stage: document.querySelector("[data-camera-stage]"),
   video: document.querySelector("[data-camera-video]"),
   preview: document.querySelector("[data-camera-preview]"),
   placeholder: document.querySelector("[data-camera-placeholder]"),
+  live: document.querySelector("[data-camera-live]"),
+  chip: document.querySelector("[data-camera-chip]"),
   status: document.querySelector("[data-camera-status]"),
   start: document.querySelector("[data-camera-start]"),
   capture: document.querySelector("[data-camera-capture]"),
@@ -64,6 +67,36 @@ function stopStream() {
   if (!stream) return;
   stream.getTracks().forEach((track) => track.stop());
   stream = null;
+  if (el.live) el.live.hidden = true;
+}
+
+/* ------------------------------------------------------------------ */
+/* Submission state of the shot in the viewfinder                      */
+/*                                                                     */
+/* The member should never have to guess whether the photo in the frame */
+/* has been sent, is being sent, or was already submitted. The chip on  */
+/* the frame says so, and it keeps saying so after a result until a new */
+/* photo is taken.                                                      */
+/* ------------------------------------------------------------------ */
+const STAGE_LABEL_KEYS = {
+  empty: "verify.stateEmpty",
+  ready: "verify.stateReady",
+  submitting: "verify.stateSubmitting",
+  approved: "verify.stateApproved",
+  review: "verify.stateReview",
+  rejected: "verify.stateRejected",
+};
+
+let lastOutcome = null;
+let submitting = false;
+
+function setStageState(state) {
+  const key = STAGE_LABEL_KEYS[state] ? state : "empty";
+  if (el.stage) el.stage.dataset.cameraState = key;
+  if (el.chip) {
+    el.chip.textContent = t(STAGE_LABEL_KEYS[key]);
+    el.chip.className = `verify-chip ${key === "empty" ? "" : `is-${key}`}`.trim();
+  }
 }
 
 function toDataUrl(source, width, height) {
@@ -90,6 +123,12 @@ function showCaptured() {
   el.start.hidden = true;
   el.capture.hidden = true;
   el.retake.hidden = false;
+  if (el.live) el.live.hidden = true;
+
+  // A fresh photo is ready to submit, and any previous submission state is
+  // replaced — the chip must describe what is in the frame now.
+  setStageState("ready");
+  if (el.submit) el.submit.disabled = false;
   cameraStatus("");
 }
 
@@ -115,6 +154,7 @@ async function startCamera() {
     el.placeholder.hidden = true;
     el.start.hidden = true;
     el.capture.hidden = false;
+    if (el.live) el.live.hidden = false;
 
     // The stream is live the moment getUserMedia resolves, but the element has
     // no frame to capture until metadata has loaded. Pressing Capture before
@@ -181,6 +221,11 @@ function retake() {
   el.file.value = "";
   cameraStatus("");
   setStatus("", "");
+
+  // Nothing is in the frame to submit, but the last submission state stays
+  // visible so the member can see their previous photo was already sent.
+  if (el.submit) el.submit.disabled = true;
+  setStageState(lastOutcome || "empty");
 }
 
 /** Fetches a fresh code for the chosen plant. The code is a trust signal, not a
@@ -248,6 +293,11 @@ function showResult(record) {
   const approved = record.approval_status === "approved";
   const rejected = record.approval_status === "rejected";
 
+  // The frame keeps a record of what happened to this shot, so returning to the
+  // form still shows that it was submitted and how it fared.
+  lastOutcome = approved ? "approved" : rejected ? "rejected" : "review";
+  setStageState(lastOutcome);
+
   el.form.hidden = true;
   el.result.hidden = false;
   el.scoreValue.textContent = `${confidence}%`;
@@ -268,6 +318,7 @@ function showResult(record) {
 }
 
 async function submit() {
+  if (submitting) return; // no double submissions
   if (!photoDataUrl) {
     setStatus("error", t("verify.noPhoto"));
     return;
@@ -278,7 +329,9 @@ async function submit() {
     return;
   }
 
+  submitting = true;
   el.submit.disabled = true;
+  setStageState("submitting");
   setStatus("loading", t("verify.analyzing"));
 
   try {
@@ -302,12 +355,17 @@ async function submit() {
     }
     setStatus("error", errorText(err));
   } finally {
+    submitting = false;
     el.submit.disabled = false;
   }
 }
 
 async function init() {
   if (!requireAuthOrRedirect("login.html")) return;
+
+  // Nothing is in the frame yet, so there is nothing to submit.
+  setStageState("empty");
+  el.submit.disabled = true;
 
   try {
     const plants = await listMyPlants();
@@ -349,3 +407,10 @@ async function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+// The chip's text is dynamic, so language.js cannot re-apply it from a
+// data-i18n key — repaint it in the new language instead.
+document.addEventListener("greenomy:translated", () => {
+  const state = el.stage ? el.stage.dataset.cameraState : null;
+  setStageState(state || "empty");
+});

@@ -67,10 +67,32 @@
           <div class="challenge-code" data-challenge-code aria-live="polite">----</div>
         </div>
 
+        <!-- The camera space: a framed viewfinder with corner edges and a centre
+             reticle, so it is obvious what to fill. The chip says what state the
+             shot is in — including whether it has already been submitted. -->
         <div class="verify-stage" data-camera-stage>
           <video data-camera-video playsinline muted autoplay hidden></video>
           <img data-camera-preview alt="" hidden />
-          <div class="verify-placeholder" data-camera-placeholder aria-hidden="true">📷</div>
+
+          <div class="verify-placeholder" data-camera-placeholder>
+            <span class="emoji" aria-hidden="true">📷</span>
+            <span class="verify-placeholder-text" data-i18n="verify.stageEmptyHint">Start the camera or choose a photo</span>
+          </div>
+
+          <div class="verify-frame" aria-hidden="true">
+            <span class="verify-corner is-tl"></span>
+            <span class="verify-corner is-tr"></span>
+            <span class="verify-corner is-bl"></span>
+            <span class="verify-corner is-br"></span>
+            <span class="verify-reticle"></span>
+          </div>
+
+          <span class="verify-live" data-camera-live hidden>
+            <span class="verify-live-dot" aria-hidden="true"></span>
+            <span data-i18n="verify.live">Live</span>
+          </span>
+
+          <span class="verify-chip" data-camera-chip role="status" aria-live="polite"></span>
         </div>
 
         <p class="verify-status" data-camera-status hidden role="status"></p>
