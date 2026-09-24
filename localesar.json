@@ -207,6 +207,10 @@
     "intZero": "صفر نفايات",
     "seedStep1Title": "ماذا تزرع؟",
     "seedStep1Lead": "اختر البذرة أو النبتة التي تريد متابعتها.",
+    "searchLabel": "ابحث في كتالوج النباتات",
+    "searchPlaceholder": "مثال: طماطم، بندورة، تەماتە",
+    "useCustom": "استخدم هذا الاسم كنبتة مخصصة",
+    "searchEmpty": "لا توجد نباتات بهذا الاسم. جرّب الاسم العربي أو الإنجليزي.",
     "plantTomato": "طماطم",
     "plantTomatoDesc": "خضار",
     "plantBasil": "ريحان",
@@ -532,6 +536,7 @@
     "cold": "بارد"
   },
   "category": {
+    "all": "الكل",
     "vegetables": "خضروات",
     "herbs": "أعشاب",
     "fruit-trees": "أشجار فاكهة",

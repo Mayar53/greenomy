@@ -10,5 +10,9 @@ const c = wrapController(ctrl);
 
 router.get("/recommendations", requireAuth, c.list);
 router.get("/catalog", c.catalog);
+// /catalog/search must be matched before /catalog/:slug, or it would be read as
+// a slug named "search".
+router.get("/catalog/search", c.search);
+router.get("/catalog/:slug", c.detail);
 
 module.exports = router;

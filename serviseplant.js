@@ -9,8 +9,24 @@ export async function getPlant(id) {
   return api.get(`/plants/${id}`);
 }
 
-export async function createPlant({ plantType, plantingMethod, plantingDate, location }) {
-  return api.post("/plants", { plantType, plantingMethod, plantingDate, location });
+export async function createPlant({
+  plantType,
+  plantingMethod,
+  plantingDate,
+  location,
+  canonicalPlantId,
+  varietyId,
+  customName,
+}) {
+  return api.post("/plants", {
+    plantType,
+    plantingMethod,
+    plantingDate,
+    location,
+    canonicalPlantId,
+    varietyId,
+    customName,
+  });
 }
 
 export async function updatePlant(id, changes) {

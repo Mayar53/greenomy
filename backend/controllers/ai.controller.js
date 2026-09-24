@@ -8,6 +8,7 @@
 // and catalog facts are retrieved and put in front of the model, so it answers
 // from Greenomy's own content instead of its general memory.
 const ai = require("../services/ai.service");
+const plantNormalize = require("../services/plant-normalize.service");
 const plantModel = require("../models/plant.model");
 const catalogModel = require("../models/plant-catalog.model");
 const greenHubModel = require("../models/green-hub.model");
@@ -29,100 +30,11 @@ const MAX_PLANTS = 3;
 // embeddings and no vector store: retrieval stays deterministic and testable.
 // ---------------------------------------------------------------------------
 
-const STOPWORDS = new Set([
-  "the", "a", "an", "and", "or", "of", "to", "in", "on", "for", "is", "are", "do", "does",
-  "did", "how", "what", "when", "where", "why", "which", "my", "i", "you", "me", "it", "its",
-  "this", "that", "these", "those", "with", "can", "should", "would", "be", "at", "from", "if",
-  "not", "no", "have", "has", "get", "got", "need", "want", "please",
-  "في", "من", "على", "إلى", "عن", "مع", "هذا", "هذه", "ذلك", "التي", "الذي", "هل", "ما", "كيف",
-  "متى", "لماذا", "أين", "أنا", "أنت", "هو", "هي", "أو", "لا", "إذا", "كان", "عندي", "لدي",
-  "لە", "بۆ", "چۆن", "کەنگی", "بۆچی", "کوێ", "ئەم", "ئەو", "من", "تۆ", "بێ", "لەگەڵ", "نە",
-]);
-
-// Word families that should reach each other: a question about "irrigation"
-// must find an article that only ever says "water".
-const SYNONYM_GROUPS = [
-  ["water", "watering", "watered", "irrigate", "irrigation", "moisture", "سقي", "ري", "ماء", "ئاو", "ئاودان"],
-  ["soil", "earth", "ground", "تربة", "تراب", "خاک", "زەوی"],
-  ["seed", "seeds", "sowing", "sow", "sown", "seedling", "seedlings", "save", "saving", "saved", "storage", "storing", "fermentation", "ferment", "winnow", "thresh", "بذور", "بذرة", "حفظ", "تخزين", "تۆو", "نەمام", "پاراستن"],
-  ["climate", "weather", "مناخ", "طقس", "ئاووهەوا", "کەشوهەوا"],
-  ["season", "seasons", "موسم", "مواسم", "وەرز", "وەرزەکان"],
-  ["frost", "freeze", "freezing", "صقيع", "برد", "بەستەڵەک", "سەرما"],
-  ["heat", "hot", "summer", "حرارة", "حار", "صيف", "گەرمی", "هاوین"],
-  ["sand", "sandy", "رمل", "رملية", "لمی"],
-  ["salt", "saline", "salinity", "ملح", "ملوحة", "مالحة", "خوێ", "سوێر"],
-  ["container", "pot", "pots", "balcony", "أصص", "وعاء", "شرفة", "قاپ", "بەلکۆن"],
-  ["pest", "insect", "insects", "aphid", "aphids", "whitefly", "mite", "mites", "grub", "حشرات", "آفات", "ئافت", "مێشوولە"],
-  ["yellow", "yellowing", "pale", "chlorosis", "اصفرار", "شحوب", "زەرد"],
-  ["wilt", "wilting", "wilted", "droop", "drooping", "limp", "ذبول", "ذابل", "ڕەنجور"],
-  ["sun", "sunburn", "scorch", "scorched", "shade", "شمس", "حروق", "ظل", "خۆر", "سێبەر"],
-  ["root", "roots", "جذور", "ڕەگ"],
-];
-
-const SYNONYMS = new Map();
-for (const group of SYNONYM_GROUPS) {
-  const canonical = group[0];
-  for (const word of group) SYNONYMS.set(word, canonical);
-}
-
-// Colloquial Arabic and Kurdish names for the plants in our catalog, mapped to
-// the English word so a question phrased locally still matches both the catalog
-// row (mentionedPlants) and the English guides. The catalog's own ar/ku names
-// are matched directly, without needing an alias.
-const PLANT_ALIASES = {
-  "بندورة": "tomato",
-  "طماطة": "tomato",
-  "كوسة": "zucchini",
-  "كوسا": "zucchini",
-  "کۆسا": "zucchini",
-  "يقطين": "pumpkin",
-  "کەدوو": "pumpkin",
-  "کادوو": "pumpkin",
-  "حبق": "basil",
-  "نعنع": "mint",
-  "شبنت": "dill",
-  "معدنوس": "parsley",
-  "برتقان": "orange",
-  "صبار": "aloe",
-  "بوتس": "pothos",
-  "ثیران": "snake",
-  "ثعبان": "snake",
-  "الثعبان": "snake",
-  "الحية": "snake",
-};
-
-/** A light English stem, so "tomatoes" meets "tomato" and "pots" meets "pot".
- * Scripts without this pattern (Arabic, Kurdish) are left alone. */
-function stem(word) {
-  if (!/^[a-z]+$/.test(word)) return word;
-  if (word.endsWith("ies") && word.length > 4) return `${word.slice(0, -3)}y`;
-  if (word.endsWith("es") && word.length > 4) return word.slice(0, -2);
-  if (word.endsWith("s") && word.length > 3) return word.slice(0, -1);
-  return word;
-}
-
-/** Searchable terms from a string: any script, lowercased, with stopwords
- * dropped and synonyms folded to one canonical word. A word and its canonical
- * are the same term, so a question never counts twice for the same word. */
-function terms(text) {
-  const found = new Set();
-  for (const raw of String(text || "").toLowerCase().match(/[\p{L}\p{N}]+/gu) || []) {
-    const word = stem(raw);
-    // Stopwords are checked before and after stemming, since stemming can change
-    // a stopword into a non-stopword ("this" -> "thi").
-    if (word.length < 2 || STOPWORDS.has(raw) || STOPWORDS.has(word)) continue;
-
-    // Arabic writes the definite article onto the noun — "الطماطم" is "tomato" —
-    // so the bare form is a term too.
-    const variants = [word];
-    if (word.startsWith("ال") && word.length > 3) variants.push(word.slice(2));
-
-    for (const variant of variants) {
-      found.add(SYNONYMS.get(variant) || PLANT_ALIASES[variant] || variant);
-    }
-  }
-  return found;
-}
+// The retrieval vocabulary — stopwords, synonym groups, colloquial plant names,
+// light stemming and Arabic/Kurdish letter unification — lives in one shared
+// service, so the assistant, the catalog search and the seeder all fold a name
+// the same way.
+const { terms } = plantNormalize;
 
 /** An article's fields, weighted: the title says what a guide is *about*, so it
  * counts for far more than a passing mention in the body. Every locale is

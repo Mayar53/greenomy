@@ -21,12 +21,31 @@ async function listByUser(userId) {
   return rows;
 }
 
-async function create({ userId, plantType, plantingMethod, plantingDate, location }) {
+async function create({
+  userId,
+  plantType,
+  plantingMethod,
+  plantingDate,
+  location,
+  canonicalPlantId,
+  varietyId,
+  customName,
+}) {
   const { rows } = await query(
-    `INSERT INTO plants (user_id, plant_type, planting_method, planting_date, location)
-     VALUES ($1, $2, $3, COALESCE($4, now()), $5)
+    `INSERT INTO plants (user_id, plant_type, planting_method, planting_date, location,
+                         canonical_plant_id, variety_id, custom_name)
+     VALUES ($1, $2, $3, COALESCE($4, now()), $5, $6, $7, $8)
      RETURNING *`,
-    [userId, plantType, plantingMethod || null, plantingDate || null, location || null]
+    [
+      userId,
+      plantType,
+      plantingMethod || null,
+      plantingDate || null,
+      location || null,
+      canonicalPlantId || null,
+      varietyId || null,
+      customName || null,
+    ]
   );
   return rows[0];
 }

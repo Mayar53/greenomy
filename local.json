@@ -207,6 +207,10 @@
     "intZero": "Zero Waste",
     "seedStep1Title": "What are you planting?",
     "seedStep1Lead": "Choose the seed or plant you'd like to start tracking.",
+    "searchLabel": "Search the plant catalog",
+    "searchPlaceholder": "e.g. tomato, طماطم, بندورة, تەماتە",
+    "useCustom": "Use this name as a custom plant",
+    "searchEmpty": "No plants match that name. Try the English or Arabic name.",
     "plantTomato": "Tomato",
     "plantTomatoDesc": "Vegetable",
     "plantBasil": "Basil",
@@ -532,6 +536,7 @@
     "cold": "cold"
   },
   "category": {
+    "all": "All",
     "vegetables": "Vegetables",
     "herbs": "Herbs",
     "fruit-trees": "Fruit trees",

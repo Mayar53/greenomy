@@ -66,19 +66,33 @@
           <div class="form-status" data-recommend-status role="status" aria-live="polite"></div>
         </section>
 
-        <div class="option-grid" data-tile-group="plantType">
-          <button type="button" class="option-tile" data-value="Tomato" aria-pressed="false">
-            <span class="tile-emoji">🍅</span><strong data-i18n="wizard.plantTomato">Tomato</strong><span data-i18n="wizard.plantTomatoDesc">Vegetable</span>
-          </button>
-          <button type="button" class="option-tile" data-value="Basil" aria-pressed="false">
-            <span class="tile-emoji">🌿</span><strong data-i18n="wizard.plantBasil">Basil</strong><span data-i18n="wizard.plantBasilDesc">Herb</span>
-          </button>
-          <button type="button" class="option-tile" data-value="Orange Tree" aria-pressed="false">
-            <span class="tile-emoji">🍊</span><strong data-i18n="wizard.plantOrange">Orange Tree</strong><span data-i18n="wizard.plantOrangeDesc">Fruit tree, from seed</span>
-          </button>
-          <button type="button" class="option-tile" data-value="Pothos" aria-pressed="false">
-            <span class="tile-emoji">🪴</span><strong data-i18n="wizard.plantPothos">Pothos</strong><span data-i18n="wizard.plantPothosDesc">Houseplant</span>
-          </button>
+        <!-- Searchable picker over the plant catalog (public
+             GET /api/catalog/search). Names resolve in every supported
+             language — English, MSA, Iraqi and Kurdish — to one canonical
+             plant. The hidden tile group below is what the wizard's own
+             selection/Continue logic reads, so the rest of the wizard is
+             unchanged. -->
+        <div class="plant-picker" data-plant-picker>
+          <div class="form-field">
+            <label for="plantSearch" data-i18n="wizard.searchLabel">Search the plant catalog</label>
+            <input type="search" id="plantSearch" autocomplete="off"
+                   placeholder="e.g. tomato, طماطم, بندورة, تەماتە"
+                   data-i18n-attr="placeholder:wizard.searchPlaceholder" />
+          </div>
+
+          <div class="chip-row" data-plant-categories role="group" aria-label="Filter by category">
+            <button type="button" class="chip is-active" data-value="all" aria-pressed="true" data-i18n="category.all">All</button>
+            <button type="button" class="chip" data-value="vegetables" aria-pressed="false" data-i18n="category.vegetables">Vegetables</button>
+            <button type="button" class="chip" data-value="herbs" aria-pressed="false" data-i18n="category.herbs">Herbs</button>
+            <button type="button" class="chip" data-value="fruit-trees" aria-pressed="false" data-i18n="category.fruit-trees">Fruit trees</button>
+            <button type="button" class="chip" data-value="houseplants" aria-pressed="false" data-i18n="category.houseplants">Houseplants</button>
+          </div>
+
+          <div class="recommend-list" data-plant-results></div>
+          <div class="form-status" data-plant-status role="status" aria-live="polite"></div>
+
+          <!-- Filled in by the picker; read by the wizard's Continue handler. -->
+          <div class="option-grid" data-tile-group="plantType" hidden></div>
         </div>
         <div class="form-field" style="margin-top: 20px;">
           <label for="seedPhoto" data-i18n="identify.label">Or identify the plant from a photo</label>

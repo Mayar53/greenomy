@@ -5,7 +5,7 @@
 import { requireAuthOrRedirect } from "./authservise.js";
 import { api, ApiError } from "./servisapi.js";
 import { createPlant } from "./serviseplant.js";
-import { t, localized } from "./language.js";
+import { t, localized, currentLanguage } from "./language.js";
 
 const DRAFT_KEY = "greenomy:onboarding-draft";
 
@@ -18,10 +18,15 @@ function loadDraft() {
 }
 
 function saveDraft(patch) {
-  const draft = { ...loadDraft(), ...patch };
-  sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
-  return draft;
+  const next = { ...loadDraft(), ...patch };
+  sessionStorage.setItem(DRAFT_KEY, JSON.stringify(next));
+  return next;
 }
+
+// One shared draft for the whole flow, so the catalog picker, the
+// photo-identify path and the recommendation cards all update the SAME
+// selection rather than three copies that drift apart.
+let draft = loadDraft();
 
 function initTileGroup(container) {
   container.addEventListener("click", (e) => {
@@ -97,7 +102,7 @@ function initNewSeedWizard() {
   // static 3-step page-level progress indicator outside this element.
   const dots = Array.from(wizard.querySelectorAll(".step-dot"));
   let current = 0;
-  const draft = loadDraft();
+  draft = loadDraft();
   draft.seed = draft.seed || {};
 
   function renderStep() {
@@ -197,6 +202,8 @@ function initNewSeedWizard() {
           plantingMethod: draft.seed.plantingMethod,
           plantingDate: draft.seed.plantingDate,
           location: draft.seed.location,
+          canonicalPlantId: draft.seed.canonicalPlantId,
+          customName: draft.seed.customName,
         });
         sessionStorage.removeItem(DRAFT_KEY);
         status.className = "form-status is-success";
@@ -269,10 +276,147 @@ function selectPlantType(group, value) {
   group.appendChild(tile);
 }
 
+/** Records the chosen plant in ONE place: the hidden tile group the wizard's
+ * own Continue handler reads, and the shared draft the create call uses. Every
+ * way of choosing a plant — picker, photo identify, recommendation — goes
+ * through here so they cannot disagree. */
+function setSelectedPlant({ name, canonicalPlantId = null, customName = null }) {
+  selectPlantType(document.querySelector('[data-tile-group="plantType"]'), name);
+  draft = saveDraft({
+    seed: { ...(loadDraft().seed || {}), plantType: name, canonicalPlantId, customName },
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/* Searchable plant picker over the catalog (new-seed.html step 1)     */
+/*                                                                     */
+/* Replaces the four hardcoded tiles. Searches the public catalog in   */
+/* every supported language, so a name the member actually uses finds  */
+/* the one canonical plant. Unmatched names can still be used as a     */
+/* custom plant, and the wizard below is unchanged.                    */
+/* ------------------------------------------------------------------ */
+function plantResultCard(plant, onPick) {
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = "recommend-card";
+  card.dataset.id = plant.id;
+
+  const head = document.createElement("span");
+  head.className = "recommend-card-head";
+
+  const emoji = document.createElement("span");
+  emoji.className = "recommend-emoji";
+  emoji.textContent = plant.emoji || "🌱";
+
+  const name = document.createElement("strong");
+  name.textContent = localized(plant, "name") || plant.name;
+
+  const days = document.createElement("span");
+  days.className = "recommend-days";
+  days.textContent = `${plant.days_to_harvest} ${t("recommend.daysUnit")}`;
+
+  head.append(emoji, name, days);
+
+  const meta = document.createElement("span");
+  meta.className = "recommend-notes";
+  meta.textContent = [plant.scientific_name, t(`category.${plant.category}`)].filter(Boolean).join(" · ");
+
+  card.append(head, meta);
+  card.addEventListener("click", () => onPick(plant));
+  return card;
+}
+
+function initPlantPicker() {
+  const picker = document.querySelector("[data-plant-picker]");
+  if (!picker) return;
+  if (!requireAuthOrRedirect("login.html")) return;
+
+  const search = picker.querySelector("#plantSearch");
+  const results = picker.querySelector("[data-plant-results]");
+  const status = picker.querySelector("[data-plant-status]");
+  const categoryRow = picker.querySelector("[data-plant-categories]");
+  if (!results) return;
+
+  let category = "all";
+  let requestSeq = 0;
+  let debounce = null;
+
+  function choose(plant) {
+    setSelectedPlant({ name: plant.name, canonicalPlantId: plant.id, customName: null });
+    results.querySelectorAll(".recommend-card").forEach((card) => {
+      card.classList.toggle("is-selected", card.dataset.id === plant.id);
+    });
+    status.className = "form-status is-success";
+    status.textContent = `${t("identify.found")}: ${localized(plant, "name") || plant.name}`;
+  }
+
+  function chooseCustom(name) {
+    setSelectedPlant({ name, canonicalPlantId: null, customName: name });
+    status.className = "form-status";
+    status.textContent = "";
+  }
+
+  function render(list, query) {
+    results.replaceChildren();
+    for (const plant of list) results.appendChild(plantResultCard(plant, choose));
+
+    if (!list.length) {
+      if (!query) return;
+      const custom = document.createElement("button");
+      custom.type = "button";
+      custom.className = "recommend-card";
+      custom.textContent = `${t("wizard.useCustom")}: ${query}`;
+      custom.addEventListener("click", () => chooseCustom(query));
+      results.appendChild(custom);
+    }
+  }
+
+  async function load() {
+    const seq = (requestSeq += 1);
+    const query = search.value.trim();
+    status.className = "form-status is-loading";
+    status.textContent = t("common.loading");
+
+    try {
+      const params = new URLSearchParams({ limit: "30", lang: currentLanguage() });
+      if (query) params.set("q", query);
+      if (category !== "all") params.set("category", category);
+
+      const list = await api.get(`/catalog/search?${params.toString()}`);
+      if (seq !== requestSeq) return; // a newer keystroke already won
+      render(Array.isArray(list) ? list : [], query);
+      status.className = "form-status";
+      status.textContent = list.length ? "" : t("wizard.searchEmpty");
+    } catch (err) {
+      if (seq !== requestSeq) return;
+      status.className = "form-status is-error";
+      status.textContent = err instanceof ApiError ? err.message : t("common.errorGeneric");
+    }
+  }
+
+  search.addEventListener("input", () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(load, 250);
+  });
+
+  categoryRow.addEventListener("click", (e) => {
+    const chip = e.target.closest("[data-value]");
+    if (!chip) return;
+    category = chip.dataset.value;
+    categoryRow.querySelectorAll("[data-value]").forEach((other) => {
+      const active = other.dataset.value === category;
+      other.classList.toggle("is-active", active);
+      other.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    load();
+  });
+
+  load();
+}
+
 function initIdentify() {
   const input = document.querySelector("#seedPhoto");
   const status = document.querySelector("[data-identify-status]");
-  const group = document.querySelector('[data-tile-group="plantType"]');
   if (!input || !status) return;
 
   input.addEventListener("change", async () => {
@@ -287,9 +431,25 @@ function initIdentify() {
       const result = await api.post("/ai/identify", { imageUrl });
 
       if (result.plantType) {
-        selectPlantType(group, result.plantType);
+        // Resolve what the model saw to a canonical plant when we can, so the
+        // saved plant links to the catalog instead of being loose text.
+        let canonical = null;
+        try {
+          const matches = await api.get(
+            `/catalog/search?q=${encodeURIComponent(result.plantType)}&limit=1`
+          );
+          if (Array.isArray(matches) && matches[0]) canonical = matches[0];
+        } catch {
+          // the catalog is a bonus here — a name with no match is still usable
+        }
+
+        setSelectedPlant({
+          name: canonical ? canonical.name : result.plantType,
+          canonicalPlantId: canonical ? canonical.id : null,
+          customName: canonical ? null : result.plantType,
+        });
         status.className = "form-status is-success";
-        status.textContent = `${t("identify.found")}: ${result.plantType}`;
+        status.textContent = `${t("identify.found")}: ${canonical ? localized(canonical, "name") || canonical.name : result.plantType}`;
       } else {
         status.className = "form-status is-error";
         status.textContent = t("identify.none");
@@ -387,11 +547,10 @@ function renderRecommendations(container, payload) {
 
   list.replaceChildren();
 
-  const group = document.querySelector('[data-tile-group="plantType"]');
   for (const item of payload.recommendations) {
     list.appendChild(
       recommendationCard(item, (chosen) => {
-        selectPlantType(group, chosen.name);
+        setSelectedPlant({ name: chosen.name, canonicalPlantId: chosen.id, customName: null });
         // Reuse the wizard's own Continue handler, which reads the selection.
         const next = document.querySelector("[data-seed-wizard] [data-next]");
         if (next) next.click();
@@ -448,6 +607,7 @@ function initRecommendations() {
 document.addEventListener("DOMContentLoaded", () => {
   initEcoProfilePage();
   initNewSeedWizard();
+  initPlantPicker();
   initIdentify();
   initRecommendations();
 });
@@ -457,5 +617,12 @@ document.addEventListener("greenomy:translated", () => {
   if (container && !container.hidden) {
     const active = container.querySelector("[data-recommend-duration] [aria-pressed='true']");
     loadRecommendations(container, active ? active.dataset.value : DURATION_DEFAULT);
+  }
+
+  // The picker's names are catalog data, so it has to ask again after a switch.
+  const picker = document.querySelector("[data-plant-picker]");
+  if (picker) {
+    const search = picker.querySelector("#plantSearch");
+    if (search) search.dispatchEvent(new Event("input"));
   }
 });
