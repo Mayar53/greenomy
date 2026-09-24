@@ -87,6 +87,9 @@ function normaliseCity(city) {
 
 const hemisphereFor = (latitude) => (latitude < 0 ? "southern" : "northern");
 
+/** A finite number, or null for a field the provider has no value for. */
+const numberOf = (value) => (typeof value === "number" && Number.isFinite(value) ? value : null);
+
 /** Coarse climate zone from latitude, current temperature and weekly rainfall.
  * A documented heuristic — not a Köppen classification — which is all the
  * ranking needs. */
@@ -181,7 +184,16 @@ function offlineConditions(city, reason) {
     season: seasonFor(month, hemisphere),
     month,
     northernMonth: northernMonthFor(month, hemisphere),
-    current: { temperature: null, weatherCode: null, precipitation: null },
+    current: {
+      temperature: null,
+      apparentTemperature: null,
+      humidity: null,
+      windSpeed: null,
+      precipitation: null,
+      weatherCode: null,
+      soilTemperature: null,
+      soilMoisture: null,
+    },
     forecast: [],
     source: "climate-table",
     approximate: true,
@@ -212,7 +224,16 @@ async function getConditions(city) {
     const params = new URLSearchParams({
       latitude: String(place.latitude),
       longitude: String(place.longitude),
-      current: "temperature_2m,weather_code,precipitation",
+      current: [
+        "temperature_2m",
+        "apparent_temperature",
+        "relative_humidity_2m",
+        "wind_speed_10m",
+        "precipitation",
+        "weather_code",
+        "soil_temperature_6cm",
+        "soil_moisture_0_to_1cm",
+      ].join(","),
       daily: "temperature_2m_max,temperature_2m_min,precipitation_sum",
       timezone: "auto",
       forecast_days: "7",
@@ -253,8 +274,14 @@ async function getConditions(city) {
       northernMonth: northernMonthFor(month, hemisphere),
       current: {
         temperature,
+        apparentTemperature: numberOf(data?.current?.apparent_temperature),
+        humidity: numberOf(data?.current?.relative_humidity_2m),
+        windSpeed: numberOf(data?.current?.wind_speed_10m),
+        precipitation: numberOf(data?.current?.precipitation),
         weatherCode: data?.current?.weather_code ?? null,
-        precipitation: data?.current?.precipitation ?? null,
+        // Soil figures come from the same call; not every location has them.
+        soilTemperature: numberOf(data?.current?.soil_temperature_6cm),
+        soilMoisture: numberOf(data?.current?.soil_moisture_0_to_1cm),
       },
       forecast,
       source: "open-meteo",

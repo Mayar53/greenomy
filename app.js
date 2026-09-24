@@ -313,6 +313,11 @@ function initAssistant() {
   const thread = document.querySelector("[data-assistant-thread]");
   const status = form.querySelector("[data-form-status]");
 
+  // The conversation so far, sent with each question so follow-ups ("and in
+  // summer?") are understood. Bounded — the backend also caps it.
+  const history = [];
+  const HISTORY_TURNS = 8;
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const input = form.querySelector("#assistantMessage");
@@ -329,13 +334,17 @@ function initAssistant() {
     try {
       // The language is sent so a reply that falls back to our own guide text
       // comes back in the language the member is reading.
-      const data = await api.post("/ai/assistant", { message, lang: currentLanguage() });
+      const data = await api.post("/ai/assistant", { message, lang: currentLanguage(), history });
 
       const titles = data.sources && data.sources.length ? await guideTitles() : null;
       const sources = titles ? data.sources.map((slug) => ({ slug, title: titles.get(slug) || slug })) : [];
       appendAssistantMessage(thread, "bot", data.reply, sources);
       status.className = "form-status";
       status.textContent = "";
+
+      // Remember this exchange so the next question has the context.
+      history.push({ role: "user", content: message }, { role: "assistant", content: data.reply });
+      if (history.length > HISTORY_TURNS * 2) history.splice(0, history.length - HISTORY_TURNS * 2);
     } catch (err) {
       if (isAuthError(err)) return gotoLogin();
       // A 503 here means no AI key is configured — the API's message says so.
