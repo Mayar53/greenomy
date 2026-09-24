@@ -311,6 +311,7 @@
     "history": "Points history",
     "empty": "No point activity yet. Verify a plant photo to start earning points.",
     "txVerification": "Verified plant photo",
+    "txRewardEarned": "Growth milestone reward",
     "txReward": "Reward redeemed",
     "txAdjustment": "Points adjustment",
     "viewGarden": "View my garden",

@@ -17,8 +17,6 @@ const crypto = require("crypto");
 const { withTransaction } = require("../config/db");
 const verificationModel = require("../models/verification.model");
 const plantModel = require("../models/plant.model");
-const userModel = require("../models/user.model");
-const transactionModel = require("../models/point-transaction.model");
 const challengeModel = require("../models/verification-challenge.model");
 const imageModel = require("../models/verification-image.model");
 const journeyModel = require("../models/journey.model");
@@ -26,10 +24,10 @@ const imageService = require("../services/image.service");
 const duplicateService = require("../services/duplicate.service");
 const ai = require("../services/ai.service");
 const { getVerificationProvider, HeuristicVerificationProvider, verifyPhoto } = require("../services/verification-provider");
+const rewardEngine = require("../services/reward-engine.service");
 const { notify } = require("../services/notification.service");
 
 const AUTO_APPROVE_THRESHOLD = 0.85;
-const POINTS_PER_VERIFIED_PHOTO = 30;
 const CHALLENGE_TTL_MS = Number(process.env.CHALLENGE_TTL_MS || 30 * 60 * 1000);
 const CHALLENGE_LENGTH = Math.min(Math.max(Number(process.env.CHALLENGE_LENGTH || 4), 3), 8);
 
@@ -245,14 +243,11 @@ exports.submit = async (req, res) => {
       });
     }
 
+    // Points are decided by the reward engine, never here — and only for an
+    // approved result. A milestone photo is always pending at this point, so it
+    // is paid when an admin approves it.
     if (approvalStatus === "approved") {
-      await userModel.addPoints(client, req.user.id, POINTS_PER_VERIFIED_PHOTO);
-      await transactionModel.create(client, {
-        userId: req.user.id,
-        amount: POINTS_PER_VERIFIED_PHOTO,
-        transactionType: "verification_approved",
-        referenceId: record.verification_id,
-      });
+      await rewardEngine.onVerificationApproved(client, record);
     }
     return record;
   });

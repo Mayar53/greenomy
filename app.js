@@ -24,7 +24,11 @@ const state = {
 
 const PLANT_EMOJI = { Tomato: "🍅", Basil: "🌿", "Orange Tree": "🍊", Pothos: "🪴" };
 const STAGE_KEYS = { seed: "garden.stageSeed", sprout: "garden.stageSprout", plant: "garden.stagePlant" };
-const TX_KEYS = { verification_approved: "wallet.txVerification", reward_redeemed: "wallet.txReward" };
+const TX_KEYS = {
+  verification_approved: "wallet.txVerification",
+  reward_earned: "wallet.txRewardEarned",
+  reward_redeemed: "wallet.txReward",
+};
 const NOTIFICATION_KEYS = {
   verification_approved: "notifications.verification_approved",
   verification_pending: "notifications.verification_pending",
