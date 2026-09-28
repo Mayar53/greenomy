@@ -25,13 +25,25 @@ describe("guards and admin queue", () => {
   });
 
   test("the seeded admin can approve, and the same photo can't be paid twice", async () => {
+    // Required here, not at the top: the module opens the database, which only
+    // exists once before() has run.
+    const { POINTS } = require("../services/reward-engine.service");
     const { token } = await h.signup(api.base);
     const plant = await h.createPlant(api.base, token);
-    // A plant photo too low-resolution to verify queues for a human. (A photo
-    // with no plant in it at all is rejected outright, so it never queues.)
+    const journey = (await h.get(api.base, "/journeys", { token })).body.find(
+      (entry) => entry.user_plant_id === plant.plant_id
+    );
+    const challenge = await h.issueChallenge(api.base, token, plant.plant_id);
+
+    // A reward-eligible (milestone) photo too low-resolution to verify queues for
+    // a human — which is exactly what has to happen before any payout.
     const lowRes = await h.photoDataUrl("QUEUE", { green: true, width: 160, height: 120 });
-    const queued = await h.submitRawPhoto(api.base, token, plant.plant_id, lowRes);
+    const queued = await h.submitRawPhoto(api.base, token, plant.plant_id, lowRes, {
+      challengeId: challenge.challengeId,
+      milestoneId: journey.milestones[0].milestone_id,
+    });
     assert.equal(queued.body.approval_status, "pending");
+    assert.equal(queued.body.requires_review, true);
 
     const admin = await h.loginAdmin(api.base);
     assert.ok(admin.token, "expected the seeded admin to log in");
@@ -50,7 +62,7 @@ describe("guards and admin queue", () => {
     assert.equal(approved.status, 200);
 
     const wallet = await h.get(api.base, "/wallet", { token });
-    assert.equal(wallet.body.currentPoints, 30);
+    assert.equal(wallet.body.currentPoints, POINTS.milestone_planting, "the approved milestone pays once");
 
     const again = await h.post(api.base, `/admin/verifications/${item.verification_id}/approve`, {
       token: admin.token,
@@ -59,7 +71,7 @@ describe("guards and admin queue", () => {
     assert.equal(again.status, 404, "approving twice must not be possible");
 
     const afterSecond = await h.get(api.base, "/wallet", { token });
-    assert.equal(afterSecond.body.currentPoints, 30, "points must not double");
+    assert.equal(afterSecond.body.currentPoints, POINTS.milestone_planting, "points must not double");
   });
 
   test("rejecting records the reason and awards nothing", async () => {

@@ -89,6 +89,35 @@ async function remove(plantId, userId) {
   return rowCount > 0;
 }
 
+/** Records a watering: when it happened and when the next one is due. Must run
+ * inside withTransaction when it accompanies a care action. */
+async function setWatering(client, plantId, { lastWatered, nextWatering }) {
+  const { rows } = await client.query(
+    `UPDATE plants
+        SET last_watered = $2, next_watering = $3, updated_at = now()
+      WHERE plant_id = $1
+      RETURNING *`,
+    [plantId, lastWatered || null, nextWatering || null]
+  );
+  return rows[0] || null;
+}
+
+/** Plants whose next watering is due, with the owner's contact details — the
+ * input to the reminder job. Only active plants with a schedule are included. */
+async function listDueForWatering() {
+  const { rows } = await query(
+    `SELECT p.plant_id, p.user_id, p.plant_type, p.custom_name, p.location, p.next_watering,
+            u.email, u.full_name
+       FROM plants p
+       JOIN users u ON u.user_id = p.user_id
+      WHERE p.status = 'active'
+        AND p.next_watering IS NOT NULL
+        AND p.next_watering <= now()
+      ORDER BY p.user_id, p.next_watering`
+  );
+  return rows;
+}
+
 /** Homepage impact: every plant counts as a started seed. */
 async function countAll() {
   const { rows } = await query("SELECT count(*)::int AS n FROM plants");
@@ -122,6 +151,8 @@ module.exports = {
   findByIdForUser,
   update,
   remove,
+  setWatering,
+  listDueForWatering,
   countAll,
   countByUser,
   countGrown,

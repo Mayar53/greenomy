@@ -27,1099 +27,4066 @@
       "organization": "Greenomy",
       "url": null,
       "type": "editorial"
+    },
+    {
+      "id": "ckb-wikipedia",
+      "name": "Kurdish (Sorani) Wikipedia",
+      "organization": "Wikimedia",
+      "url": "https://ckb.wikipedia.org/",
+      "type": "lexicon"
+    },
+    {
+      "id": "vejinlex",
+      "name": "VejinLex / Kurdistanica - English to Central Kurdish dictionary",
+      "organization": "Eli Cewsheni",
+      "url": "https://lex.vejin.net/ck/",
+      "type": "lexicon"
+    },
+    {
+      "id": "sorani-wordlist",
+      "name": "Central Kurdish (Sorani) wordlist - vegetable names",
+      "organization": "mkanabi/Kurdish-wordlist",
+      "url": "https://github.com/mkanabi/Kurdish-wordlist",
+      "type": "lexicon"
     }
   ],
-
   "stageTemplates": {
     "annual-vegetable": [
-      { "key": "planting", "label": "Planting", "ar": "الزراعة", "ku": "چاندن" },
-      { "key": "germination", "label": "Germination", "ar": "الإنبات", "ku": "سەوزبوون" },
-      { "key": "seedling", "label": "Seedling", "ar": "الشتلة", "ku": "نەمام" },
-      { "key": "vegetative", "label": "Vegetative growth", "ar": "النمو الخضري", "ku": "گەشەی سەوزایی" },
-      { "key": "flowering", "label": "Flowering", "ar": "الإزهار", "ku": "گوڵکردن" },
-      { "key": "fruiting", "label": "Fruit development", "ar": "تكوّن الثمار", "ku": "بەرهەمهێنان" },
-      { "key": "harvest", "label": "Harvest", "ar": "الحصاد", "ku": "بەرهەم" }
+      {
+        "key": "planting",
+        "label": "Planting",
+        "ar": "الزراعة",
+        "ku": "چاندن"
+      },
+      {
+        "key": "germination",
+        "label": "Germination",
+        "ar": "الإنبات",
+        "ku": "سەوزبوون"
+      },
+      {
+        "key": "seedling",
+        "label": "Seedling",
+        "ar": "الشتلة",
+        "ku": "نەمام"
+      },
+      {
+        "key": "vegetative",
+        "label": "Vegetative growth",
+        "ar": "النمو الخضري",
+        "ku": "گەشەی سەوزایی"
+      },
+      {
+        "key": "flowering",
+        "label": "Flowering",
+        "ar": "الإزهار",
+        "ku": "گوڵکردن"
+      },
+      {
+        "key": "fruiting",
+        "label": "Fruit development",
+        "ar": "تكوّن الثمار",
+        "ku": "بەرهەمهێنان"
+      },
+      {
+        "key": "harvest",
+        "label": "Harvest",
+        "ar": "الحصاد",
+        "ku": "بەرهەم"
+      }
     ],
     "leafy-annual": [
-      { "key": "planting", "label": "Planting", "ar": "الزراعة", "ku": "چاندن" },
-      { "key": "germination", "label": "Germination", "ar": "الإنبات", "ku": "سەوزبوون" },
-      { "key": "seedling", "label": "Seedling", "ar": "الشتلة", "ku": "نەمام" },
-      { "key": "leaf-growth", "label": "Leaf growth", "ar": "نمو الأوراق", "ku": "گەشەی گەڵا" },
-      { "key": "harvest", "label": "Harvest", "ar": "الحصاد", "ku": "بەرهەم" }
+      {
+        "key": "planting",
+        "label": "Planting",
+        "ar": "الزراعة",
+        "ku": "چاندن"
+      },
+      {
+        "key": "germination",
+        "label": "Germination",
+        "ar": "الإنبات",
+        "ku": "سەوزبوون"
+      },
+      {
+        "key": "seedling",
+        "label": "Seedling",
+        "ar": "الشتلة",
+        "ku": "نەمام"
+      },
+      {
+        "key": "leaf-growth",
+        "label": "Leaf growth",
+        "ar": "نمو الأوراق",
+        "ku": "گەشەی گەڵا"
+      },
+      {
+        "key": "harvest",
+        "label": "Harvest",
+        "ar": "الحصاد",
+        "ku": "بەرهەم"
+      }
     ],
     "root-vegetable": [
-      { "key": "planting", "label": "Sowing", "ar": "البذر", "ku": "تۆوچاندن" },
-      { "key": "germination", "label": "Germination", "ar": "الإنبات", "ku": "سەوزبوون" },
-      { "key": "seedling", "label": "Seedling", "ar": "الشتلة", "ku": "نەمام" },
-      { "key": "root-development", "label": "Root development", "ar": "تكوّن الجذور", "ku": "گەشەی ڕەگ" },
-      { "key": "harvest", "label": "Harvest", "ar": "الحصاد", "ku": "بەرهەم" }
+      {
+        "key": "planting",
+        "label": "Sowing",
+        "ar": "البذر",
+        "ku": "تۆوچاندن"
+      },
+      {
+        "key": "germination",
+        "label": "Germination",
+        "ar": "الإنبات",
+        "ku": "سەوزبوون"
+      },
+      {
+        "key": "seedling",
+        "label": "Seedling",
+        "ar": "الشتلة",
+        "ku": "نەمام"
+      },
+      {
+        "key": "root-development",
+        "label": "Root development",
+        "ar": "تكوّن الجذور",
+        "ku": "گەشەی ڕەگ"
+      },
+      {
+        "key": "harvest",
+        "label": "Harvest",
+        "ar": "الحصاد",
+        "ku": "بەرهەم"
+      }
     ],
     "legume": [
-      { "key": "planting", "label": "Sowing", "ar": "البذر", "ku": "تۆوچاندن" },
-      { "key": "germination", "label": "Germination", "ar": "الإنبات", "ku": "سەوزبوون" },
-      { "key": "seedling", "label": "Seedling", "ar": "الشتلة", "ku": "نەمام" },
-      { "key": "vegetative", "label": "Vegetative growth", "ar": "النمو الخضري", "ku": "گەشەی سەوزایی" },
-      { "key": "flowering", "label": "Flowering", "ar": "الإزهار", "ku": "گوڵکردن" },
-      { "key": "podding", "label": "Pod development", "ar": "تكوّن القرون", "ku": "دروستبوونی شەنە" },
-      { "key": "harvest", "label": "Harvest", "ar": "الحصاد", "ku": "بەرهەم" }
+      {
+        "key": "planting",
+        "label": "Sowing",
+        "ar": "البذر",
+        "ku": "تۆوچاندن"
+      },
+      {
+        "key": "germination",
+        "label": "Germination",
+        "ar": "الإنبات",
+        "ku": "سەوزبوون"
+      },
+      {
+        "key": "seedling",
+        "label": "Seedling",
+        "ar": "الشتلة",
+        "ku": "نەمام"
+      },
+      {
+        "key": "vegetative",
+        "label": "Vegetative growth",
+        "ar": "النمو الخضري",
+        "ku": "گەشەی سەوزایی"
+      },
+      {
+        "key": "flowering",
+        "label": "Flowering",
+        "ar": "الإزهار",
+        "ku": "گوڵکردن"
+      },
+      {
+        "key": "podding",
+        "label": "Pod development",
+        "ar": "تكوّن القرون",
+        "ku": "دروستبوونی شەنە"
+      },
+      {
+        "key": "harvest",
+        "label": "Harvest",
+        "ar": "الحصاد",
+        "ku": "بەرهەم"
+      }
     ],
     "herb-annual": [
-      { "key": "planting", "label": "Sowing", "ar": "البذر", "ku": "تۆوچاندن" },
-      { "key": "germination", "label": "Germination", "ar": "الإنبات", "ku": "سەوزبوون" },
-      { "key": "seedling", "label": "Seedling", "ar": "الشتلة", "ku": "نەمام" },
-      { "key": "leaf-growth", "label": "Leaf growth", "ar": "نمو الأوراق", "ku": "گەشەی گەڵا" },
-      { "key": "harvest", "label": "Harvest", "ar": "الحصاد", "ku": "بەرهەم" }
+      {
+        "key": "planting",
+        "label": "Sowing",
+        "ar": "البذر",
+        "ku": "تۆوچاندن"
+      },
+      {
+        "key": "germination",
+        "label": "Germination",
+        "ar": "الإنبات",
+        "ku": "سەوزبوون"
+      },
+      {
+        "key": "seedling",
+        "label": "Seedling",
+        "ar": "الشتلة",
+        "ku": "نەمام"
+      },
+      {
+        "key": "leaf-growth",
+        "label": "Leaf growth",
+        "ar": "نمو الأوراق",
+        "ku": "گەشەی گەڵا"
+      },
+      {
+        "key": "harvest",
+        "label": "Harvest",
+        "ar": "الحصاد",
+        "ku": "بەرهەم"
+      }
     ],
     "herb-perennial": [
-      { "key": "planting", "label": "Planting", "ar": "الزراعة", "ku": "چاندن" },
-      { "key": "establishment", "label": "Establishment", "ar": "التجذّر", "ku": "جێگیربوون" },
-      { "key": "vegetative", "label": "Vegetative growth", "ar": "النمو الخضري", "ku": "گەشەی سەوزایی" },
-      { "key": "harvest", "label": "Harvest", "ar": "الحصاد", "ku": "بەرهەم" }
+      {
+        "key": "planting",
+        "label": "Planting",
+        "ar": "الزراعة",
+        "ku": "چاندن"
+      },
+      {
+        "key": "establishment",
+        "label": "Establishment",
+        "ar": "التجذّر",
+        "ku": "جێگیربوون"
+      },
+      {
+        "key": "vegetative",
+        "label": "Vegetative growth",
+        "ar": "النمو الخضري",
+        "ku": "گەشەی سەوزایی"
+      },
+      {
+        "key": "harvest",
+        "label": "Harvest",
+        "ar": "الحصاد",
+        "ku": "بەرهەم"
+      }
     ],
     "fruit-tree": [
-      { "key": "planting", "label": "Planting", "ar": "الزراعة", "ku": "چاندن" },
-      { "key": "establishment", "label": "Establishment", "ar": "التجذّر", "ku": "جێگیربوون" },
-      { "key": "vegetative", "label": "Vegetative growth", "ar": "النمو الخضري", "ku": "گەشەی سەوزایی" },
-      { "key": "flowering", "label": "Flowering", "ar": "الإزهار", "ku": "گوڵکردن" },
-      { "key": "fruit-development", "label": "Fruit development", "ar": "تكوّن الثمار", "ku": "گەشەی بەرهەم" },
-      { "key": "harvest", "label": "Harvest", "ar": "الحصاد", "ku": "بەرهەم" }
+      {
+        "key": "planting",
+        "label": "Planting",
+        "ar": "الزراعة",
+        "ku": "چاندن"
+      },
+      {
+        "key": "establishment",
+        "label": "Establishment",
+        "ar": "التجذّر",
+        "ku": "جێگیربوون"
+      },
+      {
+        "key": "vegetative",
+        "label": "Vegetative growth",
+        "ar": "النمو الخضري",
+        "ku": "گەشەی سەوزایی"
+      },
+      {
+        "key": "flowering",
+        "label": "Flowering",
+        "ar": "الإزهار",
+        "ku": "گوڵکردن"
+      },
+      {
+        "key": "fruit-development",
+        "label": "Fruit development",
+        "ar": "تكوّن الثمار",
+        "ku": "گەشەی بەرهەم"
+      },
+      {
+        "key": "harvest",
+        "label": "Harvest",
+        "ar": "الحصاد",
+        "ku": "بەرهەم"
+      }
     ],
     "fruit-bush": [
-      { "key": "planting", "label": "Planting", "ar": "الزراعة", "ku": "چاندن" },
-      { "key": "establishment", "label": "Establishment", "ar": "التجذّر", "ku": "جێگیربوون" },
-      { "key": "flowering", "label": "Flowering", "ar": "الإزهار", "ku": "گوڵکردن" },
-      { "key": "fruiting", "label": "Fruiting", "ar": "الإثمار", "ku": "بەرهەمهێنان" },
-      { "key": "harvest", "label": "Harvest", "ar": "الحصاد", "ku": "بەرهەم" }
+      {
+        "key": "planting",
+        "label": "Planting",
+        "ar": "الزراعة",
+        "ku": "چاندن"
+      },
+      {
+        "key": "establishment",
+        "label": "Establishment",
+        "ar": "التجذّر",
+        "ku": "جێگیربوون"
+      },
+      {
+        "key": "flowering",
+        "label": "Flowering",
+        "ar": "الإزهار",
+        "ku": "گوڵکردن"
+      },
+      {
+        "key": "fruiting",
+        "label": "Fruiting",
+        "ar": "الإثمار",
+        "ku": "بەرهەمهێنان"
+      },
+      {
+        "key": "harvest",
+        "label": "Harvest",
+        "ar": "الحصاد",
+        "ku": "بەرهەم"
+      }
     ],
     "houseplant": [
-      { "key": "planting", "label": "Planting", "ar": "الزراعة", "ku": "چاندن" },
-      { "key": "establishment", "label": "Establishment", "ar": "التجذّر", "ku": "جێگیربوون" },
-      { "key": "vegetative", "label": "Vegetative growth", "ar": "النمو الخضري", "ku": "گەشەی سەوزایی" },
-      { "key": "mature", "label": "Mature", "ar": "نبات مكتمل", "ku": "پێگەیشتوو" }
+      {
+        "key": "planting",
+        "label": "Planting",
+        "ar": "الزراعة",
+        "ku": "چاندن"
+      },
+      {
+        "key": "establishment",
+        "label": "Establishment",
+        "ar": "التجذّر",
+        "ku": "جێگیربوون"
+      },
+      {
+        "key": "vegetative",
+        "label": "Vegetative growth",
+        "ar": "النمو الخضري",
+        "ku": "گەشەی سەوزایی"
+      },
+      {
+        "key": "mature",
+        "label": "Mature",
+        "ar": "نبات مكتمل",
+        "ku": "پێگەیشتوو"
+      }
     ]
   },
-
   "plants": [
     {
-      "id": "pl-tomato", "name": "Tomato", "slug": "tomato", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Solanum lycopersicum", "family": "Solanaceae",
-      "daysToHarvest": 70, "germinationDays": 7, "tempMin": 15, "tempMax": 29,
-      "soilPreferences": "Rich, well-drained loam", "soilPhMin": 6.0, "soilPhMax": 6.8,
-      "water": "high", "sun": "full", "difficulty": "medium", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "subtropical", "mediterranean", "continental"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring, after the last frost",
-      "harvestWindow": "60–85 days after transplanting", "seedAvailable": true, "stageTemplate": "annual-vegetable",
+      "id": "pl-tomato",
+      "name": "Tomato",
+      "slug": "tomato",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Solanum lycopersicum",
+      "family": "Solanaceae",
+      "daysToHarvest": 70,
+      "germinationDays": 7,
+      "tempMin": 15,
+      "tempMax": 29,
+      "soilPreferences": "Rich, well-drained loam",
+      "soilPhMin": 6,
+      "soilPhMax": 6.8,
+      "water": "high",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "subtropical",
+        "mediterranean",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring, after the last frost",
+      "harvestWindow": "60–85 days after transplanting",
+      "seedAvailable": true,
+      "stageTemplate": "annual-vegetable",
       "notes": "Needs 6+ hours of sun and steady watering. Pinch out side shoots for bigger fruit.",
       "i18n": {
-        "ar": { "name": "طماطم", "notes": "تحتاج ٦ ساعات شمس على الأقل وريًّا منتظمًا. اقتلع الأفرع الجانبية لثمار أكبر." },
-        "ku": { "name": "تەماتە", "notes": "پێویستی بە ٦ کاتژمێر خۆر و ئاوی ڕێکوپێک هەیە. لقە لاوەکییەکان لابە بۆ بەرهەمی گەورەتر." }
+        "ar": {
+          "name": "طماطم",
+          "notes": "تحتاج ٦ ساعات شمس على الأقل وريًّا منتظمًا. اقتلع الأفرع الجانبية لثمار أكبر."
+        },
+        "ku": {
+          "name": "تەماتە",
+          "notes": "پێویستی بە ٦ کاتژمێر خۆر و ئاوی ڕێکوپێک هەیە. لقە لاوەکییەکان لابە بۆ بەرهەمی گەورەتر.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
+          "alternatives": [
+            "تەماته"
+          ]
+        }
       },
-      "aliases": [["en", "Tomatoes"], ["ar", "طماطة"], ["ar", "بندورة"], ["ku", "تەماته"]],
+      "aliases": [
+        [
+          "en",
+          "Tomatoes"
+        ],
+        [
+          "ar",
+          "طماطة"
+        ],
+        [
+          "ar",
+          "بندورة"
+        ]
+      ],
       "varieties": [
-        { "name": "Cherry", "description": "Small, sweet fruit; heavy cropping in containers.", "growthDurationDays": 65 },
-        { "name": "Beefsteak", "description": "Large slicing fruit, needs staking.", "growthDurationDays": 85 },
-        { "name": "Roma", "description": "Plum-shaped, meaty; good for paste and drying.", "growthDurationDays": 75 }
+        {
+          "name": "Cherry",
+          "description": "Small, sweet fruit; heavy cropping in containers.",
+          "growthDurationDays": 65
+        },
+        {
+          "name": "Beefsteak",
+          "description": "Large slicing fruit, needs staking.",
+          "growthDurationDays": 85
+        },
+        {
+          "name": "Roma",
+          "description": "Plum-shaped, meaty; good for paste and drying.",
+          "growthDurationDays": 75
+        }
       ]
     },
     {
-      "id": "pl-lettuce", "name": "Lettuce", "slug": "lettuce", "category": "vegetables", "icon": "leafy",
-      "scientificName": "Lactuca sativa", "family": "Asteraceae",
-      "daysToHarvest": 45, "germinationDays": 7, "tempMin": 10, "tempMax": 22,
-      "soilPreferences": "Moist, fertile loam", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "continental", "subtropical"],
-      "plantingMonths": [3, 4, 5, 8, 9], "plantingSeason": "Spring and autumn",
-      "harvestWindow": "40–55 days after sowing", "seedAvailable": true, "stageTemplate": "leafy-annual",
+      "id": "pl-lettuce",
+      "name": "Lettuce",
+      "slug": "lettuce",
+      "category": "vegetables",
+      "icon": "leafy",
+      "scientificName": "Lactuca sativa",
+      "family": "Asteraceae",
+      "daysToHarvest": 45,
+      "germinationDays": 7,
+      "tempMin": 10,
+      "tempMax": 22,
+      "soilPreferences": "Moist, fertile loam",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "continental",
+        "subtropical"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5,
+        8,
+        9
+      ],
+      "plantingSeason": "Spring and autumn",
+      "harvestWindow": "40–55 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "leafy-annual",
       "notes": "Happy in partial shade — ideal for a balcony that only gets morning sun.",
       "i18n": {
-        "ar": { "name": "خس", "notes": "تنمو جيدًا في الظل الجزئي — مثالية لشرفة تصلها شمس الصباح فقط." },
-        "ku": { "name": "کاهوو", "notes": "لە سێبەری بەشیدا باش دەگەشێت — گونجاوە بۆ بەلکۆنێک کە تەنها خۆری بەیانیانی پێدەگات." }
+        "ar": {
+          "name": "خس",
+          "notes": "تنمو جيدًا في الظل الجزئي — مثالية لشرفة تصلها شمس الصباح فقط."
+        },
+        "ku": {
+          "name": "کاهوو",
+          "notes": "لە سێبەری بەشیدا باش دەگەشێت — گونجاوە بۆ بەلکۆنێک کە تەنها خۆری بەیانیانی پێدەگات.",
+          "nameStatus": "verified",
+          "nameSource": "sorani-wordlist"
+        }
       },
-      "aliases": [["en", "Salad"], ["ar", "خس بلدي"]]
+      "aliases": [
+        [
+          "en",
+          "Salad"
+        ],
+        [
+          "ar",
+          "خس بلدي"
+        ]
+      ]
     },
     {
-      "id": "pl-radish", "name": "Radish", "slug": "radish", "category": "vegetables", "icon": "root",
-      "scientificName": "Raphanus sativus", "family": "Brassicaceae",
-      "daysToHarvest": 25, "germinationDays": 4, "tempMin": 10, "tempMax": 20,
-      "soilPreferences": "Loose, stone-free soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [3, 4, 5, 8, 9], "plantingSeason": "Spring and autumn",
-      "harvestWindow": "22–30 days after sowing", "seedAvailable": true, "stageTemplate": "root-vegetable",
+      "id": "pl-radish",
+      "name": "Radish",
+      "slug": "radish",
+      "category": "vegetables",
+      "icon": "root",
+      "scientificName": "Raphanus sativus",
+      "family": "Brassicaceae",
+      "daysToHarvest": 25,
+      "germinationDays": 4,
+      "tempMin": 10,
+      "tempMax": 20,
+      "soilPreferences": "Loose, stone-free soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5,
+        8,
+        9
+      ],
+      "plantingSeason": "Spring and autumn",
+      "harvestWindow": "22–30 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "root-vegetable",
       "notes": "The fastest harvest here — ready in under a month, perfect for beginners.",
       "i18n": {
-        "ar": { "name": "فجل", "notes": "أسرع حصاد هنا — جاهز في أقل من شهر، مثالي للمبتدئين." },
-        "ku": { "name": "تورپ", "notes": "خێراترین بەرهەم لێرە — لە کەمتر لە مانگێکدا ئامادەیە، گونجاوە بۆ دەستپێکەران." }
+        "ar": {
+          "name": "فجل",
+          "notes": "أسرع حصاد هنا — جاهز في أقل من شهر، مثالي للمبتدئين."
+        },
+        "ku": {
+          "name": "تورپ",
+          "notes": "خێراترین بەرهەم لێرە — لە کەمتر لە مانگێکدا ئامادەیە، گونجاوە بۆ دەستپێکەران.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Sorani Wikipedia gives توور for radish; تورپ kept as the local form.",
+          "alternatives": [
+            "توور"
+          ]
+        }
       },
-      "aliases": [["en", "Radishes"], ["ar", "فجل أحمر"]]
+      "aliases": [
+        [
+          "en",
+          "Radishes"
+        ],
+        [
+          "ar",
+          "فجل أحمر"
+        ]
+      ]
     },
     {
-      "id": "pl-spinach", "name": "Spinach", "slug": "spinach", "category": "vegetables", "icon": "leafy",
-      "scientificName": "Spinacia oleracea", "family": "Amaranthaceae",
-      "daysToHarvest": 40, "germinationDays": 8, "tempMin": 10, "tempMax": 20,
-      "soilPreferences": "Rich, moisture-retentive soil", "soilPhMin": 6.5, "soilPhMax": 7.5,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "continental"],
-      "plantingMonths": [3, 4, 9, 10], "plantingSeason": "Cool spring and autumn",
-      "harvestWindow": "35–50 days after sowing", "seedAvailable": true, "stageTemplate": "leafy-annual",
+      "id": "pl-spinach",
+      "name": "Spinach",
+      "slug": "spinach",
+      "category": "vegetables",
+      "icon": "leafy",
+      "scientificName": "Spinacia oleracea",
+      "family": "Amaranthaceae",
+      "daysToHarvest": 40,
+      "germinationDays": 8,
+      "tempMin": 10,
+      "tempMax": 20,
+      "soilPreferences": "Rich, moisture-retentive soil",
+      "soilPhMin": 6.5,
+      "soilPhMax": 7.5,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        9,
+        10
+      ],
+      "plantingSeason": "Cool spring and autumn",
+      "harvestWindow": "35–50 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "leafy-annual",
       "notes": "A cool-season crop — it bolts and turns bitter once the heat arrives.",
       "i18n": {
-        "ar": { "name": "سبانخ", "notes": "محصول موسم بارد — يزهر ويصبح مرًّا عند قدوم الحرارة." },
-        "ku": { "name": "ئیسپاناخ", "notes": "بەرهەمی وەرزی ساردە — کاتێک گەرمی دێت گوڵ دەکات و تاڵ دەبێت." }
+        "ar": {
+          "name": "سبانخ",
+          "notes": "محصول موسم بارد — يزهر ويصبح مرًّا عند قدوم الحرارة."
+        },
+        "ku": {
+          "name": "سپێناخ",
+          "notes": "بەرهەمی وەرزی ساردە — کاتێک گەرمی دێت گوڵ دەکات و تاڵ دەبێت.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
+          "alternatives": [
+            "ئیسپاناخ",
+            "سپێناغ"
+          ]
+        }
       },
-      "aliases": [["en", "Baby spinach"]]
+      "aliases": [
+        [
+          "en",
+          "Baby spinach"
+        ]
+      ]
     },
     {
-      "id": "pl-cucumber", "name": "Cucumber", "slug": "cucumber", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Cucumis sativus", "family": "Cucurbitaceae",
-      "daysToHarvest": 60, "germinationDays": 6, "tempMin": 18, "tempMax": 32,
-      "soilPreferences": "Fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "high", "sun": "full", "difficulty": "medium", "indoor": true, "outdoor": true,
-      "climates": ["subtropical", "temperate", "mediterranean"],
-      "plantingMonths": [4, 5, 6], "plantingSeason": "Late spring into summer",
-      "harvestWindow": "55–70 days after sowing", "seedAvailable": true, "stageTemplate": "annual-vegetable",
+      "id": "pl-cucumber",
+      "name": "Cucumber",
+      "slug": "cucumber",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Cucumis sativus",
+      "family": "Cucurbitaceae",
+      "daysToHarvest": 60,
+      "germinationDays": 6,
+      "tempMin": 18,
+      "tempMax": 32,
+      "soilPreferences": "Fertile, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "high",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "subtropical",
+        "temperate",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        4,
+        5,
+        6
+      ],
+      "plantingSeason": "Late spring into summer",
+      "harvestWindow": "55–70 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "annual-vegetable",
       "notes": "Trained up a trellis it takes almost no floor space on a balcony.",
       "i18n": {
-        "ar": { "name": "خيار", "notes": "عند توجيهه على دعامة لا يستهلك تقريبًا أي مساحة أرضية على الشرفة." },
-        "ku": { "name": "خەیار", "notes": "کاتێک بە دارەوە بەرز دەکرێتەوە، بە نزیکەیی هیچ شوێنی زەوی داگیر ناکات لە بەلکۆن." }
+        "ar": {
+          "name": "خيار",
+          "notes": "عند توجيهه على دعامة لا يستهلك تقريبًا أي مساحة أرضية على الشرفة."
+        },
+        "ku": {
+          "name": "خەیار",
+          "notes": "کاتێک بە دارەوە بەرز دەکرێتەوە، بە نزیکەیی هیچ شوێنی زەوی داگیر ناکات لە بەلکۆن.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
       },
-      "aliases": [["en", "Cucumbers"], ["ar", "خيار بلدي"]],
+      "aliases": [
+        [
+          "en",
+          "Cucumbers"
+        ],
+        [
+          "ar",
+          "خيار بلدي"
+        ]
+      ],
       "varieties": [
-        { "name": "Beit Alpha", "description": "Middle-Eastern mini cucumber, thin skin, crunchy.", "growthDurationDays": 55 },
-        { "name": "English", "description": "Long, seedless; needs trellising and steady water.", "growthDurationDays": 65 }
+        {
+          "name": "Beit Alpha",
+          "description": "Middle-Eastern mini cucumber, thin skin, crunchy.",
+          "growthDurationDays": 55
+        },
+        {
+          "name": "English",
+          "description": "Long, seedless; needs trellising and steady water.",
+          "growthDurationDays": 65
+        }
       ]
     },
     {
-      "id": "pl-bell-pepper", "name": "Bell Pepper", "slug": "bell-pepper", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Capsicum annuum", "family": "Solanaceae",
-      "daysToHarvest": 90, "germinationDays": 12, "tempMin": 18, "tempMax": 30,
-      "soilPreferences": "Rich, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 6.8,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": true, "outdoor": true,
-      "climates": ["subtropical", "mediterranean", "temperate"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring, after frost",
-      "harvestWindow": "80–100 days after sowing", "seedAvailable": true, "stageTemplate": "annual-vegetable",
+      "id": "pl-bell-pepper",
+      "name": "Bell Pepper",
+      "slug": "bell-pepper",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Capsicum annuum Grossum Group",
+      "family": "Solanaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 12,
+      "tempMin": 18,
+      "tempMax": 30,
+      "soilPreferences": "Rich, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 6.8,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "subtropical",
+        "mediterranean",
+        "temperate"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring, after frost",
+      "harvestWindow": "80–100 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "annual-vegetable",
       "notes": "Slow to start but keeps fruiting for months once it gets going.",
       "i18n": {
-        "ar": { "name": "فلفل حلو", "notes": "يبدأ ببطء لكنه يظل مثمرًا لأشهر بمجرد أن ينطلق." },
-        "ku": { "name": "بیبەری شیرین", "notes": "بە هێواشی دەست پێدەکات، بەڵام کاتێک دەست پێکرد بۆ مانگەکان بەردەوام بەرهەم دەدات." }
+        "ar": {
+          "name": "فلفل حلو",
+          "notes": "يبدأ ببطء لكنه يظل مثمرًا لأشهر بمجرد أن ينطلق."
+        },
+        "ku": {
+          "name": "بیبەری شیرین",
+          "notes": "بە هێواشی دەست پێدەکات، بەڵام کاتێک دەست پێکرد بۆ مانگەکان بەردەوام بەرهەم دەدات.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "A phrase (sweet pepper), not a fixed name. No lexical source found.",
+          "alternatives": [
+            "بیبەر"
+          ]
+        }
       },
-      "aliases": [["en", "Sweet pepper"], ["en", "Capsicum"], ["ar", "فلفل رومي"], ["ku", "بیبەر"]]
-    },
-    {
-      "id": "pl-carrot", "name": "Carrot", "slug": "carrot", "category": "vegetables", "icon": "root",
-      "scientificName": "Daucus carota", "family": "Apiaceae",
-      "daysToHarvest": 75, "germinationDays": 12, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Deep, loose, stone-free soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "easy", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [3, 4, 5, 6], "plantingSeason": "Spring to early summer",
-      "harvestWindow": "70–80 days after sowing", "seedAvailable": true, "stageTemplate": "root-vegetable",
-      "notes": "Wants a deep container — at least 25 cm of loose soil, no stones.",
-      "i18n": {
-        "ar": { "name": "جزر", "notes": "يحتاج وعاءً عميقًا — ٢٥ سم على الأقل من تراب رخو بلا حجارة." },
-        "ku": { "name": "گێزەر", "notes": "قاپێکی قووڵ دەوێت — بە لایەنی کەم ٢٥ سم خاکی نەرم بەبێ بەرد." }
-      },
-      "aliases": [["en", "Carrots"]]
-    },
-    {
-      "id": "pl-zucchini", "name": "Zucchini", "slug": "zucchini", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Cucurbita pepo", "family": "Cucurbitaceae",
-      "daysToHarvest": 55, "germinationDays": 6, "tempMin": 18, "tempMax": 30,
-      "soilPreferences": "Rich, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "high", "sun": "full", "difficulty": "easy", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "subtropical"],
-      "plantingMonths": [4, 5, 6], "plantingSeason": "Late spring into summer",
-      "harvestWindow": "50–65 days after sowing", "seedAvailable": true, "stageTemplate": "annual-vegetable",
-      "notes": "Very generous — one plant can out-produce a whole household.",
-      "i18n": {
-        "ar": { "name": "كوسا", "notes": "سخية جدًا — نبتة واحدة قد تفي احتياج منزل كامل." },
-        "ku": { "name": "کەلەک", "notes": "زۆر بەرهەمدارە — یەک ڕووەک دەتوانێت پێداویستی ماڵێکی تەواو دابین بکات." }
-      },
-      "aliases": [["en", "Courgette"], ["en", "Zucchini squash"], ["ar", "كوسة"], ["ku", "کۆسا"]]
-    },
-    {
-      "id": "pl-spring-onion", "name": "Spring Onion", "slug": "spring-onion", "category": "vegetables", "icon": "root",
-      "scientificName": "Allium fistulosum", "family": "Amaryllidaceae",
-      "daysToHarvest": 60, "germinationDays": 10, "tempMin": 13, "tempMax": 28,
-      "soilPreferences": "Loose, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "subtropical", "continental"],
-      "plantingMonths": [], "plantingSeason": "Any mild season", "harvestWindow": "55–70 days after sowing",
-      "seedAvailable": true, "stageTemplate": "root-vegetable",
-      "notes": "You can regrow the white ends in a glass of water — no soil needed.",
-      "i18n": {
-        "ar": { "name": "بصل أخضر", "notes": "يمكنك إعادة إنماء الأطراف البيضاء في كوب ماء — دون حاجة إلى تراب." },
-        "ku": { "name": "پیازی سەوز", "notes": "دەتوانیت سەرە سپییەکان لە پەرداخێک ئاودا دووبارە بڕوێنیت — بێ خاک." }
-      },
-      "aliases": [["en", "Green onion"], ["en", "Scallion"], ["ar", "بصل أخضر بلدي"]]
-    },
-    {
-      "id": "pl-pea", "name": "Pea", "slug": "pea", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Pisum sativum", "family": "Fabaceae",
-      "daysToHarvest": 65, "germinationDays": 10, "tempMin": 10, "tempMax": 20,
-      "soilPreferences": "Well-drained, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "continental"],
-      "plantingMonths": [3, 4, 10], "plantingSeason": "Cool spring or autumn",
-      "harvestWindow": "60–75 days after sowing", "seedAvailable": true, "stageTemplate": "legume",
-      "notes": "Sow in cool weather; it fixes nitrogen and improves the soil for next year.",
-      "i18n": {
-        "ar": { "name": "بازلاء", "notes": "ازرعها في الجو البارد؛ تثبّت النيتروجين وتحسّن التربة للعام القادم." },
-        "ku": { "name": "باقڵا", "notes": "لە کەشوهەوای سارددا بیانچێنە؛ نایترۆجین جێگیر دەکەن و خاک بۆ ساڵی داهاتوو باشتر دەکەن." }
-      },
-      "aliases": [["en", "Garden pea"], ["en", "Peas"]]
-    },
-    {
-      "id": "pl-pumpkin", "name": "Pumpkin", "slug": "pumpkin", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Cucurbita maxima", "family": "Cucurbitaceae",
-      "daysToHarvest": 100, "germinationDays": 7, "tempMin": 18, "tempMax": 32,
-      "soilPreferences": "Rich, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "high", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "subtropical", "continental"],
-      "plantingMonths": [4, 5], "plantingSeason": "Late spring", "harvestWindow": "95–120 days after sowing",
-      "seedAvailable": true, "stageTemplate": "annual-vegetable",
-      "notes": "Needs room to sprawl — better on a roof or garden than a small balcony.",
-      "i18n": {
-        "ar": { "name": "قرع", "notes": "يحتاج مساحة للانتشار — أفضل على سطح أو حديقة من شرفة صغيرة." },
-        "ku": { "name": "کەدوو", "notes": "شوێنی فراوان دەوێت بۆ بڵاوبوونەوە — باشترە لە سەربان یان باخچە تا بەلکۆنێکی بچووک." }
-      },
-      "aliases": [["en", "Pumpkins"], ["ar", "يقطين"], ["ku", "کادوو"]]
-    },
-    {
-      "id": "pl-basil", "name": "Basil", "slug": "basil", "category": "herbs", "icon": "herb",
-      "scientificName": "Ocimum basilicum", "family": "Lamiaceae",
-      "daysToHarvest": 60, "germinationDays": 8, "tempMin": 18, "tempMax": 30,
-      "soilPreferences": "Light, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["subtropical", "mediterranean", "temperate", "tropical"],
-      "plantingMonths": [4, 5, 6], "plantingSeason": "Late spring into summer",
-      "harvestWindow": "55–70 days after sowing", "seedAvailable": true, "stageTemplate": "herb-annual",
-      "notes": "Loves heat and a sunny windowsill. Pinch the tips or it will go to flower.",
-      "i18n": {
-        "ar": { "name": "ريحان", "notes": "يحب الحرارة وحافة نافذة مشمسة. اقطع القمم وإلا أزهر." },
-        "ku": { "name": "ڕەیحان", "notes": "گەرمی و پەنجەرەی خۆرهەڵات دەوێت. سەرەکانی ببڕە ئەگینا گوڵ دەکات." }
-      },
-      "aliases": [["en", "Sweet basil"], ["ar", "حبق"], ["ar", "ريحان أخضر"]]
-    },
-    {
-      "id": "pl-mint", "name": "Mint", "slug": "mint", "category": "herbs", "icon": "herb",
-      "scientificName": "Mentha spicata", "family": "Lamiaceae",
-      "daysToHarvest": 60, "germinationDays": 12, "tempMin": 15, "tempMax": 28,
-      "soilPreferences": "Moist, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "high", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "subtropical", "continental", "tropical"],
-      "plantingMonths": [3, 4, 5, 6], "plantingSeason": "Spring", "harvestWindow": "Continuous once established",
-      "seedAvailable": false, "stageTemplate": "herb-perennial",
-      "notes": "Almost unkillable, but keep it in its own pot — it takes over everything.",
-      "i18n": {
-        "ar": { "name": "نعناع", "notes": "يكاد لا يموت، لكن ضعه في وعاء منفصل — فهو يزحف على كل شيء." },
-        "ku": { "name": "نەعناع", "notes": "بە سەختی دەمرێت، بەڵام لە قاپێکی جیادا بیپارێزە — هەموو شتێک داگیر دەکات." }
-      },
-      "aliases": [["en", "Spearmint"], ["ar", "نعنع"]]
-    },
-    {
-      "id": "pl-parsley", "name": "Parsley", "slug": "parsley", "category": "herbs", "icon": "herb",
-      "scientificName": "Petroselinum crispum", "family": "Apiaceae",
-      "daysToHarvest": 75, "germinationDays": 21, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Moist, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "continental"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "70–90 days after sowing",
-      "seedAvailable": true, "stageTemplate": "herb-annual",
-      "notes": "Slow to germinate — be patient, then it keeps producing for a year.",
-      "i18n": {
-        "ar": { "name": "بقدونس", "notes": "يتأخر في الإنبات — تحلَّ بالصبر، ثم يظل يعطي لعام كامل." },
-        "ku": { "name": "مەعدەنۆس", "notes": "درەنگ سەوز دەبێت — ئارام بە، پاشان بۆ ساڵێک بەردەوام بەرهەم دەدات." }
-      },
-      "aliases": [["ar", "معدنوس"]]
-    },
-    {
-      "id": "pl-coriander", "name": "Coriander", "slug": "coriander", "category": "herbs", "icon": "herb",
-      "scientificName": "Coriandrum sativum", "family": "Apiaceae",
-      "daysToHarvest": 50, "germinationDays": 10, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Light, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "subtropical", "continental"],
-      "plantingMonths": [3, 4, 5, 9], "plantingSeason": "Spring and early autumn",
-      "harvestWindow": "45–60 days after sowing", "seedAvailable": true, "stageTemplate": "herb-annual",
-      "notes": "Sow little and often — it runs to seed quickly in heat.",
-      "i18n": {
-        "ar": { "name": "كزبرة", "notes": "ازرع كميات صغيرة ومتكررة — فهي تزهر سريعًا في الحرارة." },
-        "ku": { "name": "کەشنیز", "notes": "کەم و بەردەوام بیانچێنە — لە گەرمیدا زوو گوڵ دەکات." }
-      },
-      "aliases": [["en", "Cilantro"], ["ar", "كسبرة"], ["ar", "كزبرة خضراء"]]
-    },
-    {
-      "id": "pl-rosemary", "name": "Rosemary", "slug": "rosemary", "category": "herbs", "icon": "herb",
-      "scientificName": "Salvia rosmarinus", "family": "Lamiaceae",
-      "daysToHarvest": 120, "germinationDays": 21, "tempMin": 15, "tempMax": 30,
-      "soilPreferences": "Gritty, sharply drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "low", "sun": "full", "difficulty": "medium", "indoor": true, "outdoor": true,
-      "climates": ["mediterranean", "subtropical", "temperate", "arid"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "Continuous once established",
-      "seedAvailable": true, "stageTemplate": "herb-perennial",
-      "notes": "A woody perennial that hates wet roots — let the soil dry out between waterings.",
-      "i18n": {
-        "ar": { "name": "إكليل الجبل", "notes": "نبتة خشبية معمرة تكره الرطوبة — اترك التربة تجف بين الريات." },
-        "ku": { "name": "ڕۆزماری", "notes": "ڕووەکێکی دارینەی هەمیشەییە و ڕقی لە شێیەتی — ڕێگە بدە خاک لە نێوان ئاودانەکاندا وشک بێت." }
-      },
-      "aliases": [["ar", "روزماري"], ["ar", "حصالبان"]]
-    },
-    {
-      "id": "pl-thyme", "name": "Thyme", "slug": "thyme", "category": "herbs", "icon": "herb",
-      "scientificName": "Thymus vulgaris", "family": "Lamiaceae",
-      "daysToHarvest": 90, "germinationDays": 14, "tempMin": 15, "tempMax": 28,
-      "soilPreferences": "Poor, gritty, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 8.0,
-      "water": "low", "sun": "full", "difficulty": "medium", "indoor": true, "outdoor": true,
-      "climates": ["mediterranean", "temperate", "arid", "subtropical"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "Continuous once established",
-      "seedAvailable": true, "stageTemplate": "herb-perennial",
-      "notes": "Thrives on neglect and poor, gritty soil. Overwatering is the usual killer.",
-      "i18n": {
-        "ar": { "name": "زعتر", "notes": "ينمو جيدًا بالإهمال وفي تربة فقيرة رملية. الإفراط في الري هو القاتل المعتاد." },
-        "ku": { "name": "زەعتەر", "notes": "بە پشتگوێخستن و خاکی هەژار و لمی باش دەگەشێت. زۆر ئاودان زۆرجار دەیکوژێت." }
-      },
-      "aliases": [["ar", "جعتر"]]
-    },
-    {
-      "id": "pl-chives", "name": "Chives", "slug": "chives", "category": "herbs", "icon": "herb",
-      "scientificName": "Allium schoenoprasum", "family": "Amaryllidaceae",
-      "daysToHarvest": 60, "germinationDays": 14, "tempMin": 13, "tempMax": 24,
-      "soilPreferences": "Moist, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "55–70 days after sowing",
-      "seedAvailable": true, "stageTemplate": "herb-perennial",
-      "notes": "Cut it and it comes straight back — a reliable windowsill herb.",
-      "i18n": {
-        "ar": { "name": "ثوم معمر", "notes": "اقطعه فيعود فورًا — عشبة موثوقة لحافة النافذة." },
-        "ku": { "name": "پیازچە", "notes": "بیبڕە و یەکسەر دەگەڕێتەوە — ڕووەکێکی دڵنیاکەرەوەیە بۆ پەنجەرە." }
-      },
-      "aliases": [["en", "Chive"]]
-    },
-    {
-      "id": "pl-dill", "name": "Dill", "slug": "dill", "category": "herbs", "icon": "herb",
-      "scientificName": "Anethum graveolens", "family": "Apiaceae",
-      "daysToHarvest": 45, "germinationDays": 10, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Light, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "continental"],
-      "plantingMonths": [3, 4, 5, 6], "plantingSeason": "Spring to early summer",
-      "harvestWindow": "40–55 days after sowing", "seedAvailable": true, "stageTemplate": "herb-annual",
-      "notes": "Feathery and quick. Sow directly — it dislikes being moved.",
-      "i18n": {
-        "ar": { "name": "شبت", "notes": "سريع النمو. ازرعه مباشرة — فهو لا يحب النقل." },
-        "ku": { "name": "شەبەت", "notes": "خێرایە. ڕاستەوخۆ بیانچێنە — حەزی لە گواستنەوە نییە." }
-      },
-      "aliases": [["ar", "شبنت"]]
-    },
-    {
-      "id": "pl-lemon-tree", "name": "Lemon Tree", "slug": "lemon-tree", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Citrus limon", "family": "Rutaceae",
-      "daysToHarvest": 1095, "germinationDays": 21, "tempMin": 15, "tempMax": 30,
-      "soilPreferences": "Well-drained, slightly acidic soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "hard", "indoor": true, "outdoor": true,
-      "climates": ["mediterranean", "subtropical", "tropical"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "3+ years, then winter fruiting",
-      "seedAvailable": true, "stageTemplate": "fruit-tree",
-      "notes": "A long commitment — years before the first fruit, but it lives for decades.",
-      "i18n": {
-        "ar": { "name": "ليمون", "notes": "التزام طويل — سنوات قبل أول ثمرة، لكنه يعيش عقودًا." },
-        "ku": { "name": "لیمۆ", "notes": "پابەندبوونێکی درێژخایەنە — چەند ساڵێک پێش یەکەم بەرهەم، بەڵام دەیان ساڵ دەژیت." }
-      },
-      "aliases": [["en", "Lemon"], ["en", "Lemon tree"]]
-    },
-    {
-      "id": "pl-orange-tree", "name": "Orange Tree", "slug": "orange-tree", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Citrus sinensis", "family": "Rutaceae",
-      "daysToHarvest": 1095, "germinationDays": 21, "tempMin": 15, "tempMax": 32,
-      "soilPreferences": "Well-drained, slightly acidic soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "hard", "indoor": true, "outdoor": true,
-      "climates": ["subtropical", "mediterranean", "tropical"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "3+ years, then winter fruiting",
-      "seedAvailable": true, "stageTemplate": "fruit-tree",
-      "notes": "Grown from seed it can take years and may never fruit — a grafted sapling is surer.",
-      "i18n": {
-        "ar": { "name": "برتقال", "notes": "من البذرة قد يستغرق سنوات وربما لا يثمر — الشتلة المطعّمة أكثر ضمانًا." },
-        "ku": { "name": "پرتەقاڵ", "notes": "لە تۆوەوە چەند ساڵێک دەخایەنێت و ڕەنگە هەرگیز بەرهەم نەدات — نەمامی پێوەنراو دڵنیاترە." }
-      },
-      "aliases": [["en", "Orange"], ["ar", "برتقان"]]
-    },
-    {
-      "id": "pl-fig", "name": "Fig", "slug": "fig", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Ficus carica", "family": "Moraceae",
-      "daysToHarvest": 730, "germinationDays": 21, "tempMin": 15, "tempMax": 32,
-      "soilPreferences": "Tolerates poor, dry, alkaline soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "low", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["mediterranean", "subtropical", "temperate"],
-      "plantingMonths": [3, 4], "plantingSeason": "Early spring", "harvestWindow": "2+ years, then late summer",
-      "seedAvailable": false, "stageTemplate": "fruit-tree",
-      "notes": "Tolerates a large pot and dry summers better than most fruit trees.",
-      "i18n": {
-        "ar": { "name": "تين", "notes": "يتحمل الأصص الكبيرة والصيف الجاف أفضل من معظم أشجار الفاكهة." },
-        "ku": { "name": "هەنجیر", "notes": "لە قاپی گەورە و هاوینی وشکدا باشتر لە زۆربەی دارەوەی بەرهەمەکان خۆڕاگرە." }
-      },
-      "aliases": [["en", "Fig tree"]]
-    },
-    {
-      "id": "pl-olive", "name": "Olive", "slug": "olive", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Olea europaea", "family": "Oleaceae",
-      "daysToHarvest": 1460, "germinationDays": 30, "tempMin": 15, "tempMax": 32,
-      "soilPreferences": "Light, stony, well-drained soil", "soilPhMin": 6.5, "soilPhMax": 8.0,
-      "water": "low", "sun": "full", "difficulty": "hard", "indoor": true, "outdoor": true,
-      "climates": ["mediterranean", "subtropical", "arid"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "4+ years, then autumn",
-      "seedAvailable": false, "stageTemplate": "fruit-tree",
-      "notes": "Loves long dry summers. Slow, but extremely long-lived and drought-proof.",
-      "i18n": {
-        "ar": { "name": "زيتون", "notes": "يحب الصيف الطويل الجاف. بطيء النمو لكنه معمر جدًا ومقاوم للجفاف." },
-        "ku": { "name": "زەیتوون", "notes": "هاوینی درێژ و وشکی خۆش دەوێت. هێواشە، بەڵام زۆر درێژعومر و بەرگەی وشکەساڵی دەگرێت." }
-      },
-      "aliases": [["en", "Olive tree"]]
-    },
-    {
-      "id": "pl-pomegranate", "name": "Pomegranate", "slug": "pomegranate", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Punica granatum", "family": "Lythraceae",
-      "daysToHarvest": 1095, "germinationDays": 21, "tempMin": 15, "tempMax": 32,
-      "soilPreferences": "Tolerant of poor, alkaline soil", "soilPhMin": 5.5, "soilPhMax": 7.0,
-      "water": "low", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["mediterranean", "subtropical", "arid", "continental"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "3+ years, then autumn",
-      "seedAvailable": true, "stageTemplate": "fruit-tree",
-      "notes": "Handles heat and drought well, and fruits in a large container.",
-      "i18n": {
-        "ar": { "name": "رمان", "notes": "يتحمل الحرارة والجفاف جيدًا، ويثمر في وعاء كبير." },
-        "ku": { "name": "هەنار", "notes": "بەرگەی گەرمی و وشکەساڵی باش دەگرێت، و لە قاپی گەورەدا بەرهەم دەدات." }
-      },
-      "aliases": [["en", "Pomegranate tree"]]
-    },
-    {
-      "id": "pl-strawberry", "name": "Strawberry", "slug": "strawberry", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Fragaria ananassa", "family": "Rosaceae",
-      "daysToHarvest": 120, "germinationDays": 21, "tempMin": 15, "tempMax": 26,
-      "soilPreferences": "Rich, well-drained, slightly acidic soil", "soilPhMin": 5.5, "soilPhMax": 6.5,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "continental", "subtropical"],
-      "plantingMonths": [3, 4, 9], "plantingSeason": "Spring or early autumn",
-      "harvestWindow": "100–140 days, then fruiting season", "seedAvailable": false, "stageTemplate": "fruit-bush",
-      "notes": "A fruit you can actually harvest in one season — good in a hanging basket.",
-      "i18n": {
-        "ar": { "name": "فراولة", "notes": "فاكهة يمكن حصادها في موسم واحد — جيدة في سلة معلقة." },
-        "ku": { "name": "فڕاوەڵە", "notes": "بەرهەمێک کە دەتوانیت لە یەک وەرزدا کۆی بکەیتەوە — باشە لە سەبەتەی هەڵواسراو." }
-      },
-      "aliases": [["en", "Strawberries"]]
-    },
-    {
-      "id": "pl-pothos", "name": "Pothos", "slug": "pothos", "category": "houseplants", "icon": "pot",
-      "scientificName": "Epipremnum aureum", "family": "Araceae",
-      "daysToHarvest": 90, "germinationDays": 14, "tempMin": 18, "tempMax": 28,
-      "soilPreferences": "Any well-drained potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "low", "sun": "shade", "difficulty": "easy", "indoor": true, "outdoor": false,
-      "climates": ["tropical", "subtropical"],
-      "plantingMonths": [], "plantingSeason": "Any (indoor)", "harvestWindow": "Continuous foliage growth",
-      "seedAvailable": false, "stageTemplate": "houseplant",
-      "notes": "Forgiving of low light and missed waterings — the classic first houseplant.",
-      "i18n": {
-        "ar": { "name": "بوتوس", "notes": "يتحمل الإضاءة المنخفضة ونسيان الري — النبتة المنزلية الأولى الكلاسيكية." },
-        "ku": { "name": "پۆتۆس", "notes": "بەرگەی ڕووناکی کەم و لەبیرکردنی ئاودان دەگرێت — یەکەم ڕووەکی ماڵی کلاسیک." }
-      },
-      "aliases": [["en", "Devil's ivy"], ["en", "Golden pothos"]]
-    },
-    {
-      "id": "pl-snake-plant", "name": "Snake Plant", "slug": "snake-plant", "category": "houseplants", "icon": "pot",
-      "scientificName": "Dracaena trifasciata", "family": "Asparagaceae",
-      "daysToHarvest": 120, "germinationDays": 21, "tempMin": 15, "tempMax": 30,
-      "soilPreferences": "Free-draining, sandy potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "low", "sun": "shade", "difficulty": "easy", "indoor": true, "outdoor": false,
-      "climates": ["arid", "tropical", "subtropical"],
-      "plantingMonths": [], "plantingSeason": "Any (indoor)", "harvestWindow": "Continuous foliage growth",
-      "seedAvailable": false, "stageTemplate": "houseplant",
-      "notes": "Water it monthly at most — overwatering is the only way to kill it.",
-      "i18n": {
-        "ar": { "name": "نبتة الأفعى", "notes": "اسقِها شهريًا على الأكثر — الإفراط في الري هو الطريقة الوحيدة لقتلها." },
-        "ku": { "name": "ڕووەکی مار", "notes": "لانیزۆر مانگانە ئاوی بدە — زۆر ئاودان تاکە ڕێگەیە بۆ کوشتنی." }
-      },
-      "aliases": [["en", "Sansevieria"], ["ar", "ثعبان"], ["ku", "ثیران"]]
-    },
-    {
-      "id": "pl-spider-plant", "name": "Spider Plant", "slug": "spider-plant", "category": "houseplants", "icon": "pot",
-      "scientificName": "Chlorophytum comosum", "family": "Asparagaceae",
-      "daysToHarvest": 90, "germinationDays": 14, "tempMin": 15, "tempMax": 26,
-      "soilPreferences": "Any well-drained potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": false,
-      "climates": ["tropical", "subtropical", "temperate"],
-      "plantingMonths": [], "plantingSeason": "Any (indoor)", "harvestWindow": "Continuous foliage growth",
-      "seedAvailable": false, "stageTemplate": "houseplant",
-      "notes": "Throws out baby plantlets you can pot up and share.",
-      "i18n": {
-        "ar": { "name": "نبتة العنكبوت", "notes": "تنتج نبتات صغيرة يمكن زرعها ومشاركتها." },
-        "ku": { "name": "ڕووەکی جاڵجاڵۆکە", "notes": "ڕووەکی بچووک دەردەکات کە دەتوانیت بیانچێنیت و بەش بکەیت." }
-      },
-      "aliases": [["en", "Airplane plant"]]
-    },
-    {
-      "id": "pl-aloe-vera", "name": "Aloe Vera", "slug": "aloe-vera", "category": "houseplants", "icon": "pot",
-      "scientificName": "Aloe vera", "family": "Asphodelaceae",
-      "daysToHarvest": 180, "germinationDays": 21, "tempMin": 13, "tempMax": 27,
-      "soilPreferences": "Sandy, very free-draining mix", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "low", "sun": "full", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["arid", "mediterranean", "subtropical", "tropical"],
-      "plantingMonths": [], "plantingSeason": "Any (indoor)", "harvestWindow": "Continuous once established",
-      "seedAvailable": false, "stageTemplate": "houseplant",
-      "notes": "Wants sun and very free-draining soil. The gel inside soothes burns.",
-      "i18n": {
-        "ar": { "name": "ألوفيرا", "notes": "تحب الشمس والتربة جيدة التصريف. الجل بداخلها يهدئ الحروق." },
-        "ku": { "name": "ئەلۆی ڤێرا", "notes": "خۆر و خاکی زۆر بەئاسانی ئاوڕێژ دەوێت. جەلەکەی ناوی سووتان ئارام دەکاتەوە." }
-      },
-      "aliases": [["en", "Aloe"], ["ar", "صبار"]]
-    },
-    {
-      "id": "pl-zz-plant", "name": "ZZ Plant", "slug": "zz-plant", "category": "houseplants", "icon": "pot",
-      "scientificName": "Zamioculcas zamiifolia", "family": "Araceae",
-      "daysToHarvest": 120, "germinationDays": 21, "tempMin": 18, "tempMax": 26,
-      "soilPreferences": "Any well-drained potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "low", "sun": "shade", "difficulty": "easy", "indoor": true, "outdoor": false,
-      "climates": ["tropical", "subtropical"],
-      "plantingMonths": [], "plantingSeason": "Any (indoor)", "harvestWindow": "Continuous foliage growth",
-      "seedAvailable": false, "stageTemplate": "houseplant",
-      "notes": "Handles a dark corner and forgetful watering better than anything else.",
-      "i18n": {
-        "ar": { "name": "نبتة زد زد", "notes": "تتحمل الزوايا المعتمة ونسيان الري أفضل من أي نبتة أخرى." },
-        "ku": { "name": "ڕووەکی ZZ", "notes": "لە گۆشەی تاریک و لەبیرکردنی ئاودان باشتر لە هەموو ڕووەکێکی تر خۆڕاگرە." }
-      },
-      "aliases": [["en", "Zanzibar gem"]]
-    },
-    {
-      "id": "pl-peace-lily", "name": "Peace Lily", "slug": "peace-lily", "category": "houseplants", "icon": "pot",
-      "scientificName": "Spathiphyllum wallisii", "family": "Araceae",
-      "daysToHarvest": 90, "germinationDays": 21, "tempMin": 18, "tempMax": 27,
-      "soilPreferences": "Rich, moisture-retentive potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "high", "sun": "shade", "difficulty": "medium", "indoor": true, "outdoor": false,
-      "climates": ["tropical", "subtropical"],
-      "plantingMonths": [], "plantingSeason": "Any (indoor)", "harvestWindow": "Continuous foliage growth",
-      "seedAvailable": false, "stageTemplate": "houseplant",
-      "notes": "Droops dramatically when thirsty, then recovers within hours of watering.",
-      "i18n": {
-        "ar": { "name": "زنبق السلام", "notes": "تذبل بشكل ملحوظ عند العطش، ثم تتعافى خلال ساعات من الري." },
-        "ku": { "name": "زەنباقی ئاشتی", "notes": "کاتێک تینوو بێت زۆر شۆڕ دەبێت، پاشان لە چەند کاتژمێرێکدا لە دوای ئاودان چاک دەبێتەوە." }
-      },
-      "aliases": [["en", "Spathiphyllum"]]
-    },
-    {
-      "id": "pl-monstera", "name": "Monstera", "slug": "monstera", "category": "houseplants", "icon": "pot",
-      "scientificName": "Monstera deliciosa", "family": "Araceae",
-      "daysToHarvest": 120, "germinationDays": 21, "tempMin": 18, "tempMax": 28,
-      "soilPreferences": "Rich, well-drained, airy mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "partial", "difficulty": "medium", "indoor": true, "outdoor": false,
-      "climates": ["tropical", "subtropical"],
-      "plantingMonths": [], "plantingSeason": "Any (indoor)", "harvestWindow": "Continuous foliage growth",
-      "seedAvailable": false, "stageTemplate": "houseplant",
-      "notes": "Grows fast in bright indirect light. Wipe the leaves so they can breathe.",
-      "i18n": {
-        "ar": { "name": "مونستيرا", "notes": "تنمو بسرعة في إضاءة ساطعة غير مباشرة. امسح الأوراق لتتنفس." },
-        "ku": { "name": "مۆنستێرا", "notes": "لە ڕووناکی ڕاستەوخۆی ناڕاستدا خێرا دەگەشێت. گەڵاکان پاک بکەرەوە بۆ ئەوەی هەناسە بدەن." }
-      },
-      "aliases": [["en", "Swiss cheese plant"]]
-    },
-    {
-      "id": "pl-eggplant", "name": "Eggplant", "slug": "eggplant", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Solanum melongena", "family": "Solanaceae",
-      "daysToHarvest": 75, "germinationDays": 10, "tempMin": 20, "tempMax": 32,
-      "soilPreferences": "Rich, well-drained soil", "soilPhMin": 5.8, "soilPhMax": 6.8,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": true, "outdoor": true,
-      "climates": ["subtropical", "mediterranean", "temperate"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Late spring, after frost",
-      "harvestWindow": "70–85 days after transplanting", "seedAvailable": true, "stageTemplate": "annual-vegetable",
-      "notes": "Loves heat. Pick while the skin is glossy — dull fruit is over-ripe.",
-      "i18n": {
-        "ar": { "name": "باذنجان", "notes": "يحب الحرارة. اقطفها والبشرة لامعة — الثمرة الباهتة ناضجة أكثر من اللازم." },
-        "ku": { "name": "بێنجان", "notes": "گەرمی خۆش دەوێت. کاتێک پێستەکەی درەوشاوەیە بیبڕە — بەرهەمی کاڵ زۆر پێگەیشتووە." }
-      },
-      "aliases": [["en", "Aubergine"], ["ar", "بادنجان"], ["ku", "بێنجانی ڕەش"]],
-      "varieties": [
-        { "name": "Black Beauty", "description": "Classic large, dark purple fruit.", "growthDurationDays": 80 },
-        { "name": "White Egg", "description": "Small, mild, creamy-white fruit.", "growthDurationDays": 70 }
+      "aliases": [
+        [
+          "en",
+          "Sweet pepper"
+        ],
+        [
+          "en",
+          "Capsicum"
+        ],
+        [
+          "ar",
+          "فلفل رومي"
+        ]
       ]
     },
     {
-      "id": "pl-chili-pepper", "name": "Chili Pepper", "slug": "chili-pepper", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Capsicum annuum", "family": "Solanaceae",
-      "daysToHarvest": 80, "germinationDays": 12, "tempMin": 18, "tempMax": 32,
-      "soilPreferences": "Rich, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 6.8,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": true, "outdoor": true,
-      "climates": ["subtropical", "mediterranean", "arid", "temperate"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring, after frost",
-      "harvestWindow": "75–90 days after sowing", "seedAvailable": true, "stageTemplate": "annual-vegetable",
+      "id": "pl-carrot",
+      "name": "Carrot",
+      "slug": "carrot",
+      "category": "vegetables",
+      "icon": "root",
+      "scientificName": "Daucus carota",
+      "family": "Apiaceae",
+      "daysToHarvest": 75,
+      "germinationDays": 12,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Deep, loose, stone-free soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "plantingSeason": "Spring to early summer",
+      "harvestWindow": "70–80 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "root-vegetable",
+      "notes": "Wants a deep container — at least 25 cm of loose soil, no stones.",
+      "i18n": {
+        "ar": {
+          "name": "جزر",
+          "notes": "يحتاج وعاءً عميقًا — ٢٥ سم على الأقل من تراب رخو بلا حجارة."
+        },
+        "ku": {
+          "name": "گێزەر",
+          "notes": "قاپێکی قووڵ دەوێت — بە لایەنی کەم ٢٥ سم خاکی نەرم بەبێ بەرد.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Carrots"
+        ]
+      ]
+    },
+    {
+      "id": "pl-zucchini",
+      "name": "Zucchini",
+      "slug": "zucchini",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Cucurbita pepo",
+      "family": "Cucurbitaceae",
+      "daysToHarvest": 55,
+      "germinationDays": 6,
+      "tempMin": 18,
+      "tempMax": 30,
+      "soilPreferences": "Rich, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "high",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "subtropical"
+      ],
+      "plantingMonths": [
+        4,
+        5,
+        6
+      ],
+      "plantingSeason": "Late spring into summer",
+      "harvestWindow": "50–65 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "annual-vegetable",
+      "notes": "Very generous — one plant can out-produce a whole household.",
+      "i18n": {
+        "ar": {
+          "name": "كوسا",
+          "notes": "سخية جدًا — نبتة واحدة قد تفي احتياج منزل كامل."
+        },
+        "ku": {
+          "name": "کولەکە",
+          "notes": "زۆر بەرهەمدارە — یەک ڕووەک دەتوانێت پێداویستی ماڵێکی تەواو دابین بکات.",
+          "nameStatus": "verified",
+          "nameSource": "vejinlex",
+          "alternatives": [
+            "کۆسا",
+            "کەلەک"
+          ]
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Courgette"
+        ],
+        [
+          "en",
+          "Zucchini squash"
+        ],
+        [
+          "ar",
+          "كوسة"
+        ]
+      ]
+    },
+    {
+      "id": "pl-spring-onion",
+      "name": "Spring Onion",
+      "slug": "spring-onion",
+      "category": "vegetables",
+      "icon": "root",
+      "scientificName": "Allium fistulosum",
+      "family": "Amaryllidaceae",
+      "daysToHarvest": 60,
+      "germinationDays": 10,
+      "tempMin": 13,
+      "tempMax": 28,
+      "soilPreferences": "Loose, fertile soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "subtropical",
+        "continental"
+      ],
+      "plantingMonths": [],
+      "plantingSeason": "Any mild season",
+      "harvestWindow": "55–70 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "root-vegetable",
+      "notes": "You can regrow the white ends in a glass of water — no soil needed.",
+      "i18n": {
+        "ar": {
+          "name": "بصل أخضر",
+          "notes": "يمكنك إعادة إنماء الأطراف البيضاء في كوب ماء — دون حاجة إلى تراب."
+        },
+        "ku": {
+          "name": "پیازی سەوز",
+          "notes": "دەتوانیت سەرە سپییەکان لە پەرداخێک ئاودا دووبارە بڕوێنیت — بێ خاک.",
+          "nameStatus": "verified",
+          "nameSource": "sorani-wordlist"
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Green onion"
+        ],
+        [
+          "en",
+          "Scallion"
+        ],
+        [
+          "ar",
+          "بصل أخضر بلدي"
+        ]
+      ]
+    },
+    {
+      "id": "pl-pea",
+      "name": "Pea",
+      "slug": "pea",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Pisum sativum",
+      "family": "Fabaceae",
+      "daysToHarvest": 65,
+      "germinationDays": 10,
+      "tempMin": 10,
+      "tempMax": 20,
+      "soilPreferences": "Well-drained, fertile soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        10
+      ],
+      "plantingSeason": "Cool spring or autumn",
+      "harvestWindow": "60–75 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "legume",
+      "notes": "Sow in cool weather; it fixes nitrogen and improves the soil for next year.",
+      "i18n": {
+        "ar": {
+          "name": "بازلاء",
+          "notes": "ازرعها في الجو البارد؛ تثبّت النيتروجين وتحسّن التربة للعام القادم."
+        },
+        "ku": {
+          "name": "پۆڵکە",
+          "notes": "لە کەشوهەوای سارددا بیانچێنە؛ نایترۆجین جێگیر دەکەن و خاک بۆ ساڵی داهاتوو باشتر دەکەن.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
+          "alternatives": [
+            "پۆلکە"
+          ]
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Garden pea"
+        ],
+        [
+          "en",
+          "Peas"
+        ]
+      ]
+    },
+    {
+      "id": "pl-pumpkin",
+      "name": "Pumpkin",
+      "slug": "pumpkin",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Cucurbita maxima",
+      "family": "Cucurbitaceae",
+      "daysToHarvest": 100,
+      "germinationDays": 7,
+      "tempMin": 18,
+      "tempMax": 32,
+      "soilPreferences": "Rich, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "high",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "subtropical",
+        "continental"
+      ],
+      "plantingMonths": [
+        4,
+        5
+      ],
+      "plantingSeason": "Late spring",
+      "harvestWindow": "95–120 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "annual-vegetable",
+      "notes": "Needs room to sprawl — better on a roof or garden than a small balcony.",
+      "i18n": {
+        "ar": {
+          "name": "قرع",
+          "notes": "يحتاج مساحة للانتشار — أفضل على سطح أو حديقة من شرفة صغيرة."
+        },
+        "ku": {
+          "name": "کەدوو",
+          "notes": "شوێنی فراوان دەوێت بۆ بڵاوبوونەوە — باشترە لە سەربان یان باخچە تا بەلکۆنێکی بچووک.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found.",
+          "alternatives": [
+            "کادوو"
+          ]
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Pumpkins"
+        ],
+        [
+          "ar",
+          "يقطين"
+        ]
+      ]
+    },
+    {
+      "id": "pl-basil",
+      "name": "Basil",
+      "slug": "basil",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Ocimum basilicum",
+      "family": "Lamiaceae",
+      "daysToHarvest": 60,
+      "germinationDays": 8,
+      "tempMin": 18,
+      "tempMax": 30,
+      "soilPreferences": "Light, fertile soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "subtropical",
+        "mediterranean",
+        "temperate",
+        "tropical"
+      ],
+      "plantingMonths": [
+        4,
+        5,
+        6
+      ],
+      "plantingSeason": "Late spring into summer",
+      "harvestWindow": "55–70 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "herb-annual",
+      "notes": "Loves heat and a sunny windowsill. Pinch the tips or it will go to flower.",
+      "i18n": {
+        "ar": {
+          "name": "ريحان",
+          "notes": "يحب الحرارة وحافة نافذة مشمسة. اقطع القمم وإلا أزهر."
+        },
+        "ku": {
+          "name": "ڕەیحان",
+          "notes": "گەرمی و پەنجەرەی خۆرهەڵات دەوێت. سەرەکانی ببڕە ئەگینا گوڵ دەکات.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Sweet basil"
+        ],
+        [
+          "ar",
+          "حبق"
+        ],
+        [
+          "ar",
+          "ريحان أخضر"
+        ]
+      ]
+    },
+    {
+      "id": "pl-mint",
+      "name": "Mint",
+      "slug": "mint",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Mentha spicata",
+      "family": "Lamiaceae",
+      "daysToHarvest": 60,
+      "germinationDays": 12,
+      "tempMin": 15,
+      "tempMax": 28,
+      "soilPreferences": "Moist, fertile soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "high",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "subtropical",
+        "continental",
+        "tropical"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "Continuous once established",
+      "seedAvailable": false,
+      "stageTemplate": "herb-perennial",
+      "notes": "Almost unkillable, but keep it in its own pot — it takes over everything.",
+      "i18n": {
+        "ar": {
+          "name": "نعناع",
+          "notes": "يكاد لا يموت، لكن ضعه في وعاء منفصل — فهو يزحف على كل شيء."
+        },
+        "ku": {
+          "name": "نەعناع",
+          "notes": "بە سەختی دەمرێت، بەڵام لە قاپێکی جیادا بیپارێزە — هەموو شتێک داگیر دەکات.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Spearmint"
+        ],
+        [
+          "ar",
+          "نعنع"
+        ]
+      ]
+    },
+    {
+      "id": "pl-parsley",
+      "name": "Parsley",
+      "slug": "parsley",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Petroselinum crispum",
+      "family": "Apiaceae",
+      "daysToHarvest": 75,
+      "germinationDays": 21,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Moist, fertile soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "70–90 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "herb-annual",
+      "notes": "Slow to germinate — be patient, then it keeps producing for a year.",
+      "i18n": {
+        "ar": {
+          "name": "بقدونس",
+          "notes": "يتأخر في الإنبات — تحلَّ بالصبر، ثم يظل يعطي لعام كامل."
+        },
+        "ku": {
+          "name": "مەعدەنۆس",
+          "notes": "درەنگ سەوز دەبێت — ئارام بە، پاشان بۆ ساڵێک بەردەوام بەرهەم دەدات.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Sorani Wikipedia titles parsley جاڤری; مەعدەنۆس kept as the everyday local word.",
+          "alternatives": [
+            "جاڤری"
+          ]
+        }
+      },
+      "aliases": [
+        [
+          "ar",
+          "معدنوس"
+        ]
+      ]
+    },
+    {
+      "id": "pl-coriander",
+      "name": "Coriander",
+      "slug": "coriander",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Coriandrum sativum",
+      "family": "Apiaceae",
+      "daysToHarvest": 50,
+      "germinationDays": 10,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Light, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "subtropical",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5,
+        9
+      ],
+      "plantingSeason": "Spring and early autumn",
+      "harvestWindow": "45–60 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "herb-annual",
+      "notes": "Sow little and often — it runs to seed quickly in heat.",
+      "i18n": {
+        "ar": {
+          "name": "كزبرة",
+          "notes": "ازرع كميات صغيرة ومتكررة — فهي تزهر سريعًا في الحرارة."
+        },
+        "ku": {
+          "name": "کەشنیز",
+          "notes": "کەم و بەردەوام بیانچێنە — لە گەرمیدا زوو گوڵ دەکات.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Cilantro"
+        ],
+        [
+          "ar",
+          "كسبرة"
+        ],
+        [
+          "ar",
+          "كزبرة خضراء"
+        ]
+      ]
+    },
+    {
+      "id": "pl-rosemary",
+      "name": "Rosemary",
+      "slug": "rosemary",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Salvia rosmarinus",
+      "family": "Lamiaceae",
+      "daysToHarvest": 120,
+      "germinationDays": 21,
+      "tempMin": 15,
+      "tempMax": 30,
+      "soilPreferences": "Gritty, sharply drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "subtropical",
+        "temperate",
+        "arid"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "Continuous once established",
+      "seedAvailable": true,
+      "stageTemplate": "herb-perennial",
+      "notes": "A woody perennial that hates wet roots — let the soil dry out between waterings.",
+      "i18n": {
+        "ar": {
+          "name": "إكليل الجبل",
+          "notes": "نبتة خشبية معمرة تكره الرطوبة — اترك التربة تجف بين الريات."
+        },
+        "ku": {
+          "name": "ڕۆزماری",
+          "notes": "ڕووەکێکی دارینەی هەمیشەییە و ڕقی لە شێیەتی — ڕێگە بدە خاک لە نێوان ئاودانەکاندا وشک بێت.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
+      },
+      "aliases": [
+        [
+          "ar",
+          "روزماري"
+        ],
+        [
+          "ar",
+          "حصالبان"
+        ]
+      ]
+    },
+    {
+      "id": "pl-thyme",
+      "name": "Thyme",
+      "slug": "thyme",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Thymus vulgaris",
+      "family": "Lamiaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 14,
+      "tempMin": 15,
+      "tempMax": 28,
+      "soilPreferences": "Poor, gritty, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 8,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "temperate",
+        "arid",
+        "subtropical"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "Continuous once established",
+      "seedAvailable": true,
+      "stageTemplate": "herb-perennial",
+      "notes": "Thrives on neglect and poor, gritty soil. Overwatering is the usual killer.",
+      "i18n": {
+        "ar": {
+          "name": "زعتر",
+          "notes": "ينمو جيدًا بالإهمال وفي تربة فقيرة رملية. الإفراط في الري هو القاتل المعتاد."
+        },
+        "ku": {
+          "name": "زەعتەر",
+          "notes": "بە پشتگوێخستن و خاکی هەژار و لمی باش دەگەشێت. زۆر ئاودان زۆرجار دەیکوژێت.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found."
+        }
+      },
+      "aliases": [
+        [
+          "ar",
+          "جعتر"
+        ]
+      ]
+    },
+    {
+      "id": "pl-chives",
+      "name": "Chives",
+      "slug": "chives",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Allium schoenoprasum",
+      "family": "Amaryllidaceae",
+      "daysToHarvest": 60,
+      "germinationDays": 14,
+      "tempMin": 13,
+      "tempMax": 24,
+      "soilPreferences": "Moist, fertile soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "55–70 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "herb-perennial",
+      "notes": "Cut it and it comes straight back — a reliable windowsill herb.",
+      "i18n": {
+        "ar": {
+          "name": "ثوم معمر",
+          "notes": "اقطعه فيعود فورًا — عشبة موثوقة لحافة النافذة."
+        },
+        "ku": {
+          "name": "پیازەکێوی",
+          "notes": "بیبڕە و یەکسەر دەگەڕێتەوە — ڕووەکێکی دڵنیاکەرەوەیە بۆ پەنجەرە.",
+          "nameStatus": "verified",
+          "nameSource": "vejinlex",
+          "alternatives": [
+            "پیازەمارانە",
+            "پیوازۆکە",
+            "پیازچە"
+          ]
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Chive"
+        ]
+      ]
+    },
+    {
+      "id": "pl-dill",
+      "name": "Dill",
+      "slug": "dill",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Anethum graveolens",
+      "family": "Apiaceae",
+      "daysToHarvest": 45,
+      "germinationDays": 10,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Light, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "plantingSeason": "Spring to early summer",
+      "harvestWindow": "40–55 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "herb-annual",
+      "notes": "Feathery and quick. Sow directly — it dislikes being moved.",
+      "i18n": {
+        "ar": {
+          "name": "شبت",
+          "notes": "سريع النمو. ازرعه مباشرة — فهو لا يحب النقل."
+        },
+        "ku": {
+          "name": "شویت",
+          "notes": "خێرایە. ڕاستەوخۆ بیانچێنە — حەزی لە گواستنەوە نییە.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
+          "alternatives": [
+            "شەبەت"
+          ]
+        }
+      },
+      "aliases": [
+        [
+          "ar",
+          "شبنت"
+        ]
+      ]
+    },
+    {
+      "id": "pl-lemon-tree",
+      "name": "Lemon Tree",
+      "slug": "lemon-tree",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Citrus limon",
+      "family": "Rutaceae",
+      "daysToHarvest": 1095,
+      "germinationDays": 21,
+      "tempMin": 15,
+      "tempMax": 30,
+      "soilPreferences": "Well-drained, slightly acidic soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "hard",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "subtropical",
+        "tropical"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "3+ years, then winter fruiting",
+      "seedAvailable": true,
+      "stageTemplate": "fruit-tree",
+      "notes": "A long commitment — years before the first fruit, but it lives for decades.",
+      "i18n": {
+        "ar": {
+          "name": "ليمون",
+          "notes": "التزام طويل — سنوات قبل أول ثمرة، لكنه يعيش عقودًا."
+        },
+        "ku": {
+          "name": "لیمۆ",
+          "notes": "پابەندبوونێکی درێژخایەنە — چەند ساڵێک پێش یەکەم بەرهەم، بەڵام دەیان ساڵ دەژیت.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Loan word in general use; no lexical source checked."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Lemon"
+        ],
+        [
+          "en",
+          "Lemon tree"
+        ]
+      ]
+    },
+    {
+      "id": "pl-orange-tree",
+      "name": "Orange Tree",
+      "slug": "orange-tree",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Citrus sinensis",
+      "family": "Rutaceae",
+      "daysToHarvest": 1095,
+      "germinationDays": 21,
+      "tempMin": 15,
+      "tempMax": 32,
+      "soilPreferences": "Well-drained, slightly acidic soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "hard",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "subtropical",
+        "mediterranean",
+        "tropical"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "3+ years, then winter fruiting",
+      "seedAvailable": true,
+      "stageTemplate": "fruit-tree",
+      "notes": "Grown from seed it can take years and may never fruit — a grafted sapling is surer.",
+      "i18n": {
+        "ar": {
+          "name": "برتقال",
+          "notes": "من البذرة قد يستغرق سنوات وربما لا يثمر — الشتلة المطعّمة أكثر ضمانًا."
+        },
+        "ku": {
+          "name": "پرتەقاڵ",
+          "notes": "لە تۆوەوە چەند ساڵێک دەخایەنێت و ڕەنگە هەرگیز بەرهەم نەدات — نەمامی پێوەنراو دڵنیاترە.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Orange"
+        ],
+        [
+          "ar",
+          "برتقان"
+        ]
+      ]
+    },
+    {
+      "id": "pl-fig",
+      "name": "Fig",
+      "slug": "fig",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Ficus carica",
+      "family": "Moraceae",
+      "daysToHarvest": 730,
+      "germinationDays": 21,
+      "tempMin": 15,
+      "tempMax": 32,
+      "soilPreferences": "Tolerates poor, dry, alkaline soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "subtropical",
+        "temperate"
+      ],
+      "plantingMonths": [
+        3,
+        4
+      ],
+      "plantingSeason": "Early spring",
+      "harvestWindow": "2+ years, then late summer",
+      "seedAvailable": false,
+      "stageTemplate": "fruit-tree",
+      "notes": "Tolerates a large pot and dry summers better than most fruit trees.",
+      "i18n": {
+        "ar": {
+          "name": "تين",
+          "notes": "يتحمل الأصص الكبيرة والصيف الجاف أفضل من معظم أشجار الفاكهة."
+        },
+        "ku": {
+          "name": "هەنجیر",
+          "notes": "لە قاپی گەورە و هاوینی وشکدا باشتر لە زۆربەی دارەوەی بەرهەمەکان خۆڕاگرە.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Fig tree"
+        ]
+      ]
+    },
+    {
+      "id": "pl-olive",
+      "name": "Olive",
+      "slug": "olive",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Olea europaea",
+      "family": "Oleaceae",
+      "daysToHarvest": 1460,
+      "germinationDays": 30,
+      "tempMin": 15,
+      "tempMax": 32,
+      "soilPreferences": "Light, stony, well-drained soil",
+      "soilPhMin": 6.5,
+      "soilPhMax": 8,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "hard",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "subtropical",
+        "arid"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "4+ years, then autumn",
+      "seedAvailable": false,
+      "stageTemplate": "fruit-tree",
+      "notes": "Loves long dry summers. Slow, but extremely long-lived and drought-proof.",
+      "i18n": {
+        "ar": {
+          "name": "زيتون",
+          "notes": "يحب الصيف الطويل الجاف. بطيء النمو لكنه معمر جدًا ومقاوم للجفاف."
+        },
+        "ku": {
+          "name": "زەیتوون",
+          "notes": "هاوینی درێژ و وشکی خۆش دەوێت. هێواشە، بەڵام زۆر درێژعومر و بەرگەی وشکەساڵی دەگرێت.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Olive tree"
+        ]
+      ]
+    },
+    {
+      "id": "pl-pomegranate",
+      "name": "Pomegranate",
+      "slug": "pomegranate",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Punica granatum",
+      "family": "Lythraceae",
+      "daysToHarvest": 1095,
+      "germinationDays": 21,
+      "tempMin": 15,
+      "tempMax": 32,
+      "soilPreferences": "Tolerant of poor, alkaline soil",
+      "soilPhMin": 5.5,
+      "soilPhMax": 7,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "subtropical",
+        "arid",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "3+ years, then autumn",
+      "seedAvailable": true,
+      "stageTemplate": "fruit-tree",
+      "notes": "Handles heat and drought well, and fruits in a large container.",
+      "i18n": {
+        "ar": {
+          "name": "رمان",
+          "notes": "يتحمل الحرارة والجفاف جيدًا، ويثمر في وعاء كبير."
+        },
+        "ku": {
+          "name": "هەنار",
+          "notes": "بەرگەی گەرمی و وشکەساڵی باش دەگرێت، و لە قاپی گەورەدا بەرهەم دەدات.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Pomegranate tree"
+        ]
+      ]
+    },
+    {
+      "id": "pl-strawberry",
+      "name": "Strawberry",
+      "slug": "strawberry",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Fragaria ananassa",
+      "family": "Rosaceae",
+      "daysToHarvest": 120,
+      "germinationDays": 21,
+      "tempMin": 15,
+      "tempMax": 26,
+      "soilPreferences": "Rich, well-drained, slightly acidic soil",
+      "soilPhMin": 5.5,
+      "soilPhMax": 6.5,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "continental",
+        "subtropical"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        9
+      ],
+      "plantingSeason": "Spring or early autumn",
+      "harvestWindow": "100–140 days, then fruiting season",
+      "seedAvailable": false,
+      "stageTemplate": "fruit-bush",
+      "notes": "A fruit you can actually harvest in one season — good in a hanging basket.",
+      "i18n": {
+        "ar": {
+          "name": "فراولة",
+          "notes": "فاكهة يمكن حصادها في موسم واحد — جيدة في سلة معلقة."
+        },
+        "ku": {
+          "name": "تووفەرەنگی",
+          "notes": "بەرهەمێک کە دەتوانیت لە یەک وەرزدا کۆی بکەیتەوە — باشە لە سەبەتەی هەڵواسراو.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
+          "alternatives": [
+            "فڕاوەڵە"
+          ]
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Strawberries"
+        ]
+      ]
+    },
+    {
+      "id": "pl-pothos",
+      "name": "Pothos",
+      "slug": "pothos",
+      "category": "houseplants",
+      "icon": "pot",
+      "scientificName": "Epipremnum aureum",
+      "family": "Araceae",
+      "daysToHarvest": 90,
+      "germinationDays": 14,
+      "tempMin": 18,
+      "tempMax": 28,
+      "soilPreferences": "Any well-drained potting mix",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "low",
+      "sun": "shade",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": false,
+      "climates": [
+        "tropical",
+        "subtropical"
+      ],
+      "plantingMonths": [],
+      "plantingSeason": "Any (indoor)",
+      "harvestWindow": "Continuous foliage growth",
+      "seedAvailable": false,
+      "stageTemplate": "houseplant",
+      "notes": "Forgiving of low light and missed waterings — the classic first houseplant.",
+      "i18n": {
+        "ar": {
+          "name": "بوتوس",
+          "notes": "يتحمل الإضاءة المنخفضة ونسيان الري — النبتة المنزلية الأولى الكلاسيكية."
+        },
+        "ku": {
+          "name": "پۆتۆس",
+          "notes": "بەرگەی ڕووناکی کەم و لەبیرکردنی ئاودان دەگرێت — یەکەم ڕووەکی ماڵی کلاسیک.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Transliterated name; these houseplants have no established Sorani name."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Devil's ivy"
+        ],
+        [
+          "en",
+          "Golden pothos"
+        ]
+      ]
+    },
+    {
+      "id": "pl-snake-plant",
+      "name": "Snake Plant",
+      "slug": "snake-plant",
+      "category": "houseplants",
+      "icon": "pot",
+      "scientificName": "Dracaena trifasciata",
+      "family": "Asparagaceae",
+      "daysToHarvest": 120,
+      "germinationDays": 21,
+      "tempMin": 15,
+      "tempMax": 30,
+      "soilPreferences": "Free-draining, sandy potting mix",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "low",
+      "sun": "shade",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": false,
+      "climates": [
+        "arid",
+        "tropical",
+        "subtropical"
+      ],
+      "plantingMonths": [],
+      "plantingSeason": "Any (indoor)",
+      "harvestWindow": "Continuous foliage growth",
+      "seedAvailable": false,
+      "stageTemplate": "houseplant",
+      "notes": "Water it monthly at most — overwatering is the only way to kill it.",
+      "i18n": {
+        "ar": {
+          "name": "نبتة الأفعى",
+          "notes": "اسقِها شهريًا على الأكثر — الإفراط في الري هو الطريقة الوحيدة لقتلها."
+        },
+        "ku": {
+          "name": "ڕووەکی مار",
+          "notes": "لانیزۆر مانگانە ئاوی بدە — زۆر ئاودان تاکە ڕێگەیە بۆ کوشتنی.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Descriptive phrase, not an established Sorani name.",
+          "alternatives": [
+            "ثیران"
+          ]
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Sansevieria"
+        ],
+        [
+          "ar",
+          "ثعبان"
+        ]
+      ]
+    },
+    {
+      "id": "pl-spider-plant",
+      "name": "Spider Plant",
+      "slug": "spider-plant",
+      "category": "houseplants",
+      "icon": "pot",
+      "scientificName": "Chlorophytum comosum",
+      "family": "Asparagaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 14,
+      "tempMin": 15,
+      "tempMax": 26,
+      "soilPreferences": "Any well-drained potting mix",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": false,
+      "climates": [
+        "tropical",
+        "subtropical",
+        "temperate"
+      ],
+      "plantingMonths": [],
+      "plantingSeason": "Any (indoor)",
+      "harvestWindow": "Continuous foliage growth",
+      "seedAvailable": false,
+      "stageTemplate": "houseplant",
+      "notes": "Throws out baby plantlets you can pot up and share.",
+      "i18n": {
+        "ar": {
+          "name": "نبتة العنكبوت",
+          "notes": "تنتج نبتات صغيرة يمكن زرعها ومشاركتها."
+        },
+        "ku": {
+          "name": "ڕووەکی جاڵجاڵۆکە",
+          "notes": "ڕووەکی بچووک دەردەکات کە دەتوانیت بیانچێنیت و بەش بکەیت.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Descriptive phrase, not an established Sorani name."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Airplane plant"
+        ]
+      ]
+    },
+    {
+      "id": "pl-aloe-vera",
+      "name": "Aloe Vera",
+      "slug": "aloe-vera",
+      "category": "houseplants",
+      "icon": "pot",
+      "scientificName": "Aloe vera",
+      "family": "Asphodelaceae",
+      "daysToHarvest": 180,
+      "germinationDays": 21,
+      "tempMin": 13,
+      "tempMax": 27,
+      "soilPreferences": "Sandy, very free-draining mix",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "arid",
+        "mediterranean",
+        "subtropical",
+        "tropical"
+      ],
+      "plantingMonths": [],
+      "plantingSeason": "Any (indoor)",
+      "harvestWindow": "Continuous once established",
+      "seedAvailable": false,
+      "stageTemplate": "houseplant",
+      "notes": "Wants sun and very free-draining soil. The gel inside soothes burns.",
+      "i18n": {
+        "ar": {
+          "name": "ألوفيرا",
+          "notes": "تحب الشمس والتربة جيدة التصريف. الجل بداخلها يهدئ الحروق."
+        },
+        "ku": {
+          "name": "ئەلۆی ڤێرا",
+          "notes": "خۆر و خاکی زۆر بەئاسانی ئاوڕێژ دەوێت. جەلەکەی ناوی سووتان ئارام دەکاتەوە.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Transliterated name; no lexical source checked."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Aloe"
+        ],
+        [
+          "ar",
+          "صبار"
+        ]
+      ]
+    },
+    {
+      "id": "pl-zz-plant",
+      "name": "ZZ Plant",
+      "slug": "zz-plant",
+      "category": "houseplants",
+      "icon": "pot",
+      "scientificName": "Zamioculcas zamiifolia",
+      "family": "Araceae",
+      "daysToHarvest": 120,
+      "germinationDays": 21,
+      "tempMin": 18,
+      "tempMax": 26,
+      "soilPreferences": "Any well-drained potting mix",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "low",
+      "sun": "shade",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": false,
+      "climates": [
+        "tropical",
+        "subtropical"
+      ],
+      "plantingMonths": [],
+      "plantingSeason": "Any (indoor)",
+      "harvestWindow": "Continuous foliage growth",
+      "seedAvailable": false,
+      "stageTemplate": "houseplant",
+      "notes": "Handles a dark corner and forgetful watering better than anything else.",
+      "i18n": {
+        "ar": {
+          "name": "نبتة زد زد",
+          "notes": "تتحمل الزوايا المعتمة ونسيان الري أفضل من أي نبتة أخرى."
+        },
+        "ku": {
+          "name": "ڕووەکی ZZ",
+          "notes": "لە گۆشەی تاریک و لەبیرکردنی ئاودان باشتر لە هەموو ڕووەکێکی تر خۆڕاگرە.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Keeps the cultivar letters; no Sorani name exists."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Zanzibar gem"
+        ]
+      ]
+    },
+    {
+      "id": "pl-peace-lily",
+      "name": "Peace Lily",
+      "slug": "peace-lily",
+      "category": "houseplants",
+      "icon": "pot",
+      "scientificName": "Spathiphyllum wallisii",
+      "family": "Araceae",
+      "daysToHarvest": 90,
+      "germinationDays": 21,
+      "tempMin": 18,
+      "tempMax": 27,
+      "soilPreferences": "Rich, moisture-retentive potting mix",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "high",
+      "sun": "shade",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": false,
+      "climates": [
+        "tropical",
+        "subtropical"
+      ],
+      "plantingMonths": [],
+      "plantingSeason": "Any (indoor)",
+      "harvestWindow": "Continuous foliage growth",
+      "seedAvailable": false,
+      "stageTemplate": "houseplant",
+      "notes": "Droops dramatically when thirsty, then recovers within hours of watering.",
+      "i18n": {
+        "ar": {
+          "name": "زنبق السلام",
+          "notes": "تذبل بشكل ملحوظ عند العطش، ثم تتعافى خلال ساعات من الري."
+        },
+        "ku": {
+          "name": "زەنباقی ئاشتی",
+          "notes": "کاتێک تینوو بێت زۆر شۆڕ دەبێت، پاشان لە چەند کاتژمێرێکدا لە دوای ئاودان چاک دەبێتەوە.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Literal translation of the English name."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Spathiphyllum"
+        ]
+      ]
+    },
+    {
+      "id": "pl-monstera",
+      "name": "Monstera",
+      "slug": "monstera",
+      "category": "houseplants",
+      "icon": "pot",
+      "scientificName": "Monstera deliciosa",
+      "family": "Araceae",
+      "daysToHarvest": 120,
+      "germinationDays": 21,
+      "tempMin": 18,
+      "tempMax": 28,
+      "soilPreferences": "Rich, well-drained, airy mix",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": false,
+      "climates": [
+        "tropical",
+        "subtropical"
+      ],
+      "plantingMonths": [],
+      "plantingSeason": "Any (indoor)",
+      "harvestWindow": "Continuous foliage growth",
+      "seedAvailable": false,
+      "stageTemplate": "houseplant",
+      "notes": "Grows fast in bright indirect light. Wipe the leaves so they can breathe.",
+      "i18n": {
+        "ar": {
+          "name": "مونستيرا",
+          "notes": "تنمو بسرعة في إضاءة ساطعة غير مباشرة. امسح الأوراق لتتنفس."
+        },
+        "ku": {
+          "name": "مۆنستێرا",
+          "notes": "لە ڕووناکی ڕاستەوخۆی ناڕاستدا خێرا دەگەشێت. گەڵاکان پاک بکەرەوە بۆ ئەوەی هەناسە بدەن.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Transliterated name; no lexical source checked."
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Swiss cheese plant"
+        ]
+      ]
+    },
+    {
+      "id": "pl-eggplant",
+      "name": "Eggplant",
+      "slug": "eggplant",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Solanum melongena",
+      "family": "Solanaceae",
+      "daysToHarvest": 75,
+      "germinationDays": 10,
+      "tempMin": 20,
+      "tempMax": 32,
+      "soilPreferences": "Rich, well-drained soil",
+      "soilPhMin": 5.8,
+      "soilPhMax": 6.8,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "subtropical",
+        "mediterranean",
+        "temperate"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Late spring, after frost",
+      "harvestWindow": "70–85 days after transplanting",
+      "seedAvailable": true,
+      "stageTemplate": "annual-vegetable",
+      "notes": "Loves heat. Pick while the skin is glossy — dull fruit is over-ripe.",
+      "i18n": {
+        "ar": {
+          "name": "باذنجان",
+          "notes": "يحب الحرارة. اقطفها والبشرة لامعة — الثمرة الباهتة ناضجة أكثر من اللازم."
+        },
+        "ku": {
+          "name": "بێنجان",
+          "notes": "گەرمی خۆش دەوێت. کاتێک پێستەکەی درەوشاوەیە بیبڕە — بەرهەمی کاڵ زۆر پێگەیشتووە.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Sorani Wikipedia and the Sorani wordlist write باینجان; بێنجان kept as the local form.",
+          "alternatives": [
+            "بێنجانی ڕەش",
+            "باینجان"
+          ]
+        }
+      },
+      "aliases": [
+        [
+          "en",
+          "Aubergine"
+        ],
+        [
+          "ar",
+          "بادنجان"
+        ]
+      ],
+      "varieties": [
+        {
+          "name": "Black Beauty",
+          "description": "Classic large, dark purple fruit.",
+          "growthDurationDays": 80
+        },
+        {
+          "name": "White Egg",
+          "description": "Small, mild, creamy-white fruit.",
+          "growthDurationDays": 70
+        }
+      ]
+    },
+    {
+      "id": "pl-chili-pepper",
+      "name": "Chili Pepper",
+      "slug": "chili-pepper",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Capsicum annuum Longum Group",
+      "family": "Solanaceae",
+      "daysToHarvest": 80,
+      "germinationDays": 12,
+      "tempMin": 18,
+      "tempMax": 32,
+      "soilPreferences": "Rich, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 6.8,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "subtropical",
+        "mediterranean",
+        "arid",
+        "temperate"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring, after frost",
+      "harvestWindow": "75–90 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "annual-vegetable",
       "notes": "Heat builds as the fruit ripens from green to red. Dry some for year-round spice.",
       "i18n": {
-        "ar": { "name": "فلفل حار", "notes": "تزداد الحرارة مع نضوج الثمرة من الأخضر إلى الأحمر. جفف بعضها لبهار طوال العام." },
-        "ku": { "name": "بیبەری تیژ", "notes": "تیژییەکە زیاد دەکات کاتێک بەرهەم لە سەوزەوە بۆ سوور پێدەگات. هەندێک وشک بکەرەوە بۆ بەهاری ساڵانە." }
+        "ar": {
+          "name": "فلفل حار",
+          "notes": "تزداد الحرارة مع نضوج الثمرة من الأخضر إلى الأحمر. جفف بعضها لبهار طوال العام."
+        },
+        "ku": {
+          "name": "بیبەری تیژ",
+          "notes": "تیژییەکە زیاد دەکات کاتێک بەرهەم لە سەوزەوە بۆ سوور پێدەگات. هەندێک وشک بکەرەوە بۆ بەهاری ساڵانە.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
       },
-      "aliases": [["en", "Chilli"], ["en", "Hot pepper"], ["ar", "فلفل حراق"]]
+      "aliases": [
+        [
+          "en",
+          "Chilli"
+        ],
+        [
+          "en",
+          "Hot pepper"
+        ],
+        [
+          "ar",
+          "فلفل حراق"
+        ]
+      ]
     },
     {
-      "id": "pl-beetroot", "name": "Beetroot", "slug": "beetroot", "category": "vegetables", "icon": "root",
-      "scientificName": "Beta vulgaris", "family": "Amaranthaceae",
-      "daysToHarvest": 60, "germinationDays": 10, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Loose, fertile, stone-free soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "medium", "sun": "full", "difficulty": "easy", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [3, 4, 5, 9], "plantingSeason": "Spring and early autumn",
-      "harvestWindow": "55–70 days after sowing", "seedAvailable": true, "stageTemplate": "root-vegetable",
+      "id": "pl-beetroot",
+      "name": "Beetroot",
+      "slug": "beetroot",
+      "category": "vegetables",
+      "icon": "root",
+      "scientificName": "Beta vulgaris",
+      "family": "Amaranthaceae",
+      "daysToHarvest": 60,
+      "germinationDays": 10,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Loose, fertile, stone-free soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5,
+        9
+      ],
+      "plantingSeason": "Spring and early autumn",
+      "harvestWindow": "55–70 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "root-vegetable",
       "notes": "Each seed cluster gives several plants — thin them to give roots room.",
       "i18n": {
-        "ar": { "name": "شمندر", "notes": "كل حبة بذور تنتج عدة نبتات — خفّفها لإعطاء الجذور مساحة." },
-        "ku": { "name": "شەمەندەر", "notes": "هەر تۆوێک چەند ڕووەک دەدات — تەنکەیان بکە بۆ ئەوەی ڕەگ شوێن هەبێت." }
+        "ar": {
+          "name": "شمندر",
+          "notes": "كل حبة بذور تنتج عدة نبتات — خفّفها لإعطاء الجذور مساحة."
+        },
+        "ku": {
+          "name": "چەوەندەر",
+          "notes": "هەر تۆوێک چەند ڕووەک دەدات — تەنکەیان بکە بۆ ئەوەی ڕەگ شوێن هەبێت.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
+          "alternatives": [
+            "شەمەندەر"
+          ]
+        }
       },
-      "aliases": [["en", "Beet"], ["ar", "بنجر"]]
+      "aliases": [
+        [
+          "en",
+          "Beet"
+        ],
+        [
+          "ar",
+          "بنجر"
+        ]
+      ]
     },
     {
-      "id": "pl-turnip", "name": "Turnip", "slug": "turnip", "category": "vegetables", "icon": "root",
-      "scientificName": "Brassica rapa", "family": "Brassicaceae",
-      "daysToHarvest": 50, "germinationDays": 6, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Loose, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "easy", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [3, 4, 8, 9], "plantingSeason": "Spring and autumn",
-      "harvestWindow": "45–60 days after sowing", "seedAvailable": true, "stageTemplate": "root-vegetable",
+      "id": "pl-turnip",
+      "name": "Turnip",
+      "slug": "turnip",
+      "category": "vegetables",
+      "icon": "root",
+      "scientificName": "Brassica rapa",
+      "family": "Brassicaceae",
+      "daysToHarvest": 50,
+      "germinationDays": 6,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Loose, fertile soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        8,
+        9
+      ],
+      "plantingSeason": "Spring and autumn",
+      "harvestWindow": "45–60 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "root-vegetable",
       "notes": "Fast and forgiving. Young leaves are edible too — a true two-in-one crop.",
       "i18n": {
-        "ar": { "name": "لفت", "notes": "سريع وسهل. الأوراق الصغيرة صالحة للأكل أيضًا — محصول بميزتين." },
-        "ku": { "name": "شەلجام", "notes": "خێرا و ئاسانە. گەڵای گەنجیش دەخورێت — بەرهەمێک بە دوو سوود." }
+        "ar": {
+          "name": "لفت",
+          "notes": "سريع وسهل. الأوراق الصغيرة صالحة للأكل أيضًا — محصول بميزتين."
+        },
+        "ku": {
+          "name": "شێلم",
+          "notes": "خێرا و ئاسانە. گەڵای گەنجیش دەخورێت — بەرهەمێک بە دوو سوود.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
+          "alternatives": [
+            "شەلجام"
+          ]
+        }
       },
-      "aliases": [["en", "Turnips"]]
+      "aliases": [
+        [
+          "en",
+          "Turnips"
+        ]
+      ]
     },
     {
-      "id": "pl-onion", "name": "Onion", "slug": "onion", "category": "vegetables", "icon": "root",
-      "scientificName": "Allium cepa", "family": "Amaryllidaceae",
-      "daysToHarvest": 100, "germinationDays": 10, "tempMin": 13, "tempMax": 28,
-      "soilPreferences": "Loose, fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "subtropical", "continental"],
-      "plantingMonths": [2, 3, 4, 10], "plantingSeason": "Spring, or autumn in mild climates",
-      "harvestWindow": "90–120 days after sowing", "seedAvailable": true, "stageTemplate": "root-vegetable",
+      "id": "pl-onion",
+      "name": "Onion",
+      "slug": "onion",
+      "category": "vegetables",
+      "icon": "root",
+      "scientificName": "Allium cepa",
+      "family": "Amaryllidaceae",
+      "daysToHarvest": 100,
+      "germinationDays": 10,
+      "tempMin": 13,
+      "tempMax": 28,
+      "soilPreferences": "Loose, fertile, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "subtropical",
+        "continental"
+      ],
+      "plantingMonths": [
+        2,
+        3,
+        4,
+        10
+      ],
+      "plantingSeason": "Spring, or autumn in mild climates",
+      "harvestWindow": "90–120 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "root-vegetable",
       "notes": "Stop watering once the tops fall over — that is how bulbs cure and keep.",
       "i18n": {
-        "ar": { "name": "بصل", "notes": "أوقف الري عندما تسقط الأوراق — هكذا تجف البصلة وتُخزن." },
-        "ku": { "name": "پیاز", "notes": "کاتێک سەرەکان کەوتن، ئاودان ڕابگرە — بەم شێوەیە پیازەکە وشک دەبێت و دەپارێزرێت." }
+        "ar": {
+          "name": "بصل",
+          "notes": "أوقف الري عندما تسقط الأوراق — هكذا تجف البصلة وتُخزن."
+        },
+        "ku": {
+          "name": "پیاز",
+          "notes": "کاتێک سەرەکان کەوتن، ئاودان ڕابگرە — بەم شێوەیە پیازەکە وشک دەبێت و دەپارێزرێت.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
       },
-      "aliases": [["en", "Onions"], ["en", "Bulb onion"]]
+      "aliases": [
+        [
+          "en",
+          "Onions"
+        ],
+        [
+          "en",
+          "Bulb onion"
+        ]
+      ]
     },
     {
-      "id": "pl-garlic", "name": "Garlic", "slug": "garlic", "category": "vegetables", "icon": "root",
-      "scientificName": "Allium sativum", "family": "Amaryllidaceae",
-      "daysToHarvest": 180, "germinationDays": 14, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Loose, fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "low", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "continental"],
-      "plantingMonths": [10, 11, 2, 3], "plantingSeason": "Autumn for the biggest bulbs",
-      "harvestWindow": "8–9 months after planting", "seedAvailable": false, "stageTemplate": "root-vegetable",
+      "id": "pl-garlic",
+      "name": "Garlic",
+      "slug": "garlic",
+      "category": "vegetables",
+      "icon": "root",
+      "scientificName": "Allium sativum",
+      "family": "Amaryllidaceae",
+      "daysToHarvest": 180,
+      "germinationDays": 14,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Loose, fertile, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "continental"
+      ],
+      "plantingMonths": [
+        10,
+        11,
+        2,
+        3
+      ],
+      "plantingSeason": "Autumn for the biggest bulbs",
+      "harvestWindow": "8–9 months after planting",
+      "seedAvailable": false,
+      "stageTemplate": "root-vegetable",
       "notes": "Grown from a clove, not seed. Plant in autumn and it rewards you in summer.",
       "i18n": {
-        "ar": { "name": "ثوم", "notes": "يُزرع من فصّ لا من بذرة. ازرعه في الخريف وستحصده في الصيف." },
-        "ku": { "name": "سیر", "notes": "لە فەسڵێکەوە دەچێنرێت نەک لە تۆو. لە پاییزدا بیچێنە و لە هاویندا بەرهەمی دەبینی." }
+        "ar": {
+          "name": "ثوم",
+          "notes": "يُزرع من فصّ لا من بذرة. ازرعه في الخريف وستحصده في الصيف."
+        },
+        "ku": {
+          "name": "سیر",
+          "notes": "لە فەسڵێکەوە دەچێنرێت نەک لە تۆو. لە پاییزدا بیچێنە و لە هاویندا بەرهەمی دەبینی.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
       },
-      "aliases": [["en", "Garlic bulbs"]]
+      "aliases": [
+        [
+          "en",
+          "Garlic bulbs"
+        ]
+      ]
     },
     {
-      "id": "pl-leek", "name": "Leek", "slug": "leek", "category": "vegetables", "icon": "root",
-      "scientificName": "Allium ampeloprasum", "family": "Amaryllidaceae",
-      "daysToHarvest": 120, "germinationDays": 12, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Deep, fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "110–140 days after sowing",
-      "seedAvailable": true, "stageTemplate": "root-vegetable",
+      "id": "pl-leek",
+      "name": "Leek",
+      "slug": "leek",
+      "category": "vegetables",
+      "icon": "root",
+      "scientificName": "Allium ampeloprasum",
+      "family": "Amaryllidaceae",
+      "daysToHarvest": 120,
+      "germinationDays": 12,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Deep, fertile, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "110–140 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "root-vegetable",
       "notes": "Earth up the stems as they grow for a longer, whiter, sweeter shaft.",
       "i18n": {
-        "ar": { "name": "كراث", "notes": "اردم السيقان أثناء نموها للحصول على جزء أبيض أطول وأحلى." },
-        "ku": { "name": "کوارە", "notes": "لە کاتی گەشەکردن خاک بکە بە دەوری قەدەکاندا بۆ بەشێکی سپیی درێژتر و شیرینتر." }
+        "ar": {
+          "name": "كراث",
+          "notes": "اردم السيقان أثناء نموها للحصول على جزء أبيض أطول وأحلى."
+        },
+        "ku": {
+          "name": "کوارە",
+          "notes": "لە کاتی گەشەکردن خاک بکە بە دەوری قەدەکاندا بۆ بەشێکی سپیی درێژتر و شیرینتر.",
+          "nameStatus": "verified",
+          "nameSource": "vejinlex",
+          "alternatives": [
+            "کوڕادە",
+            "کەوەر",
+            "کەرەسا"
+          ]
+        }
       },
-      "aliases": [["en", "Leeks"]]
+      "aliases": [
+        [
+          "en",
+          "Leeks"
+        ]
+      ]
     },
     {
-      "id": "pl-potato", "name": "Potato", "slug": "potato", "category": "vegetables", "icon": "root",
-      "scientificName": "Solanum tuberosum", "family": "Solanaceae",
-      "daysToHarvest": 90, "germinationDays": 14, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Loose, slightly acidic, fertile soil", "soilPhMin": 5.0, "soilPhMax": 6.5,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [3, 4, 9, 10], "plantingSeason": "Early spring or autumn",
-      "harvestWindow": "80–110 days after planting", "seedAvailable": false, "stageTemplate": "root-vegetable",
+      "id": "pl-potato",
+      "name": "Potato",
+      "slug": "potato",
+      "category": "vegetables",
+      "icon": "root",
+      "scientificName": "Solanum tuberosum",
+      "family": "Solanaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 14,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Loose, slightly acidic, fertile soil",
+      "soilPhMin": 5,
+      "soilPhMax": 6.5,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        9,
+        10
+      ],
+      "plantingSeason": "Early spring or autumn",
+      "harvestWindow": "80–110 days after planting",
+      "seedAvailable": false,
+      "stageTemplate": "root-vegetable",
       "notes": "Grown from a seed potato. Earth up the rows — tubers exposed to light turn green.",
       "i18n": {
-        "ar": { "name": "بطاطا", "notes": "تُزرع من درنة. اردم الصفوف — الدرنات المكشوفة للضوء تخضرّ." },
-        "ku": { "name": "پەتاتە", "notes": "لە تەپکێک دەچێنرێت. ڕیزەکان خاک بکە — تەپکەکانی بەرکەوتووی ڕووناکی سەوز دەبن." }
+        "ar": {
+          "name": "بطاطا",
+          "notes": "تُزرع من درنة. اردم الصفوف — الدرنات المكشوفة للضوء تخضرّ."
+        },
+        "ku": {
+          "name": "پەتاتە",
+          "notes": "لە تەپکێک دەچێنرێت. ڕیزەکان خاک بکە — تەپکەکانی بەرکەوتووی ڕووناکی سەوز دەبن.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
       },
-      "aliases": [["en", "Potatoes"], ["en", "Spud"], ["ar", "بطاطس"]]
+      "aliases": [
+        [
+          "en",
+          "Potatoes"
+        ],
+        [
+          "en",
+          "Spud"
+        ],
+        [
+          "ar",
+          "بطاطس"
+        ]
+      ]
     },
     {
-      "id": "pl-sweet-potato", "name": "Sweet Potato", "slug": "sweet-potato", "category": "vegetables", "icon": "root",
-      "scientificName": "Ipomoea batatas", "family": "Convolvulaceae",
-      "daysToHarvest": 120, "germinationDays": 14, "tempMin": 20, "tempMax": 30,
-      "soilPreferences": "Loose, sandy, well-drained soil", "soilPhMin": 5.5, "soilPhMax": 6.5,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["subtropical", "tropical", "mediterranean"],
-      "plantingMonths": [4, 5, 6], "plantingSeason": "Warm season", "harvestWindow": "110–140 days after planting",
-      "seedAvailable": false, "stageTemplate": "root-vegetable",
+      "id": "pl-sweet-potato",
+      "name": "Sweet Potato",
+      "slug": "sweet-potato",
+      "category": "vegetables",
+      "icon": "root",
+      "scientificName": "Ipomoea batatas",
+      "family": "Convolvulaceae",
+      "daysToHarvest": 120,
+      "germinationDays": 14,
+      "tempMin": 20,
+      "tempMax": 30,
+      "soilPreferences": "Loose, sandy, well-drained soil",
+      "soilPhMin": 5.5,
+      "soilPhMax": 6.5,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "subtropical",
+        "tropical",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        4,
+        5,
+        6
+      ],
+      "plantingSeason": "Warm season",
+      "harvestWindow": "110–140 days after planting",
+      "seedAvailable": false,
+      "stageTemplate": "root-vegetable",
       "notes": "Grown from rooted slips. A warm-weather crop that loves a long, hot season.",
       "i18n": {
-        "ar": { "name": "بطاطا حلوة", "notes": "تُزرع من شتلات مورّقة. محصول محب للحرارة يحتاج موسمًا طويلًا حارًا." },
-        "ku": { "name": "پەتاتەی شیرین", "notes": "لە نەمامی ڕەگداری دەچێنرێت. بەرهەمێکی حەز لە گەرمی دەکات و وەرزی درێژ دەوێت." }
+        "ar": {
+          "name": "بطاطا حلوة",
+          "notes": "تُزرع من شتلات مورّقة. محصول محب للحرارة يحتاج موسمًا طويلًا حارًا."
+        },
+        "ku": {
+          "name": "پەتاتەی شیرین",
+          "notes": "لە نەمامی ڕەگداری دەچێنرێت. بەرهەمێکی حەز لە گەرمی دەکات و وەرزی درێژ دەوێت.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
       },
-      "aliases": [["en", "Kumara"]]
+      "aliases": [
+        [
+          "en",
+          "Kumara"
+        ]
+      ]
     },
     {
-      "id": "pl-broad-bean", "name": "Broad Bean", "slug": "broad-bean", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Vicia faba", "family": "Fabaceae",
-      "daysToHarvest": 90, "germinationDays": 12, "tempMin": 10, "tempMax": 20,
-      "soilPreferences": "Fertile, moisture-retentive soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "medium", "sun": "full", "difficulty": "easy", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "continental"],
-      "plantingMonths": [2, 3, 4, 10, 11], "plantingSeason": "Autumn or early spring",
-      "harvestWindow": "85–100 days after sowing", "seedAvailable": true, "stageTemplate": "legume",
+      "id": "pl-broad-bean",
+      "name": "Broad Bean",
+      "slug": "broad-bean",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Vicia faba",
+      "family": "Fabaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 12,
+      "tempMin": 10,
+      "tempMax": 20,
+      "soilPreferences": "Fertile, moisture-retentive soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "continental"
+      ],
+      "plantingMonths": [
+        2,
+        3,
+        4,
+        10,
+        11
+      ],
+      "plantingSeason": "Autumn or early spring",
+      "harvestWindow": "85–100 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "legume",
       "notes": "Hardy and nitrogen-fixing — a great soil-builder for the bed's next crop.",
       "i18n": {
-        "ar": { "name": "فول", "notes": "متحمّل ويثبّت النيتروجين — ممتاز لتحضير التربة للمحصول التالي." },
-        "ku": { "name": "باقڵای گەورە", "notes": "خۆڕاگرە و نایترۆجین جێگیر دەکات — باشە بۆ ئامادەکردنی خاک بۆ بەرهەمی داهاتوو." }
+        "ar": {
+          "name": "فول",
+          "notes": "متحمّل ويثبّت النيتروجين — ممتاز لتحضير التربة للمحصول التالي."
+        },
+        "ku": {
+          "name": "باقڵا",
+          "notes": "خۆڕاگرە و نایترۆجین جێگیر دەکات — باشە بۆ ئامادەکردنی خاک بۆ بەرهەمی داهاتوو.",
+          "nameStatus": "verified",
+          "nameSource": "vejinlex",
+          "alternatives": [
+            "باقڵای گەورە"
+          ]
+        }
       },
-      "aliases": [["en", "Fava bean"], ["en", "Broad beans"], ["ar", "فول بلدي"]]
+      "aliases": [
+        [
+          "en",
+          "Fava bean"
+        ],
+        [
+          "en",
+          "Broad beans"
+        ],
+        [
+          "ar",
+          "فول بلدي"
+        ]
+      ]
     },
     {
-      "id": "pl-green-bean", "name": "Green Bean", "slug": "green-bean", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Phaseolus vulgaris", "family": "Fabaceae",
-      "daysToHarvest": 55, "germinationDays": 7, "tempMin": 15, "tempMax": 28,
-      "soilPreferences": "Fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "easy", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "subtropical", "mediterranean", "continental"],
-      "plantingMonths": [4, 5, 6], "plantingSeason": "Late spring into summer",
-      "harvestWindow": "50–65 days after sowing", "seedAvailable": true, "stageTemplate": "legume",
+      "id": "pl-green-bean",
+      "name": "Green Bean",
+      "slug": "green-bean",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Phaseolus vulgaris",
+      "family": "Fabaceae",
+      "daysToHarvest": 55,
+      "germinationDays": 7,
+      "tempMin": 15,
+      "tempMax": 28,
+      "soilPreferences": "Fertile, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "subtropical",
+        "mediterranean",
+        "continental"
+      ],
+      "plantingMonths": [
+        4,
+        5,
+        6
+      ],
+      "plantingSeason": "Late spring into summer",
+      "harvestWindow": "50–65 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "legume",
       "notes": "Keep picking and it keeps producing — letting pods mature stops the crop.",
       "i18n": {
-        "ar": { "name": "فاصولياء", "notes": "واصل القطف فتستمر بالإنتاج — ترك القرون تنضج يوقف المحصول." },
-        "ku": { "name": "لۆبیا", "notes": "بەردەوام بیکوڵەوە بۆ ئەوەی بەردەوام بەرهەم بدات — هێشتنی شەنەکان دەبێتە هۆی وەستانی بەرهەم." }
+        "ar": {
+          "name": "فاصولياء",
+          "notes": "واصل القطف فتستمر بالإنتاج — ترك القرون تنضج يوقف المحصول."
+        },
+        "ku": {
+          "name": "لۆبیا",
+          "notes": "بەردەوام بیکوڵەوە بۆ ئەوەی بەردەوام بەرهەم بدات — هێشتنی شەنەکان دەبێتە هۆی وەستانی بەرهەم.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Sorani wordlist gives فاسۆلیا; لۆبیا kept as the everyday local word.",
+          "alternatives": [
+            "لۆبیای سەوز",
+            "فاسۆلیا",
+            "فاسۆلیای سەوز"
+          ]
+        }
       },
-      "aliases": [["en", "French bean"], ["en", "String bean"], ["ku", "لۆبیای سەوز"]]
+      "aliases": [
+        [
+          "en",
+          "French bean"
+        ],
+        [
+          "en",
+          "String bean"
+        ]
+      ]
     },
     {
-      "id": "pl-okra", "name": "Okra", "slug": "okra", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Abelmoschus esculentus", "family": "Malvaceae",
-      "daysToHarvest": 60, "germinationDays": 10, "tempMin": 22, "tempMax": 35,
-      "soilPreferences": "Rich, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["subtropical", "arid", "tropical", "mediterranean"],
-      "plantingMonths": [4, 5, 6], "plantingSeason": "Hot season", "harvestWindow": "55–70 days after sowing",
-      "seedAvailable": true, "stageTemplate": "annual-vegetable",
+      "id": "pl-okra",
+      "name": "Okra",
+      "slug": "okra",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Abelmoschus esculentus",
+      "family": "Malvaceae",
+      "daysToHarvest": 60,
+      "germinationDays": 10,
+      "tempMin": 22,
+      "tempMax": 35,
+      "soilPreferences": "Rich, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "subtropical",
+        "arid",
+        "tropical",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        4,
+        5,
+        6
+      ],
+      "plantingSeason": "Hot season",
+      "harvestWindow": "55–70 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "annual-vegetable",
       "notes": "Loves the heat. Pick pods young, at 7–10 cm, before they turn woody.",
       "i18n": {
-        "ar": { "name": "بامية", "notes": "تحب الحرارة. اقطف القرون صغيرة بطول ٧–١٠ سم قبل أن تتخشب." },
-        "ku": { "name": "بامیە", "notes": "گەرمی خۆش دەوێت. شەنەکان بچووک بکوڵەوە لە ٧–١٠ سم پێش ئەوەی دارینە بن." }
+        "ar": {
+          "name": "بامية",
+          "notes": "تحب الحرارة. اقطف القرون صغيرة بطول ٧–١٠ سم قبل أن تتخشب."
+        },
+        "ku": {
+          "name": "بامیە",
+          "notes": "گەرمی خۆش دەوێت. شەنەکان بچووک بکوڵەوە لە ٧–١٠ سم پێش ئەوەی دارینە بن.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Sorani Wikipedia titles okra بامێ; بامیە kept as the local form.",
+          "alternatives": [
+            "بامێ"
+          ]
+        }
       },
-      "aliases": [["en", "Lady's finger"], ["en", "Okro"]]
+      "aliases": [
+        [
+          "en",
+          "Lady's finger"
+        ],
+        [
+          "en",
+          "Okro"
+        ]
+      ]
     },
     {
-      "id": "pl-corn", "name": "Corn", "slug": "corn", "category": "vegetables", "icon": "fruit",
-      "scientificName": "Zea mays", "family": "Poaceae",
-      "daysToHarvest": 90, "germinationDays": 7, "tempMin": 18, "tempMax": 32,
-      "soilPreferences": "Rich, fertile, well-drained soil", "soilPhMin": 5.8, "soilPhMax": 7.0,
-      "water": "high", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "subtropical", "continental", "mediterranean"],
-      "plantingMonths": [4, 5, 6], "plantingSeason": "Warm season", "harvestWindow": "85–100 days after sowing",
-      "seedAvailable": true, "stageTemplate": "annual-vegetable",
+      "id": "pl-corn",
+      "name": "Corn",
+      "slug": "corn",
+      "category": "vegetables",
+      "icon": "fruit",
+      "scientificName": "Zea mays",
+      "family": "Poaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 7,
+      "tempMin": 18,
+      "tempMax": 32,
+      "soilPreferences": "Rich, fertile, well-drained soil",
+      "soilPhMin": 5.8,
+      "soilPhMax": 7,
+      "water": "high",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "subtropical",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        4,
+        5,
+        6
+      ],
+      "plantingSeason": "Warm season",
+      "harvestWindow": "85–100 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "annual-vegetable",
       "notes": "Plant in a block, not a row — wind-pollinated, so neighbours fill the cobs.",
       "i18n": {
-        "ar": { "name": "ذرة", "notes": "ازرعها في مربع لا صف — فهي تُلقّح بالريح، فالجيران يملؤون الكوز." },
-        "ku": { "name": "گەنمەشامی", "notes": "بە کۆمەڵ بیانچێنە نەک بە ڕیز — بە بای پیت دەکرێت، دراوسێکان گوڵەکە پڕ دەکەن." }
+        "ar": {
+          "name": "ذرة",
+          "notes": "ازرعها في مربع لا صف — فهي تُلقّح بالريح، فالجيران يملؤون الكوز."
+        },
+        "ku": {
+          "name": "گەنمەشامی",
+          "notes": "بە کۆمەڵ بیانچێنە نەک بە ڕیز — بە بای پیت دەکرێت، دراوسێکان گوڵەکە پڕ دەکەن.",
+          "nameStatus": "verified",
+          "nameSource": "sorani-wordlist"
+        }
       },
-      "aliases": [["en", "Maize"], ["en", "Sweet corn"], ["ar", "ذرة حلوة"]]
+      "aliases": [
+        [
+          "en",
+          "Maize"
+        ],
+        [
+          "en",
+          "Sweet corn"
+        ],
+        [
+          "ar",
+          "ذرة حلوة"
+        ]
+      ]
     },
     {
-      "id": "pl-cabbage", "name": "Cabbage", "slug": "cabbage", "category": "vegetables", "icon": "leafy",
-      "scientificName": "Brassica oleracea", "family": "Brassicaceae",
-      "daysToHarvest": 90, "germinationDays": 8, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Fertile, firm, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [3, 4, 8, 9], "plantingSeason": "Spring and autumn",
-      "harvestWindow": "80–100 days after sowing", "seedAvailable": true, "stageTemplate": "leafy-annual",
+      "id": "pl-cabbage",
+      "name": "Cabbage",
+      "slug": "cabbage",
+      "category": "vegetables",
+      "icon": "leafy",
+      "scientificName": "Brassica oleracea var. capitata",
+      "family": "Brassicaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 8,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Fertile, firm, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        8,
+        9
+      ],
+      "plantingSeason": "Spring and autumn",
+      "harvestWindow": "80–100 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "leafy-annual",
       "notes": "Firm heads resist pests. Net against cabbage white butterflies in summer.",
       "i18n": {
-        "ar": { "name": "ملفوف", "notes": "الرؤوس المتماسكة تقاوم الآفات. استخدم شبكة ضد فراشات الملفوف في الصيف." },
-        "ku": { "name": "کەلم", "notes": "سەرەکانی توند بەرگەی ئافات دەگرن. لە هاوین ڕێچکە بەکاربهێنە دژی پروانەی کەلم." }
+        "ar": {
+          "name": "ملفوف",
+          "notes": "الرؤوس المتماسكة تقاوم الآفات. استخدم شبكة ضد فراشات الملفوف في الصيف."
+        },
+        "ku": {
+          "name": "کەلەرم",
+          "notes": "سەرەکانی توند بەرگەی ئافات دەگرن. لە هاوین ڕێچکە بەکاربهێنە دژی پروانەی کەلم.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
+          "alternatives": [
+            "کەلم"
+          ]
+        }
       },
-      "aliases": [["en", "Cabbages"], ["ar", "كرنب"]]
+      "aliases": [
+        [
+          "en",
+          "Cabbages"
+        ],
+        [
+          "ar",
+          "كرنب"
+        ]
+      ]
     },
     {
-      "id": "pl-cauliflower", "name": "Cauliflower", "slug": "cauliflower", "category": "vegetables", "icon": "leafy",
-      "scientificName": "Brassica oleracea", "family": "Brassicaceae",
-      "daysToHarvest": 90, "germinationDays": 8, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Fertile, firm, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [3, 4, 8, 9], "plantingSeason": "Spring and autumn",
-      "harvestWindow": "80–100 days after sowing", "seedAvailable": true, "stageTemplate": "leafy-annual",
+      "id": "pl-cauliflower",
+      "name": "Cauliflower",
+      "slug": "cauliflower",
+      "category": "vegetables",
+      "icon": "leafy",
+      "scientificName": "Brassica oleracea var. botrytis",
+      "family": "Brassicaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 8,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Fertile, firm, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        8,
+        9
+      ],
+      "plantingSeason": "Spring and autumn",
+      "harvestWindow": "80–100 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "leafy-annual",
       "notes": "Tie the outer leaves over the head to keep the curd white and tender.",
       "i18n": {
-        "ar": { "name": "قرنبيط", "notes": "اربط الأوراق الخارجية فوق الرأس ليبقى أبيض وطريًّا." },
-        "ku": { "name": "گوڵەگەنم", "notes": "گەڵا دەرەکییەکان بەسەر سەرەکەدا ببەستە بۆ ئەوەی سپی و نەرم بمینێت." }
+        "ar": {
+          "name": "قرنبيط",
+          "notes": "اربط الأوراق الخارجية فوق الرأس ليبقى أبيض وطريًّا."
+        },
+        "ku": {
+          "name": "قەرنابیت",
+          "notes": "گەڵا دەرەکییەکان بەسەر سەرەکەدا ببەستە بۆ ئەوەی سپی و نەرم بمینێت.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
+          "alternatives": [
+            "گوڵەگەنم"
+          ]
+        }
       },
-      "aliases": [["en", "Cauliflowers"]]
+      "aliases": [
+        [
+          "en",
+          "Cauliflowers"
+        ]
+      ]
     },
     {
-      "id": "pl-broccoli", "name": "Broccoli", "slug": "broccoli", "category": "vegetables", "icon": "leafy",
-      "scientificName": "Brassica oleracea", "family": "Brassicaceae",
-      "daysToHarvest": 80, "germinationDays": 8, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Fertile, firm, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [3, 4, 8, 9], "plantingSeason": "Spring and autumn",
-      "harvestWindow": "70–90 days after sowing", "seedAvailable": true, "stageTemplate": "leafy-annual",
+      "id": "pl-broccoli",
+      "name": "Broccoli",
+      "slug": "broccoli",
+      "category": "vegetables",
+      "icon": "leafy",
+      "scientificName": "Brassica oleracea var. italica",
+      "family": "Brassicaceae",
+      "daysToHarvest": 80,
+      "germinationDays": 8,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Fertile, firm, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        8,
+        9
+      ],
+      "plantingSeason": "Spring and autumn",
+      "harvestWindow": "70–90 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "leafy-annual",
       "notes": "Cut the main head and side shoots keep coming for weeks.",
       "i18n": {
-        "ar": { "name": "بروكلي", "notes": "اقطع الرأس الرئيسي فتستمر النموات الجانبية لأسابيع." },
-        "ku": { "name": "برۆکڵی", "notes": "سەرەکی ببڕە، لەقە لاوەکییەکان بۆ چەند هەفتەیەک بەردەوام دەبن." }
+        "ar": {
+          "name": "بروكلي",
+          "notes": "اقطع الرأس الرئيسي فتستمر النموات الجانبية لأسابيع."
+        },
+        "ku": {
+          "name": "برۆکڵی",
+          "notes": "سەرەکی ببڕە، لەقە لاوەکییەکان بۆ چەند هەفتەیەک بەردەوام دەبن.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
       },
-      "aliases": [["en", "Calabrese"]]
+      "aliases": [
+        [
+          "en",
+          "Calabrese"
+        ]
+      ]
     },
     {
-      "id": "pl-arugula", "name": "Arugula", "slug": "arugula", "category": "vegetables", "icon": "leafy",
-      "scientificName": "Eruca vesicaria", "family": "Brassicaceae",
-      "daysToHarvest": 35, "germinationDays": 5, "tempMin": 10, "tempMax": 22,
-      "soilPreferences": "Any fertile, moist soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "continental"],
-      "plantingMonths": [3, 4, 5, 9, 10], "plantingSeason": "Cool spring and autumn",
-      "harvestWindow": "30–45 days after sowing", "seedAvailable": true, "stageTemplate": "leafy-annual",
+      "id": "pl-arugula",
+      "name": "Arugula",
+      "slug": "arugula",
+      "category": "vegetables",
+      "icon": "leafy",
+      "scientificName": "Eruca vesicaria",
+      "family": "Brassicaceae",
+      "daysToHarvest": 35,
+      "germinationDays": 5,
+      "tempMin": 10,
+      "tempMax": 22,
+      "soilPreferences": "Any fertile, moist soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5,
+        9,
+        10
+      ],
+      "plantingSeason": "Cool spring and autumn",
+      "harvestWindow": "30–45 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "leafy-annual",
       "notes": "Cut-and-come-again: snip leaves and it regrows for several pickings.",
       "i18n": {
-        "ar": { "name": "جرجير", "notes": "اقطع واعد: قصّ الأوراق وتنمو من جديد لعدة قطوف." },
-        "ku": { "name": "جرجیر", "notes": "ببڕە و دەگەڕێتەوە: گەڵاکان ببڕە، بۆ چەند جار دووبارە دەڕوێت." }
+        "ar": {
+          "name": "جرجير",
+          "notes": "اقطع واعد: قصّ الأوراق وتنمو من جديد لعدة قطوف."
+        },
+        "ku": {
+          "name": "جرجیر",
+          "notes": "ببڕە و دەگەڕێتەوە: گەڵاکان ببڕە، بۆ چەند جار دووبارە دەڕوێت.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "جرجیر is the Arabic name; no settled Sorani term found for rocket. Needs a native speaker.",
+          "alternatives": [
+            "ئاروگولا"
+          ]
+        }
       },
-      "aliases": [["en", "Rocket"], ["en", "Rucola"], ["ar", "روكا"], ["ar", "جرجير بلدي"]]
+      "aliases": [
+        [
+          "en",
+          "Rocket"
+        ],
+        [
+          "en",
+          "Rucola"
+        ],
+        [
+          "ar",
+          "روكا"
+        ],
+        [
+          "ar",
+          "جرجير بلدي"
+        ]
+      ]
     },
     {
-      "id": "pl-swiss-chard", "name": "Swiss Chard", "slug": "swiss-chard", "category": "vegetables", "icon": "leafy",
-      "scientificName": "Beta vulgaris", "family": "Amaranthaceae",
-      "daysToHarvest": 55, "germinationDays": 8, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Rich, moist, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "medium", "sun": "full", "difficulty": "easy", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "continental"],
-      "plantingMonths": [3, 4, 8, 9], "plantingSeason": "Spring and autumn",
-      "harvestWindow": "50–65 days after sowing", "seedAvailable": true, "stageTemplate": "leafy-annual",
+      "id": "pl-swiss-chard",
+      "name": "Swiss Chard",
+      "slug": "swiss-chard",
+      "category": "vegetables",
+      "icon": "leafy",
+      "scientificName": "Beta vulgaris var. cicla",
+      "family": "Amaranthaceae",
+      "daysToHarvest": 55,
+      "germinationDays": 8,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Rich, moist, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        8,
+        9
+      ],
+      "plantingSeason": "Spring and autumn",
+      "harvestWindow": "50–65 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "leafy-annual",
       "notes": "Harvest outer leaves only and one sowing feeds you for months.",
       "i18n": {
-        "ar": { "name": "سلق", "notes": "اقطف الأوراق الخارجية فقط، وزرعة واحدة تكفيك لأشهر." },
-        "ku": { "name": "سەلق", "notes": "تەنها گەڵای دەرەوە بکوڵەوە، یەک چاندن بۆ مانگەکان بەشت دەکات." }
+        "ar": {
+          "name": "سلق",
+          "notes": "اقطف الأوراق الخارجية فقط، وزرعة واحدة تكفيك لأشهر."
+        },
+        "ku": {
+          "name": "سەلق",
+          "notes": "تەنها گەڵای دەرەوە بکوڵەوە، یەک چاندن بۆ مانگەکان بەشت دەکات.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "سەلق is borrowed from Iraqi Arabic; no Sorani term found."
+        }
       },
-      "aliases": [["en", "Chard"], ["en", "Silverbeet"], ["ar", "سلق أخضر"]]
+      "aliases": [
+        [
+          "en",
+          "Chard"
+        ],
+        [
+          "en",
+          "Silverbeet"
+        ],
+        [
+          "ar",
+          "سلق أخضر"
+        ]
+      ]
     },
     {
-      "id": "pl-celery", "name": "Celery", "slug": "celery", "category": "vegetables", "icon": "leafy",
-      "scientificName": "Apium graveolens", "family": "Apiaceae",
-      "daysToHarvest": 120, "germinationDays": 18, "tempMin": 13, "tempMax": 24,
-      "soilPreferences": "Rich, moisture-retentive soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "high", "sun": "partial", "difficulty": "hard", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "continental"],
-      "plantingMonths": [3, 4, 8], "plantingSeason": "Spring or late summer",
-      "harvestWindow": "110–130 days after sowing", "seedAvailable": true, "stageTemplate": "leafy-annual",
+      "id": "pl-celery",
+      "name": "Celery",
+      "slug": "celery",
+      "category": "vegetables",
+      "icon": "leafy",
+      "scientificName": "Apium graveolens",
+      "family": "Apiaceae",
+      "daysToHarvest": 120,
+      "germinationDays": 18,
+      "tempMin": 13,
+      "tempMax": 24,
+      "soilPreferences": "Rich, moisture-retentive soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "high",
+      "sun": "partial",
+      "difficulty": "hard",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        8
+      ],
+      "plantingSeason": "Spring or late summer",
+      "harvestWindow": "110–130 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "leafy-annual",
       "notes": "Thirsty and slow — never let it dry out or the stems turn stringy.",
       "i18n": {
-        "ar": { "name": "كرفس", "notes": "عطشان وبطيء — لا تدعه يجف وإلا أصبحت السيقان ليفية." },
-        "ku": { "name": "کەرەفس", "notes": "تینوو و هێواشە — ڕێگە مەدە وشک بێت، ئەگینا قەدەکان دەبنە دۆر." }
+        "ar": {
+          "name": "كرفس",
+          "notes": "عطشان وبطيء — لا تدعه يجف وإلا أصبحت السيقان ليفية."
+        },
+        "ku": {
+          "name": "کەرەفس",
+          "notes": "تینوو و هێواشە — ڕێگە مەدە وشک بێت، ئەگینا قەدەکان دەبنە دۆر.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found."
+        }
       },
-      "aliases": [["en", "Celery stalks"]]
+      "aliases": [
+        [
+          "en",
+          "Celery stalks"
+        ]
+      ]
     },
     {
-      "id": "pl-fennel", "name": "Fennel", "slug": "fennel", "category": "herbs", "icon": "herb",
-      "scientificName": "Foeniculum vulgare", "family": "Apiaceae",
-      "daysToHarvest": 90, "germinationDays": 10, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Well-drained, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "medium", "indoor": false, "outdoor": true,
-      "climates": ["mediterranean", "temperate", "continental"],
-      "plantingMonths": [3, 4, 5, 8], "plantingSeason": "Spring and late summer",
-      "harvestWindow": "85–100 days after sowing", "seedAvailable": true, "stageTemplate": "herb-annual",
+      "id": "pl-fennel",
+      "name": "Fennel",
+      "slug": "fennel",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Foeniculum vulgare",
+      "family": "Apiaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 10,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Well-drained, fertile soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "temperate",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5,
+        8
+      ],
+      "plantingSeason": "Spring and late summer",
+      "harvestWindow": "85–100 days after sowing",
+      "seedAvailable": true,
+      "stageTemplate": "herb-annual",
       "notes": "Both the bulb and the feathery tops are edible; the seeds flavour tea.",
       "i18n": {
-        "ar": { "name": "شمر", "notes": "البصلة والقِمم الريشية صالحتان للأكل، والبذور تُنكّه الشاي." },
-        "ku": { "name": "ڕازیانە", "notes": "هەم پیازەکە و هەم سەرە پەرجەکان دەخورێن، تۆوەکان چێژی چا دەدەن." }
+        "ar": {
+          "name": "شمر",
+          "notes": "البصلة والقِمم الريشية صالحتان للأكل، والبذور تُنكّه الشاي."
+        },
+        "ku": {
+          "name": "ڕازیانە",
+          "notes": "هەم پیازەکە و هەم سەرە پەرجەکان دەخورێن، تۆوەکان چێژی چا دەدەن.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
       },
-      "aliases": [["en", "Florence fennel"], ["ar", "شمرة"]]
+      "aliases": [
+        [
+          "en",
+          "Florence fennel"
+        ],
+        [
+          "ar",
+          "شمرة"
+        ]
+      ]
     },
     {
-      "id": "pl-oregano", "name": "Oregano", "slug": "oregano", "category": "herbs", "icon": "herb",
-      "scientificName": "Origanum vulgare", "family": "Lamiaceae",
-      "daysToHarvest": 90, "germinationDays": 14, "tempMin": 15, "tempMax": 28,
-      "soilPreferences": "Light, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 8.0,
-      "water": "low", "sun": "full", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["mediterranean", "temperate", "subtropical", "arid"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "Continuous once established",
-      "seedAvailable": true, "stageTemplate": "herb-perennial",
+      "id": "pl-oregano",
+      "name": "Oregano",
+      "slug": "oregano",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Origanum vulgare",
+      "family": "Lamiaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 14,
+      "tempMin": 15,
+      "tempMax": 28,
+      "soilPreferences": "Light, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 8,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "temperate",
+        "subtropical",
+        "arid"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "Continuous once established",
+      "seedAvailable": true,
+      "stageTemplate": "herb-perennial",
       "notes": "Drought-tolerant and perennial. Flavour is strongest just before it flowers.",
       "i18n": {
-        "ar": { "name": "أوريجانو", "notes": "متحمّل للجفاف ومعمّر. النكهة أقوى قبل الإزهار مباشرة." },
-        "ku": { "name": "ئۆریگانۆ", "notes": "بەرگەی وشکەساڵی دەگرێت و هەمیشەییە. تامەکەی پێش گوڵکردن بەهێزترینە." }
+        "ar": {
+          "name": "أوريجانو",
+          "notes": "متحمّل للجفاف ومعمّر. النكهة أقوى قبل الإزهار مباشرة."
+        },
+        "ku": {
+          "name": "ئۆریگانۆ",
+          "notes": "بەرگەی وشکەساڵی دەگرێت و هەمیشەییە. تامەکەی پێش گوڵکردن بەهێزترینە.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Sorani Wikipedia gives ئەزبۆڵە for oregano; ئۆریگانۆ is the transliteration in use.",
+          "alternatives": [
+            "ئەزبۆڵە"
+          ]
+        }
       },
-      "aliases": [["en", "Wild marjoram"], ["ar", "زعتر بري"]]
+      "aliases": [
+        [
+          "en",
+          "Wild marjoram"
+        ],
+        [
+          "ar",
+          "زعتر بري"
+        ]
+      ]
     },
     {
-      "id": "pl-sage", "name": "Sage", "slug": "sage", "category": "herbs", "icon": "herb",
-      "scientificName": "Salvia officinalis", "family": "Lamiaceae",
-      "daysToHarvest": 90, "germinationDays": 14, "tempMin": 15, "tempMax": 28,
-      "soilPreferences": "Light, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "low", "sun": "full", "difficulty": "medium", "indoor": true, "outdoor": true,
-      "climates": ["mediterranean", "temperate", "continental"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "Continuous once established",
-      "seedAvailable": true, "stageTemplate": "herb-perennial",
+      "id": "pl-sage",
+      "name": "Sage",
+      "slug": "sage",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Salvia officinalis",
+      "family": "Lamiaceae",
+      "daysToHarvest": 90,
+      "germinationDays": 14,
+      "tempMin": 15,
+      "tempMax": 28,
+      "soilPreferences": "Light, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "temperate",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "Continuous once established",
+      "seedAvailable": true,
+      "stageTemplate": "herb-perennial",
       "notes": "A woody perennial; prune lightly after flowering to keep it tidy.",
       "i18n": {
-        "ar": { "name": "مريمية", "notes": "نبتة معمرة خشبية؛ قلّمها بلطف بعد الإزهار لتبقى مرتبة." },
-        "ku": { "name": "مەریەمیە", "notes": "ڕووەکێکی دارینەی هەمیشەییە؛ دوای گوڵکردن کەمێک بیبڕە بۆ ڕێکخستنی." }
+        "ar": {
+          "name": "مريمية",
+          "notes": "نبتة معمرة خشبية؛ قلّمها بلطف بعد الإزهار لتبقى مرتبة."
+        },
+        "ku": {
+          "name": "مەریەمیە",
+          "notes": "ڕووەکێکی دارینەی هەمیشەییە؛ دوای گوڵکردن کەمێک بیبڕە بۆ ڕێکخستنی.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found.",
+          "alternatives": [
+            "سەلڤیا"
+          ]
+        }
       },
-      "aliases": [["en", "Garden sage"], ["en", "Common sage"]]
+      "aliases": [
+        [
+          "en",
+          "Garden sage"
+        ],
+        [
+          "en",
+          "Common sage"
+        ]
+      ]
     },
     {
-      "id": "pl-lavender", "name": "Lavender", "slug": "lavender", "category": "herbs", "icon": "herb",
-      "scientificName": "Lavandula angustifolia", "family": "Lamiaceae",
-      "daysToHarvest": 120, "germinationDays": 21, "tempMin": 15, "tempMax": 30,
-      "soilPreferences": "Poor, gritty, sharply drained soil", "soilPhMin": 6.5, "soilPhMax": 8.0,
-      "water": "low", "sun": "full", "difficulty": "medium", "indoor": true, "outdoor": true,
-      "climates": ["mediterranean", "temperate", "arid", "subtropical"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "Flower spikes in summer",
-      "seedAvailable": true, "stageTemplate": "herb-perennial",
+      "id": "pl-lavender",
+      "name": "Lavender",
+      "slug": "lavender",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Lavandula angustifolia",
+      "family": "Lamiaceae",
+      "daysToHarvest": 120,
+      "germinationDays": 21,
+      "tempMin": 15,
+      "tempMax": 30,
+      "soilPreferences": "Poor, gritty, sharply drained soil",
+      "soilPhMin": 6.5,
+      "soilPhMax": 8,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "medium",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "temperate",
+        "arid",
+        "subtropical"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "Flower spikes in summer",
+      "seedAvailable": true,
+      "stageTemplate": "herb-perennial",
       "notes": "Wants sun and sharp drainage — wet feet in winter are its only real enemy.",
       "i18n": {
-        "ar": { "name": "خزامى", "notes": "تحب الشمس والتصريف الجيد — الرطوبة في الشتاء عدوّها الوحيد." },
-        "ku": { "name": "لاڤەندەر", "notes": "خۆر و ئاوڕێژی باش دەوێت — شێی زستان تاکە دوژمنی ڕاستەقینەیەتی." }
+        "ar": {
+          "name": "خزامى",
+          "notes": "تحب الشمس والتصريف الجيد — الرطوبة في الشتاء عدوّها الوحيد."
+        },
+        "ku": {
+          "name": "لاڤەندەر",
+          "notes": "خۆر و ئاوڕێژی باش دەوێت — شێی زستان تاکە دوژمنی ڕاستەقینەیەتی.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Transliterated name; no lexical source checked."
+        }
       },
-      "aliases": [["en", "English lavender"]]
+      "aliases": [
+        [
+          "en",
+          "English lavender"
+        ]
+      ]
     },
     {
-      "id": "pl-lemon-balm", "name": "Lemon Balm", "slug": "lemon-balm", "category": "herbs", "icon": "herb",
-      "scientificName": "Melissa officinalis", "family": "Lamiaceae",
-      "daysToHarvest": 70, "germinationDays": 14, "tempMin": 15, "tempMax": 28,
-      "soilPreferences": "Moist, fertile soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": true,
-      "climates": ["temperate", "mediterranean", "continental"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "Continuous once established",
-      "seedAvailable": true, "stageTemplate": "herb-annual",
+      "id": "pl-lemon-balm",
+      "name": "Lemon Balm",
+      "slug": "lemon-balm",
+      "category": "herbs",
+      "icon": "herb",
+      "scientificName": "Melissa officinalis",
+      "family": "Lamiaceae",
+      "daysToHarvest": 70,
+      "germinationDays": 14,
+      "tempMin": 15,
+      "tempMax": 28,
+      "soilPreferences": "Moist, fertile soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "mediterranean",
+        "continental"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "Continuous once established",
+      "seedAvailable": true,
+      "stageTemplate": "herb-annual",
       "notes": "A lemony mint relative. Cut it back hard — it self-seeds enthusiastically.",
       "i18n": {
-        "ar": { "name": "مليسة", "notes": "قريبة من النعناع برائحة الليمون. قلّمها بقوة — فهي تنتشر بسرعة." },
-        "ku": { "name": "مێلیسا", "notes": "لە نەعناع نزیکە بە بۆنی لیمۆ. بە توندی بیبڕە — خێرا بڵاو دەبێتەوە." }
+        "ar": {
+          "name": "مليسة",
+          "notes": "قريبة من النعناع برائحة الليمون. قلّمها بقوة — فهي تنتشر بسرعة."
+        },
+        "ku": {
+          "name": "مێلیسا",
+          "notes": "لە نەعناع نزیکە بە بۆنی لیمۆ. بە توندی بیبڕە — خێرا بڵاو دەبێتەوە.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Transliterated name; no lexical source checked."
+        }
       },
-      "aliases": [["en", "Melissa"], ["en", "Lemon balm herb"]]
+      "aliases": [
+        [
+          "en",
+          "Melissa"
+        ],
+        [
+          "en",
+          "Lemon balm herb"
+        ]
+      ]
     },
     {
-      "id": "pl-grape", "name": "Grape", "slug": "grape", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Vitis vinifera", "family": "Vitaceae",
-      "daysToHarvest": 730, "germinationDays": 30, "tempMin": 15, "tempMax": 30,
-      "soilPreferences": "Well-drained, stony, poor soil", "soilPhMin": 6.0, "soilPhMax": 7.5,
-      "water": "medium", "sun": "full", "difficulty": "hard", "indoor": false, "outdoor": true,
-      "climates": ["mediterranean", "subtropical", "temperate", "arid"],
-      "plantingMonths": [2, 3, 4], "plantingSeason": "Late winter to early spring",
-      "harvestWindow": "2–3 years, then late summer", "seedAvailable": false, "stageTemplate": "fruit-tree",
+      "id": "pl-grape",
+      "name": "Grape",
+      "slug": "grape",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Vitis vinifera",
+      "family": "Vitaceae",
+      "daysToHarvest": 730,
+      "germinationDays": 30,
+      "tempMin": 15,
+      "tempMax": 30,
+      "soilPreferences": "Well-drained, stony, poor soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7.5,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "hard",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "subtropical",
+        "temperate",
+        "arid"
+      ],
+      "plantingMonths": [
+        2,
+        3,
+        4
+      ],
+      "plantingSeason": "Late winter to early spring",
+      "harvestWindow": "2–3 years, then late summer",
+      "seedAvailable": false,
+      "stageTemplate": "fruit-tree",
       "notes": "Needs a sturdy trellis and annual winter pruning to fruit well.",
       "i18n": {
-        "ar": { "name": "عنب", "notes": "يحتاج دعامة قوية وتقليمًا شتويًا سنويًا ليثمر جيدًا." },
-        "ku": { "name": "ترێ", "notes": "پێویستی بە دارەکی بەهێز و هەڵبڕینی زستانی ساڵانە هەیە بۆ بەرهەمی باش." }
+        "ar": {
+          "name": "عنب",
+          "notes": "يحتاج دعامة قوية وتقليمًا شتويًا سنويًا ليثمر جيدًا."
+        },
+        "ku": {
+          "name": "ترێ",
+          "notes": "پێویستی بە دارەکی بەهێز و هەڵبڕینی زستانی ساڵانە هەیە بۆ بەرهەمی باش.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
       },
-      "aliases": [["en", "Grape vine"], ["en", "Vine"]]
+      "aliases": [
+        [
+          "en",
+          "Grape vine"
+        ],
+        [
+          "en",
+          "Vine"
+        ]
+      ]
     },
     {
-      "id": "pl-apple", "name": "Apple", "slug": "apple", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Malus domestica", "family": "Rosaceae",
-      "daysToHarvest": 1460, "germinationDays": 30, "tempMin": 10, "tempMax": 24,
-      "soilPreferences": "Deep, fertile, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "hard", "indoor": false, "outdoor": true,
-      "climates": ["temperate", "continental", "mediterranean"],
-      "plantingMonths": [2, 3, 11], "plantingSeason": "Dormant season (winter)",
-      "harvestWindow": "4+ years, then autumn", "seedAvailable": false, "stageTemplate": "fruit-tree",
+      "id": "pl-apple",
+      "name": "Apple",
+      "slug": "apple",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Malus domestica",
+      "family": "Rosaceae",
+      "daysToHarvest": 1460,
+      "germinationDays": 30,
+      "tempMin": 10,
+      "tempMax": 24,
+      "soilPreferences": "Deep, fertile, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "hard",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "temperate",
+        "continental",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        2,
+        3,
+        11
+      ],
+      "plantingSeason": "Dormant season (winter)",
+      "harvestWindow": "4+ years, then autumn",
+      "seedAvailable": false,
+      "stageTemplate": "fruit-tree",
       "notes": "Needs winter chill to fruit. Most varieties need a second tree to pollinate.",
       "i18n": {
-        "ar": { "name": "تفاح", "notes": "يحتاج برودة الشتاء ليثمر. معظم الأصناف تحتاج شجرة ثانية للتلقيح." },
-        "ku": { "name": "سێو", "notes": "پێویستی بە سەرمای زستان هەیە بۆ بەرهەمدان. زۆربەی جۆرەکان دارێکی دووەم دەوێت بۆ پیتکردن." }
+        "ar": {
+          "name": "تفاح",
+          "notes": "يحتاج برودة الشتاء ليثمر. معظم الأصناف تحتاج شجرة ثانية للتلقيح."
+        },
+        "ku": {
+          "name": "سێو",
+          "notes": "پێویستی بە سەرمای زستان هەیە بۆ بەرهەمدان. زۆربەی جۆرەکان دارێکی دووەم دەوێت بۆ پیتکردن.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found."
+        }
       },
-      "aliases": [["en", "Apple tree"]]
+      "aliases": [
+        [
+          "en",
+          "Apple tree"
+        ]
+      ]
     },
     {
-      "id": "pl-apricot", "name": "Apricot", "slug": "apricot", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Prunus armeniaca", "family": "Rosaceae",
-      "daysToHarvest": 1095, "germinationDays": 30, "tempMin": 10, "tempMax": 28,
-      "soilPreferences": "Deep, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "hard", "indoor": false, "outdoor": true,
-      "climates": ["mediterranean", "temperate", "continental", "subtropical"],
-      "plantingMonths": [2, 3, 11], "plantingSeason": "Dormant season (winter)",
-      "harvestWindow": "3+ years, then early summer", "seedAvailable": true, "stageTemplate": "fruit-tree",
+      "id": "pl-apricot",
+      "name": "Apricot",
+      "slug": "apricot",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Prunus armeniaca",
+      "family": "Rosaceae",
+      "daysToHarvest": 1095,
+      "germinationDays": 30,
+      "tempMin": 10,
+      "tempMax": 28,
+      "soilPreferences": "Deep, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "hard",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "temperate",
+        "continental",
+        "subtropical"
+      ],
+      "plantingMonths": [
+        2,
+        3,
+        11
+      ],
+      "plantingSeason": "Dormant season (winter)",
+      "harvestWindow": "3+ years, then early summer",
+      "seedAvailable": true,
+      "stageTemplate": "fruit-tree",
       "notes": "Flowers early, so a late frost can take the crop — a sheltered spot helps.",
       "i18n": {
-        "ar": { "name": "مشمش", "notes": "يزهر مبكرًا، لذا قد يفقده الصقيع المتأخر — المكان المحمي يساعد." },
-        "ku": { "name": "قەیسی", "notes": "زوو گوڵ دەکات، بۆیە بەستەڵەکی درەنگ دەتوانێت بەرهەمەکە بەرێت — شوێنی پارێزراو یارمەتی دەدات." }
+        "ar": {
+          "name": "مشمش",
+          "notes": "يزهر مبكرًا، لذا قد يفقده الصقيع المتأخر — المكان المحمي يساعد."
+        },
+        "ku": {
+          "name": "قەیسی",
+          "notes": "زوو گوڵ دەکات، بۆیە بەستەڵەکی درەنگ دەتوانێت بەرهەمەکە بەرێت — شوێنی پارێزراو یارمەتی دەدات.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "No lexical source found; widely used as found.",
+          "alternatives": [
+            "زەردەئالو"
+          ]
+        }
       },
-      "aliases": [["en", "Apricot tree"]]
+      "aliases": [
+        [
+          "en",
+          "Apricot tree"
+        ]
+      ]
     },
     {
-      "id": "pl-peach", "name": "Peach", "slug": "peach", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Prunus persica", "family": "Rosaceae",
-      "daysToHarvest": 1095, "germinationDays": 30, "tempMin": 10, "tempMax": 28,
-      "soilPreferences": "Deep, well-drained soil", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "full", "difficulty": "hard", "indoor": false, "outdoor": true,
-      "climates": ["mediterranean", "temperate", "subtropical", "continental"],
-      "plantingMonths": [2, 3, 11], "plantingSeason": "Dormant season (winter)",
-      "harvestWindow": "3+ years, then summer", "seedAvailable": true, "stageTemplate": "fruit-tree",
+      "id": "pl-peach",
+      "name": "Peach",
+      "slug": "peach",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Prunus persica",
+      "family": "Rosaceae",
+      "daysToHarvest": 1095,
+      "germinationDays": 30,
+      "tempMin": 10,
+      "tempMax": 28,
+      "soilPreferences": "Deep, well-drained soil",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "full",
+      "difficulty": "hard",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "mediterranean",
+        "temperate",
+        "subtropical",
+        "continental"
+      ],
+      "plantingMonths": [
+        2,
+        3,
+        11
+      ],
+      "plantingSeason": "Dormant season (winter)",
+      "harvestWindow": "3+ years, then summer",
+      "seedAvailable": true,
+      "stageTemplate": "fruit-tree",
       "notes": "Prune hard each winter — fruit forms on the previous year's growth.",
       "i18n": {
-        "ar": { "name": "خوخ", "notes": "قلّم بقوة كل شتاء — الثمار تتكوّن على نمو العام السابق." },
-        "ku": { "name": "قۆخ", "notes": "هەر زستانێک بە توندی بیبڕە — بەرهەم لەسەر گەشەی ساڵی پێشوو دروست دەبێت." }
+        "ar": {
+          "name": "خوخ",
+          "notes": "قلّم بقوة كل شتاء — الثمار تتكوّن على نمو العام السابق."
+        },
+        "ku": {
+          "name": "قۆخ",
+          "notes": "هەر زستانێک بە توندی بیبڕە — بەرهەم لەسەر گەشەی ساڵی پێشوو دروست دەبێت.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
+        }
       },
-      "aliases": [["en", "Peach tree"]]
+      "aliases": [
+        [
+          "en",
+          "Peach tree"
+        ]
+      ]
     },
     {
-      "id": "pl-date-palm", "name": "Date Palm", "slug": "date-palm", "category": "fruit-trees", "icon": "tree",
-      "scientificName": "Phoenix dactylifera", "family": "Arecaceae",
-      "daysToHarvest": 1825, "germinationDays": 60, "tempMin": 20, "tempMax": 40,
-      "soilPreferences": "Deep, sandy, well-drained soil", "soilPhMin": 6.5, "soilPhMax": 8.0,
-      "water": "low", "sun": "full", "difficulty": "hard", "indoor": false, "outdoor": true,
-      "climates": ["arid", "subtropical", "mediterranean"],
-      "plantingMonths": [3, 4, 5], "plantingSeason": "Spring", "harvestWindow": "5+ years, then late summer",
-      "seedAvailable": true, "stageTemplate": "fruit-tree",
+      "id": "pl-date-palm",
+      "name": "Date Palm",
+      "slug": "date-palm",
+      "category": "fruit-trees",
+      "icon": "tree",
+      "scientificName": "Phoenix dactylifera",
+      "family": "Arecaceae",
+      "daysToHarvest": 1825,
+      "germinationDays": 60,
+      "tempMin": 20,
+      "tempMax": 40,
+      "soilPreferences": "Deep, sandy, well-drained soil",
+      "soilPhMin": 6.5,
+      "soilPhMax": 8,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "hard",
+      "indoor": false,
+      "outdoor": true,
+      "climates": [
+        "arid",
+        "subtropical",
+        "mediterranean"
+      ],
+      "plantingMonths": [
+        3,
+        4,
+        5
+      ],
+      "plantingSeason": "Spring",
+      "harvestWindow": "5+ years, then late summer",
+      "seedAvailable": true,
+      "stageTemplate": "fruit-tree",
       "notes": "A desert tree that needs intense heat and deep roots — a very long-term crop.",
       "i18n": {
-        "ar": { "name": "نخيل", "notes": "شجرة صحراوية تحتاج حرارة شديدة وجذورًا عميقة — محصول طويل الأمد جدًا." },
-        "ku": { "name": "دارخورما", "notes": "دارێکی بیابانە پێویستی بە گەرمییەکی زۆر و ڕەگی قووڵ هەیە — بەرهەمێکی زۆر درێژخایەن." }
+        "ar": {
+          "name": "نخيل",
+          "notes": "شجرة صحراوية تحتاج حرارة شديدة وجذورًا عميقة — محصول طويل الأمد جدًا."
+        },
+        "ku": {
+          "name": "دارخورما",
+          "notes": "دارێکی بیابانە پێویستی بە گەرمییەکی زۆر و ڕەگی قووڵ هەیە — بەرهەمێکی زۆر درێژخایەن.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "خورما is the fruit; the tree is دارخورما.",
+          "alternatives": [
+            "خورما"
+          ]
+        }
       },
-      "aliases": [["en", "Date"], ["ar", "نخلة"]]
+      "aliases": [
+        [
+          "en",
+          "Date"
+        ],
+        [
+          "ar",
+          "نخلة"
+        ]
+      ]
     },
     {
-      "id": "pl-jade-plant", "name": "Jade Plant", "slug": "jade-plant", "category": "houseplants", "icon": "pot",
-      "scientificName": "Crassula ovata", "family": "Crassulaceae",
-      "daysToHarvest": 180, "germinationDays": 21, "tempMin": 15, "tempMax": 27,
-      "soilPreferences": "Gritty, sharply drained mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "low", "sun": "full", "difficulty": "easy", "indoor": true, "outdoor": false,
-      "climates": ["arid", "subtropical", "mediterranean"],
-      "plantingMonths": [], "plantingSeason": "Any (indoor)", "harvestWindow": "Continuous foliage growth",
-      "seedAvailable": false, "stageTemplate": "houseplant",
+      "id": "pl-jade-plant",
+      "name": "Jade Plant",
+      "slug": "jade-plant",
+      "category": "houseplants",
+      "icon": "pot",
+      "scientificName": "Crassula ovata",
+      "family": "Crassulaceae",
+      "daysToHarvest": 180,
+      "germinationDays": 21,
+      "tempMin": 15,
+      "tempMax": 27,
+      "soilPreferences": "Gritty, sharply drained mix",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "low",
+      "sun": "full",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": false,
+      "climates": [
+        "arid",
+        "subtropical",
+        "mediterranean"
+      ],
+      "plantingMonths": [],
+      "plantingSeason": "Any (indoor)",
+      "harvestWindow": "Continuous foliage growth",
+      "seedAvailable": false,
+      "stageTemplate": "houseplant",
       "notes": "A succulent that stores water in its leaves — let the soil dry fully first.",
       "i18n": {
-        "ar": { "name": "نبتة اليشم", "notes": "نبتة عصارية تخزن الماء في أوراقها — اترك التربة تجف تمامًا أولًا." },
-        "ku": { "name": "ڕووەکی یەشیم", "notes": "ڕووەکێکی ئاویە ئاو لە گەڵاکانیدا هەڵدەگرێت — ڕێگە بدە خاک بە تەواوی وشک بێت." }
+        "ar": {
+          "name": "نبتة اليشم",
+          "notes": "نبتة عصارية تخزن الماء في أوراقها — اترك التربة تجف تمامًا أولًا."
+        },
+        "ku": {
+          "name": "ڕووەکی یەشیم",
+          "notes": "ڕووەکێکی ئاویە ئاو لە گەڵاکانیدا هەڵدەگرێت — ڕێگە بدە خاک بە تەواوی وشک بێت.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Descriptive phrase, not an established Sorani name."
+        }
       },
-      "aliases": [["en", "Money plant"], ["en", "Lucky plant"]]
+      "aliases": [
+        [
+          "en",
+          "Money plant"
+        ],
+        [
+          "en",
+          "Lucky plant"
+        ]
+      ]
     },
     {
-      "id": "pl-rubber-plant", "name": "Rubber Plant", "slug": "rubber-plant", "category": "houseplants", "icon": "pot",
-      "scientificName": "Ficus elastica", "family": "Moraceae",
-      "daysToHarvest": 150, "germinationDays": 21, "tempMin": 18, "tempMax": 27,
-      "soilPreferences": "Well-drained potting mix", "soilPhMin": 6.0, "soilPhMax": 7.0,
-      "water": "medium", "sun": "partial", "difficulty": "easy", "indoor": true, "outdoor": false,
-      "climates": ["tropical", "subtropical"],
-      "plantingMonths": [], "plantingSeason": "Any (indoor)", "harvestWindow": "Continuous foliage growth",
-      "seedAvailable": false, "stageTemplate": "houseplant",
+      "id": "pl-rubber-plant",
+      "name": "Rubber Plant",
+      "slug": "rubber-plant",
+      "category": "houseplants",
+      "icon": "pot",
+      "scientificName": "Ficus elastica",
+      "family": "Moraceae",
+      "daysToHarvest": 150,
+      "germinationDays": 21,
+      "tempMin": 18,
+      "tempMax": 27,
+      "soilPreferences": "Well-drained potting mix",
+      "soilPhMin": 6,
+      "soilPhMax": 7,
+      "water": "medium",
+      "sun": "partial",
+      "difficulty": "easy",
+      "indoor": true,
+      "outdoor": false,
+      "climates": [
+        "tropical",
+        "subtropical"
+      ],
+      "plantingMonths": [],
+      "plantingSeason": "Any (indoor)",
+      "harvestWindow": "Continuous foliage growth",
+      "seedAvailable": false,
+      "stageTemplate": "houseplant",
       "notes": "Wipe the big leaves with a damp cloth; dusty leaves stop it photosynthesising.",
       "i18n": {
-        "ar": { "name": "فيكس مطاطي", "notes": "امسح الأوراق الكبيرة بقطعة قماش رطبة؛ الغبار يمنع التمثيل الضوئي." },
-        "ku": { "name": "ڕووەکی لاستیک", "notes": "گەڵا گەورەکان بە پارچەیەکی شێدار پاک بکەرەوە؛ خۆڵ ڕێگە لە وەرگرتنی ڕووناکی دەگرێت." }
+        "ar": {
+          "name": "فيكس مطاطي",
+          "notes": "امسح الأوراق الكبيرة بقطعة قماش رطبة؛ الغبار يمنع التمثيل الضوئي."
+        },
+        "ku": {
+          "name": "ڕووەکی لاستیک",
+          "notes": "گەڵا گەورەکان بە پارچەیەکی شێدار پاک بکەرەوە؛ خۆڵ ڕێگە لە وەرگرتنی ڕووناکی دەگرێت.",
+          "nameStatus": "needs_native_review",
+          "nameReviewNote": "Descriptive phrase, not an established Sorani name."
+        }
       },
-      "aliases": [["en", "Ficus elastica"], ["en", "Rubber tree"]]
+      "aliases": [
+        [
+          "en",
+          "Ficus elastica"
+        ],
+        [
+          "en",
+          "Rubber tree"
+        ]
+      ]
     }
   ]
 }

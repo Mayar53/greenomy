@@ -2,14 +2,14 @@
 // show in their photo. Never static, short-lived, single-use.
 const { query } = require("../config/db");
 
-const COLUMNS = "challenge_id, user_id, plant_id, code, issued_at, expires_at, used_at";
+const COLUMNS = "challenge_id, user_id, plant_id, code, issued_at, expires_at, used_at, instruction";
 
-async function issue({ userId, plantId, code, expiresAt }) {
+async function issue({ userId, plantId, code, expiresAt, instruction }) {
   const { rows } = await query(
-    `INSERT INTO verification_challenges (user_id, plant_id, code, expires_at)
-     VALUES ($1, $2, $3, $4)
+    `INSERT INTO verification_challenges (user_id, plant_id, code, expires_at, instruction)
+     VALUES ($1, $2, $3, $4, $5)
      RETURNING ${COLUMNS}`,
-    [userId, plantId || null, code, expiresAt]
+    [userId, plantId || null, code, expiresAt, instruction || null]
   );
   return rows[0];
 }

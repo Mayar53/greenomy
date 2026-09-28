@@ -62,6 +62,171 @@ describe("integrity is measured from the real bytes", () => {
   });
 });
 
+describe("a single photo is never a reward", () => {
+  /** The member's current points, straight from the server. */
+  async function points(base, token) {
+    const me = await h.get(base, "/auth/me", { token });
+    return me.body.total_points;
+  }
+
+  test("an approved photo that evidences no milestone pays nothing", async () => {
+    const { token, plant } = await member("NOPAY");
+    const res = await h.submitRawPhoto(api.base, token, plant.plant_id, await h.photoDataUrl("NOPAY", { green: true }));
+
+    assert.equal(res.status, 201);
+    assert.equal(res.body.approval_status, "approved", "the photo itself is usable");
+    assert.equal(await points(api.base, token), 0, "but one picture earns no points");
+  });
+
+  test("identification and authenticity are reported as separate answers", async () => {
+    const { token, plant } = await member("TWOSTATES");
+    const res = await h.submitRawPhoto(
+      api.base,
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("TWOSTATES", { green: true })
+    );
+
+    assert.ok(["passed", "failed", "inconclusive"].includes(res.body.identification_status));
+    assert.ok(["review_pending", "not_flagged", "rejected"].includes(res.body.authenticity_status));
+    assert.notEqual(res.body.authenticity_status, "authentic", "we never claim an image is authentic");
+  });
+
+  test("a milestone photo is held for a human, never auto-approved", async () => {
+    const { token, plant } = await member("MILESTONE");
+    const journey = (await h.get(api.base, "/journeys", { token })).body.find(
+      (entry) => entry.user_plant_id === plant.plant_id
+    );
+    const first = journey.milestones[0];
+    const challenge = await h.issueChallenge(api.base, token, plant.plant_id);
+
+    const res = await h.submitRawPhoto(
+      api.base,
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("MILESTONE", { green: true }),
+      { challengeId: challenge.challengeId, milestoneId: first.milestone_id }
+    );
+
+    assert.equal(res.status, 201);
+    assert.equal(res.body.approval_status, "pending", "a reward-eligible photo always queues for review");
+    assert.equal(res.body.requires_review, true);
+    assert.equal(res.body.authenticity_status, "review_pending");
+    assert.equal(await points(api.base, token), 0, "nothing is paid before the review");
+  });
+
+  test("a milestone photo needs a challenge code", async () => {
+    const { token, plant } = await member("NOCODE");
+    const journey = (await h.get(api.base, "/journeys", { token })).body.find(
+      (entry) => entry.user_plant_id === plant.plant_id
+    );
+    const res = await h.submitRawPhoto(
+      api.base,
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("NOCODE", { green: true }),
+      { milestoneId: journey.milestones[0].milestone_id }
+    );
+    assert.equal(res.status, 400);
+  });
+});
+
+describe("the journey must be earned in order", () => {
+  test("the final stage cannot be claimed before the earlier ones", async () => {
+    const { token, plant } = await member("SKIP");
+    const journey = (await h.get(api.base, "/journeys", { token })).body.find(
+      (entry) => entry.user_plant_id === plant.plant_id
+    );
+    const last = journey.milestones[journey.milestones.length - 1];
+    const challenge = await h.issueChallenge(api.base, token, plant.plant_id);
+
+    const res = await h.submitRawPhoto(
+      api.base,
+      token,
+      plant.plant_id,
+      await h.photoDataUrl("SKIP", { green: true }),
+      { challengeId: challenge.challengeId, milestoneId: last.milestone_id }
+    );
+
+    assert.equal(res.status, 409, "a mature plant cannot be claimed with no earlier evidence");
+    assert.equal(res.body.nextStage, "planting", "it tells the member where to start");
+    const me = await h.get(api.base, "/auth/me", { token });
+    assert.equal(me.body.total_points, 0);
+  });
+});
+
+describe("the same image cannot serve two plantings", () => {
+  test("reusing an image in another planting record is caught", async () => {
+    const { token } = await member("REUSE");
+    const first = await h.createPlant(api.base, token, { canonicalPlantId: "pl-tomato" });
+    const second = await h.createPlant(api.base, token, { canonicalPlantId: "pl-basil" });
+    const imageUrl = await h.photoDataUrl("REUSE", { green: true });
+
+    const one = await h.submitRawPhoto(api.base, token, first.plant_id, imageUrl);
+    assert.equal(one.status, 201);
+
+    const two = await h.submitRawPhoto(api.base, token, second.plant_id, imageUrl);
+    assert.equal(two.body.duplicate_status, "exact", "the same bytes are recognised");
+    assert.equal(two.body.approval_status, "rejected");
+    assert.equal(two.body.authenticity_status, "rejected");
+  });
+
+  test("a lightly modified copy of a submitted image is flagged, not approved", async () => {
+    const { token, plant } = await member("RECODE");
+    const original = await h.photoDataUrl("RECODE", { green: true });
+    await h.submitRawPhoto(api.base, token, plant.plant_id, original);
+
+    const copy = await h.reencodeDataUrl(original);
+    const res = await h.submitRawPhoto(api.base, token, plant.plant_id, copy);
+
+    assert.notEqual(res.body.approval_status, "approved", "a re-encoded copy is not new evidence");
+    assert.ok(["near", "exact"].includes(res.body.duplicate_status));
+  });
+});
+
+describe("continuity with the plant's own history", () => {
+  test("a first photo has no continuity, a second one is compared to it", async () => {
+    const { token, plant } = await member("CONTINUITY");
+
+    const first = await h.submitRawPhoto(api.base, token, plant.plant_id, await h.photoDataUrl("CONT-1", { green: true }));
+    assert.equal(first.body.continuity_status, "first", "nothing to compare against yet");
+    assert.equal(first.body.continuity_distance, null);
+
+    const second = await h.submitRawPhoto(api.base, token, plant.plant_id, await h.photoDataUrl("CONT-2", { green: true }));
+    assert.ok(second.body.continuity_distance !== null, "the earlier frame is compared");
+    assert.ok(["consistent", "inconsistent"].includes(second.body.continuity_status));
+  });
+
+  test("an unrelated photo of the same plant does not extend the journey silently", async () => {
+    const { token, plant } = await member("UNRELATED");
+    await h.submitRawPhoto(api.base, token, plant.plant_id, await h.photoDataUrl("UNREL-1", { green: true }));
+
+    const stranger = await h.submitRawPhoto(api.base, token, plant.plant_id, await h.photoDataUrl("STREET-PLANT", { green: true }));
+
+    // A lone photo is only ever evidence: it earns nothing whether or not it
+    // looks like the plant's earlier frames. If it does NOT look like them, a
+    // human decides instead of the system accepting it quietly.
+    const me = await h.get(api.base, "/auth/me", { token });
+    assert.equal(me.body.total_points, 0, "no reward for a photo with no verified journey");
+    if (stranger.body.continuity_status === "inconsistent") {
+      assert.equal(stranger.body.requires_review, true);
+      assert.equal(stranger.body.approval_status, "pending");
+    }
+  });
+});
+
+describe("capture challenges", () => {
+  test("each challenge carries a fresh code and a randomised instruction", async () => {
+    const { token, plant } = await member("CHALLENGE");
+    const a = await h.issueChallenge(api.base, token, plant.plant_id);
+    const b = await h.issueChallenge(api.base, token, plant.plant_id);
+
+    assert.match(a.code, /^[0-9]{3,8}$/);
+    assert.ok(typeof a.instruction === "string" && a.instruction.length > 10, "an instruction to follow");
+    assert.notEqual(a.challengeId, b.challengeId, "a new challenge each time");
+  });
+});
+
 describe("duplicate protection", () => {
   test("the exact same photo cannot be submitted twice unnoticed", async () => {
     const { token, plant } = await member("DUP");
@@ -118,6 +283,9 @@ describe("verification challenges", () => {
     const journeys = await h.get(api.base, "/journeys", { token });
     const journey = journeys.body.find((entry) => entry.user_plant_id === plant.plant_id);
     const milestone = journey.milestones[1];
+    // A journey is verified in order, so the stages before this one stand first;
+    // this test is about the CHALLENGE, not about the order rule.
+    await h.completeMilestonesBefore(journey, milestone.stage_key);
 
     // Without a code: refused.
     const noCode = await h.submitRawPhoto(
@@ -614,5 +782,78 @@ describe("provenance signals in isolation", () => {
       analysis: { format: "jpeg", width: 4032, height: 3024, metadata: { hasExif: true, text: "apple iphone" }, bandStats: { top: 0, center: 400, bottom: 0 } },
     });
     assert.notEqual(photo.verdict, "suspicious");
+  });
+});
+
+describe("what the pipeline refuses outright", () => {
+  // The policy is pure, so these need no model and no network: they pin the
+  // rules that stop an image earning points it cannot support.
+  const { _decide } = require("../controllers/verifications.controller");
+
+  const base = {
+    analysis: { pixelStats: { greenRatio: 0.4 } },
+    provenance: { verdict: "clean", score: 0.9, indicators: [], positive: [], checks: [] },
+    duplicates: { status: "none", matches: [] },
+    continuity: { status: "first", distance: null, compared: 0 },
+    milestone: null,
+    challengePassed: null,
+    confidence: 0.99,
+  };
+
+  test("a fake plant is rejected however confident the model is", () => {
+    const out = _decide({
+      ...base,
+      signals: { plantMatch: true, captured: true, artificialPlant: true, stageMatch: true },
+    });
+    assert.equal(out.approvalStatus, "rejected");
+    assert.equal(out.reasonCode, "not_a_real_plant");
+  });
+
+  test("a fully grown plant cannot evidence an early stage", () => {
+    const out = _decide({
+      ...base,
+      signals: { plantMatch: true, captured: true, stageMatch: false },
+      milestone: { stage_key: "planting" },
+    });
+    assert.equal(out.approvalStatus, "rejected");
+    assert.equal(out.reasonCode, "stage_mismatch");
+  });
+
+  test("a milestone photo without the challenge code is rejected", () => {
+    const out = _decide({
+      ...base,
+      signals: { plantMatch: true, captured: true, challengePassed: false },
+      milestone: { stage_key: "planting" },
+    });
+    assert.equal(out.approvalStatus, "rejected");
+    assert.equal(out.reasonCode, "challenge_failed");
+  });
+
+  test("an image that looks taken from somewhere else is rejected", () => {
+    const out = _decide({ ...base, signals: { plantMatch: true, captured: false } });
+    assert.equal(out.approvalStatus, "rejected");
+  });
+
+  test("a photo of a plant with no milestone still earns nothing", () => {
+    const out = _decide({ ...base, signals: { plantMatch: true, captured: true }, confidence: 1 });
+    assert.equal(out.approvalStatus, "approved", "usable as evidence");
+    // and the reward engine pays nothing for it — see the points tests
+  });
+
+  test("high confidence alone never approves a milestone photo", () => {
+    const out = _decide({
+      ...base,
+      signals: { plantMatch: true, captured: true, challengePassed: true },
+      milestone: { stage_key: "harvest" },
+      confidence: 1,
+    });
+    assert.equal(out.approvalStatus, "pending");
+    assert.equal(out.requiresReview, true);
+  });
+
+  test("an unknown signal asks a human instead of guessing", () => {
+    const out = _decide({ ...base, signals: { plantMatch: null, captured: null }, milestone: { stage_key: "harvest" } });
+    assert.equal(out.approvalStatus, "pending");
+    assert.equal(out.requiresReview, true);
   });
 });

@@ -129,6 +129,52 @@ function readField(form, name) {
   return el ? el.value.trim() : "";
 }
 
+/* Each admin section has ONE form: it creates when empty and updates when a row
+   is being edited. These three helpers keep that behaviour identical everywhere
+   instead of re-implementing it per section. */
+
+/** Copies a record into the form, leaving fields the form does not have alone. */
+function fillForm(form, values) {
+  for (const [name, value] of Object.entries(values)) {
+    const field = form.querySelector(`[name="${name}"]`);
+    if (field) field.value = value === undefined || value === null ? "" : value;
+  }
+}
+
+/** Switches the form between "Create" and "Save changes", and reveals Cancel. */
+function setFormEditing(form, editing) {
+  const submit = form.querySelector('button[type="submit"]');
+  const cancel = form.querySelector("[data-cancel-edit]");
+  if (submit) submit.textContent = t(editing ? "admin.saveChanges" : "admin.create");
+  if (cancel) cancel.hidden = !editing;
+  form.dataset.editing = editing ? "1" : "";
+}
+
+/** Leaves edit mode and empties the form. */
+function resetForm(form, status) {
+  setFormEditing(form, false);
+  form.reset();
+  if (status) {
+    status.className = "form-status admin-form-wide";
+    status.textContent = "";
+  }
+}
+
+/** Brings the form into view — the table can be a long scroll below it. */
+function focusForm(form) {
+  form.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+/** A date for an <input type="date">, in LOCAL parts. Slicing the ISO string
+ * would show the day in UTC, which is the day before for anywhere east of it. */
+function toDateInput(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  const pad = (part) => String(part).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
 /* ---------------------------------------------------------------- modal */
 function openModal(html) {
   if (!modal.root) return;
@@ -147,7 +193,7 @@ function closeModal() {
 /* --------------------------------------------------------- verification */
 function reviewItemHTML(v) {
   const score = Math.round((v.ai_confidence_score || 0) * 100);
-  const plant = v.plant_type || t("admin.unknownPlant");
+  const plant = v.plant_name || v.plant_type || t("admin.unknownPlant");
   const id = escapeHtml(v.verification_id);
   const thumb = v.image_url
     ? `<img class="history-thumb" src="${escapeHtml(v.image_url)}" alt="" />`
@@ -240,7 +286,17 @@ function initQueue() {
 /* ----------------------------------------------------------------- users */
 function userRowHTML(user) {
   const isSelf = me && user.user_id === me.user_id;
+  const isOwner = user.role === "super_admin";
   const suspended = user.status !== "active";
+
+  // The owner can never be suspended, so offering the button would only produce
+  // the API's refusal — it says "owner only" instead.
+  const actions = isOwner
+    ? `<span class="pill is-off">${escapeHtml(t("admin.ownerOnly"))}</span>`
+    : `<button type="button" class="btn btn-secondary" data-user="${escapeHtml(user.user_id)}" data-status="${suspended ? "active" : "suspended"}"${isSelf ? " disabled" : ""}>
+          ${escapeHtml(suspended ? t("admin.activate") : t("admin.suspend"))}
+        </button>`;
+
   return `
     <tr>
       <td>${escapeHtml(user.full_name)}${isSelf ? ` <span class="pill is-off">${escapeHtml(t("admin.you"))}</span>` : ""}</td>
@@ -248,11 +304,7 @@ function userRowHTML(user) {
       <td>${escapeHtml(t(ROLE_LABELS[user.role] || "admin.roleUser"))}</td>
       <td>${Number(user.total_points || 0).toLocaleString()}</td>
       <td>${suspended ? pill(t("admin.statusSuspended"), "is-warn") : pill(t("admin.statusActive"), "is-on")}</td>
-      <td class="actions">
-        <button type="button" class="btn btn-secondary" data-user="${escapeHtml(user.user_id)}" data-status="${suspended ? "active" : "suspended"}"${isSelf ? " disabled" : ""}>
-          ${escapeHtml(suspended ? t("admin.activate") : t("admin.suspend"))}
-        </button>
-      </td>
+      <td class="actions">${actions}</td>
     </tr>
   `;
 }
@@ -529,6 +581,7 @@ function partnerRowHTML(partner) {
       <td>${escapeHtml(partner.contact_email || "—")}</td>
       <td>${partner.is_active ? pill(t("admin.statusActive"), "is-on") : pill(t("admin.statusInactive"), "is-off")}</td>
       <td class="actions">
+        <button type="button" class="btn btn-secondary" data-edit-partner="${escapeHtml(partner.partner_id)}">${escapeHtml(t("admin.edit"))}</button>
         <button type="button" class="btn btn-secondary" data-partner="${escapeHtml(partner.partner_id)}" data-active="${partner.is_active ? "false" : "true"}">
           ${escapeHtml(partner.is_active ? t("admin.deactivate") : t("admin.activate"))}
         </button>
@@ -539,6 +592,7 @@ function partnerRowHTML(partner) {
 
 function initPartners() {
   let partners = null;
+  let editingId = null;
 
   const render = () => {
     if (partners === null) return setContent("[data-admin-partners]", loadingState("store"));
@@ -573,24 +627,55 @@ function initPartners() {
 
   const root = host("[data-admin-host]");
   const form = root.querySelector("[data-partner-form]");
+  const status = form.querySelector("[data-form-status]");
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const status = form.querySelector("[data-form-status]");
+    const payload = {
+      name: readField(form, "name"),
+      website: readField(form, "website") || null,
+      contactEmail: readField(form, "contactEmail") || null,
+      description: readField(form, "description") || null,
+      logoUrl: readField(form, "logoUrl") || null,
+    };
+
     withBusy(form.querySelector('button[type="submit"]'), async () => {
-      await api.post("/admin/partners", {
-        name: readField(form, "name"),
-        website: readField(form, "website") || null,
-        contactEmail: readField(form, "contactEmail") || null,
-      });
-      form.reset();
-      status.className = "form-status is-success";
+      // One form, two jobs: it updates the row being edited, otherwise creates.
+      if (editingId) await api.patch(`/admin/partners/${encodeURIComponent(editingId)}`, payload);
+      else await api.post("/admin/partners", payload);
+
+      editingId = null;
+      resetForm(form, status);
+      status.className = "form-status admin-form-wide is-success";
       status.textContent = t("admin.saved");
       await load();
     });
   });
 
+  form.addEventListener("click", (e) => {
+    if (!e.target.closest("[data-cancel-edit]")) return;
+    editingId = null;
+    resetForm(form, status);
+  });
+
   root.addEventListener("click", (e) => {
+    const edit = e.target.closest("[data-edit-partner]");
+    if (edit) {
+      const partner = (partners || []).find((p) => p.partner_id === edit.getAttribute("data-edit-partner"));
+      if (!partner) return;
+      editingId = partner.partner_id;
+      fillForm(form, {
+        name: partner.name,
+        website: partner.website,
+        contactEmail: partner.contact_email,
+        description: partner.description,
+        logoUrl: partner.logo_url,
+      });
+      setFormEditing(form, true);
+      focusForm(form);
+      return;
+    }
+
     const button = e.target.closest("[data-partner]");
     if (!button) return;
     withBusy(button, async () => {
@@ -616,6 +701,7 @@ function rewardRowHTML(reward) {
       <td>${Number(reward.points_required || 0).toLocaleString()}</td>
       <td>${reward.is_active ? pill(t("admin.statusActive"), "is-on") : pill(t("admin.statusInactive"), "is-off")}</td>
       <td class="actions">
+        <button type="button" class="btn btn-secondary" data-edit-reward="${escapeHtml(reward.reward_id)}">${escapeHtml(t("admin.edit"))}</button>
         <button type="button" class="btn btn-secondary" data-reward="${escapeHtml(reward.reward_id)}" data-active="${reward.is_active ? "false" : "true"}">
           ${escapeHtml(reward.is_active ? t("admin.deactivate") : t("admin.activate"))}
         </button>
@@ -626,6 +712,7 @@ function rewardRowHTML(reward) {
 
 function initRewards() {
   let rewards = null;
+  let editingId = null;
 
   const render = () => {
     if (rewards === null) return setContent("[data-admin-rewards]", loadingState("gift"));
@@ -661,25 +748,56 @@ function initRewards() {
 
   const root = host("[data-admin-host]");
   const form = root.querySelector("[data-reward-form]");
+  const status = form.querySelector("[data-form-status]");
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const status = form.querySelector("[data-form-status]");
+    const payload = {
+      partner: readField(form, "partner"),
+      category: readField(form, "category"),
+      title: readField(form, "title"),
+      description: readField(form, "description") || null,
+      pointsRequired: Number(readField(form, "pointsRequired")),
+      expiresAt: readField(form, "expiresAt") || null,
+    };
+
     withBusy(form.querySelector('button[type="submit"]'), async () => {
-      await api.post("/admin/rewards", {
-        partner: readField(form, "partner"),
-        category: readField(form, "category"),
-        title: readField(form, "title"),
-        pointsRequired: Number(readField(form, "pointsRequired")),
-      });
-      form.reset();
-      status.className = "form-status is-success";
+      if (editingId) await api.patch(`/admin/rewards/${encodeURIComponent(editingId)}`, payload);
+      else await api.post("/admin/rewards", payload);
+
+      editingId = null;
+      resetForm(form, status);
+      status.className = "form-status admin-form-wide is-success";
       status.textContent = t("admin.saved");
       await load();
     });
   });
 
+  form.addEventListener("click", (e) => {
+    if (!e.target.closest("[data-cancel-edit]")) return;
+    editingId = null;
+    resetForm(form, status);
+  });
+
   root.addEventListener("click", (e) => {
+    const edit = e.target.closest("[data-edit-reward]");
+    if (edit) {
+      const reward = (rewards || []).find((r) => r.reward_id === edit.getAttribute("data-edit-reward"));
+      if (!reward) return;
+      editingId = reward.reward_id;
+      fillForm(form, {
+        partner: reward.partner,
+        category: reward.category,
+        title: reward.title,
+        description: reward.description,
+        pointsRequired: reward.points_required,
+        expiresAt: toDateInput(reward.expires_at),
+      });
+      setFormEditing(form, true);
+      focusForm(form);
+      return;
+    }
+
     const button = e.target.closest("[data-reward]");
     if (!button) return;
     withBusy(button, async () => {
@@ -704,6 +822,7 @@ function contentRowHTML(article) {
       <td>${article.readingTime ? `${article.readingTime} ${escapeHtml(t("greenHub.minRead"))}` : "—"}</td>
       <td>${article.isPublished ? pill(t("admin.colPublished"), "is-on") : pill(t("admin.statusDraft"), "is-off")}</td>
       <td class="actions">
+        <button type="button" class="btn btn-secondary" data-edit-article="${escapeHtml(article.id)}">${escapeHtml(t("admin.edit"))}</button>
         <button type="button" class="btn btn-secondary" data-article="${escapeHtml(article.id)}" data-publish="${article.isPublished ? "false" : "true"}">
           ${escapeHtml(article.isPublished ? t("admin.unpublish") : t("admin.publish"))}
         </button>
@@ -715,6 +834,7 @@ function contentRowHTML(article) {
 
 function initContent() {
   let articles = null;
+  let editingId = null;
 
   const render = () => {
     if (articles === null) return setContent("[data-admin-content]", loadingState("file"));
@@ -749,28 +869,66 @@ function initContent() {
 
   const root = host("[data-admin-host]");
   const form = root.querySelector("[data-content-form]");
+  const status = form.querySelector("[data-form-status]");
+
+  /** The body is one paragraph per line in the form, an array in the API. */
+  const bodyLines = () =>
+    readField(form, "body")
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const status = form.querySelector("[data-form-status]");
+    const readingTime = readField(form, "readingTime");
+    const payload = {
+      slug: readField(form, "slug"),
+      title: readField(form, "title"),
+      description: readField(form, "description") || null,
+      category: readField(form, "category"),
+      body: bodyLines(),
+      imageUrl: readField(form, "imageUrl") || null,
+      readingTime: readingTime ? Number(readingTime) : null,
+    };
+
     withBusy(form.querySelector('button[type="submit"]'), async () => {
-      await api.post("/admin/content", {
-        slug: readField(form, "slug"),
-        title: readField(form, "title"),
-        category: readField(form, "category"),
-        body: readField(form, "body")
-          .split("\n")
-          .map((line) => line.trim())
-          .filter(Boolean),
-      });
-      form.reset();
-      status.className = "form-status is-success";
+      if (editingId) await api.patch(`/admin/content/${encodeURIComponent(editingId)}`, payload);
+      else await api.post("/admin/content", payload);
+
+      editingId = null;
+      resetForm(form, status);
+      status.className = "form-status admin-form-wide is-success";
       status.textContent = t("admin.saved");
       await load();
     });
   });
 
+  form.addEventListener("click", (e) => {
+    if (!e.target.closest("[data-cancel-edit]")) return;
+    editingId = null;
+    resetForm(form, status);
+  });
+
   root.addEventListener("click", (e) => {
+    const edit = e.target.closest("[data-edit-article]");
+    if (edit) {
+      const article = (articles || []).find((a) => a.id === edit.getAttribute("data-edit-article"));
+      if (!article) return;
+      editingId = article.id;
+      fillForm(form, {
+        slug: article.slug,
+        title: article.title,
+        description: article.description,
+        category: article.category,
+        body: (article.body || []).join("\n"),
+        imageUrl: article.imageUrl,
+        readingTime: article.readingTime,
+      });
+      setFormEditing(form, true);
+      focusForm(form);
+      return;
+    }
+
     const publish = e.target.closest("[data-publish]");
     if (publish) {
       return withBusy(publish, async () => {
@@ -787,6 +945,10 @@ function initContent() {
     withBusy(remove, async () => {
       await api.delete(`/admin/content/${encodeURIComponent(remove.getAttribute("data-delete"))}`);
       articles = articles.filter((a) => a.id !== remove.getAttribute("data-delete"));
+      if (editingId === remove.getAttribute("data-delete")) {
+        editingId = null;
+        resetForm(form, status);
+      }
       render();
     });
   });

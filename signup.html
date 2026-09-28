@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title data-i18n="meta.signupTitle">Join Greenomy — Create Your Account</title>
   <meta name="robots" content="noindex" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="auth.css" />
   <link rel="stylesheet" href="responsive.css" />
@@ -60,7 +60,10 @@
 
         <div class="form-field">
           <label for="confirmPassword" data-i18n="auth.confirmPassword">Confirm Password</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required />
+          <div class="password-field">
+            <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required />
+            <button type="button" class="password-toggle" data-i18n="auth.showPassword">Show</button>
+          </div>
           <span class="field-error" role="alert"></span>
         </div>
 

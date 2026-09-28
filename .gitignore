@@ -16,6 +16,11 @@ backend/.pgdata.broken/
 # Verification images written by the API (content-addressed, never committed)
 backend/uploads/
 
+# Runtime state of the Telegram contact bot (which chat chose which language,
+# and the log of messages it could not answer)
+backend/.bot-state.json
+backend/.bot-messages.jsonl
+
 # OS / editor
 Thumbs.db
 desktop.ini

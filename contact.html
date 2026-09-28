@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title data-i18n="meta.contactTitle">Contact & Waitlist — Greenomy</title>
   <meta name="description" data-i18n-attr="content:meta.contactDesc" content="Get in touch with Greenomy or join the waitlist to be first in line when we launch in your city." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="responsive.css" />
   <link rel="canonical" href="https://greenomy.app/contact.html" />
@@ -25,6 +25,7 @@
         <a href="greenhub.html" data-i18n="nav.greenHub">Green Hub</a>
         <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
         <a href="contact.html" data-i18n="nav.contact" aria-current="page">Contact</a>
+        <a href="login.html" class="nav-login" data-i18n="nav.login" data-auth="guest">Log In</a>
       </nav>
       <div class="header-actions">
         <div class="lang-switch" role="group" aria-label="Language">
@@ -34,7 +35,7 @@
         </div>
         <a href="signup.html" class="btn btn-primary" data-auth="guest" data-i18n="nav.join">Join Greenomy</a>
         <a href="garden.html" class="btn btn-primary" data-auth="user" data-i18n="nav.garden" hidden>My Garden</a>
-        <button type="button" class="btn btn-secondary" data-auth="user" data-auth-logout data-i18n="app.logout" hidden>Log out</button>
+        <a href="admin.html" class="btn btn-secondary" data-auth="admin" data-i18n="nav.admin" hidden>Admin</a>
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
       </div>
     </div>
@@ -61,6 +62,21 @@
             <div class="icon-badge" aria-hidden="true" data-icon="store"></div>
             <h2 class="heading-sm" data-i18n="contact.partnershipLabel">Partnerships</h2>
             <p><a href="mailto:Greenomyofficial@gmail.com">Greenomyofficial@gmail.com</a></p>
+          </div>
+          <div class="card">
+            <div class="icon-badge" aria-hidden="true" data-icon="instagram"></div>
+            <h2 class="heading-sm" data-i18n="contact.communityLabel">Community</h2>
+            <p data-i18n="contact.communityLead">Follow the official accounts for updates and growing tips.</p>
+            <div class="app-actions">
+              <a href="https://www.instagram.com/greenomy_official" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://t.me/Greenomy_official" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Telegram</a>
+            </div>
+          </div>
+          <div class="card" data-telegram-card hidden>
+            <div class="icon-badge" aria-hidden="true" data-icon="telegram"></div>
+            <h2 class="heading-sm" data-i18n="contact.botLabel">Message us on Telegram</h2>
+            <p data-i18n="contact.botLead">Send our bot a message and it reaches the team directly.</p>
+            <a class="btn btn-primary" data-telegram-bot href="#" target="_blank" rel="noopener noreferrer" data-i18n="contact.botBtn">Open the bot</a>
           </div>
         </div>
 
@@ -102,6 +118,10 @@
         <div class="footer-brand">
           <a href="index.html" class="brand" style="color:#fff;"><img class="brand-mark" src="logo-mark.png" alt="" /> <span class="brand-name">Greenomy</span></a>
           <p data-i18n="footer.mission">Environmental technology made warm and human.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/greenomy_official" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-i18n-attr="aria-label:social.instagram"><span data-icon="instagram"></span></a>
+            <a href="https://t.me/Greenomy_official" target="_blank" rel="noopener noreferrer" aria-label="Telegram" data-i18n-attr="aria-label:social.telegram"><span data-icon="telegram"></span></a>
+          </div>
         </div>
         <div>
           <h3 data-i18n="footer.explore">Explore</h3>
@@ -110,9 +130,6 @@
           <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
           <a href="contact.html" data-i18n="nav.contact">Contact</a>
         </div>
-      </div>
-      <div class="footer-bottom">
-        <span>&copy; <span data-current-year>2026</span> Greenomy.</span>
       </div>
     </div>
   </footer>

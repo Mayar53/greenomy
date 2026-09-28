@@ -1,6 +1,7 @@
 // contact.js — waitlist form: validation, submission, and loading/success/error states
 import { joinWaitlist } from "./waitlist.js";
 import { t } from "./language.js";
+import { api } from "./servisapi.js";
 
 function setFieldError(field, message) {
   const wrapper = field.closest(".form-field");
@@ -74,4 +75,27 @@ function initWaitlistForm() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initWaitlistForm);
+/**
+ * The Telegram bot card only appears once a bot is actually configured: the API
+ * reports its username, so the page never links to a bot that does not exist.
+ */
+async function initTelegramCard() {
+  const card = document.querySelector("[data-telegram-card]");
+  if (!card) return;
+
+  try {
+    const info = await api.get("/telegram/info", { auth: false });
+    if (!info || !info.url) return;
+
+    const link = card.querySelector("[data-telegram-bot]");
+    if (link) link.href = info.url;
+    card.hidden = false;
+  } catch {
+    // No bot configured, or the API is unreachable — leave the card hidden.
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initWaitlistForm();
+  initTelegramCard();
+});

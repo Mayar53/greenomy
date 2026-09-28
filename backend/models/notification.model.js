@@ -53,6 +53,17 @@ async function countUnread(userId) {
   return rows[0].n;
 }
 
+/** How many notifications of a type were created for this member today — the
+ * dedupe guard that keeps a daily reminder from being sent twice. */
+async function countTodayByType(userId, type) {
+  const { rows } = await query(
+    `SELECT count(*)::int AS n FROM notifications
+      WHERE user_id = $1 AND type = $2 AND created_at::date = CURRENT_DATE`,
+    [userId, type]
+  );
+  return rows[0].n;
+}
+
 module.exports = {
   create,
   listByUser,
@@ -60,4 +71,5 @@ module.exports = {
   markRead,
   markAllRead,
   countUnread,
+  countTodayByType,
 };

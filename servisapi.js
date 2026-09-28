@@ -2,6 +2,8 @@
 // Frontend pages never call fetch() directly against backend routes;
 // they go through the service layer, which goes through this client.
 
+import { currentLanguage } from "./language.js";
+
 const API_PORT = 4000;
 
 /**
@@ -70,7 +72,7 @@ async function request(method, path, { body, params, auth = true } = {}) {
     });
   }
 
-  const headers = { "Content-Type": "application/json" };
+  const headers = { "Content-Type": "application/json", "Accept-Language": currentLanguage() };
   const token = auth ? getAuthToken() : null;
   if (token) headers.Authorization = `Bearer ${token}`;
 
@@ -101,7 +103,7 @@ async function request(method, path, { body, params, auth = true } = {}) {
  * by hand breaks the upload. */
 async function requestForm(path, formData) {
   const url = new URL(`${API_BASE_URL}${path}`, window.location.origin);
-  const headers = {};
+  const headers = { "Accept-Language": currentLanguage() };
   const token = getAuthToken();
   if (token) headers.Authorization = `Bearer ${token}`;
 

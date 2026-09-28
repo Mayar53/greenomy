@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title data-i18n="meta.ecoProfileTitle">Your Eco Profile — Greenomy</title>
   <meta name="robots" content="noindex" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="auth.css" />
   <link rel="stylesheet" href="responsive.css" />
@@ -99,6 +99,12 @@
         <a href="onboarding.html" class="btn btn-secondary" data-i18n="wizard.back">Back</a>
         <button type="submit" class="btn btn-primary" data-i18n="wizard.continue">Continue</button>
       </div>
+
+      <p class="wizard-skip">
+        <a href="new-seed.html" class="btn-ghost" data-i18n="wizard.skip">Skip for now</a>
+        <span class="form-note" data-i18n="wizard.skipNote">You can fill this in later from your Profile.</span>
+      </p>
+
       <div class="form-status" data-form-status role="status" aria-live="polite"></div>
     </form>
   </main>

@@ -181,7 +181,11 @@ describe("AI verification resilience", () => {
       assert.equal(submitted.body.ai_provider, "heuristic", "should have fallen back to the heuristic");
 
       const wallet = await h.get(api.base, "/wallet", { token });
-      assert.equal(wallet.body.currentPoints, 30, "points are still awarded");
+      assert.equal(
+        wallet.body.currentPoints,
+        0,
+        "one photo earns nothing on its own, so a provider outage cannot create a payout"
+      );
     } finally {
       process.env.VERIFICATION_PROVIDER = previousProvider;
       if (previousKey === undefined) delete process.env.AI_API_KEY;
@@ -414,5 +418,69 @@ describe("assistant pipeline", () => {
   test("an over-long message is truncated before it reaches the provider", async () => {
     const { sent } = await captureAssistant({ message: "a".repeat(5000) });
     assert.equal(sent.messages[sent.messages.length - 1].content.length, 1000);
+  });
+});
+
+describe("photos in the assistant", () => {
+  const { _parseImage } = require("../controllers/ai.controller");
+
+  const jpeg = (bytes) => "data:image/jpeg;base64," + Buffer.alloc(bytes, 1).toString("base64");
+
+  test("a jpeg data URL is accepted", () => {
+    const parsed = _parseImage(jpeg(2000));
+    assert.equal(parsed.error, undefined);
+    assert.equal(parsed.mime, "image/jpeg");
+    assert.ok(parsed.bytes > 1000);
+  });
+
+  test("nothing sent means no photo", () => {
+    assert.equal(_parseImage(undefined), null);
+    assert.equal(_parseImage(""), null);
+  });
+
+  test("a link instead of image data is refused", () => {
+    // An http URL would make the server fetch it — not something a member's
+    // photo needs, and an easy way to make the server talk to anywhere.
+    assert.ok(_parseImage("https://example.com/plant.jpg").error);
+    assert.ok(_parseImage("data:text/html;base64,PHNjcmlwdD4=").error);
+    assert.ok(_parseImage({ url: "x" }).error);
+  });
+
+  test("an oversized photo is refused", () => {
+    assert.ok(_parseImage(jpeg(4_000_000)).error);
+  });
+
+  test("a photo with no words is a question, and still answers", async () => {
+    const { token } = await h.signup(api.base);
+    const res = await h.post(api.base, "/ai/assistant", {
+      token,
+      body: { message: "", image: jpeg(5000), lang: "en" },
+    });
+    assert.notEqual(res.status, 400, "a photo on its own is a question, not a bad request");
+    // With a model configured this answers from the photo. Without one there is
+    // no guide text to fall back on for a wordless question, so it says so
+    // rather than inventing an answer — either way it never pretends to have
+    // looked at the photo.
+    if (res.status === 200) {
+      assert.ok(res.body.reply);
+      if (res.body.answeredBy === "guide") assert.equal(res.body.photoNotSeen, true);
+    } else {
+      assert.equal(res.status, 503);
+    }
+  });
+
+  test("no words and no photo is still a bad request", async () => {
+    const { token } = await h.signup(api.base);
+    const res = await h.post(api.base, "/ai/assistant", { token, body: { message: "" } });
+    assert.equal(res.status, 400);
+  });
+
+  test("a photo that is not image data is rejected with a 400", async () => {
+    const { token } = await h.signup(api.base);
+    const res = await h.post(api.base, "/ai/assistant", {
+      token,
+      body: { message: "what is wrong?", image: "https://example.com/plant.jpg" },
+    });
+    assert.equal(res.status, 400);
   });
 });

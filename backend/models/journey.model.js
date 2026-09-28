@@ -63,9 +63,12 @@ async function findByIdForUser(journeyId, userId) {
 
 async function listByUser(userId) {
   const { rows } = await query(
-    `SELECT j.${JOURNEY_COLUMNS.split(", ").join(", j.")}, p.plant_type
+    `SELECT j.${JOURNEY_COLUMNS.split(", ").join(", j.")},
+            p.plant_id, p.plant_type, p.canonical_plant_id, p.planting_method, p.planting_date,
+            c.stage_template, c.icon AS plant_icon
        FROM journeys j
        JOIN plants p ON p.plant_id = j.user_plant_id
+       LEFT JOIN plant_catalog c ON c.id = p.canonical_plant_id
       WHERE j.user_id = $1
       ORDER BY j.created_at DESC`,
     [userId]

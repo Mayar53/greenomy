@@ -70,7 +70,7 @@ exports.create = async (req, res) => {
   if (!person) {
     return res.status(404).json({ error: "No account with that email — they need to sign up first" });
   }
-  if (person.role === "super_admin") {
+  if (permissions.isOwner(person)) {
     return res.status(409).json({ error: "That account is the owner and already holds every permission" });
   }
 
@@ -93,7 +93,7 @@ exports.update = async (req, res) => {
   const target = await userModel.findById(req.params.id);
   if (!target) return res.status(404).json({ error: "Admin not found" });
   if (target.role === "user") return res.status(404).json({ error: "Admin not found" });
-  if (target.role === "super_admin") {
+  if (permissions.isOwner(target)) {
     return res.status(403).json({ error: "The owner account cannot be changed" });
   }
 
@@ -110,7 +110,7 @@ exports.remove = async (req, res) => {
 
   const target = await userModel.findById(req.params.id);
   if (!target || target.role === "user") return res.status(404).json({ error: "Admin not found" });
-  if (target.role === "super_admin") {
+  if (permissions.isOwner(target)) {
     return res.status(403).json({ error: "The owner account cannot be changed" });
   }
 

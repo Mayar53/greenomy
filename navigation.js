@@ -1,7 +1,7 @@
 // navigation.js — header behaviour shared by every page: the mobile menu, the
 // active nav link, and the auth-aware account controls.
 
-import { isAuthenticated, fetchCurrentUser, logout, clearSession } from "./authservise.js";
+import { isAuthenticated, fetchCurrentUser, getCurrentUser, logout, clearSession } from "./authservise.js";
 import { ApiError } from "./servisapi.js";
 
 function initMobileMenu() {
@@ -9,27 +9,31 @@ function initMobileMenu() {
   const nav = document.querySelector(".main-nav");
   if (!toggle || !nav) return;
 
-  toggle.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", String(isOpen));
-    document.body.style.overflow = isOpen ? "hidden" : "";
-  });
+  const isOpen = () => nav.classList.contains("is-open");
+  const setOpen = (open) => {
+    nav.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    // The page behind an open panel stays where it was.
+    document.body.style.overflow = open ? "hidden" : "";
+  };
 
+  toggle.addEventListener("click", () => setOpen(!isOpen()));
+
+  // Choosing a destination closes the panel.
   nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
-    });
+    link.addEventListener("click", () => setOpen(false));
   });
 
-  // Close on escape
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && nav.classList.contains("is-open")) {
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
-    }
+    if (e.key === "Escape" && isOpen()) setOpen(false);
+  });
+
+  // A tap anywhere off the panel closes it too. The toggle is excluded: its
+  // own handler has already decided the new state by the time this runs.
+  document.addEventListener("click", (e) => {
+    if (!isOpen()) return;
+    if (nav.contains(e.target) || toggle.contains(e.target)) return;
+    setOpen(false);
   });
 }
 
@@ -46,17 +50,29 @@ function markActiveLink() {
 /* ---------------------------------------------------------------------- */
 /* Auth-aware header                                                       */
 /*                                                                        */
-/* There is ONE source of session truth — the token and user that          */
-/* authservise.js stores under `greenomy:token` / `greenomy:user`, which   */
-/* the API client and every protected page already read. No page keeps its */
-/* own logged-in flag: header controls are marked `data-auth="guest"` or   */
-/* `data-auth="user"` and are repainted from that single session on every  */
-/* load, so the Home page cannot disagree with the rest of the app.        */
-/* ---------------------------------------------------------------------- */
+/* There is ONE source of session truth — the token and user that            */
+/* authservise.js stores under `greenomy:token` / `greenomy:user`, which the  */
+/* API client and every protected page already read. No page keeps its own    */
+/* logged-in flag: header controls are marked `data-auth="guest"`,           */
+/* `data-auth="user"` or `data-auth="admin"` and are repainted from that      */
+/* single session on every load, so the Home page cannot disagree with the    */
+/* rest of the app.                                                           */
 
-function paintAuthState(authenticated) {
+const STAFF_ROLES = ["admin", "super_admin"];
+
+/** Which header controls this visitor has earned the right to see. `admin` is a
+ * stricter `user`: only staff get the dashboard link. */
+function authStates() {
+  const authenticated = isAuthenticated();
+  const user = getCurrentUser();
+  const staff = authenticated && Boolean(user) && STAFF_ROLES.includes(user.role);
+  return { guest: !authenticated, user: authenticated, admin: staff };
+}
+
+function paintAuthState() {
+  const states = authStates();
   document.querySelectorAll("[data-auth]").forEach((el) => {
-    el.hidden = el.getAttribute("data-auth") !== (authenticated ? "user" : "guest");
+    el.hidden = states[el.getAttribute("data-auth")] !== true;
   });
 }
 
@@ -65,17 +81,17 @@ function initAuthHeader() {
 
   // Paint straight from storage first — a page must never look logged out just
   // because the network check has not come back yet.
-  paintAuthState(isAuthenticated());
+  paintAuthState();
 
   // Then confirm with the backend. ONLY an explicit rejection ends the session;
   // a network error, or a missing cached profile, does not.
   if (isAuthenticated()) {
     fetchCurrentUser()
-      .then(() => paintAuthState(true))
+      .then(() => paintAuthState())
       .catch((err) => {
         if (err instanceof ApiError && (err.status === 401 || err.status === 403)) {
           clearSession();
-          paintAuthState(false);
+          paintAuthState();
         }
       });
   }
@@ -87,7 +103,7 @@ function initAuthHeader() {
       try {
         await logout();
       } finally {
-        paintAuthState(false);
+        paintAuthState();
         window.location.href = "index.html";
       }
     });

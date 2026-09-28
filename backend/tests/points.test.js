@@ -46,32 +46,29 @@ describe("points and redemption", () => {
     assert.equal(wallet.body.currentPoints, 0);
   });
 
-  test("an auto-approved photo awards 30 points and writes one ledger row", async () => {
+  test("an approved photo on its own earns nothing — a reward needs a journey", async () => {
     const { token } = await h.signup(api.base);
     const plant = await h.createPlant(api.base, token);
 
     const submitted = await h.submitPhoto(api.base, token, plant.plant_id, h.SHARP_GREEN_PHOTO, "OK");
-    assert.equal(submitted.body.approval_status, "approved");
+    assert.equal(submitted.body.approval_status, "approved", "the photo is still accepted as evidence");
 
+    // One picture identifies a plant. It does not prove the member grew it, so
+    // it is worth no points: points follow a verified journey milestone.
     const wallet = await h.get(api.base, "/wallet", { token });
-    assert.equal(wallet.body.currentPoints, 30);
-    assert.equal(wallet.body.totalEarned, 30);
+    assert.equal(wallet.body.currentPoints, 0);
+    assert.equal(wallet.body.totalEarned, 0);
 
     const ledger = await h.get(api.base, "/wallet/transactions", { token });
-    assert.equal(ledger.body.length, 1);
-    assert.equal(ledger.body[0].transaction_type, "verification_approved");
-    assert.equal(ledger.body[0].amount, 30);
-    assert.equal(ledger.body[0].reference_id, submitted.body.verification_id);
+    assert.equal(ledger.body.length, 0, "no ledger row for a photo that evidences no milestone");
   });
 
   test("redeeming deducts the points, issues a token, and the token is single-use", async () => {
     const { token } = await h.signup(api.base);
     const plant = await h.createPlant(api.base, token);
 
-    // 4 approved photos = 120 points, the price of rw-004.
-    for (let i = 0; i < 4; i += 1) {
-      await h.submitPhoto(api.base, token, plant.plant_id, h.SHARP_GREEN_PHOTO, `EARN${i}`);
-    }
+    // A balance, so this test can exercise spending (rw-004 costs 120).
+    await h.creditPoints(api.base, token, 120);
     const before = await h.get(api.base, "/wallet", { token });
     assert.equal(before.body.currentPoints, 120);
 

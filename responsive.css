@@ -1,3 +1,13 @@
+/* ---------------------------------------------------------------------- */
+/* Phone-only header controls                                              */
+/*                                                                        */
+/* On a phone the navigation IS the hamburger panel, so "Log In" belongs    */
+/* inside it — a signed-out visitor on a laptop reaches log in from the     */
+/* Sign up page, which is why the link is hidden wherever the full nav is   */
+/* already on screen.                                                      */
+/* ---------------------------------------------------------------------- */
+.main-nav .nav-login { display: none; }
+
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -26,8 +36,16 @@
   .nav-toggle { display: inline-flex; }
 
   .main-nav {
-    position: fixed;
-    inset: 64px 0 0 0;
+    /* Anchored to the header, not the viewport. The header carries
+       `backdrop-filter`, which makes it the containing block for fixed
+       descendants — as `position: fixed` this panel collapsed to the
+       header's own height (40px) and its links were clipped away, so the
+       navigation could not be opened at all on a phone. */
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    max-height: calc(100vh - var(--header-height));
+    max-height: calc(100dvh - var(--header-height));
     background: var(--beige);
     flex-direction: column;
     align-items: stretch;
@@ -75,29 +93,66 @@
   .impact-section { margin: 0 12px; padding: 40px 20px; }
 
   table.data-table { display: block; overflow-x: auto; white-space: nowrap; }
+
+  /* The hamburger panel is the whole navigation here, so it carries the two
+     entries the laptop header serves with its own controls. */
+  .main-nav .nav-login:not([hidden]) { display: block; }
+
+  /* -------------------------------------------------------------------- */
+  /* Header controls shrink with the nav                                   */
+  /*                                                                      */
+  /* A language switch, an account button and the toggle at their desktop  */
+  /* sizes need ~560px. Between 431px and that there is not enough room,   */
+  /* and the toggle — the only way into the navigation — was pushed off    */
+  /* the right edge. In hamburger mode the controls are sized for the      */
+  /* hamburger. The 400px block trims them again for a 320px screen.       */
+  /* -------------------------------------------------------------------- */
+  .header-inner { gap: 10px; }
+  .header-actions { gap: 6px; min-width: 0; }
+
+  .lang-switch { padding: 2px; gap: 2px; }
+  .lang-switch button { min-width: 32px; padding: 0 5px; font-size: 0.72rem; }
+
+  .header-actions .btn { padding: 9px 12px; font-size: 0.82rem; }
+
+  /* -------------------------------------------------------------------- */
+  /* Nothing may be wider than the card that holds it                      */
+  /*                                                                      */
+  /* A grid or flex child will not shrink past its content unless it is    */
+  /* told to, so one long translated word — a Kurdish button label, a      */
+  /* challenge badge — used to force the whole track wider than the page.  */
+  /* -------------------------------------------------------------------- */
+  .grid > *,
+  .footer-grid > *,
+  .option-grid > * { min-width: 0; }
+
+  /* A button label wraps on a phone instead of widening the layout. The
+     header keeps nowrap so the bar can never grow past --header-height and
+     the menu panel stays aligned to it. */
+  .btn { white-space: normal; }
+  .header-actions .btn { white-space: nowrap; }
+
+  /* `.form-field` is a flex column, so its inputs fill it on their own. The
+     password field is not, which left its input at the browser's default
+     width — wider than a narrow auth card. */
+  .password-field input { width: 100%; }
 }
 
-@media (max-width: 430px) {
-  /* There is no room for the wordmark beside the language switch and the
-     account button, so the mark carries the brand on its own here. The name
-     stays in the DOM, so the link keeps its accessible name. */
+@media (max-width: 500px) {
+  /* No room for the wordmark beside the language switch and the account
+     button, so the mark carries the brand on its own here. The name stays in
+     the DOM, so the link keeps its accessible name. */
   .site-header .brand-name {
     position: absolute; width: 1px; height: 1px;
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
+}
 
+@media (max-width: 430px) {
   .container {
     padding-left: max(16px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
   }
-
-  /* Every pixel here is spoken for: the mark, three language buttons, one
-     account button and the menu toggle have to fit 375px together. */
-  .header-inner { gap: 10px; }
-  .header-actions { gap: 6px; }
-  .lang-switch { padding: 2px; gap: 2px; }
-  .lang-switch button { min-width: 32px; padding: 0 5px; font-size: 0.72rem; }
-  .header-actions .btn { padding: 9px 12px; font-size: 0.82rem; }
 
   .hero { padding: 40px 0 56px; }
   .hero-actions .btn { width: 100%; }
@@ -116,6 +171,111 @@
   }
 }
 
+@media (max-width: 400px) {
+  /* ---------------------------------------------------------------------- */
+  /* The narrowest phones (320–400px)                                        */
+  /*                                                                        */
+  /* The brand mark, three language buttons, the account button and the      */
+  /* menu toggle have to share a 320px row. At the 430px sizes they add up   */
+  /* to ~376px, which pushed the toggle off the right edge — the one control */
+  /* a phone visitor needs to reach the navigation at all. Everything below  */
+  /* is trimmed so the row fits with room to spare, in every language.       */
+  /* ---------------------------------------------------------------------- */
+  .container {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+
+  .header-inner { gap: 6px; }
+  .header-actions { gap: 4px; min-width: 0; }
+
+  .brand-mark { width: 30px; height: 30px; }
+
+  .lang-switch { padding: 2px; gap: 2px; }
+  .lang-switch button { min-width: 26px; padding: 0 3px; font-size: 0.66rem; }
+
+  .header-actions .btn { padding: 6px 9px; font-size: 0.74rem; }
+  .nav-toggle { width: 38px; height: 38px; }
+}
+
 @media (max-width: 375px) {
   .heading-xl { font-size: 1.9rem; }
+}
+
+/* Engagement on small screens: stack the mystery card, let the care buttons
+   wrap comfortably, and give the garden level room to breathe. */
+@media (max-width: 600px) {
+  .garden-level { gap: 14px; }
+  .garden-level-badge { width: 54px; height: 54px; border-radius: 15px; }
+  .garden-level-badge .icon { width: 26px; height: 26px; }
+
+  .care-actions { gap: 6px; }
+  .care-btn { padding: 7px 10px; font-size: 0.78rem; }
+
+  .mystery-card { flex-wrap: wrap; }
+  .mystery-card .btn { width: 100%; }
+
+  .celebration-toast { font-size: 0.85rem; padding: 11px 15px; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Shorter pages on a phone                                                */
+/*                                                                        */
+/* A landing page that runs four screens of scrolling buries the thing     */
+/* someone came for. This trims the vertical rhythm — section padding,     */
+/* gaps, heading margins, the hero and the footer — and nothing else.      */
+/* Every rule is inside a media query, so the desktop layout is untouched. */
+/* ---------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Tighter rhythm between and inside sections. */
+  section { padding: 32px 0; }
+  .section-head { margin-bottom: 20px; }
+  .grid { gap: 16px; }
+
+  /* Keep the brand art, but stop it owning the first screen. */
+  .hero { padding: 24px 0 34px; }
+  .hero-art { max-width: 220px; margin-bottom: 4px; }
+  .hero-actions { margin-top: 18px; gap: 10px; }
+  .hero-stats { margin-top: 20px; gap: 18px; }
+  .hero-stat strong { font-size: 1.35rem; }
+
+  /* The live-impact band is inset on small screens, so it needs less padding. */
+  .impact-section { margin: 0 8px; padding: 28px 16px; }
+  /* Four single-column stats is a lot of scrolling for four numbers. */
+  .impact-section .grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* The footer is a directory, not a section. */
+  .site-footer { margin-top: 32px; padding: 36px 0 max(20px, env(safe-area-inset-bottom)); }
+  .footer-grid { margin-bottom: 24px; gap: 24px; }
+
+  /* List pages are the longest of all: 16 Green Hub cards or 11 rewards each
+     carried a full-width 16:10 image and a four-line blurb. A wider crop and a
+     two-line preview halve the scroll without hiding anything — the full text
+     is still one tap away on the article itself. */
+  .article-card img, .article-card .article-thumb { aspect-ratio: 21/9; }
+  .article-body { padding: 16px; gap: 6px; }
+  .article-card p {
+    display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .reward-card { gap: 10px; }
+  .card { padding: 16px; }
+}
+
+
+@media (max-width: 430px) {
+  /* The label is the first thing to go on a narrow phone; the panel keeps the
+     title, so the meaning is never lost. */
+  .assistant-launcher span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .assistant-launcher { padding: 12px; }
+  .assistant-panel { inset-inline: 12px; width: auto; max-height: 75vh; }
+}
+
+@media (max-width: 560px) {
+  /* A phone screen has no room for a floating panel: it becomes a sheet that
+     uses the width, and the size toggle has nothing to do. */
+  .assistant-panel,
+  .assistant-panel.is-expanded { inset-inline: 10px; width: auto; max-height: 82vh; }
+  .assistant-panel [data-assistant-expand] { display: none; }
+  .assistant-msg-image { max-height: 160px; }
 }

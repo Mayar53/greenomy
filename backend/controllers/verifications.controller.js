@@ -17,11 +17,13 @@ const crypto = require("crypto");
 const { withTransaction } = require("../config/db");
 const verificationModel = require("../models/verification.model");
 const plantModel = require("../models/plant.model");
+const plantName = require("../services/plant-name.service");
 const challengeModel = require("../models/verification-challenge.model");
 const imageModel = require("../models/verification-image.model");
 const journeyModel = require("../models/journey.model");
 const imageService = require("../services/image.service");
 const duplicateService = require("../services/duplicate.service");
+const continuityService = require("../services/continuity.service");
 const provenanceService = require("../services/provenance.service");
 const ai = require("../services/ai.service");
 const { getVerificationProvider, HeuristicVerificationProvider, verifyPhoto } = require("../services/verification-provider");
@@ -35,6 +37,20 @@ const CHALLENGE_LENGTH = Math.min(Math.max(Number(process.env.CHALLENGE_LENGTH |
 // Foliage floors. A frame with essentially no green in it is not a growing
 // plant; a frame that is only faintly green is not evidence either. Both are
 // only consulted when no vision model is configured to judge the plant itself.
+// One of these is asked for at random on each attempt, so a photo taken before
+// the challenge was issued cannot satisfy it. Kept simple and doable in seconds.
+const CHALLENGE_INSTRUCTIONS = [
+  "Hold the plant so the whole pot or container is in the frame.",
+  "Photograph it from the side, with the base of the stem visible.",
+  "Take it from just above, looking down at the top of the plant.",
+  "Put your hand next to the pot so the scale is visible.",
+  "Step back a little so the plant and its surroundings are both visible.",
+  "Take it from the other side of the plant than your last photo.",
+];
+function pickInstruction() {
+  return CHALLENGE_INSTRUCTIONS[crypto.randomInt(0, CHALLENGE_INSTRUCTIONS.length)];
+}
+
 const NO_PLANT_GREEN_RATIO = Number(process.env.VERIFY_MIN_GREEN_RATIO || 0.1);
 const STRONG_GREEN_RATIO = Number(process.env.VERIFY_STRONG_GREEN_RATIO || 0.25);
 
@@ -47,7 +63,16 @@ const STRONG_GREEN_RATIO = Number(process.env.VERIFY_STRONG_GREEN_RATIO || 0.25)
  * no red flags is accepted. A plant match alone is never enough — that is the
  * entire point of the second question.
  */
-function decideVerification({ analysis, signals, provenance, duplicates, milestone, challengePassed, confidence }) {
+function decideVerification({
+  analysis,
+  signals,
+  provenance,
+  duplicates,
+  continuity,
+  milestone,
+  challengePassed,
+  confidence,
+}) {
   const greenery = Number(analysis.pixelStats && analysis.pixelStats.greenRatio) || 0;
   const plantMatch = signals ? signals.plantMatch : null;
 
@@ -58,6 +83,23 @@ function decideVerification({ analysis, signals, provenance, duplicates, milesto
   // With no model at all, pixel greenery is the only plant signal available.
   if (!signals && greenery < NO_PLANT_GREEN_RATIO) {
     return { approvalStatus: "rejected", requiresReview: false, reasonCode: "no_plant" };
+  }
+
+  // 2a. A fake plant, or a stage the photo plainly does not show -> reject.
+  //     A mature fruiting plant cannot evidence "seed planted", and a plastic
+  //     plant is not a plant at all. Rejecting is the honest answer here: the
+  //     image cannot support the claim, so it earns nothing.
+  if (signals && signals.artificialPlant === true) {
+    return { approvalStatus: "rejected", requiresReview: false, reasonCode: "not_a_real_plant" };
+  }
+  if (signals && signals.stageMatch === false) {
+    return { approvalStatus: "rejected", requiresReview: false, reasonCode: "stage_mismatch" };
+  }
+  // A reward-eligible photo is proof of NOW only if the per-attempt code is in
+  // it. The code is issued for this attempt and shown by the member, so an
+  // older or borrowed photo cannot contain it.
+  if (milestone && signals && signals.challengePassed === false) {
+    return { approvalStatus: "rejected", requiresReview: false, reasonCode: "challenge_failed" };
   }
 
   // 2. Clear evidence the image came from somewhere else -> reject. The model's
@@ -90,6 +132,12 @@ function decideVerification({ analysis, signals, provenance, duplicates, milesto
   }
   if (duplicates.status === "near") {
     return { approvalStatus: "pending", requiresReview: true, reasonCode: "duplicate" };
+  }
+  // 4b. The frame shares nothing with this plant's earlier stages. Growth looks
+  //     different at every stage, so this is only raised when the images are
+  //     essentially unrelated — and it asks for a human, never rejects.
+  if (continuity && continuity.status === "inconsistent") {
+    return { approvalStatus: "pending", requiresReview: true, reasonCode: "continuity_uncertain" };
   }
   if (milestone) {
     // Reward-eligible: never auto-paid here — the code/photo needs a human
@@ -134,16 +182,19 @@ exports.challenge = async (req, res) => {
     if (!plant) return res.status(404).json({ error: "Plant not found" });
   }
 
+  const instruction = pickInstruction();
   const challenge = await challengeModel.issue({
     userId: req.user.id,
     plantId: plantId || null,
     code: generateChallengeCode(),
     expiresAt: new Date(Date.now() + CHALLENGE_TTL_MS).toISOString(),
+    instruction,
   });
 
   res.status(201).json({
     challengeId: challenge.challenge_id,
     code: challenge.code,
+    instruction: challenge.instruction,
     expiresAt: challenge.expires_at,
   });
 };
@@ -205,8 +256,28 @@ exports.submit = async (req, res) => {
     return res.status(400).json({ error: "A verification code is required for a milestone photo" });
   }
 
+  // A reward-eligible photo has to follow the journey: every earlier stage must
+  // already be done, so a mature plant cannot be claimed with no evidence of the
+  // growth before it. Server-side, so no client can skip it.
+  if (milestone) {
+    const stages = await journeyModel.listMilestones(milestone.journey_id);
+    const outstanding = stages.filter(
+      (stage) => Number(stage.sort_order) < Number(milestone.sort_order) && !stage.completed_at
+    );
+    if (outstanding.length) {
+      return res.status(409).json({
+        error: "Complete the earlier stages first — a journey is verified in order.",
+        nextStage: outstanding[0].stage_key,
+        outstandingStages: outstanding.map((stage) => stage.stage_key),
+      });
+    }
+  }
+
   // 3. Duplicates across the whole image table — not just this member's history.
   const duplicates = await duplicateService.findDuplicates(analysis);
+
+  // 3b. Continuity against this member's own earlier photos of THIS plant.
+  const continuity = await continuityService.assess({ userId: req.user.id, plantId, analysis });
 
   // 4. Base integrity score. A provider outage must never block a submission.
   let scored;
@@ -225,6 +296,9 @@ exports.submit = async (req, res) => {
         imageUrl: imageUrlForModels,
         plantName: plant.plant_type,
         challengeCode: challenge ? challenge.code : null,
+        // Why the photo was taken matters: the same picture can be right for one
+        // stage and wrong for another.
+        stage: milestone ? { key: milestone.stage_key, label: milestone.label_en } : null,
       });
     } catch (err) {
       console.warn(`Vision verification unavailable (${err.message}) — continuing with local signals.`);
@@ -251,6 +325,7 @@ exports.submit = async (req, res) => {
     signals,
     provenance,
     duplicates,
+    continuity,
     milestone,
     challengePassed,
     confidence,
@@ -265,6 +340,8 @@ exports.submit = async (req, res) => {
   const suspicious =
     duplicate ||
     provenance.verdict === "suspicious" ||
+    continuity.status === "inconsistent" ||
+    Boolean(signals && (signals.artificialPlant === true || signals.stageMatch === false)) ||
     Boolean(signals && (signals.captured === false || signals.screenshot === true || signals.watermark === true));
 
   // The full internal result. Kept on the record so an admin can see WHY a photo
@@ -288,9 +365,16 @@ exports.submit = async (req, res) => {
     },
     // Supporting signals
     challengePassed,
+    artificialPlant: signals ? signals.artificialPlant : null,
+    stageMatch: signals ? signals.stageMatch : null,
     duplicate: duplicates.status,
     crossUser,
     journeyConsistency,
+    // How close this frame is to this plant's earlier stages, and whether the
+    // member said it came from the camera or from the gallery. The latter is
+    // client-declared, so it is recorded for the reviewer and never trusted.
+    continuity: { status: continuity.status, distance: continuity.distance, compared: continuity.compared },
+    captureSource: ["camera", "upload"].includes(body.captureSource) ? body.captureSource : "unknown",
     suspicious,
     requiresReview,
     confidence,
@@ -339,6 +423,8 @@ exports.submit = async (req, res) => {
       challengeId: challenge ? challenge.challenge_id : null,
       milestoneId: milestone ? milestone.milestone_id : null,
       duplicateStatus: duplicate ? duplicates.status : "none",
+      continuityDistance: continuity.distance,
+      continuityStatus: continuity.status,
       requiresReview,
       verificationResult,
     });
@@ -372,17 +458,33 @@ exports.submit = async (req, res) => {
 
   await notify({ userId: req.user.id, type: notificationType });
 
-  res.status(201).json(verification);
+  // Two separate answers, so the member is never told more than we know:
+  // identification is what the model saw, authenticity is where the review
+  // stands. Nothing here ever claims an image was proven authentic.
+  const plantMatchForMember = verificationResult.plantMatch;
+  res.status(201).json({
+    ...verification,
+    identification_status:
+      plantMatchForMember === false ? "failed" : plantMatchForMember === true ? "passed" : "inconclusive",
+    authenticity_status:
+      approvalStatus === "rejected"
+        ? "rejected"
+        : requiresReview
+          ? "review_pending"
+          : "not_flagged",
+  });
 };
 
 exports.getOne = async (req, res) => {
   const verification = await verificationModel.findByIdForUser(req.params.id, req.user.id);
   if (!verification) return res.status(404).json({ error: "Verification not found" });
-  res.json(verification);
+  res.json(await plantName.decorate(verification, plantName.requestLanguage(req)));
 };
 
 exports.history = async (req, res) => {
-  res.json(await verificationModel.listByUser(req.user.id));
+  res.json(
+    await plantName.decorate(await verificationModel.listByUser(req.user.id), plantName.requestLanguage(req))
+  );
 };
 
 /** GET /api/verifications/:id/image — the ORIGINAL photo, owner only. Serving it

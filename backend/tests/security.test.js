@@ -79,10 +79,7 @@ describe("security hardening", () => {
 
   test("two simultaneous redemptions of the same reward only spend the points once", async () => {
     const { token } = await h.signup(api.base);
-    const plant = await h.createPlant(api.base, token);
-    for (let i = 0; i < 4; i += 1) {
-      await h.submitPhoto(api.base, token, plant.plant_id, h.SHARP_GREEN_PHOTO, `RACE${i}`);
-    }
+    await h.creditPoints(api.base, token, 120);
 
     const before = await h.get(api.base, "/wallet", { token });
     assert.equal(before.body.currentPoints, 120);

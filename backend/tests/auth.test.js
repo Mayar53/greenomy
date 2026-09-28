@@ -75,3 +75,34 @@ describe("auth", () => {
     assert.equal(bogus.status, 401);
   });
 });
+
+describe("one address is one account, whatever its case", () => {
+  test("signing up again with a different case is refused", async () => {
+    const email = `Case_${Date.now()}@Example.test`;
+
+    const first = await h.post(api.base, "/auth/signup", {
+      body: { fullName: "Case Test", email, password: "password123" },
+    });
+    assert.equal(first.status, 201);
+    assert.equal(first.body.user.email, email.toLowerCase(), "the stored address is canonical");
+
+    const second = await h.post(api.base, "/auth/signup", {
+      body: { fullName: "Case Test", email: email.toLowerCase(), password: "password123" },
+    });
+    assert.equal(second.status, 409, "a duplicate account must not be created");
+  });
+
+  test("login accepts the address in any case", async () => {
+    const email = `CaseLogin_${Date.now()}@Example.test`;
+    await h.post(api.base, "/auth/signup", {
+      body: { fullName: "Case Login", email, password: "password123" },
+    });
+
+    const res = await h.post(api.base, "/auth/login", {
+      body: { email: email.toUpperCase(), password: "password123" },
+    });
+    assert.equal(res.status, 200);
+    assert.ok(res.body.token);
+    assert.equal(res.body.user.email, email.toLowerCase());
+  });
+});

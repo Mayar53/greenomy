@@ -14,7 +14,11 @@ const ROLE_LABELS = {
   super_admin: "admin.roleSuperAdmin",
 };
 
+// Profile belongs to the dashboard, not the member app: only staff may open it.
+const ADMIN_ROLES = ["admin", "super_admin"];
+
 let user = null;
+let allowed = false;
 
 function escapeHtml(value) {
   return String(value == null ? "" : value).replace(/[&<>"']/g, (c) =>
@@ -221,12 +225,20 @@ function wireLogout() {
   });
 }
 
+/** Staff only. Mirrors admin.js: the role is read from the API, never from the
+ * cached session, so a demoted admin loses the page on the next load. */
+function denyAccess() {
+  const denied = document.querySelector("[data-admin-denied]");
+  if (denied) denied.hidden = false;
+  document.querySelectorAll("[data-admin-host]").forEach((el) => {
+    el.hidden = true;
+  });
+}
+
 async function init() {
   if (!requireAuthOrRedirect("login.html")) return;
 
   wireLogout();
-  initProfileForm();
-  initPasswordForm();
   renderSummary();
 
   try {
@@ -238,12 +250,19 @@ async function init() {
     return;
   }
 
+  if (!ADMIN_ROLES.includes(user.role)) return denyAccess();
+
+  // Wire the forms only once the account is known to be staff.
+  allowed = true;
+  initProfileForm();
+  initPasswordForm();
   renderSummary();
   fillProfileForm();
 }
 
 document.addEventListener("DOMContentLoaded", init);
 document.addEventListener("greenomy:translated", () => {
+  if (!allowed) return;
   renderSummary();
   fillProfileForm();
 });

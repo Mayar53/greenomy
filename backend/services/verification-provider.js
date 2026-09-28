@@ -98,28 +98,39 @@ class AIVerificationProvider {
 // — it just cannot be auto-verified, so it goes to review instead.
 const MULTI_SIGNAL_SYSTEM = "You check photos for a plant-growing challenge. Reply with JSON only — no prose, no code fences.";
 
-function multiSignalPrompt(plantName, challengeCode) {
+function multiSignalPrompt(plantName, challengeCode, stage) {
   return [
-    "You are checking ONE photo submitted for a plant-growing challenge. There are TWO SEPARATE questions, and an image can pass one while failing the other:",
+    "You are checking ONE photo submitted for a plant-growing challenge. There are THREE SEPARATE questions, and an image can pass one while failing another:",
     "  (1) PLANT — does it show a real, living plant being grown?",
     "  (2) ORIGINAL — does it look like a photo this person actually took themselves, rather than something taken from the internet: a stock/library photo, a screenshot, a social-media repost, or a heavily edited/generated image?",
+    "  (3) STAGE — does what the photo shows match the growth stage being claimed?",
     plantName ? `The plant is expected to be a ${plantName}.` : "",
+    stage && stage.label
+      ? `It is submitted as the "${stage.label}" stage. Judge the plant's development against that stage only: a mature, flowering or fruiting plant does NOT evidence an early stage such as planting or first growth, and bare soil, a seed or an empty pot does NOT evidence a late stage.`
+      : "",
     challengeCode
       ? `The photo should ALSO show the code "${challengeCode}" — handwritten or printed — somewhere clearly in the frame.`
       : "",
-    "",
-    "Signals that an image is NOT the person's own photo: perfectly uniform or studio-white backgrounds; watermarks, stock credits or price tags; logos; screenshot UI (status bars, buttons, browser chrome); drawn-on text; heavy artificial colour grading; a scene that looks like a shop, catalogue or poster rather than someone's home.",
+    "An artificial plant — plastic, silk, fabric, printed or a toy — is NOT a living plant: answer plantMatch false and artificialPlant true for it.",
     "A photo of a plant downloaded from the internet IS still a plant: answer plantMatch true and captured false for it. Never let a plant match alone decide the result.",
     "",
+    "Signals that an image is NOT the person's own photo: perfectly uniform or studio-white backgrounds; watermarks, stock credits or price tags; logos; screenshot UI (status bars, buttons, browser chrome); drawn-on text; heavy artificial colour grading; a scene that looks like a shop, catalogue or poster rather than someone's home.",
+    "",
     "Reply with ONLY this JSON shape:",
-    '{"plantMatch": <true|false|null>, "captured": <true|false|null>, "screenshot": <true|false|null>, "watermark": <true|false|null>, "challengePassed": <true|false|null>, "confidence": <0-1>, "reason": "<one short sentence>"}',
-    "plantMatch: is there a real plant being grown? null if you cannot tell.",
+    '{"plantMatch": <true|false|null>, "captured": <true|false|null>, "screenshot": <true|false|null>, "watermark": <true|false|null>, "challengePassed": <true|false|null>, "artificialPlant": <true|false|null>, "stageMatch": <true|false|null>, "confidence": <0-1>, "reason": "<one short sentence>"}',
+    "plantMatch: is there a real, living plant being grown? null if you cannot tell.",
     "captured: does it look like an original photo taken by the person submitting it? null if you cannot tell.",
     "screenshot: does it show screen/UI elements, i.e. is it a screen capture? null if unsure.",
     "watermark: is there a watermark, stock-image credit, price tag or large overlaid text? null if unsure.",
     challengeCode
       ? "challengePassed: is the code clearly visible and correct? null if you cannot tell."
       : "challengePassed: null.",
+    stage && stage.label
+      ? "artificialPlant: is the plant fake — plastic, silk, fabric, printed or a toy? null if unsure."
+      : "artificialPlant: is the plant fake — plastic, silk, fabric, printed or a toy? null if unsure.",
+    stage && stage.label
+      ? "stageMatch: does the plant's development match the stage being claimed? null if unsure."
+      : "stageMatch: null.",
     "confidence: how certain you are this is a genuine photo of a growing plant.",
     "Never guess — use null rather than inventing an answer.",
   ]
@@ -134,13 +145,13 @@ const asTriState = (value) => (value === true ? true : value === false ? false :
  * Returns null when no model is configured; throws only on a provider failure
  * (the caller treats that as "unknown", never as a pass).
  */
-async function verifyPhoto({ imageUrl, plantName, challengeCode }) {
+async function verifyPhoto({ imageUrl, plantName, challengeCode, stage = null }) {
   if (!ai.isConfigured()) return null;
 
   const reply = await ai.chat({
     messages: [
       { role: "system", content: MULTI_SIGNAL_SYSTEM },
-      { role: "user", content: ai.userContent(multiSignalPrompt(plantName, challengeCode), imageUrl) },
+      { role: "user", content: ai.userContent(multiSignalPrompt(plantName, challengeCode, stage), imageUrl) },
     ],
     maxTokens: 1000,
   });
@@ -156,6 +167,10 @@ async function verifyPhoto({ imageUrl, plantName, challengeCode }) {
     screenshot: asTriState(parsed.screenshot),
     watermark: asTriState(parsed.watermark),
     challengePassed: asTriState(parsed.challengePassed),
+    // A fake plant is not a plant, and a stage that does not match the one being
+    // claimed is not evidence of that stage.
+    artificialPlant: asTriState(parsed.artificialPlant),
+    stageMatch: asTriState(parsed.stageMatch),
     confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(1, confidence)) : null,
     reason: typeof parsed.reason === "string" ? parsed.reason.slice(0, 300) : null,
     provider: "ai",

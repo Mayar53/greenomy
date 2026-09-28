@@ -226,6 +226,11 @@ function aliasRowsFor(plant) {
   if (plant.acceptedName && plant.acceptedName !== plant.scientificName) push("en", plant.acceptedName, "powo");
   if (plant.i18n && plant.i18n.ar) push("ar", plant.i18n.ar.name, "greenomy");
   if (plant.i18n && plant.i18n.ku) push("ku", plant.i18n.ku.name, "greenomy");
+  // Kurdish regional/alternative names: one canonical display name, the rest are
+  // search aliases, so a variant never becomes a second plant.
+  for (const alternative of (plant.i18n && plant.i18n.ku && plant.i18n.ku.alternatives) || []) {
+    push("ku", alternative, "greenomy");
+  }
   for (const pair of plant.aliases || []) {
     if (Array.isArray(pair) && pair.length === 2) push(pair[0], pair[1], "greenomy");
   }

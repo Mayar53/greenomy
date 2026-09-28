@@ -46,6 +46,21 @@ function createTestDatabase() {
   // on the network, on a city resolving, or on Open-Meteo's availability.
   process.env.WEATHER_PROVIDER = "offline";
 
+  // And for mail: a test must never send real email, and must never reach for
+  // the developer's own SMTP credentials in backend/.env. Pinning the console
+  // provider keeps every test offline and its outbox inspectable.
+  process.env.MAIL_PROVIDER = "console";
+  process.env.MAIL_SMTP_HOST = "";
+  process.env.MAIL_SMTP_USER = "";
+  process.env.MAIL_SMTP_PASS = "";
+  process.env.MAIL_FROM = "Greenomy <test@greenomy.test>";
+
+  // And Telegram: a test must never talk to the real Bot API or use the
+  // developer's own bot token from backend/.env.
+  process.env.TELEGRAM_BOT_TOKEN = "";
+  process.env.TELEGRAM_WEBHOOK_SECRET = "";
+  process.env.TELEGRAM_BOT_URL = "";
+
   // Verification images are written to a throwaway directory inside the test
   // temp dir, never the project's uploads/ folder. The size limit is lowered so
   // an "oversized upload" test does not have to build an 8 MB file.
@@ -130,6 +145,42 @@ async function loginAdmin(base) {
 const SHARP_GREEN_PHOTO = { greenRatio: 0.55, sharpness: 22, brightness: 0.55 };
 /** A submission certain to queue for review (< 0.85). */
 const DIM_PHOTO = { greenRatio: 0.1, sharpness: 4, brightness: 0.5 };
+
+/**
+ * Test fixture: credit a balance directly.
+ *
+ * Tests about SPENDING (redemption, notifications, analytics) need a balance;
+ * how points are EARNED is covered by the verification and reward tests, and it
+ * now requires a verified journey rather than one photo. Going through the real
+ * earning path here would test the wrong thing.
+ */
+async function creditPoints(base, token, amount) {
+  const { query } = require("../config/db");
+  const me = await get(base, "/auth/me", { token });
+  await query("UPDATE users SET total_points = COALESCE(total_points, 0) + $2 WHERE user_id = $1", [
+    me.body.user_id,
+    amount,
+  ]);
+}
+
+/**
+ * Test fixture: mark every milestone BEFORE a stage complete.
+ *
+ * A journey is verified in order — that is the anti-fraud rule — so a test that
+ * wants to submit a later stage has to stand on the earlier ones first.
+ */
+async function completeMilestonesBefore(journey, stageKey) {
+  const { query } = require("../config/db");
+  const target = journey.milestones.find((milestone) => milestone.stage_key === stageKey);
+  for (const milestone of journey.milestones) {
+    if (Number(milestone.sort_order) < Number(target.sort_order)) {
+      await query(
+        "UPDATE journey_milestones SET completed_at = COALESCE(completed_at, now()) WHERE milestone_id = $1",
+        [milestone.milestone_id]
+      );
+    }
+  }
+}
 
 async function createPlant(base, token, overrides = {}) {
   const res = await post(base, "/plants", {
@@ -339,6 +390,8 @@ module.exports = {
   del,
   signup,
   loginAdmin,
+  creditPoints,
+  completeMilestonesBefore,
   createPlant,
   submitPhoto,
   submitRawPhoto,

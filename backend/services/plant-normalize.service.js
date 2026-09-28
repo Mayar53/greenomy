@@ -10,6 +10,8 @@
 // Covers English, Modern Standard Arabic, Iraqi Arabic and Kurdish (Sorani),
 // including the letter-form and definite-article variations each script uses.
 
+const plantSeed = require("../../plants.json");
+
 /** Words that describe the question rather than the subject. Checked before
  * and after stemming, in every supported language. */
 const STOPWORDS = new Set([
@@ -67,48 +69,42 @@ const SYNONYM_GROUPS = [
     "گەڵا", "گوڵ", "بەرهەم"],
 ];
 
-// Colloquial Arabic and Kurdish names mapped to the English word, so a question
-// phrased locally still matches both the catalog row and the English guides.
-// Keys are folded through the same letter unification as lookups (see below).
-const PLANT_ALIASES = {
-  // tomato
-  "طماطم": "tomato", "طماطة": "tomato", "بندورة": "tomato", "تماتة": "tomato",
-  "تەماتە": "tomato", "تەماته": "tomato", "تماته": "tomato",
-  // cucumber
-  "خيار": "cucumber", "خەیار": "cucumber",
-  // zucchini / courgette
-  "كوسة": "zucchini", "كوسا": "zucchini", "كوسى": "zucchini", "کۆسا": "zucchini", "کەلەک": "zucchini",
-  // pumpkin / squash
-  "يقطين": "pumpkin", "قرع": "pumpkin", "کەدوو": "pumpkin", "کادوو": "pumpkin",
-  // eggplant / aubergine
-  "باذنجان": "eggplant", "باذنجانة": "eggplant", "بادنجان": "eggplant", "بێنجان": "eggplant",
-  // pepper
-  "فلفل": "pepper", "فليفلة": "pepper", "بیبەر": "pepper",
-  // onion / garlic
-  "بصل": "onion", "بيقەز": "onion", "پیاز": "onion", "ثوم": "garlic", "سیر": "garlic",
-  "توم": "garlic", "سير": "garlic",
-  // leafy
-  "خس": "lettuce", "کاهوو": "lettuce", "سبانخ": "spinach", "ئیسپاناخ": "spinach",
-  "ملوخية": "mallow", "جرجير": "arugula", "روكا": "arugula", "بقدونس": "parsley", "معدنوس": "parsley",
-  "مەعدەنۆس": "parsley", "كزبرة": "coriander", "کەشنیز": "coriander", "شبت": "dill", "شەبەت": "dill",
-  "ريحان": "basil", "حبق": "basil", "ڕەیحان": "basil", "نعنع": "mint", "نعناع": "mint",
-  "نەعناع": "mint", "زعتر": "thyme", "زەعتەر": "thyme", "إكليل الجبل": "rosemary", "روزماري": "rosemary",
-  "ڕۆزماری": "rosemary",
-  // root
-  "جزر": "carrot", "گێزەر": "carrot", "فجل": "radish", "تورپ": "radish", "شمندر": "beetroot",
-  "لفت": "turnip", "بطاطا": "potato", "پەتاتە": "potato",
-  // fruit trees
-  "ليمون": "lemon", "لیمۆ": "lemon", "برتقال": "orange", "برتقان": "orange", "پرتەقاڵ": "orange",
-  "تين": "fig", "هەنجیر": "fig", "زيتون": "olive", "زەیتوون": "olive", "رمان": "pomegranate",
-  "هەنار": "pomegranate", "عنب": "grape", "ترێ": "grape", "مشمش": "apricot", "قەیسی": "apricot",
-  "تفاح": "apple", "سێو": "apple", "خوخ": "peach", "قۆخ": "peach",
-  // houseplants
-  "صبار": "aloe", "ألوفيرا": "aloe", "بوتس": "pothos", "پۆتۆس": "pothos", "ثعبان": "snake",
-  "ثیران": "snake", "الحية": "snake", "زنبق": "lily", "مونستيرا": "monstera", "مۆنستێرا": "monstera",
-  // other
-  "فراولة": "strawberry", "فڕاوەڵە": "strawberry", "بامية": "okra", "بامیە": "okra",
-  "باقلاء": "broad-bean", "بازلاء": "pea", "باقڵا": "pea", "ذرة": "corn", "گەنم": "wheat",
-};
+// Plants named in the Green Hub articles that are not grown in the catalog, so
+// there is no plants.json entry to derive them from.
+const NON_CATALOG_ALIASES = { "ملوخية": "mallow", "گەنم": "wheat", "شعير": "barley" };
+
+/** Alias -> canonical search term, built from plants.json — the ONE place plant
+ * names live. Every name a plant answers to (English, scientific, Arabic,
+ * Kurdish and its own alias list, including the colloquial names the audit
+ * verified) folds onto that plant's slug, so a question in any language reaches
+ * the same catalog row and the same guides. Adding a plant, or correcting a
+ * Kurdish name, is therefore a data edit — never a code change here. */
+function buildPlantAliases() {
+  const map = { ...NON_CATALOG_ALIASES };
+  for (const plant of plantSeed.plants || []) {
+    const canonical = plant.slug || String(plant.name || "").toLowerCase().replace(/\s+/g, "-");
+    if (!canonical) continue;
+
+    const names = [plant.name, plant.slug, plant.scientificName, plant.acceptedName];
+    if (plant.i18n) {
+      for (const locale of Object.values(plant.i18n)) {
+        if (locale && locale.name) names.push(locale.name);
+      }
+    }
+    for (const pair of plant.aliases || []) {
+      if (Array.isArray(pair) && pair[1]) names.push(pair[1]);
+    }
+
+    // First claim wins, matching the seeder: one alias resolves to one plant.
+    for (const name of names) {
+      const key = String(name || "").trim().toLowerCase();
+      if (key && !(key in map)) map[key] = canonical;
+    }
+  }
+  return map;
+}
+
+const PLANT_ALIASES = buildPlantAliases();
 
 /** Unifies the letter forms that vary between writers of Arabic script, so
  * "طماطة" and "طماطه" are the same word. Applied to stored aliases AND to

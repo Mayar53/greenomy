@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title data-i18n="meta.aboutTitle">About Greenomy — Sustainability You Can Grow</title>
   <meta name="description" data-i18n-attr="content:meta.aboutDesc" content="Greenomy's vision, values, and mission to make sustainability and urban greening accessible to everyone." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="responsive.css" />
   <link rel="canonical" href="https://greenomy.app/about.html" />
@@ -25,6 +25,7 @@
         <a href="greenhub.html" data-i18n="nav.greenHub">Green Hub</a>
         <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
         <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        <a href="login.html" class="nav-login" data-i18n="nav.login" data-auth="guest">Log In</a>
       </nav>
       <div class="header-actions">
         <div class="lang-switch" role="group" aria-label="Language">
@@ -34,7 +35,7 @@
         </div>
         <a href="signup.html" class="btn btn-primary" data-auth="guest" data-i18n="nav.join">Join Greenomy</a>
         <a href="garden.html" class="btn btn-primary" data-auth="user" data-i18n="nav.garden" hidden>My Garden</a>
-        <button type="button" class="btn btn-secondary" data-auth="user" data-auth-logout data-i18n="app.logout" hidden>Log out</button>
+        <a href="admin.html" class="btn btn-secondary" data-auth="admin" data-i18n="nav.admin" hidden>Admin</a>
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
       </div>
     </div>
@@ -94,21 +95,6 @@
       </div>
     </section>
 
-    <section class="section-tight">
-      <div class="container">
-        <div class="section-head text-center">
-          <h2 class="heading-md" data-i18n="about.founderTitle">Founder</h2>
-        </div>
-        <div class="card" style="max-width: 560px; margin: 0 auto; display: flex; gap: 20px; align-items: center;">
-          <div style="width: 84px; height: 84px; border-radius: 50%; background: var(--beige-dark); flex-shrink: 0; display:flex; align-items:center; justify-content:center; font-size: 2rem;" aria-hidden="true" data-icon="user"></div>
-          <div>
-            <h3 data-i18n="about.founderName" style="margin-bottom:2px;">Founder Name</h3>
-            <p style="color: var(--sage-ink); font-weight:600; margin-bottom: 8px;" data-i18n="about.founderRole">Founder &amp; CEO, Greenomy</p>
-            <p data-i18n="about.founderBio">Placeholder bio — replace with the founder's real story.</p>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -117,6 +103,10 @@
         <div class="footer-brand">
           <a href="index.html" class="brand" style="color:#fff;"><img class="brand-mark" src="logo-mark.png" alt="" /> <span class="brand-name">Greenomy</span></a>
           <p data-i18n="footer.mission">Environmental technology made warm and human.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/greenomy_official" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-i18n-attr="aria-label:social.instagram"><span data-icon="instagram"></span></a>
+            <a href="https://t.me/Greenomy_official" target="_blank" rel="noopener noreferrer" aria-label="Telegram" data-i18n-attr="aria-label:social.telegram"><span data-icon="telegram"></span></a>
+          </div>
         </div>
         <div>
           <h3 data-i18n="footer.explore">Explore</h3>
@@ -125,9 +115,6 @@
           <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
           <a href="contact.html" data-i18n="nav.contact">Contact</a>
         </div>
-      </div>
-      <div class="footer-bottom">
-        <span>&copy; <span data-current-year>2026</span> Greenomy.</span>
       </div>
     </div>
   </footer>

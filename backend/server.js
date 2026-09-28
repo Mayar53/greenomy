@@ -5,6 +5,7 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const { ping, assertConfigured } = require("./config/db");
 const securityHeaders = require("./middleware/security-headers");
+const { runReminders } = require("./services/reminder.service");
 
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/users.routes");
@@ -96,6 +97,8 @@ app.use("/api/partners", partnerRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/ai", require("./routes/ai.routes"));
 app.use("/api/journeys", require("./routes/journeys.routes"));
+app.use("/api/engagement", require("./routes/engagement.routes"));
+app.use("/api/telegram", require("./routes/telegram.routes"));
 app.use("/api", require("./routes/recommendations.routes"));
 
 // Development-only: exposes the mail outbox so password-reset links can be
@@ -161,6 +164,18 @@ if (require.main === module) {
     .then(() => ping())
     .then(() => {
       const server = app.listen(PORT, () => console.log(`Greenomy API listening on port ${PORT}`));
+
+      // Daily care reminders are opt-in: a background timer is a deployment
+      // choice, not a default. `npm run reminders` (cron) is the alternative.
+      if (String(process.env.REMINDERS_ENABLED || "").toLowerCase() === "true") {
+        const intervalHours = Math.max(1, Number(process.env.REMINDERS_INTERVAL_HOURS || 24));
+        const run = () =>
+          runReminders().catch((err) => console.error("Reminder job failed:", err.message));
+        run();
+        setInterval(run, intervalHours * 3600 * 1000).unref();
+        console.log(`Care reminders enabled — checking every ${intervalHours}h.`);
+      }
+
       // A port clash surfaces as an event, not a throw — without this it would
       // crash with a bare stack trace.
       server.on("error", (err) => {

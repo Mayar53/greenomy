@@ -116,12 +116,6 @@ function initNewSeedWizard() {
     if (current === steps.length - 1) renderConfirmation();
   }
 
-  const PLANT_TYPE_KEYS = {
-    "Tomato": "wizard.plantTomato",
-    "Basil": "wizard.plantBasil",
-    "Orange Tree": "wizard.plantOrange",
-    "Pothos": "wizard.plantPothos",
-  };
   const PLANTING_METHOD_KEYS = {
     "From Seed": "wizard.methodSeed",
     "From Cutting": "wizard.methodCutting",
@@ -137,7 +131,10 @@ function initNewSeedWizard() {
   function renderConfirmation() {
     const summary = wizard.querySelector("[data-seed-summary]");
     if (!summary) return;
-    const plantType = localizedValue(draft.seed.plantType, PLANT_TYPE_KEYS, "wizard.yourPlant");
+    // The name comes from the catalog row that was picked, in the reader's own
+    // language, so the wizard keeps no plant names of its own.
+    const plantType =
+      (draft.seed.names || {})[currentLanguage()] || draft.seed.plantType || t("wizard.yourPlant");
     const method = draft.seed.plantingMethod
       ? localizedValue(draft.seed.plantingMethod, PLANTING_METHOD_KEYS)
       : "—";
@@ -282,10 +279,20 @@ function selectPlantType(group, value) {
  * own Continue handler reads, and the shared draft the create call uses. Every
  * way of choosing a plant — picker, photo identify, recommendation — goes
  * through here so they cannot disagree. */
-function setSelectedPlant({ name, canonicalPlantId = null, customName = null }) {
+/** A catalog row's name in every language, so the wizard can show the plant the
+ * way the reader's language writes it without keeping a name list of its own. */
+function catalogNames(plant) {
+  const names = {};
+  for (const [lang, locale] of Object.entries((plant && plant.i18n) || {})) {
+    if (locale && locale.name) names[lang] = locale.name;
+  }
+  return names;
+}
+
+function setSelectedPlant({ name, canonicalPlantId = null, customName = null, names = {} }) {
   selectPlantType(document.querySelector('[data-tile-group="plantType"]'), name);
   draft = saveDraft({
-    seed: { ...(loadDraft().seed || {}), plantType: name, canonicalPlantId, customName },
+    seed: { ...(loadDraft().seed || {}), plantType: name, canonicalPlantId, customName, names },
   });
 }
 
@@ -345,7 +352,12 @@ function initPlantPicker() {
   let debounce = null;
 
   function choose(plant) {
-    setSelectedPlant({ name: plant.name, canonicalPlantId: plant.id, customName: null });
+    setSelectedPlant({
+      name: plant.name,
+      canonicalPlantId: plant.id,
+      customName: null,
+      names: catalogNames(plant),
+    });
     results.querySelectorAll(".recommend-card").forEach((card) => {
       card.classList.toggle("is-selected", card.dataset.id === plant.id);
     });
@@ -450,6 +462,7 @@ function initIdentify() {
           name: canonical ? canonical.name : result.plantType,
           canonicalPlantId: canonical ? canonical.id : null,
           customName: canonical ? null : result.plantType,
+          names: canonical ? catalogNames(canonical) : {},
         });
         status.className = "form-status is-success";
         status.textContent = `${t("identify.found")}: ${canonical ? localized(canonical, "name") || canonical.name : result.plantType}`;
@@ -554,7 +567,12 @@ function renderRecommendations(container, payload) {
   for (const item of payload.recommendations) {
     list.appendChild(
       recommendationCard(item, (chosen) => {
-        setSelectedPlant({ name: chosen.name, canonicalPlantId: chosen.id, customName: null });
+        setSelectedPlant({
+          name: chosen.name,
+          canonicalPlantId: chosen.id,
+          customName: null,
+          names: catalogNames(chosen),
+        });
         // Reuse the wizard's own Continue handler, which reads the selection.
         const next = document.querySelector("[data-seed-wizard] [data-next]");
         if (next) next.click();

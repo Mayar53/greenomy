@@ -40,16 +40,21 @@
   /* Type */
   --font-en: 'Inter', 'Plus Jakarta Sans', -apple-system, sans-serif;
   --font-ar: 'Cairo', 'Tajawal', -apple-system, sans-serif;
+  /* Kurdish needs a stack of its own. Cairo draws the Arabic letters but has
+     none of the Kurdish ones, so ە ڕ ڵ ۆ ێ ڤ ژ چ گ پ dropped out to whatever
+     font the device happened to have — a Kurdish word came out in two
+     typefaces at once, which is why Kurdish looked like a different font from
+     Arabic. Noto Sans Arabic has the whole Kurdish set and is the closest of
+     the fonts that do to Cairo's weight and proportions. */
+  --font-ku: 'Noto Sans Arabic', 'Cairo', 'Tajawal', -apple-system, sans-serif;
   --font-body: var(--font-en);
 
   /* Motion */
   --transition: 180ms ease;
 }
 
-html[lang="ar"],
-html[lang="ku"] {
-  --font-body: var(--font-ar);
-}
+html[lang="ar"] { --font-body: var(--font-ar); }
+html[lang="ku"] { --font-body: var(--font-ku); }
 
 /* ---------------------------------------------------------------------- */
 /* Reset & base                                                            */
@@ -214,6 +219,11 @@ p { margin: 0 0 1em; color: var(--color-text-muted); }
 /* The auth-aware header swaps these controls; [hidden] must win over .btn's
    own `display`, exactly as it does not for .option-grid. */
 [data-auth][hidden] { display: none; }
+
+/* Same rule for the admin-only gate: the profile page marks `.card` and `.grid`
+   as hosts, and both set their own `display`, so an author-level override is
+   what actually hides them from a member. */
+[data-admin-host][hidden] { display: none; }
 
 .lang-switch {
   display: flex; align-items: center; gap: 4px;
@@ -435,6 +445,21 @@ section.section-tight { padding: 56px 0; }
 }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 20px; }
 
+/* Share card (Instagram story) — the canvas is drawn in app.js drawShareCard() */
+.share-modal { max-width: 460px; }
+.share-preview {
+  display: flex; align-items: center; justify-content: center;
+  margin: 14px 0 4px;
+  min-height: 180px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #16241B;
+}
+.share-preview canvas { display: block; width: 100%; height: auto; }
+/* The loader sits on the dark backdrop, so the usual dashed frame is dropped. */
+.share-preview .loading-state { border: none; color: rgba(255,255,255,0.7); padding: 44px 20px; }
+.share-preview .icon { display: block; margin: 0 auto 12px; width: 30px; height: 30px; }
+
 .redeem-summary { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
 .redeem-summary li { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--color-border); padding-bottom: 8px; }
 .redeem-summary span { color: var(--color-text-muted); }
@@ -627,17 +652,54 @@ section.section-tight { padding: 56px 0; }
 .site-footer a { color: rgba(255,255,255,0.7); font-size: 0.92rem; display: block; padding: 6px 0; transition: color var(--transition); }
 .site-footer a:hover { color: var(--gold-light); }
 .footer-brand p { color: rgba(255,255,255,0.6); font-size: 0.92rem; }
-.footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+
+/* The official channels, drawn with the app's own icon set. */
+.footer-social { display: flex; gap: 10px; margin-top: 16px; }
+.footer-social a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; padding: 0; border-radius: 12px;
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8);
+}
+.footer-social a:hover { background: rgba(255,255,255,0.18); color: var(--gold-light); }
+.footer-social .icon { width: 20px; height: 20px; }
 
 /* ---------------------------------------------------------------------- */
-/* RTL adjustments                                                         */
+/* Reading direction                                                       */
+/*                                                                        */
+/* The interface is laid out left to right in EVERY language: the document */
+/* keeps dir="ltr" (set by language.js), so the logo, the navigation, the  */
+/* hero, the grids, the cards and the footer hold the same positions in    */
+/* English, Arabic and Kurdish. Switching language never mirrors a         */
+/* component, so there is no `[dir="rtl"]` layout rule anywhere.          */
+/*                                                                        */
+/* Arabic and Kurdish still read right to left — but only the text does.   */
+/* `unicode-bidi: plaintext` gives every block the reading direction of    */
+/* its own content, so an Arabic paragraph is ordered and read right to    */
+/* left while the block keeps the alignment the layout gives it: left      */
+/* beside a card's icon, centred under a centred section head, in the same */
+/* place as the English copy. Setting `direction: rtl` instead would drag  */
+/* each paragraph to the opposite edge of its box and leave it detached    */
+/* from the button, icon or logo sitting next to it.                       */
 /* ---------------------------------------------------------------------- */
-html[dir="rtl"] .hero-grid { direction: rtl; }
-html[dir="rtl"] .nav-toggle span,
-html[dir="rtl"] .nav-toggle::before,
-html[dir="rtl"] .nav-toggle::after { margin-left: 0; }
-html[dir="rtl"] .points-tag,
-html[dir="rtl"] .lang-switch { flex-direction: row-reverse; }
+html[data-text-dir="rtl"] :is(h1, h2, h3, h4, h5, h6, p, blockquote, figcaption, caption) {
+  unicode-bidi: plaintext;
+}
+
+/* Anything that is nothing but text: a list entry, a table cell, a label, a
+   chip's label, a nav link. `:not(:has(*))` is what makes this safe — an
+   element with children keeps the layout it was designed with, so a pill
+   with an icon, a milestone row or the header itself never flips. */
+html[data-text-dir="rtl"] :is(div, section, article, li, td, th, label, span, strong, em, small, b, i, a, time, cite):not(:has(*)) {
+  unicode-bidi: plaintext;
+}
+
+/* What the visitor types. Email, password and number fields hold latin
+   values, and the password field reserves room on its physical right for
+   the "Show" button, so no field is turned around. */
+html[data-text-dir="rtl"] input,
+html[data-text-dir="rtl"] textarea {
+  unicode-bidi: plaintext;
+}
 
 /* ---------------------------------------------------------------------- */
 /* Verification (camera) page                                              */
@@ -891,4 +953,333 @@ html[dir="rtl"] .lang-switch { flex-direction: row-reverse; }
   font-size: 1.9rem; font-weight: 800; letter-spacing: 0.28em;
   border-radius: var(--radius-sm); border: 2px dashed var(--color-primary);
   background: var(--color-surface); color: var(--color-text);
+}
+
+/* ---------------------------------------------------------------- Engagement */
+/* Garden level + XP progress. The bar is shared by the garden level, journeys,
+   achievements and challenges, so one look means one thing everywhere. */
+.xp-bar {
+  height: 10px; border-radius: 999px; background: var(--beige-dark);
+  overflow: hidden; margin: 10px 0;
+}
+.xp-bar-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--sage), var(--sage-ink));
+  transition: width 320ms ease;
+}
+
+.garden-overview { display: flex; flex-direction: column; gap: 20px; }
+.garden-level { display: flex; align-items: center; gap: 18px; }
+.garden-level-badge {
+  position: relative; flex: none;
+  width: 62px; height: 62px; border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(135, 169, 107, 0.16); color: var(--sage-ink);
+}
+.garden-level-badge .icon { width: 32px; height: 32px; }
+.garden-level-badge strong {
+  position: absolute; inset-inline-end: -6px; inset-block-end: -6px;
+  min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px;
+  background: var(--sage-ink); color: #fff; font-size: 0.78rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.garden-level-main { flex: 1; min-width: 0; }
+.garden-level-main .heading-md { margin: 0 0 6px; }
+
+.garden-elements { display: flex; flex-wrap: wrap; gap: 8px; }
+.garden-element {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 12px; border-radius: 999px; font-size: 0.82rem;
+  border: 1px solid var(--color-border); background: var(--color-surface);
+}
+.garden-element .icon { width: 16px; height: 16px; }
+.garden-element.is-unlocked { border-color: rgba(135, 169, 107, 0.5); color: var(--sage-ink); }
+.garden-element.is-locked { color: var(--color-text-muted); opacity: 0.7; background: var(--beige); }
+
+.engagement-stats { margin-top: 18px; }
+.engagement-stat { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.engagement-stat-icon {
+  width: 44px; height: 44px; border-radius: 13px; margin-bottom: 4px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(135, 169, 107, 0.15); color: var(--sage-ink);
+}
+.engagement-stat-icon .icon { width: 22px; height: 22px; }
+.engagement-stat strong { font-size: 1.5rem; }
+.engagement-stat-title { font-weight: 600; font-size: 0.9rem; }
+
+/* Plant journey card */
+.journey-card { display: flex; flex-direction: column; gap: 12px; }
+.journey-card .plant-card-id strong { text-transform: capitalize; }
+/* The share button sits at the bottom, so cards of different heights line up. */
+.journey-card .btn-block { margin-top: auto; }
+
+.milestone-list { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; }
+.milestone-item { display: flex; gap: 12px; padding: 7px 0; position: relative; }
+.milestone-item:not(:last-child)::before {
+  content: ""; position: absolute;
+  inset-inline-start: 13px; top: 32px; bottom: -2px;
+  width: 2px; background: var(--beige-dark);
+}
+.milestone-marker {
+  flex: none; width: 28px; height: 28px; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--beige); color: var(--color-text-muted); z-index: 1;
+}
+.milestone-marker .icon { width: 16px; height: 16px; }
+.milestone-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.milestone-label { font-weight: 600; font-size: 0.92rem; }
+.milestone-window { font-size: 0.78rem; color: var(--color-text-muted); }
+.milestone-item.is-done .milestone-marker { background: rgba(75, 139, 90, 0.16); color: var(--color-success); }
+.milestone-item.is-current .milestone-marker { background: var(--sage-ink); color: #fff; }
+.milestone-item.is-upcoming { opacity: 0.7; }
+
+.reward-line { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.reward-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: 999px; font-size: 0.74rem;
+  background: rgba(212, 175, 55, 0.16); color: #8a6d1c;
+}
+.reward-chip .icon { width: 13px; height: 13px; }
+
+.care-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.care-btn {
+  font: inherit; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 12px; border-radius: 999px;
+  border: 1px solid var(--color-border); background: var(--color-surface);
+  color: var(--color-text); font-size: 0.82rem;
+  transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.care-btn:hover { border-color: var(--sage); color: var(--sage-ink); transform: translateY(-1px); }
+.care-btn[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
+.care-btn .icon { width: 16px; height: 16px; }
+
+/* Achievements */
+.achievement-card { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.achievement-icon {
+  width: 46px; height: 46px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(135, 169, 107, 0.15); color: var(--sage-ink);
+}
+.achievement-icon .icon { width: 24px; height: 24px; }
+.achievement-card.is-locked { opacity: 0.72; }
+.achievement-card.is-locked .achievement-icon { background: var(--beige-dark); color: var(--color-text-muted); }
+.achievement-card.is-unlocked .achievement-icon { background: rgba(212, 175, 55, 0.18); color: #8a6d1c; }
+
+/* Seasonal challenges */
+.challenge-card { display: flex; flex-direction: column; gap: 8px; }
+.challenge-card.is-ended { opacity: 0.7; }
+.challenge-top { display: flex; align-items: center; gap: 10px; }
+.challenge-top strong { flex: 1; min-width: 0; }
+.challenge-icon {
+  flex: none; width: 38px; height: 38px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(135, 169, 107, 0.15); color: var(--sage-ink);
+}
+.challenge-icon .icon { width: 20px; height: 20px; }
+.challenge-embedded { margin-top: 18px; }
+.challenge-embedded .challenge-card { margin-bottom: 0; }
+
+/* Mystery rewards + collection */
+.mystery-panel { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+.mystery-card { display: flex; align-items: center; gap: 16px; }
+.mystery-icon {
+  flex: none; width: 52px; height: 52px; border-radius: 15px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(107, 45, 92, 0.12); color: var(--burgundy);
+}
+.mystery-icon .icon { width: 26px; height: 26px; }
+.mystery-body { flex: 1; min-width: 0; }
+.mystery-body p { margin: 2px 0 0; }
+.collection-card { margin-top: 18px; }
+.collection-card .garden-elements { margin-top: 12px; }
+
+/* Celebration toasts — subtle, bottom, self-dismissing. */
+.celebration {
+  position: fixed; z-index: 300;
+  inset-block-end: max(20px, env(safe-area-inset-bottom)); inset-inline: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 0 16px; pointer-events: none;
+}
+.celebration[hidden] { display: none; }
+.celebration-toast {
+  display: inline-flex; align-items: center; gap: 10px;
+  max-width: 420px; padding: 12px 18px;
+  border-radius: 999px; background: var(--charcoal); color: #fff;
+  box-shadow: var(--shadow-hover); font-size: 0.9rem;
+  animation: celebration-in 260ms ease both;
+}
+.celebration-toast .icon { width: 18px; height: 18px; color: var(--gold-light); }
+@keyframes celebration-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .celebration-toast { animation: none; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Assistant, as a launcher                                                */
+/*                                                                        */
+/* The conversation used to live in a card at the bottom of the garden      */
+/* page — the last thing on a long page, so members never found it. It is   */
+/* now a button that follows the member around the app and opens the same   */
+/* conversation in a panel.                                                */
+/* ---------------------------------------------------------------------- */
+.assistant-launcher {
+  position: fixed;
+  inset-block-end: max(20px, env(safe-area-inset-bottom));
+  inset-inline-end: max(20px, env(safe-area-inset-right));
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 999px;
+  background: var(--sage-ink);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-hover);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.assistant-launcher:hover { transform: translateY(-2px); }
+.assistant-launcher .icon { width: 20px; height: 20px; }
+
+.assistant-panel {
+  position: fixed;
+  inset-block-end: max(20px, env(safe-area-inset-bottom));
+  inset-inline-end: max(20px, env(safe-area-inset-right));
+  z-index: 95;
+  width: min(380px, calc(100vw - 32px));
+  max-height: min(70vh, 560px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-hover);
+}
+.assistant-panel[hidden] { display: none; }
+.assistant-panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.assistant-panel-head .heading-sm { margin: 0; }
+.assistant-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  color: var(--color-text-muted);
+  display: inline-flex;
+}
+.assistant-close .icon { width: 18px; height: 18px; }
+.assistant-close:hover { background: var(--beige-dark); color: var(--charcoal); }
+.assistant-panel .form-note { margin: 0; }
+.assistant-panel .assistant-thread { flex: 1; overflow-y: auto; margin-bottom: 0; overscroll-behavior: contain; }
+.assistant-panel form { display: flex; flex-direction: column; gap: 10px; }
+.assistant-panel .form-field { margin-bottom: 0; }
+.assistant-panel .btn { width: 100%; }
+
+/* The panel sizes itself to the screen, and can be made bigger: a plant problem
+   is easier to discuss with room to see the photo and the answer together. */
+.assistant-panel { width: clamp(300px, 92vw, 460px); max-height: min(78vh, 700px); }
+.assistant-panel.is-expanded { width: min(760px, 94vw); max-height: 88vh; }
+.assistant-panel-tools { display: inline-flex; align-items: center; gap: 4px; }
+.assistant-tool {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  color: var(--color-text-muted);
+  display: inline-flex;
+}
+.assistant-tool .icon { width: 18px; height: 18px; }
+.assistant-tool:hover { background: var(--beige-dark); color: var(--charcoal); }
+.assistant-tool[aria-pressed="true"] { background: var(--beige-dark); color: var(--sage-ink); }
+
+.assistant-panel #assistantMessage {
+  width: 100%;
+  min-height: 42px;
+  max-height: 132px;
+  resize: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: inherit;
+}
+.assistant-panel #assistantMessage:focus { outline: 2px solid var(--sage-ink); outline-offset: 1px; }
+
+.assistant-form-actions { display: flex; align-items: center; gap: 8px; }
+.assistant-form-actions .btn { flex: 1; }
+.assistant-attach {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--charcoal);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.assistant-attach:hover { background: var(--beige-dark); }
+.assistant-attach .icon { width: 18px; height: 18px; }
+
+.assistant-attachment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--beige);
+}
+.assistant-attachment[hidden] { display: none; }
+.assistant-attachment-thumb { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; }
+.assistant-attachment-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+.assistant-attach-remove {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  color: var(--color-text-muted);
+  display: inline-flex;
+}
+.assistant-attach-remove .icon { width: 16px; height: 16px; }
+
+.assistant-msg-image {
+  display: block;
+  max-width: 100%;
+  max-height: 220px;
+  border-radius: var(--radius-sm);
+  margin: 8px 0 0;
+  object-fit: cover;
+}
+.assistant-note {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-style: italic;
 }

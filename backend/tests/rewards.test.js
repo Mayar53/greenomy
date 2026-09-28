@@ -84,6 +84,8 @@ describe("milestone rewards", () => {
   test("a verified growth milestone pays growth points and advances the stage", async () => {
     const { token, plant, journey } = await member();
     const vegetative = journey.milestones.find((m) => m.stage_key === "vegetative");
+    // The journey is verified in order, so the earlier stages stand first.
+    await h.completeMilestonesBefore(journey, "vegetative");
 
     await approve((await submitMilestone(token, plant, vegetative, "VEG")).verification_id);
 

@@ -14,6 +14,7 @@ const rewardAwardModel = require("../models/reward-award.model");
 const userModel = require("../models/user.model");
 const transactionModel = require("../models/point-transaction.model");
 const journeyModel = require("../models/journey.model");
+const engagementService = require("./engagement.service");
 
 // What each outcome is worth. A single photo never pays a journey's full total:
 // it pays for the one milestone it evidences, and the completion bonus is
@@ -78,18 +79,20 @@ async function onVerificationApproved(client, verification) {
   const awards = [];
   const userId = verification.user_id;
 
-  if (!verification.milestone_id) {
-    const award = await grant(client, {
-      userId,
-      awardType: "photo_verified",
-      referenceId: verification.verification_id,
-    });
-    if (award) awards.push(award);
-    return awards;
-  }
+  // A photo that evidences no milestone pays NOTHING.
+  //
+  // This is the rule that stops one picture — an internet photo, someone else's
+  // plant, a frame reused from another planting — from being worth points on its
+  // own. Points come from a verified JOURNEY, not from an image: identity ("is
+  // this a tomato?") and ownership ("is this the tomato you have been growing?")
+  // are separate questions, and only the second one earns anything.
+  if (!verification.milestone_id) return awards;
 
   const { rows } = await client.query(
-    "SELECT milestone_id, journey_id, stage_key FROM journey_milestones WHERE milestone_id = $1",
+    `SELECT m.milestone_id, m.journey_id, m.stage_key, j.user_plant_id
+       FROM journey_milestones m
+       JOIN journeys j ON j.journey_id = m.journey_id
+      WHERE m.milestone_id = $1`,
     [verification.milestone_id]
   );
   const milestone = rows[0];
@@ -137,6 +140,18 @@ async function onVerificationApproved(client, verification) {
       if (completionAward) awards.push(completionAward);
     }
   }
+
+  // Engagement layer: the milestone's own rewards (XP, seeds, decorations,
+  // facts, boosts or a mystery reward) from engagement.json, then a re-check of
+  // every achievement rule. Both are idempotent on the milestone id, so a
+  // replayed approval pays neither twice.
+  await engagementService.applyMilestoneRewards(client, {
+    userId,
+    plantId: milestone.user_plant_id,
+    milestoneId: milestone.milestone_id,
+    stageKey: milestone.stage_key,
+  });
+  await engagementService.evaluateAchievements(client, userId);
 
   return awards;
 }

@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title data-i18n="meta.newSeedTitle">Plant Your First Seed — Greenomy</title>
   <meta name="robots" content="noindex" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="auth.css" />
   <link rel="stylesheet" href="responsive.css" />
@@ -172,6 +172,13 @@
         <div class="form-status" data-form-status role="status" aria-live="polite"></div>
       </div>
     </div>
+
+    <!-- Outside the wizard card on purpose: visible in every step, and the step
+         toggle cannot hide it. Planting is optional. -->
+    <p class="wizard-skip" style="justify-content: center;">
+      <a href="garden.html" class="btn-ghost" data-i18n="wizard.skip">Skip for now</a>
+      <span class="form-note" data-i18n="wizard.skipPlantNote">You can plant a seed any time from My Garden.</span>
+    </p>
   </main>
 
   <script type="module" src="main.js"></script>

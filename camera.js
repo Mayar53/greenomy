@@ -302,7 +302,16 @@ function showResult(record) {
 
   el.form.hidden = true;
   el.result.hidden = false;
-  el.scoreValue.textContent = `${confidence}%`;
+  // No bare percentage here. A high "match" only ever meant "this looks like a
+  // tomato", never "you grew it", and showing it read as acceptance. The verdict
+  // below says what actually happened; staff still see the score in the queue.
+  el.scoreValue.textContent = record.requires_review
+    ? t("verify.reviewNote")
+    : approved
+      ? t("verify.approved")
+      : rejected
+        ? t("verify.rejected")
+        : "";
   el.result.classList.toggle("is-approved", approved);
   el.result.classList.toggle("is-rejected", rejected);
   el.verdict.textContent = verdictText(record, approved, rejected);
@@ -378,7 +387,8 @@ async function init() {
     plants.forEach((plant) => {
       const option = document.createElement("option");
       option.value = plant.plant_id;
-      option.textContent = plant.location ? `${plant.plant_type} · ${plant.location}` : plant.plant_type;
+      const label = plant.plant_name || plant.plant_type;
+      option.textContent = plant.location ? `${label} · ${plant.location}` : label;
       el.select.appendChild(option);
     });
     el.form.hidden = false;

@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title data-i18n="profile.title">My Profile — Greenomy</title>
   <meta name="robots" content="noindex" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="responsive.css" />
 </head>
@@ -16,22 +16,15 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand"><img class="brand-mark" src="logo-mark.png" alt="" /> <span class="brand-name">Greenomy</span></a>
-      <nav class="main-nav" aria-label="Primary">
-        <a href="index.html" data-i18n="nav.home">Home</a>
-        <a href="garden.html" data-i18n="nav.garden">My Garden</a>
-        <a href="wallet.html" data-i18n="nav.wallet">Wallet</a>
-        <a href="profile.html" data-i18n="nav.profile" aria-current="page">Profile</a>
-        <a href="greenhub.html" data-i18n="nav.greenHub">Green Hub</a>
-        <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
-      </nav>
-      <div class="header-actions">
+      <div class="header-actions" style="margin-inline-start: auto;">
         <div class="lang-switch" role="group" aria-label="Language">
           <button type="button" data-lang-option="en" aria-pressed="true">EN</button>
           <button type="button" data-lang-option="ar" aria-pressed="false">AR</button>
           <button type="button" data-lang-option="ku" aria-pressed="false">KU</button>
         </div>
+        <a href="wallet.html" class="btn btn-ghost" data-i18n="nav.wallet">Wallet</a>
+        <a href="admin.html" class="btn btn-secondary" data-auth="admin" data-i18n="nav.admin" hidden>Admin</a>
         <button type="button" class="btn btn-secondary" data-logout data-i18n="app.logout">Log out</button>
-        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
       </div>
     </div>
   </header>
@@ -39,15 +32,29 @@
   <main>
     <section class="section-tight">
       <div class="container">
+        <nav class="admin-nav" aria-label="Admin sections">
+          <a href="admin.html" data-i18n="adminTab.queue">Queue</a>
+          <a href="admin-users.html" data-i18n="adminTab.users">Users</a>
+          <a href="admin-partners.html" data-i18n="adminTab.partners">Partners</a>
+          <a href="admin-rewards.html" data-i18n="adminTab.rewards">Rewards</a>
+          <a href="admin-content.html" data-i18n="adminTab.content">Content</a>
+          <a href="admin-analytics.html" data-i18n="adminTab.analytics">Analytics</a>
+          <a href="profile.html" data-i18n="nav.profile" aria-current="page">Profile</a>
+        </nav>
+
         <div class="section-head">
           <span class="eyebrow" data-i18n="nav.profile">Profile</span>
           <h1 class="heading-lg" data-i18n="profile.title">My Profile</h1>
           <p class="section-lead" data-i18n="profile.lead">Your account details, and how to change your password.</p>
         </div>
 
-        <div class="card" data-profile-summary style="margin-bottom: 24px;"></div>
+        <div class="empty-state" data-admin-denied hidden>
+          <span class="icon-slot" aria-hidden="true" data-icon="lock"></span><span data-i18n="admin.notAuthorized">You don't have admin access to this page.</span>
+        </div>
 
-        <div class="grid grid-2">
+        <div class="card" data-profile-summary data-admin-host style="margin-bottom: 24px;"></div>
+
+        <div class="grid grid-2" data-admin-host>
           <form class="card" data-profile-form novalidate>
             <h2 class="heading-md" data-i18n="profile.detailsTitle">Account details</h2>
 
@@ -160,6 +167,10 @@
         <div class="footer-brand">
           <a href="index.html" class="brand" style="color:#fff;"><img class="brand-mark" src="logo-mark.png" alt="" /> <span class="brand-name">Greenomy</span></a>
           <p data-i18n="footer.mission">Environmental technology made warm and human.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/greenomy_official" target="_blank" rel="noopener noreferrer" aria-label="Instagram" data-i18n-attr="aria-label:social.instagram"><span data-icon="instagram"></span></a>
+            <a href="https://t.me/Greenomy_official" target="_blank" rel="noopener noreferrer" aria-label="Telegram" data-i18n-attr="aria-label:social.telegram"><span data-icon="telegram"></span></a>
+          </div>
         </div>
         <div>
           <h3 data-i18n="footer.explore">Explore</h3>
@@ -168,9 +179,6 @@
           <a href="rewards.html" data-i18n="nav.rewards">Rewards</a>
           <a href="contact.html" data-i18n="nav.contact">Contact</a>
         </div>
-      </div>
-      <div class="footer-bottom">
-        <span>&copy; <span data-current-year>2026</span> Greenomy.</span>
       </div>
     </div>
   </footer>

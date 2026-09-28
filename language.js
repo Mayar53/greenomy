@@ -51,9 +51,17 @@ async function loadDictionary(lang) {
   }
 }
 
+/** Language and reading direction are two different things here.
+ *
+ * Arabic and Kurdish are read right to left, but the *interface* is laid out
+ * the same way in every language: the document keeps `dir="ltr"` so the
+ * header, hero, grids, cards and footer stay put instead of mirroring, and
+ * only the text of an RTL language is turned around. `data-text-dir` is that
+ * signal — the stylesheet applies it at the text level and nowhere else. */
 function setDocumentDirection(lang) {
   document.documentElement.lang = lang;
-  document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
+  document.documentElement.dir = "ltr";
+  document.documentElement.dataset.textDir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
 }
 
 function updateSwitchUI(lang) {
@@ -74,6 +82,16 @@ export async function setLanguage(lang) {
 export function t(path) {
   const value = resolveKey(path);
   return typeof value === "string" ? value : path;
+}
+
+/** The localized label for a growth stage, falling back to the record's English
+ * label. `journey.stages.<key>` is the namespace every stage shares, so this is
+ * defined once here rather than re-implemented by each page that shows one. */
+export function stageLabel(milestone) {
+  if (!milestone) return "";
+  const key = `journey.stages.${milestone.stage_key}`;
+  const translated = t(key);
+  return translated === key ? milestone.label_en : translated;
 }
 
 /** Returns the active language's value for a data record field, falling back

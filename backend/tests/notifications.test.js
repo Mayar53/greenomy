@@ -91,10 +91,7 @@ describe("notifications", () => {
 
   test("redeeming a reward notifies the user", async () => {
     const { token } = await h.signup(api.base);
-    const plant = await h.createPlant(api.base, token);
-    for (let i = 0; i < 4; i += 1) {
-      await h.submitPhoto(api.base, token, plant.plant_id, h.SHARP_GREEN_PHOTO, `RD${i}`);
-    }
+    await h.creditPoints(api.base, token, 120);
 
     await h.post(api.base, "/notifications/read-all", { token, body: {} });
     const redeemed = await h.post(api.base, "/rewards/rw-004/redeem", { token, body: {} });

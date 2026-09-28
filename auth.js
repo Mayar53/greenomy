@@ -41,14 +41,27 @@ function errorMessage(err) {
   return err instanceof ApiError ? err.message : t("common.errorGeneric");
 }
 
+/** The button's label follows the input it controls. */
+function syncPasswordToggle(button) {
+  const input = button.closest(".password-field")?.querySelector("input");
+  if (!input) return;
+  button.textContent = input.type === "text" ? t("auth.hidePassword") : t("auth.showPassword");
+}
+
 function initPasswordToggles() {
   document.querySelectorAll(".password-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const input = btn.closest(".password-field").querySelector("input");
       const isHidden = input.type === "password";
       input.type = isHidden ? "text" : "password";
-      btn.textContent = isHidden ? t("auth.hidePassword") : t("auth.showPassword");
+      syncPasswordToggle(btn);
     });
+  });
+
+  // A language switch rewrites the button from its data-i18n text, which would
+  // claim "Show" while the password is visible — put the state back.
+  document.addEventListener("greenomy:translated", () => {
+    document.querySelectorAll(".password-toggle").forEach(syncPasswordToggle);
   });
 }
 

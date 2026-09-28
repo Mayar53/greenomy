@@ -8,8 +8,9 @@ async function create(client, v) {
        (plant_id, user_id, image_url, gps_lat, gps_long, captured_at,
         ai_confidence_score, ai_provider, ai_metrics, approval_status,
         image_sha256, storage_path, challenge_id, milestone_id,
-        duplicate_status, requires_review, verification_result)
-     VALUES ($1, $2, $3, $4, $5, now(), $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+        duplicate_status, continuity_distance, continuity_status,
+        requires_review, verification_result)
+     VALUES ($1, $2, $3, $4, $5, now(), $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
      RETURNING *`,
     [
       v.plantId,
@@ -26,6 +27,8 @@ async function create(client, v) {
       v.challengeId || null,
       v.milestoneId || null,
       v.duplicateStatus || "none",
+      v.continuityDistance ?? null,
+      v.continuityStatus || null,
       v.requiresReview === true,
       v.verificationResult ? JSON.stringify(v.verificationResult) : null,
     ]
@@ -99,6 +102,22 @@ async function reject(client, verificationId, adminId, reason) {
 
 /** How many photos this member has already submitted for a plant — the
  * "have we seen this plant before" signal for journey consistency. */
+/** The hashes of this member's EARLIER photos of this plant — what the
+ * continuity check compares a new frame against. Never another member's. */
+async function hashesForPlant(userId, plantId, { limit = 40, excludeVerificationId = null } = {}) {
+  const { rows } = await query(
+    `SELECT i.phash, i.dhash, i.ahash, v.milestone_id, v.created_at
+       FROM verifications v
+       JOIN verification_images i ON i.verification_id = v.verification_id
+      WHERE v.user_id = $1 AND v.plant_id = $2
+        AND ($3::uuid IS NULL OR v.verification_id <> $3::uuid)
+      ORDER BY v.created_at DESC
+      LIMIT $4`,
+    [userId, plantId, excludeVerificationId, limit]
+  );
+  return rows;
+}
+
 async function countForPlant(userId, plantId) {
   const { rows } = await query(
     "SELECT count(*)::int AS n FROM verifications WHERE user_id = $1 AND plant_id = $2",
@@ -125,6 +144,7 @@ module.exports = {
   listPending,
   approve,
   reject,
+  hashesForPlant,
   countForPlant,
   countApprovedByUser,
 };

@@ -3,11 +3,13 @@ const { query } = require("../config/db");
 
 // password_hash is deliberately never selected by the public helpers.
 const PUBLIC_COLUMNS =
-  "user_id, full_name, email, city, total_points, role, status, permissions, experience, plant_types, interests, created_at, updated_at";
+  "user_id, full_name, email, city, total_points, lifetime_xp, care_streak_days, care_streak_last, role, status, permissions, experience, plant_types, interests, created_at, updated_at";
 
-/** Used by login only — the one place that needs the hash. */
+/** Email is matched case-insensitively: an address is one account, whatever
+ * case it was typed in. Used by login, signup's "already exists" check, the
+ * password-reset flow and admin promotion-by-email, so they all agree. */
 async function findByEmail(email) {
-  const { rows } = await query("SELECT * FROM users WHERE email = $1", [email]);
+  const { rows } = await query("SELECT * FROM users WHERE lower(email) = lower($1)", [String(email || "").trim()]);
   return rows[0] || null;
 }
 
@@ -20,11 +22,14 @@ async function findById(userId) {
 }
 
 async function create({ fullName, email, passwordHash, city, role = "user" }) {
+  // Stored lower-cased and trimmed, so one address is always one row — the
+  // case-insensitive unique index in migration 012 relies on this.
+  const normalizedEmail = String(email || "").trim().toLowerCase();
   const { rows } = await query(
     `INSERT INTO users (full_name, email, password_hash, city, role)
      VALUES ($1, $2, $3, $4, $5)
      RETURNING ${PUBLIC_COLUMNS}`,
-    [fullName, email, passwordHash, city || null, role]
+    [fullName, normalizedEmail, passwordHash, city || null, role]
   );
   return rows[0];
 }
@@ -70,6 +75,37 @@ async function addPoints(client, userId, amount) {
     [userId, amount]
   );
   return rows[0] ? rows[0].total_points : null;
+}
+
+/**
+ * Adds lifetime garden XP. Must run inside withTransaction with the reward
+ * grant. XP is derived currency — it is never spent, so it has no ledger of its
+ * own; the reward_grants row is the record of why it changed.
+ */
+async function addXp(client, userId, amount) {
+  const { rows } = await client.query(
+    `UPDATE users
+        SET lifetime_xp = GREATEST(lifetime_xp + $2, 0),
+            updated_at  = now()
+      WHERE user_id = $1
+      RETURNING lifetime_xp`,
+    [userId, amount]
+  );
+  return rows[0] ? rows[0].lifetime_xp : null;
+}
+
+/** Records the member's current care streak and the day it was last advanced. */
+async function setCareStreak(client, userId, days, lastDate) {
+  const { rows } = await client.query(
+    `UPDATE users
+        SET care_streak_days = $2,
+            care_streak_last = $3,
+            updated_at = now()
+      WHERE user_id = $1
+      RETURNING care_streak_days, care_streak_last`,
+    [userId, days, lastDate]
+  );
+  return rows[0] || null;
 }
 
 /** Locks the balance row for the duration of a redemption transaction. */
@@ -166,6 +202,8 @@ module.exports = {
   updateProfile,
   updatePassword,
   addPoints,
+  addXp,
+  setCareStreak,
   lockForUpdate,
   count,
   listAll,

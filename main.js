@@ -5,15 +5,12 @@
 import "./navigation.js";
 import "./language.js";
 import { initIcons } from "./icons.js";
+import "./assistant.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Icons are inline SVG (see icons.js) — paint the placeholders before anything
   // else so nothing flashes as an empty box.
   initIcons();
-
-  // Footer year, if present.
-  const yearEl = document.querySelector("[data-current-year]");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
 
 // Page scripts render content containing icons after their own fetches; this

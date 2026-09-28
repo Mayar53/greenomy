@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title data-i18n="adminTab.content">Content — Greenomy</title>
   <meta name="robots" content="noindex" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="responsive.css" />
 </head>
@@ -23,7 +23,6 @@
           <button type="button" data-lang-option="ku" aria-pressed="false">KU</button>
         </div>
         <a href="wallet.html" class="btn btn-ghost" data-i18n="nav.wallet">Wallet</a>
-        <button type="button" class="btn btn-secondary" data-logout data-i18n="app.logout">Log out</button>
       </div>
     </div>
   </header>
@@ -38,6 +37,7 @@
           <a href="admin-rewards.html" data-i18n="adminTab.rewards">Rewards</a>
           <a href="admin-content.html" data-i18n="adminTab.content" aria-current="page">Content</a>
           <a href="admin-analytics.html" data-i18n="adminTab.analytics">Analytics</a>
+          <a href="profile.html" data-i18n="nav.profile">Profile</a>
         </nav>
 
         <div class="section-head">
@@ -61,6 +61,18 @@
               <input type="text" id="content-title" name="title" required />
             </div>
             <div class="form-field">
+              <label for="content-reading" data-i18n="admin.readingTime">Reading time (min)</label>
+              <input type="number" id="content-reading" name="readingTime" min="1" step="1" />
+            </div>
+            <div class="form-field admin-form-wide">
+              <label for="content-description" data-i18n="admin.description">Description</label>
+              <input type="text" id="content-description" name="description" />
+            </div>
+            <div class="form-field admin-form-wide">
+              <label for="content-image" data-i18n="admin.imageUrl">Image URL</label>
+              <input type="url" id="content-image" name="imageUrl" placeholder="https://" />
+            </div>
+            <div class="form-field">
               <label for="content-category" data-i18n="admin.colCategory">Category</label>
               <select id="content-category" name="category">
                 <option value="food-seed-recycling" data-i18n="greenHub.filterSeed">Food Seed Recycling</option>
@@ -78,6 +90,7 @@
             </div>
             <div>
               <button type="submit" class="btn btn-primary" data-i18n="admin.create">Create</button>
+              <button type="button" class="btn btn-secondary" data-cancel-edit data-i18n="admin.cancel" hidden>Cancel</button>
             </div>
             <div class="form-status admin-form-wide" data-form-status role="status" aria-live="polite"></div>
           </form>

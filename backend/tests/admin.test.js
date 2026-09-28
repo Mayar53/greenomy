@@ -220,6 +220,135 @@ describe("admin dashboard", () => {
     const after = await h.get(api.base, "/admin/analytics", { token: adminToken });
     assert.equal(after.body.verifications.total, before + 1);
     assert.equal(after.body.verifications.approved, res.body.verifications.approved + 1);
-    assert.equal(after.body.points.earned, res.body.points.earned + 30);
+    // A photo that evidences no milestone pays nothing, so the points line must
+    // NOT move — the dashboard reports what actually happened.
+    assert.equal(after.body.points.earned, res.body.points.earned, "a lone photo adds no points");
+  });
+});
+
+// The dashboard edits records in place, not only creates them. These cover every
+// field the forms now send, and one thing the forms deliberately do NOT send:
+// translations, which an edit must leave alone rather than wipe.
+describe("editing existing records", () => {
+  test("a reward can be edited, keeping its id and translations", async () => {
+    const created = await h.post(api.base, "/admin/rewards", {
+      token: adminToken,
+      body: {
+        partner: "Green Bean Coffee",
+        category: "restaurant",
+        title: "Original title",
+        pointsRequired: 100,
+        i18n: { ar: { title: "العنوان الأصلي" } },
+      },
+    });
+    assert.equal(created.status, 201);
+
+    const edited = await h.patch(api.base, `/admin/rewards/${created.body.reward_id}`, {
+      token: adminToken,
+      body: {
+        partner: "Green Bean Coffee",
+        category: "courses",
+        title: "Edited title",
+        description: "Now with a description",
+        pointsRequired: 250,
+        expiresAt: "2027-01-31",
+      },
+    });
+
+    assert.equal(edited.status, 200);
+    assert.equal(edited.body.reward_id, created.body.reward_id, "the id is stable");
+    assert.equal(edited.body.title, "Edited title");
+    assert.equal(edited.body.category, "courses");
+    assert.equal(edited.body.description, "Now with a description");
+    assert.equal(edited.body.points_required, 250);
+    // A date-only field: the calendar day the admin picked must survive, whatever
+    // timezone the server stores it in.
+    const expiry = new Date(edited.body.expires_at);
+    assert.equal(expiry.getFullYear(), 2027);
+    assert.equal(expiry.getMonth(), 0);
+    assert.equal(expiry.getDate(), 31);
+    assert.equal(
+      edited.body.i18n && edited.body.i18n.ar && edited.body.i18n.ar.title,
+      "العنوان الأصلي",
+      "an edit that does not mention i18n must not erase it"
+    );
+  });
+
+  test("a partner can be edited, description and logo included", async () => {
+    const created = await h.post(api.base, "/admin/partners", {
+      token: adminToken,
+      body: { name: "Editable Partner" },
+    });
+    assert.equal(created.status, 201);
+
+    const edited = await h.patch(api.base, `/admin/partners/${created.body.partner_id}`, {
+      token: adminToken,
+      body: {
+        name: "Renamed Partner",
+        description: "A description",
+        logoUrl: "https://example.test/logo.png",
+        website: "https://example.test",
+        contactEmail: "hello@example.test",
+      },
+    });
+
+    assert.equal(edited.status, 200);
+    assert.equal(edited.body.name, "Renamed Partner");
+    assert.equal(edited.body.description, "A description");
+    assert.equal(edited.body.logo_url, "https://example.test/logo.png");
+    assert.equal(edited.body.website, "https://example.test");
+    assert.equal(edited.body.contact_email, "hello@example.test");
+  });
+
+  test("an article can be edited across every field the form offers", async () => {
+    const created = await h.post(api.base, "/admin/content", {
+      token: adminToken,
+      body: {
+        slug: `editable-${Date.now()}`,
+        title: "Original article",
+        category: "soil",
+        body: ["First paragraph"],
+      },
+    });
+    assert.equal(created.status, 201);
+
+    const edited = await h.patch(api.base, `/admin/content/${created.body.id}`, {
+      token: adminToken,
+      body: {
+        title: "Edited article",
+        description: "A short summary",
+        category: "water",
+        body: ["One", "Two"],
+        imageUrl: "https://example.test/cover.jpg",
+        readingTime: 4,
+      },
+    });
+
+    assert.equal(edited.status, 200);
+    assert.equal(edited.body.title, "Edited article");
+    assert.equal(edited.body.description, "A short summary");
+    assert.equal(edited.body.category, "water");
+    assert.deepEqual(edited.body.body, ["One", "Two"]);
+    assert.equal(edited.body.imageUrl, "https://example.test/cover.jpg");
+    assert.equal(edited.body.readingTime, 4);
+
+    // Still the same record, and still deletable.
+    const removed = await h.del(api.base, `/admin/content/${created.body.id}`, { token: adminToken });
+    assert.equal(removed.status, 204);
+  });
+
+  test("an unknown record is a 404, not a silent create", async () => {
+    const missingId = "00000000-0000-0000-0000-000000000000";
+    const reward = await h.patch(api.base, `/admin/rewards/${missingId}`, {
+      token: adminToken,
+      body: { title: "Nope" },
+    });
+    assert.equal(reward.status, 404);
+
+    const partner = await h.patch(api.base, `/admin/partners/${missingId}`, {
+      token: adminToken,
+      body: { name: "Nope" },
+    });
+    assert.equal(partner.status, 404);
   });
 });

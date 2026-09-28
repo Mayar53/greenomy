@@ -152,3 +152,72 @@ describe("admin permissions", () => {
     assert.equal((await h.get(api.base, "/admin/permissions", { token })).status, 403);
   });
 });
+
+describe("the owner account is protected", () => {
+  /** The owner's user id, read from the member list as the owner. */
+  async function ownerId() {
+    const list = await h.get(api.base, "/admin/users", { token: ownerToken });
+    return list.body.find((entry) => entry.email === h.ADMIN_EMAIL).user_id;
+  }
+
+  test("even an admin with users.manage cannot suspend or demote the owner", async () => {
+    const { token } = await makeAdmin(["users.manage"]);
+    const id = await ownerId();
+
+    const suspended = await h.patch(api.base, `/admin/users/${id}`, {
+      token,
+      body: { status: "suspended" },
+    });
+    assert.equal(suspended.status, 403, "the owner must not be lockable out");
+
+    const demoted = await h.patch(api.base, `/admin/users/${id}`, {
+      token,
+      body: { role: "admin" },
+    });
+    assert.equal(demoted.status, 403, "the owner must not be demotable");
+
+    // And it is still the owner afterwards.
+    const list = await h.get(api.base, "/admin/users", { token: ownerToken });
+    const owner = list.body.find((entry) => entry.email === h.ADMIN_EMAIL);
+    assert.equal(owner.role, "super_admin");
+    assert.equal(owner.status, "active");
+  });
+
+  test("the owner still governs other admins", async () => {
+    const { admin } = await makeAdmin(["analytics.view"]);
+
+    const changed = await h.patch(api.base, `/admin/admins/${admin.id}`, {
+      token: ownerToken,
+      body: { permissions: ["analytics.view", "users.manage"] },
+    });
+    assert.equal(changed.status, 200);
+    assert.deepEqual(changed.body.permissions, ["users.manage", "analytics.view"]);
+
+    const removed = await h.del(api.base, `/admin/admins/${admin.id}`, { token: ownerToken });
+    assert.equal(removed.status, 200);
+    assert.equal(removed.body.role, "user");
+  });
+
+  test("super_admin cannot be minted through the member endpoint", async () => {
+    const { token } = await makeAdmin(["users.manage"]);
+    const { user } = await h.signup(api.base);
+
+    const res = await h.patch(api.base, `/admin/users/${user.user_id}`, {
+      token,
+      body: { role: "super_admin" },
+    });
+    assert.equal(res.status, 400, "users.manage must not confer the owner role");
+  });
+
+  test("a users.manage admin may still suspend a plain member", async () => {
+    const { token } = await makeAdmin(["users.manage"]);
+    const { user } = await h.signup(api.base);
+
+    const res = await h.patch(api.base, `/admin/users/${user.user_id}`, {
+      token,
+      body: { status: "suspended" },
+    });
+    assert.equal(res.status, 200);
+    assert.equal(res.body.status, "suspended");
+  });
+});

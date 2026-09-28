@@ -2,9 +2,13 @@
 const plantModel = require("../models/plant.model");
 const catalogModel = require("../models/plant-catalog.model");
 const journeyService = require("../services/journey.service");
+const engagementService = require("../services/engagement.service");
+const plantName = require("../services/plant-name.service");
 
 exports.list = async (req, res) => {
-  res.json(await plantModel.listByUser(req.user.id));
+  const plants = await plantModel.listByUser(req.user.id);
+  // plant_type stays as stored (English); plant_name is the reader's language.
+  res.json(await plantName.decorate(plants, plantName.requestLanguage(req)));
 };
 
 exports.create = async (req, res) => {
@@ -50,13 +54,21 @@ exports.create = async (req, res) => {
     console.warn(`Could not start a journey for plant ${plant.plant_id}: ${err.message}`);
   }
 
-  res.status(201).json(plant);
+  // Unlock any achievement the new plant earns (First Life, propagation, ...).
+  // Same rule: a failure here must not lose the plant.
+  try {
+    await engagementService.onPlantCreated(req.user.id);
+  } catch (err) {
+    console.warn(`Could not evaluate achievements for plant ${plant.plant_id}: ${err.message}`);
+  }
+
+  res.status(201).json(await plantName.decorate(plant, plantName.requestLanguage(req)));
 };
 
 exports.getOne = async (req, res) => {
   const plant = await plantModel.findByIdForUser(req.params.id, req.user.id);
   if (!plant) return res.status(404).json({ error: "Plant not found" });
-  res.json(plant);
+  res.json(await plantName.decorate(plant, plantName.requestLanguage(req)));
 };
 
 exports.update = async (req, res) => {
