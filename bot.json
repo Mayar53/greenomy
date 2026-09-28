@@ -1,0 +1,293 @@
+{
+  "greetings": [
+    "hi",
+    "hello",
+    "hey",
+    "salam",
+    "salaam",
+    "مرحبا",
+    "سلام",
+    "هلا",
+    "اهلا",
+    "سڵاو",
+    "سڵاڤ"
+  ],
+  "maxQuestionWords": 5,
+  "languages": [
+    {
+      "code": "en",
+      "label": "English"
+    },
+    {
+      "code": "ar",
+      "label": "العربية"
+    },
+    {
+      "code": "ku",
+      "label": "کوردی"
+    }
+  ],
+  "languagePrompt": "Choose your language\nاختر لغتك\nزمانت هەڵبژێرە",
+  "profile": {
+    "photo": "bot-avatar.png",
+    "name": "Greenomy",
+    "shortDescription": {
+      "en": "Grow real plants, learn sustainability, earn rewards.",
+      "ar": "ازرع نباتات حقيقية، تعلّم الاستدامة، واكسب مكافآت.",
+      "ku": "ڕووەکی ڕاستەقینە بڕوێنە، بەردەوامی فێربە، خەڵات وەربگرە."
+    },
+    "description": {
+      "en": "Greenomy makes sustainability and urban greening something you can grow with your hands: plant something, document its growth with a photo, earn points, and redeem them with partner businesses.\n\nAsk me about our vision, how it works, our social accounts, or points and rewards — or just send a message and it goes straight to the team.",
+      "ar": "غرينومي يجعل الاستدامة والتخضير الحضري شيئًا يمكنك زراعته بيديك: ازرع نبتة، وثّق نموّها بصورة، واكسب نقاطًا، ثم استبدلها مع الشركات الشريكة.\n\nاسألني عن رؤيتنا، أو كيف يعمل، أو حساباتنا، أو النقاط والمكافآت — أو أرسل رسالة وستصل مباشرة إلى الفريق.",
+      "ku": "گرینۆمی بەردەوامی و سەوزکردنی شار دەکاتە شتێک کە بە دەستی خۆت بڕوێنیت: ڕووەکێک بڕوێنە، گەشەکردنی بە وێنە تۆمار بکە، خاڵ کۆبکەرەوە و لەگەڵ کۆمپانیا هاوبەشەکان بیگۆڕە.\n\nلە من بپرسە دەربارەی دیدەگەمان، چۆن کار دەکات، هەژمارەکانمان، یان خاڵ و خەڵات — یان نامەیەک بنێرە و ڕاستەوخۆ دەگاتە تیمەکە."
+    },
+    "commands": [
+      {
+        "command": "start",
+        "description": {
+          "en": "Start",
+          "ar": "ابدأ",
+          "ku": "دەستپێکردن"
+        }
+      },
+      {
+        "command": "language",
+        "description": {
+          "en": "Change language",
+          "ar": "تغيير اللغة",
+          "ku": "گۆڕینی زمان"
+        }
+      },
+      {
+        "command": "help",
+        "description": {
+          "en": "What I can answer",
+          "ar": "ما يمكنني الإجابة عنه",
+          "ku": "ئەوەی دەتوانم وەڵامی بدەمەوە"
+        }
+      }
+    ]
+  },
+  "greeting": {
+    "en": "Welcome to Greenomy. I can answer a few things straight away — or send any message and it goes to the team.",
+    "ar": "مرحبًا بك في غرينومي. يمكنني الإجابة عن بعض الأمور فورًا — أو أرسل رسالتك وستصل إلى الفريق.",
+    "ku": "بەخێربێیت بۆ گرینۆمی. دەتوانم یەکسەر وەڵامی چەند شتێک بدەمەوە — یان نامەیەک بنێرە و دەگاتە تیمەکە."
+  },
+  "unknownReply": {
+    "en": "I'm not sure about that one — I can answer the topics listed above. For anything else, email Greenomyofficial@gmail.com and the team will get back to you.",
+    "ar": "لست متأكدًا من ذلك — يمكنني الإجابة عن المواضيع المذكورة أعلاه. ولأي شيء آخر، راسلنا على Greenomyofficial@gmail.com وسيرد عليك الفريق.",
+    "ku": "دڵنیا نیم لەوە — دەتوانم وەڵامی ئەو بابەتانە بدەمەوە کە لە سەرەوە نووسراون. بۆ هەر شتێکی تر، ئیمەیل بۆ بنێرە: Greenomyofficial@gmail.com و تیمەکە وەڵامت دەداتەوە."
+  },
+  "fallback": {
+    "en": "Please send your message as text and we'll pass it to the team.",
+    "ar": "الرجاء إرسال رسالتك كنص وسنوصلها إلى الفريق.",
+    "ku": "تکایە نامەکەت وەک دەق بنێرە و دەینێرین بۆ تیمەکە."
+  },
+  "topics": [
+    {
+      "id": "vision",
+      "label": {
+        "en": "Vision",
+        "ar": "رؤيتنا",
+        "ku": "دیدەگە"
+      },
+      "keywords": [
+        "vision",
+        "mission",
+        "goal",
+        "dream",
+        "رؤية",
+        "الرؤية",
+        "رسالة",
+        "هدف",
+        "دیدەگە",
+        "ئامانج",
+        "خەون"
+      ],
+      "answer": {
+        "en": "Our vision: Greenomy makes sustainability and urban greening accessible through technology and community — real plants, real progress, one small plant at a time.",
+        "ar": "رؤيتنا: غرينومي يجعل الاستدامة والتخضير الحضري في متناول الجميع عبر التقنية والمجتمع — نباتات حقيقية وتقدّم حقيقي، نبتة صغيرة تلو الأخرى.",
+        "ku": "دیدەگەیمان: گرینۆمی بەردەوامی و سەوزکردنی شار بەردەست دەکات بە تەکنەلۆژیا و کۆمەڵگە — ڕووەکی ڕاستەقینە و پێشکەوتنی ڕاستەقینە، یەک ڕووەک بە یەک."
+      }
+    },
+    {
+      "id": "about",
+      "label": {
+        "en": "About us",
+        "ar": "من نحن",
+        "ku": "دەربارەی ئێمە"
+      },
+      "keywords": [
+        "about",
+        "who are you",
+        "what is greenomy",
+        "عن",
+        "من نحن",
+        "ما هو",
+        "دەربارە",
+        "کێن"
+      ],
+      "answer": {
+        "en": "Greenomy turns everyday sustainability into something you can grow: plant something, document it with a photo, earn points, and redeem them with partner businesses.",
+        "ar": "غرينومي يحوّل الاستدامة اليومية إلى شيء يمكنك زراعته: ازرع نبتة، وثّقها بصورة، واكسب نقاطًا، ثم استبدلها مع الشركاء.",
+        "ku": "گرینۆمی بەردەوامی ڕۆژانە دەکاتە شتێک کە بتوانیت بڕوێنیت: ڕووەکێک بڕوێنە، بە وێنە تۆماری بکە، خاڵ کۆبکەرەوە و لەگەڵ هاوبەشەکان بیگۆڕە."
+      }
+    },
+    {
+      "id": "how",
+      "label": {
+        "en": "How it works",
+        "ar": "كيف يعمل",
+        "ku": "چۆن کار دەکات"
+      },
+      "keywords": [
+        "how",
+        "how it works",
+        "steps",
+        "كيف",
+        "كيف يعمل",
+        "خطوات",
+        "چۆن",
+        "هەنگاو"
+      ],
+      "answer": {
+        "en": "How it works: 1) Join and set up your profile. 2) Learn and collect. 3) Grow a plant and verify it with a photo. 4) Earn points and redeem rewards from partners.",
+        "ar": "كيف يعمل: 1) انضم وأكمل ملفك. 2) تعلّم واجمع. 3) ازرع نبتة ووثّقها بصورة. 4) اكسب نقاطًا واستبدل مكافآت الشركاء.",
+        "ku": "چۆن کار دەکات: ١) بەشداربە و پرۆفایلت ڕێکبخە. ٢) فێربە و کۆبکەرەوە. ٣) ڕووەکێک بڕوێنە و بە وێنە پشتڕاستی بکەرەوە. ٤) خاڵ کۆبکەرەوە و خەڵاتی هاوبەشەکان وەربگرە."
+      }
+    },
+    {
+      "id": "social",
+      "label": {
+        "en": "Social media",
+        "ar": "حساباتنا",
+        "ku": "سۆشیال میدیا"
+      },
+      "keywords": [
+        "social",
+        "instagram",
+        "telegram",
+        "follow",
+        "channel",
+        "انستغرام",
+        "إنستغرام",
+        "تيليجرام",
+        "تابع",
+        "قناة",
+        "ئینستاگرام",
+        "تێلێگرام",
+        "شوێن",
+        "کەناڵ"
+      ],
+      "answer": {
+        "en": "Our official accounts:\nInstagram — https://www.instagram.com/greenomy_official\nTelegram channel — https://t.me/Greenomy_official",
+        "ar": "حساباتنا الرسمية:\nإنستغرام — https://www.instagram.com/greenomy_official\nقناة تيليجرام — https://t.me/Greenomy_official",
+        "ku": "هەژمارە فەرمییەکانمان:\nئینستاگرام — https://www.instagram.com/greenomy_official\nکەناڵی تێلێگرام — https://t.me/Greenomy_official"
+      }
+    },
+    {
+      "id": "rewards",
+      "label": {
+        "en": "Points & rewards",
+        "ar": "النقاط والمكافآت",
+        "ku": "خاڵ و خەڵات"
+      },
+      "keywords": [
+        "reward",
+        "rewards",
+        "points",
+        "redeem",
+        "مكافآت",
+        "مكافأة",
+        "نقاط",
+        "استبدال",
+        "خەڵات",
+        "خاڵ"
+      ],
+      "answer": {
+        "en": "Points and rewards: verify a plant photo to earn points, then redeem them for rewards from partner cafés, courses and nurseries — see the Rewards page on the site.",
+        "ar": "النقاط والمكافآت: وثّق صورة نبتة لتحصل على نقاط، ثم استبدلها بمكافآت من المقاهي والدورات والمشاتل الشريكة — انظر صفحة المكافآت.",
+        "ku": "خاڵ و خەڵات: وێنەی ڕووەکێک پشتڕاست بکەرەوە بۆ وەرگرتنی خاڵ، پاشان بیگۆڕە بە خەڵاتی قاوەخانە و کۆرس و شوێنەکانی هاوبەش — لاپەڕەی خەڵاتەکان ببینە."
+      }
+    },
+    {
+      "id": "grow",
+      "label": {
+        "en": "What can I grow",
+        "ar": "ماذا أزرع",
+        "ku": "چی بڕوێنم"
+      },
+      "keywords": [
+        "plant",
+        "plants",
+        "grow",
+        "growing",
+        "seed",
+        "seeds",
+        "نبات",
+        "زراعة",
+        "بذرة",
+        "ڕووەک",
+        "چاندن",
+        "تۆو"
+      ],
+      "answer": {
+        "en": "You can grow vegetables, herbs, fruit trees and houseplants — the catalog has 63 species, and every plant gets its own growth milestones in your garden.",
+        "ar": "يمكنك زراعة الخضروات والأعشاب وأشجار الفاكهة والنباتات المنزلية — يحتوي الكتالوج على 63 نوعًا، ولكل نبتة مراحل نمو خاصة بها في حديقتك.",
+        "ku": "دەتوانیت سەوزەوات، گیا خۆشەکان، دارەکانی بەرهەم و ڕووەکی ماڵی بڕوێنیت — کاتالۆگ ٦٣ جۆر لەخۆدەگرێت و هەر ڕووەکێک قۆناغی گەشەی تایبەتی خۆی هەیە."
+      }
+    },
+    {
+      "id": "contact",
+      "label": {
+        "en": "Contact",
+        "ar": "تواصل معنا",
+        "ku": "پەیوەندی"
+      },
+      "keywords": [
+        "contact",
+        "email",
+        "mail",
+        "reach",
+        "support",
+        "تواصل",
+        "ايميل",
+        "بريد",
+        "دعم",
+        "پەیوەندی",
+        "ئیمەیل",
+        "پشتگیری"
+      ],
+      "answer": {
+        "en": "Email us any time at Greenomyofficial@gmail.com — or just send a message here and it goes straight to the team.",
+        "ar": "راسلنا في أي وقت على Greenomyofficial@gmail.com — أو أرسل رسالة هنا وستصل مباشرة إلى الفريق.",
+        "ku": "هەر کاتێک ئیمەیل بۆ بنێرە: Greenomyofficial@gmail.com — یان لێرە نامەیەک بنێرە و ڕاستەوخۆ دەگاتە تیمەکە."
+      }
+    },
+    {
+      "id": "website",
+      "label": {
+        "en": "Website",
+        "ar": "الموقع",
+        "ku": "ماڵپەڕ"
+      },
+      "keywords": [
+        "website",
+        "site",
+        "app",
+        "link",
+        "url",
+        "موقع",
+        "تطبيق",
+        "رابط",
+        "ماڵپەڕ",
+        "لینک"
+      ],
+      "answer": {
+        "en": "The site is at https://greenomy.app — join, grow a plant and track it from your garden.",
+        "ar": "الموقع على https://greenomy.app — انضم، ازرع نبتة، وتابعها من حديقتك.",
+        "ku": "ماڵپەڕ لە https://greenomy.app ـە — بەشداربە، ڕووەکێک بڕوێنە و لە باخچەکەت چاودێری بکە."
+      }
+    }
+  ]
+}

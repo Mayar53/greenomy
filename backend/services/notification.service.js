@@ -2,7 +2,14 @@
 // notification and fanning it out to the user's registered devices.
 const notificationModel = require("../models/notification.model");
 const deviceTokenModel = require("../models/device-token.model");
+const userModel = require("../models/user.model");
 const { getPushProvider } = require("./push.service");
+const { sendMail } = require("./mail.service");
+
+// Email is opt-out: on unless MAIL_EMAIL_NOTIFICATIONS is explicitly "false".
+// With no mail provider configured, sendMail just logs, so this is safe in dev.
+const emailEnabled = () =>
+  String(process.env.MAIL_EMAIL_NOTIFICATIONS || "true").trim().toLowerCase() !== "false";
 
 // Stored copy is English; the client localises by `type` and falls back to
 // this text for unknown types.
@@ -56,6 +63,24 @@ async function notify({ userId, type, title, message }) {
     }
   } catch (err) {
     console.warn(`Push delivery failed for user ${userId}:`, err.message);
+  }
+
+  // Email the member too (best-effort, like push). The database row remains the
+  // source of truth; a mail failure must never fail the request that triggered
+  // the notification.
+  if (emailEnabled()) {
+    try {
+      const user = await userModel.findById(userId);
+      if (user && user.email) {
+        await sendMail({
+          to: user.email,
+          subject: notification.title,
+          text: `${notification.message}\n\n${process.env.APP_BASE_URL || ""}/garden.html`,
+        });
+      }
+    } catch (err) {
+      console.warn(`Email delivery failed for user ${userId}:`, err.message);
+    }
   }
 
   return notification;

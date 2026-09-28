@@ -1,0 +1,1202 @@
+{
+  "careActions": [
+    {
+      "key": "watering",
+      "icon": "droplet",
+      "xp": 3
+    },
+    {
+      "key": "soil_check",
+      "icon": "compost",
+      "xp": 3
+    },
+    {
+      "key": "sunlight_check",
+      "icon": "sun",
+      "xp": 3
+    },
+    {
+      "key": "pruning",
+      "icon": "scissors",
+      "xp": 5
+    },
+    {
+      "key": "repotting",
+      "icon": "pot",
+      "xp": 6
+    },
+    {
+      "key": "fertilizing",
+      "icon": "spark",
+      "xp": 5
+    },
+    {
+      "key": "observation",
+      "icon": "search",
+      "xp": 3
+    },
+    {
+      "key": "journal",
+      "icon": "book",
+      "xp": 4
+    }
+  ],
+  "reminders": {
+    "defaultIntervalDays": 3,
+    "byWaterNeed": {
+      "low": 7,
+      "medium": 4,
+      "high": 2
+    }
+  },
+  "streaks": [
+    {
+      "days": 7,
+      "xp": 25,
+      "seeds": 1
+    },
+    {
+      "days": 14,
+      "xp": 60,
+      "seeds": 2
+    },
+    {
+      "days": 30,
+      "xp": 150,
+      "seeds": 3,
+      "decoration": "dec-streak-30"
+    }
+  ],
+  "gardenLevels": [
+    {
+      "level": 1,
+      "xp": 0,
+      "element": "el-patch",
+      "icon": "sprout"
+    },
+    {
+      "level": 2,
+      "xp": 100,
+      "element": "el-seedling",
+      "icon": "seedling"
+    },
+    {
+      "level": 3,
+      "xp": 250,
+      "element": "el-decor",
+      "icon": "spark"
+    },
+    {
+      "level": 4,
+      "xp": 500,
+      "element": "el-tree",
+      "icon": "tree"
+    },
+    {
+      "level": 5,
+      "xp": 1000,
+      "element": "el-pond",
+      "icon": "droplet"
+    },
+    {
+      "level": 6,
+      "xp": 2000,
+      "element": "el-greenhouse",
+      "icon": "store"
+    },
+    {
+      "level": 7,
+      "xp": 3500,
+      "element": "el-orchard",
+      "icon": "fruit"
+    },
+    {
+      "level": 8,
+      "xp": 5500,
+      "element": "el-meadow",
+      "icon": "leafy"
+    }
+  ],
+  "stageOrder": [
+    "planting",
+    "germination",
+    "seedling",
+    "establishment",
+    "vegetative",
+    "leaf-growth",
+    "root-development",
+    "flowering",
+    "fruiting",
+    "fruit-development",
+    "podding",
+    "mature",
+    "harvest"
+  ],
+  "milestoneRewards": {
+    "default": {
+      "planting": {
+        "xp": 15
+      },
+      "germination": {
+        "xp": 20,
+        "seeds": 1,
+        "mystery": true
+      },
+      "seedling": {
+        "xp": 20
+      },
+      "establishment": {
+        "xp": 25
+      },
+      "vegetative": {
+        "xp": 25
+      },
+      "leaf-growth": {
+        "xp": 25
+      },
+      "root-development": {
+        "xp": 25
+      },
+      "flowering": {
+        "xp": 40,
+        "decoration": "dec-bloom",
+        "fact": "fact-flowering-plants"
+      },
+      "fruiting": {
+        "xp": 45,
+        "mystery": true
+      },
+      "fruit-development": {
+        "xp": 45,
+        "mystery": true
+      },
+      "podding": {
+        "xp": 45,
+        "mystery": true
+      },
+      "mature": {
+        "xp": 55,
+        "decoration": "dec-mature",
+        "fact": "fact-perennials"
+      },
+      "harvest": {
+        "xp": 80,
+        "seeds": 1,
+        "rareItem": "rare-first-harvest",
+        "fact": "fact-harvest-seed-saving"
+      }
+    },
+    "templates": {
+      "herb-annual": {
+        "leaf-growth": {
+          "xp": 30,
+          "mystery": true
+        },
+        "harvest": {
+          "xp": 70,
+          "seeds": 2,
+          "fact": "fact-harvest-seed-saving"
+        }
+      },
+      "herb-perennial": {
+        "establishment": {
+          "xp": 30,
+          "decoration": "dec-bloom"
+        },
+        "harvest": {
+          "xp": 70,
+          "seeds": 1
+        }
+      },
+      "root-vegetable": {
+        "root-development": {
+          "xp": 30,
+          "mystery": true
+        }
+      },
+      "legume": {
+        "podding": {
+          "xp": 50,
+          "mystery": true,
+          "fact": "fact-legume-nitrogen"
+        }
+      },
+      "fruit-tree": {
+        "establishment": {
+          "xp": 40,
+          "fact": "fact-perennials"
+        },
+        "fruit-development": {
+          "xp": 60,
+          "mystery": true
+        }
+      },
+      "houseplant": {
+        "mature": {
+          "xp": 60,
+          "decoration": "dec-mature",
+          "fact": "fact-succulent-water"
+        }
+      }
+    },
+    "plants": {
+      "pl-tomato": {
+        "flowering": {
+          "xp": 45,
+          "decoration": "dec-bloom",
+          "fact": "fact-tomato-roots"
+        }
+      }
+    }
+  },
+  "achievements": [
+    {
+      "id": "first_life",
+      "icon": "seed",
+      "name": "First Life",
+      "description": "Grow your first plant.",
+      "rule": {
+        "type": "plants_created",
+        "count": 1
+      },
+      "reward": {
+        "xp": 20
+      },
+      "i18n": {
+        "ar": {
+          "name": "أول حياة",
+          "description": "ازرع نباتك الأول."
+        },
+        "ku": {
+          "name": "یەکەم ژیان",
+          "description": "یەکەم ڕووەکت بڕوێنە."
+        }
+      }
+    },
+    {
+      "id": "first_care",
+      "icon": "droplet",
+      "name": "First Care",
+      "description": "Complete your first recorded care action.",
+      "rule": {
+        "type": "care_actions",
+        "count": 1
+      },
+      "reward": {
+        "xp": 15
+      },
+      "i18n": {
+        "ar": {
+          "name": "أول رعاية",
+          "description": "أكمل أول عملية رعاية مسجّلة."
+        },
+        "ku": {
+          "name": "یەکەم چاودێری",
+          "description": "یەکەم کردەی چاودێری تۆمارکراو تەواو بکە."
+        }
+      }
+    },
+    {
+      "id": "green_thumb",
+      "icon": "leaf",
+      "name": "Green Thumb",
+      "description": "Care for 3 different plants.",
+      "rule": {
+        "type": "distinct_plants_cared",
+        "count": 3
+      },
+      "reward": {
+        "xp": 60
+      },
+      "i18n": {
+        "ar": {
+          "name": "يد خضراء",
+          "description": "اعتنِ بثلاثة نباتات مختلفة."
+        },
+        "ku": {
+          "name": "دەستی سەوز",
+          "description": "چاودێری ٣ ڕووەکی جیاواز بکە."
+        }
+      }
+    },
+    {
+      "id": "first_bloom",
+      "icon": "spark",
+      "name": "First Bloom",
+      "description": "Reach the first flowering milestone.",
+      "rule": {
+        "type": "stage_reached",
+        "stages": [
+          "flowering"
+        ],
+        "count": 1
+      },
+      "reward": {
+        "xp": 50
+      },
+      "i18n": {
+        "ar": {
+          "name": "أول إزهار",
+          "description": "اصل إلى أول مرحلة إزهار."
+        },
+        "ku": {
+          "name": "یەکەم گەشە",
+          "description": "بگە بە یەکەم قۆناغی گەشەکردن."
+        }
+      }
+    },
+    {
+      "id": "first_harvest",
+      "icon": "fruit",
+      "name": "First Harvest",
+      "description": "Successfully reach a harvest milestone.",
+      "rule": {
+        "type": "stage_reached",
+        "stages": [
+          "harvest"
+        ],
+        "count": 1
+      },
+      "reward": {
+        "xp": 100,
+        "seeds": 1
+      },
+      "i18n": {
+        "ar": {
+          "name": "أول حصاد",
+          "description": "اصل بنجاح إلى مرحلة الحصاد."
+        },
+        "ku": {
+          "name": "یەکەم بەرهەم",
+          "description": "بە سەرکەوتوویی بگە بە قۆناغی بەرهەم."
+        }
+      }
+    },
+    {
+      "id": "second_generation",
+      "icon": "recycle",
+      "name": "Second Generation",
+      "description": "Successfully propagate a plant.",
+      "rule": {
+        "type": "planting_methods",
+        "methods": [
+          "From Cutting",
+          "Regrown From Scraps"
+        ],
+        "count": 1
+      },
+      "reward": {
+        "xp": 40
+      },
+      "i18n": {
+        "ar": {
+          "name": "الجيل الثاني",
+          "description": "اكثر نباتاً بنجاح."
+        },
+        "ku": {
+          "name": "نەوەی دووەم",
+          "description": "بە سەرکەوتوویی ڕووەکێک زیاد بکە."
+        }
+      }
+    },
+    {
+      "id": "garden_keeper",
+      "icon": "trophy",
+      "name": "Garden Keeper",
+      "description": "Maintain 5 healthy plants.",
+      "rule": {
+        "type": "healthy_plants",
+        "count": 5
+      },
+      "reward": {
+        "xp": 150,
+        "decoration": "dec-garden-keeper"
+      },
+      "i18n": {
+        "ar": {
+          "name": "حامي الحديقة",
+          "description": "حافظ على 5 نباتات سليمة."
+        },
+        "ku": {
+          "name": "پارێزەری باخچە",
+          "description": "٥ ڕووەکی تەندروست بپارێزە."
+        }
+      }
+    },
+    {
+      "id": "seed_saver",
+      "icon": "book",
+      "name": "Seed Saver",
+      "description": "Complete a full plant journey.",
+      "rule": {
+        "type": "journeys_completed",
+        "count": 1
+      },
+      "reward": {
+        "xp": 120,
+        "seeds": 2
+      },
+      "i18n": {
+        "ar": {
+          "name": "حافظ البذور",
+          "description": "أكمل رحلة نبات كاملة."
+        },
+        "ku": {
+          "name": "پارێزەری تۆو",
+          "description": "گەشتێکی تەواوی ڕووەک تەواو بکە."
+        }
+      }
+    },
+    {
+      "id": "dedicated_grower",
+      "icon": "spark",
+      "name": "Dedicated Grower",
+      "description": "Reach a 7-day care streak.",
+      "rule": {
+        "type": "care_streak",
+        "count": 7
+      },
+      "reward": {
+        "xp": 80
+      },
+      "i18n": {
+        "ar": {
+          "name": "مزارع ملتزم",
+          "description": "اصل إلى 7 أيام متتالية من الرعاية."
+        },
+        "ku": {
+          "name": "کشتوکاڵی پابەند",
+          "description": "بگە بە ٧ ڕۆژی چاودێری بەردەوام."
+        }
+      }
+    },
+    {
+      "id": "steady_hands",
+      "icon": "trophy",
+      "name": "Steady Hands",
+      "description": "Reach a 14-day care streak.",
+      "rule": {
+        "type": "care_streak",
+        "count": 14
+      },
+      "reward": {
+        "xp": 160,
+        "seeds": 1
+      },
+      "i18n": {
+        "ar": {
+          "name": "يد ثابتة",
+          "description": "اصل إلى 14 يوماً متتالياً من الرعاية."
+        },
+        "ku": {
+          "name": "دەستی جێگیر",
+          "description": "بگە بە ١٤ ڕۆژی چاودێری بەردەوام."
+        }
+      }
+    },
+    {
+      "id": "garden_architect",
+      "icon": "tree",
+      "name": "Garden Architect",
+      "description": "Reach garden level 4.",
+      "rule": {
+        "type": "garden_level",
+        "count": 4
+      },
+      "reward": {
+        "xp": 100,
+        "gardenItem": "gi-tree"
+      },
+      "i18n": {
+        "ar": {
+          "name": "مهندس الحديقة",
+          "description": "اصل إلى مستوى الحديقة 4."
+        },
+        "ku": {
+          "name": "تەلارسازی باخچە",
+          "description": "بگە بە ئاستی ٤ی باخچە."
+        }
+      }
+    },
+    {
+      "id": "challenge_champion",
+      "icon": "trophy",
+      "name": "Challenge Champion",
+      "description": "Complete a seasonal challenge.",
+      "rule": {
+        "type": "challenges_completed",
+        "count": 1
+      },
+      "reward": {
+        "xp": 50,
+        "seeds": 1
+      },
+      "i18n": {
+        "ar": {
+          "name": "بطل التحديات",
+          "description": "أكمل تحدياً موسمياً."
+        },
+        "ku": {
+          "name": "پاڵەوانی ئاستەنگ",
+          "description": "ئاستەنگێکی وەرزی تەواو بکە."
+        }
+      }
+    },
+    {
+      "id": "photo_journalist",
+      "icon": "camera",
+      "name": "Photo Journalist",
+      "description": "Get 10 plant photos verified.",
+      "rule": {
+        "type": "verifications_approved",
+        "count": 10
+      },
+      "reward": {
+        "xp": 130
+      },
+      "i18n": {
+        "ar": {
+          "name": "مصور النباتات",
+          "description": "احصل على توثيق 10 صور نباتات."
+        },
+        "ku": {
+          "name": "وێنەگری ڕووەک",
+          "description": "١٠ وێنەی ڕووەک پشتڕاست بکەرەوە."
+        }
+      }
+    },
+    {
+      "id": "keen_observer",
+      "icon": "search",
+      "name": "Keen Observer",
+      "description": "Record 25 care actions.",
+      "rule": {
+        "type": "care_actions",
+        "count": 25
+      },
+      "reward": {
+        "xp": 120
+      },
+      "i18n": {
+        "ar": {
+          "name": "مراقب دقيق",
+          "description": "سجّل 25 عملية رعاية."
+        },
+        "ku": {
+          "name": "چاودێری وردبین",
+          "description": "٢٥ کردەی چاودێری تۆمار بکە."
+        }
+      }
+    },
+    {
+      "id": "secret_collector",
+      "icon": "lock",
+      "name": "Quiet Collector",
+      "description": "Unlock 5 plant facts.",
+      "secret": true,
+      "rule": {
+        "type": "facts_owned",
+        "count": 5
+      },
+      "reward": {
+        "xp": 100,
+        "decoration": "dec-collector"
+      },
+      "i18n": {
+        "ar": {
+          "name": "جامع هادئ",
+          "description": "افتح 5 حقائق عن النباتات."
+        },
+        "ku": {
+          "name": "کۆکەرەوەی هێمن",
+          "description": "٥ زانیاری ڕووەک بکەرەوە."
+        }
+      }
+    },
+    {
+      "id": "secret_propagator",
+      "icon": "lock",
+      "name": "Lineage Maker",
+      "description": "Propagate 5 plants.",
+      "secret": true,
+      "rule": {
+        "type": "planting_methods",
+        "methods": [
+          "From Cutting",
+          "Regrown From Scraps"
+        ],
+        "count": 5
+      },
+      "reward": {
+        "xp": 120,
+        "rareItem": "rare-lineage"
+      },
+      "i18n": {
+        "ar": {
+          "name": "صانع السلالات",
+          "description": "اكثر 5 نباتات."
+        },
+        "ku": {
+          "name": "دروستکەری نەوە",
+          "description": "٥ ڕووەک زیاد بکە."
+        }
+      }
+    },
+    {
+      "id": "secret_streak_master",
+      "icon": "lock",
+      "name": "Unbroken",
+      "description": "Reach a 30-day care streak.",
+      "secret": true,
+      "rule": {
+        "type": "care_streak",
+        "count": 30
+      },
+      "reward": {
+        "xp": 300,
+        "rareItem": "rare-streak-crown"
+      },
+      "i18n": {
+        "ar": {
+          "name": "بلا انقطاع",
+          "description": "اصل إلى 30 يوماً متتالياً من الرعاية."
+        },
+        "ku": {
+          "name": "بێ پچڕان",
+          "description": "بگە بە ٣٠ ڕۆژی چاودێری بەردەوام."
+        }
+      }
+    },
+    {
+      "id": "secret_mystery_hunter",
+      "icon": "lock",
+      "name": "Curious Soul",
+      "description": "Reveal 5 mystery rewards.",
+      "secret": true,
+      "rule": {
+        "type": "mysteries_claimed",
+        "count": 5
+      },
+      "reward": {
+        "xp": 140,
+        "rareItem": "rare-mystery-lens"
+      },
+      "i18n": {
+        "ar": {
+          "name": "روح فضولية",
+          "description": "اكشف 5 مكافآت غامضة."
+        },
+        "ku": {
+          "name": "ڕۆحی نولێکەر",
+          "description": "٥ خەڵاتی نهێنی ئاشکرا بکە."
+        }
+      }
+    }
+  ],
+  "challenges": [
+    {
+      "id": "ch-autumn-sow",
+      "icon": "seed",
+      "title": "Autumn Sowing",
+      "description": "Start something new from seed this autumn.",
+      "startDate": "2026-09-01",
+      "endDate": "2026-11-30",
+      "requirement": {
+        "type": "plant_created",
+        "plantingMethod": "From Seed",
+        "count": 1
+      },
+      "reward": {
+        "xp": 60,
+        "seeds": 1
+      },
+      "i18n": {
+        "ar": {
+          "title": "زراعة الخريف",
+          "description": "ابدأ شيئاً جديداً من البذور هذا الخريف."
+        },
+        "ku": {
+          "title": "ڕواندنی پاییز",
+          "description": "ئەم پاییزە شتێکی نوێ لە تۆو دەست پێبکە."
+        }
+      }
+    },
+    {
+      "id": "ch-rainy-care",
+      "icon": "droplet",
+      "title": "Rainy Season Care",
+      "description": "Keep watering wisely through the rainy weeks — log 5 waterings.",
+      "startDate": "2026-11-01",
+      "endDate": "2027-02-28",
+      "requirement": {
+        "type": "care_count",
+        "action": "watering",
+        "count": 5
+      },
+      "reward": {
+        "xp": 70,
+        "seeds": 1,
+        "mystery": true
+      },
+      "i18n": {
+        "ar": {
+          "title": "رعاية موسم الأمطار",
+          "description": "اسقِ بحكمة خلال أسابيع المطر — سجّل 5 عمليات سقي."
+        },
+        "ku": {
+          "title": "چاودێری وەرزی باران",
+          "description": "بە دانایی ئاو بدە لە هەفتەکانی باران — ٥ ئاودان تۆمار بکە."
+        }
+      }
+    },
+    {
+      "id": "ch-desert-week",
+      "icon": "sun",
+      "title": "Desert Week",
+      "description": "Learn about drought-resistant plants and check their sunlight 3 times.",
+      "startDate": "2026-06-01",
+      "endDate": "2026-08-31",
+      "requirement": {
+        "type": "care_count",
+        "action": "sunlight_check",
+        "count": 3
+      },
+      "reward": {
+        "xp": 50,
+        "decoration": "dec-desert"
+      },
+      "i18n": {
+        "ar": {
+          "title": "أسبوع الصحراء",
+          "description": "تعرّف على النباتات المقاومة للجفاف وتحقق من ضوء الشمس 3 مرات."
+        },
+        "ku": {
+          "title": "هەفتەی بیابان",
+          "description": "ڕووەکە بەرگریکەرەکانی وشکەساڵی بناسە و ٣ جار ڕووناکی خۆر بپشکنە."
+        }
+      }
+    },
+    {
+      "id": "ch-spring-seed",
+      "icon": "sprout",
+      "title": "Spring Growth",
+      "description": "Welcome spring by observing your plants 4 times.",
+      "startDate": "2027-03-01",
+      "endDate": "2027-05-31",
+      "requirement": {
+        "type": "care_count",
+        "action": "observation",
+        "count": 4
+      },
+      "reward": {
+        "xp": 60,
+        "seeds": 2
+      },
+      "i18n": {
+        "ar": {
+          "title": "نمو الربيع",
+          "description": "استقبل الربيع بمراقبة نباتاتك 4 مرات."
+        },
+        "ku": {
+          "title": "گەشەی بەهار",
+          "description": "بەهار بەخێربێنە بە ٤ جار چاودێریکردنی ڕووەکەکانت."
+        }
+      }
+    }
+  ],
+  "facts": [
+    {
+      "id": "fact-flowering-plants",
+      "icon": "spark",
+      "title": "Why plants flower",
+      "body": "Flowering is a plant's signal that it has enough light and energy to reproduce. Your first flower means the plant is thriving, not just surviving.",
+      "i18n": {
+        "ar": {
+          "title": "لماذا تُزهر النباتات",
+          "body": "الإزهار إشارة إلى أن النبات حصل على ضوء وطاقة كافيين للتكاثر. أول زهرة تعني أن نباتك مزدهر وليس فقط ناجياً."
+        },
+        "ku": {
+          "title": "بۆچی ڕووەکەکان گەشە دەکەن",
+          "body": "گەشەکردن ئاماژەیە بۆ ئەوەی ڕووەک ڕووناکی و وزەی پێویست هەیە بۆ زاوزێکردن. یەکەم گوڵ واتە ڕووەکەکەت گەشە دەکات نەک تەنها دەژیت."
+        }
+      }
+    },
+    {
+      "id": "fact-perennials",
+      "icon": "recycle",
+      "title": "Perennials come back",
+      "body": "Perennial herbs and trees die back in winter and regrow from the same roots. Mark where they are planted so you don't disturb them while digging.",
+      "i18n": {
+        "ar": {
+          "title": "النباتات المعمّرة تعود",
+          "body": "الأعشاب والأشجار المعمّرة تذبل شتاءً وتنمو مجدداً من الجذور نفسها. علّم مكان زراعتها كي لا تزعجها أثناء الحفر."
+        },
+        "ku": {
+          "title": "ڕووەکە چەندساڵەکان دەگەڕێنەوە",
+          "body": "ڕووەک و درەختە چەندساڵەکان لە زستان دەمرن و لە هەمان ڕەگدا دووبارە گەشە دەکەن. شوێنی چاندنیان دیاری بکە بۆ ئەوەی لە کاتی هەڵکۆڵین تێکیان نەدەیت."
+        }
+      }
+    },
+    {
+      "id": "fact-harvest-seed-saving",
+      "icon": "book",
+      "title": "Save your own seed",
+      "body": "Let one healthy plant go to seed and you will never need to buy it again. Dry the seed fully before storing it in a cool, dark jar.",
+      "i18n": {
+        "ar": {
+          "title": "احفظ بذورك",
+          "body": "اترك نباتاً سليماً واحداً ليُنتج البذور ولن تحتاج لشرائها مجدداً. جفف البذور تماماً قبل حفظها في برطمان بارد ومظلم."
+        },
+        "ku": {
+          "title": "تۆوی خۆت بپارێزە",
+          "body": "یەک ڕووەکی تەندروست بهێڵە بۆ تۆو و هەرگیز پێویستت بە کڕینەوە نابێت. تۆوەکە بە تەواوی وشک بکەرەوە پێش هەڵگرتنی لە قاپێکی سارد و تاریک."
+        }
+      }
+    },
+    {
+      "id": "fact-root-depth",
+      "icon": "root",
+      "title": "Roots go deeper than you think",
+      "body": "Many vegetables send roots down twice as wide as the plant is tall. That is why deep, loose soil beats a shallow pot with frequent watering.",
+      "i18n": {
+        "ar": {
+          "title": "الجذور أعمق مما تظن",
+          "body": "تمتد جذور كثير من الخضروات بعرض ضعف ارتفاع النبات. لهذا التربة العميقة الرخوة أفضل من وعاء ضحل مع سقي متكرر."
+        },
+        "ku": {
+          "title": "ڕەگەکان قوڵترن لەوەی بیربکەیتەوە",
+          "body": "زۆرێک لە سەوزەوات ڕەگەکانیان دوو ئەوەندەی بەرزی ڕووەکەکە درێژ دەکەن. بۆیە خاکی قوڵ و نەرم باشترە لە قاپێکی کەم قوڵ بە ئاودانی زۆر."
+        }
+      }
+    },
+    {
+      "id": "fact-legume-nitrogen",
+      "icon": "compost",
+      "title": "Legumes feed the soil",
+      "body": "Beans and peas work with bacteria in their roots to pull nitrogen from the air. Planting them before a leafy crop leaves the soil richer.",
+      "i18n": {
+        "ar": {
+          "title": "البقوليات تغذي التربة",
+          "body": "تعمل الفاصولياء والبازلاء مع بكتيريا الجذور لسحب النيتروجين من الهواء. زراعتها قبل محصول ورقي تُغني التربة."
+        },
+        "ku": {
+          "title": "باقیلاتەکان خاک دەوڵەمەند دەکەن",
+          "body": "فاسۆلیا و نۆک لەگەڵ بەکتریای ڕەگدا کار دەکەن بۆ کێشانی نایترۆجین لە هەوا. چاندنیان پێش بەرهەمێکی گەڵا خاک دەوڵەمەندتر دەکات."
+        }
+      }
+    },
+    {
+      "id": "fact-succulent-water",
+      "icon": "droplet",
+      "title": "Succulents store water",
+      "body": "Thick leaves are water tanks. A succulent that looks slightly soft is often healthier than one you water every day — let the soil dry out fully first.",
+      "i18n": {
+        "ar": {
+          "title": "النباتات العصارية تخزن الماء",
+          "body": "الأوراق السميكة خزانات ماء. النبات العصاري الذي يبدو ناعماً قليلاً غالباً أكثر صحة من الذي تسقيه يومياً — دع التربة تجف تماماً أولاً."
+        },
+        "ku": {
+          "title": "ڕووەکە ئاویەکان ئاو هەڵدەگرن",
+          "body": "گەڵای ئەستوور تانکی ئاون. ڕووەکێکی ئاوی کە کەمێک نەرم دیارە زۆرجار تەندروستترە لەوەی ڕۆژانە ئاوی دەدەیتێ — سەرەتا ڕێگە بە خاکەکە بدە بە تەواوی وشک بێت."
+        }
+      }
+    },
+    {
+      "id": "fact-tomato-roots",
+      "icon": "fruit",
+      "title": "{plant} stems can reroot",
+      "body": "Bury a leggy {plant} seedling deeper than it was growing and tiny hairs on the stem will turn into new roots, giving you a stronger plant.",
+      "i18n": {
+        "ar": {
+          "title": "ساق {plant} يمكن أن تتجذر",
+          "body": "ادفن شتلة {plant} الأطول أعمق مما كانت تنمو وستتحول الشعيرات الدقيقة على الساق إلى جذور جديدة، لتحصل على نبات أقوى."
+        },
+        "ku": {
+          "title": "قەدی {plant} دەتوانێت دووبارە ڕەگ بدات",
+          "body": "شیتلەی {plant}ی درێژ قوڵتر بڕوێنە لەوەی گەشەی دەکرد، مووە وردەکانی قەدەکە دەبنە ڕەگی نوێ و ڕووەکێکی بەهێزترت پێدەدات."
+        }
+      },
+      "plantId": "pl-tomato"
+    },
+    {
+      "id": "fact-rare-variegation",
+      "icon": "leaf",
+      "title": "Variegation is a mutation",
+      "description": "A rare plant fact.",
+      "body": "White or pink patches on a leaf are cells that lost their green pigment. Keep a variegated plant in bright, indirect light — the pale parts cannot photosynthesise as well.",
+      "i18n": {
+        "ar": {
+          "title": "التبرقش طفرة",
+          "body": "البقع البيضاء أو الوردية على الورقة خلايا فقدت صبغتها الخضراء. ضع النبات المبرقش في ضوء ساطع غير مباشر — الأجزاء الفاتحة لا تقوم بالبناء الضوئي بكفاءة."
+        },
+        "ku": {
+          "title": "ڕەنگاویشی گۆڕانکارییەکی بۆماوەییە",
+          "body": "خاڵە سپی یان پەمەییەکانی سەر گەڵا خانەن کە ڕەنگی سەوزیان لەدەستداوە. ڕووەکە ڕەنگاوڕەنگەکە لە ڕووناکی ڕوون و ناڕاستەوخۆ دابنێ — بەشە کاڵەکان ناتوانن باش فۆتۆسینتێز بکەن."
+        }
+      }
+    }
+  ],
+  "items": {
+    "dec-bloom": {
+      "icon": "spark",
+      "name": "Bloom Ornament",
+      "i18n": {
+        "ar": {
+          "name": "زينة الإزهار"
+        },
+        "ku": {
+          "name": "ڕازاندنەوەی گەشە"
+        }
+      }
+    },
+    "dec-mature": {
+      "icon": "tree",
+      "name": "Mature Grove",
+      "i18n": {
+        "ar": {
+          "name": "بستان ناضج"
+        },
+        "ku": {
+          "name": "باخچەی پێگەیشتوو"
+        }
+      }
+    },
+    "dec-garden-keeper": {
+      "icon": "trophy",
+      "name": "Keeper's Crest",
+      "i18n": {
+        "ar": {
+          "name": "شعار الحامي"
+        },
+        "ku": {
+          "name": "نیشانەی پارێزەر"
+        }
+      }
+    },
+    "dec-collector": {
+      "icon": "book",
+      "name": "Collector's Shelf",
+      "i18n": {
+        "ar": {
+          "name": "رف الجامع"
+        },
+        "ku": {
+          "name": "ڕەفەی کۆکەرەوە"
+        }
+      }
+    },
+    "dec-streak-30": {
+      "icon": "spark",
+      "name": "Steadfast Wreath",
+      "i18n": {
+        "ar": {
+          "name": "إكليل الثبات"
+        },
+        "ku": {
+          "name": "تاجی دامەزراوی"
+        }
+      }
+    },
+    "dec-desert": {
+      "icon": "sun",
+      "name": "Desert Bloom",
+      "i18n": {
+        "ar": {
+          "name": "زهرة الصحراء"
+        },
+        "ku": {
+          "name": "گوڵی بیابان"
+        }
+      }
+    },
+    "dec-mystery-leaf": {
+      "icon": "leaf",
+      "name": "Mystery Leaf",
+      "i18n": {
+        "ar": {
+          "name": "ورقة غامضة"
+        },
+        "ku": {
+          "name": "گەڵای نهێنی"
+        }
+      }
+    },
+    "dec-mystery-bloom": {
+      "icon": "spark",
+      "name": "Hidden Blossom",
+      "i18n": {
+        "ar": {
+          "name": "زهرة خفية"
+        },
+        "ku": {
+          "name": "گوڵی شاراوە"
+        }
+      }
+    },
+    "prof-gold-frame": {
+      "icon": "user",
+      "name": "Gold Profile Frame",
+      "i18n": {
+        "ar": {
+          "name": "إطار ذهبي"
+        },
+        "ku": {
+          "name": "چوارچێوەی زێڕین"
+        }
+      }
+    },
+    "prof-leaf-frame": {
+      "icon": "user",
+      "name": "Leaf Profile Frame",
+      "i18n": {
+        "ar": {
+          "name": "إطار ورقي"
+        },
+        "ku": {
+          "name": "چوارچێوەی گەڵا"
+        }
+      }
+    },
+    "gi-tree": {
+      "icon": "tree",
+      "name": "Garden Tree",
+      "i18n": {
+        "ar": {
+          "name": "شجرة الحديقة"
+        },
+        "ku": {
+          "name": "درەختی باخچە"
+        }
+      }
+    },
+    "gi-pond": {
+      "icon": "droplet",
+      "name": "Garden Pond",
+      "i18n": {
+        "ar": {
+          "name": "بركة الحديقة"
+        },
+        "ku": {
+          "name": "حەوزی باخچە"
+        }
+      }
+    },
+    "rare-first-harvest": {
+      "icon": "fruit",
+      "name": "First Harvest Emblem",
+      "i18n": {
+        "ar": {
+          "name": "شعار أول حصاد"
+        },
+        "ku": {
+          "name": "نیشانەی یەکەم بەرهەم"
+        }
+      }
+    },
+    "rare-lineage": {
+      "icon": "recycle",
+      "name": "Lineage Seed",
+      "i18n": {
+        "ar": {
+          "name": "بذرة السلالة"
+        },
+        "ku": {
+          "name": "تۆوی نەوە"
+        }
+      }
+    },
+    "rare-streak-crown": {
+      "icon": "trophy",
+      "name": "Unbroken Crown",
+      "i18n": {
+        "ar": {
+          "name": "تاج بلا انقطاع"
+        },
+        "ku": {
+          "name": "تاجی بێ پچڕان"
+        }
+      }
+    },
+    "rare-mystery-lens": {
+      "icon": "search",
+      "name": "Mystery Lens",
+      "i18n": {
+        "ar": {
+          "name": "عدسة الغموض"
+        },
+        "ku": {
+          "name": "لێنسی نهێنی"
+        }
+      }
+    },
+    "rare-golden-seed": {
+      "icon": "seed",
+      "name": "Golden Seed",
+      "i18n": {
+        "ar": {
+          "name": "بذرة ذهبية"
+        },
+        "ku": {
+          "name": "تۆوی زێڕین"
+        }
+      }
+    }
+  },
+  "mysteryPools": {
+    "milestone": [
+      {
+        "weight": 30,
+        "xp": 40
+      },
+      {
+        "weight": 20,
+        "seeds": 1
+      },
+      {
+        "weight": 15,
+        "xp": 70
+      },
+      {
+        "weight": 12,
+        "decoration": "dec-mystery-leaf"
+      },
+      {
+        "weight": 10,
+        "fact": "fact-rare-variegation"
+      },
+      {
+        "weight": 8,
+        "boost": {
+          "multiplier": 1.5,
+          "hours": 24
+        }
+      },
+      {
+        "weight": 5,
+        "rareItem": "rare-golden-seed"
+      }
+    ],
+    "challenge": [
+      {
+        "weight": 30,
+        "xp": 60
+      },
+      {
+        "weight": 25,
+        "seeds": 2
+      },
+      {
+        "weight": 20,
+        "decoration": "dec-mystery-bloom"
+      },
+      {
+        "weight": 15,
+        "fact": "fact-rare-variegation"
+      },
+      {
+        "weight": 10,
+        "rareItem": "rare-golden-seed"
+      }
+    ]
+  }
+}
