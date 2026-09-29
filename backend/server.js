@@ -23,6 +23,13 @@ const notificationRoutes = require("./routes/notifications.routes");
 
 const app = express();
 
+// The API always runs behind a proxy (Render in production, dev.js locally), so
+// the socket address is the proxy's, not the visitor's. Without this,
+// express-rate-limit keys every visitor to one shared bucket — 20 auth requests
+// per 15 minutes for the whole platform rather than per client. Exactly one hop
+// is trusted, so a client cannot spoof its address via X-Forwarded-For.
+app.set("trust proxy", 1);
+
 const isProduction = process.env.NODE_ENV === "production";
 
 // Don't advertise the framework.

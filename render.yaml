@@ -111,17 +111,20 @@ services:
 
       # --- AI (optional) ---
       # Leave AI_API_KEY empty (blank) to run fully offline: no AI features and
-      # heuristic photo scoring. These URL/model values match the Gemini
-      # compatible endpoint used in the local backend/.env — change them in the
-      # dashboard for another provider.
+      # heuristic photo scoring. These values use the Gemini compatible
+      # endpoint — change them in the dashboard for another provider.
       - key: AI_API_KEY
         sync: false
       - key: AI_API_URL
         value: https://generativelanguage.googleapis.com/v1beta/openai
+      # gemini-3.5-flash answers immediately; gemini-3.6-flash is frequently
+      # shedding load (503 "high demand") and took 19s to say so, so it is a
+      # stand-in rather than the default. The client retries, then walks this
+      # list in order.
       - key: AI_MODEL
-        value: gemini-3.6-flash
-      - key: AI_FALLBACK_MODELS
         value: gemini-3.5-flash
+      - key: AI_FALLBACK_MODELS
+        value: gemini-3.6-flash,gemini-flash-latest
       - key: AI_TIMEOUT_MS
         value: "120000"
 
