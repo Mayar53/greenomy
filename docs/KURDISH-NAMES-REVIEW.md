@@ -18,8 +18,8 @@ node scripts/kurdish-review.js
 ## Summary
 
 - plants in the catalog: **63**
-- Kurdish names verified against a source: **30**
-- awaiting a native Sorani reviewer: **33**
+- Kurdish names verified against a source: **36**
+- awaiting a native Sorani reviewer: **27**
 
 ## What a reviewer needs to supply
 
@@ -44,9 +44,6 @@ give replaces it and the old one is kept as a search alias, so nothing is lost.
 | pl-parsley | Petroselinum crispum | Parsley | بقدونس | مەعدەنۆس | Sorani Wikipedia titles parsley جاڤری; مەعدەنۆس kept as the everyday local word. |
 | pl-coriander | Coriandrum sativum | Coriander | كزبرة | کەشنیز | No lexical source found; widely used as found. |
 | pl-thyme | Thymus vulgaris | Thyme | زعتر | زەعتەر | No lexical source found; widely used as found. |
-| pl-lemon-tree | Citrus limon | Lemon Tree | ليمون | لیمۆ | Loan word in general use; no lexical source checked. |
-| pl-fig | Ficus carica | Fig | تين | هەنجیر | No lexical source found; widely used as found. |
-| pl-olive | Olea europaea | Olive | زيتون | زەیتوون | No lexical source found; widely used as found. |
 | pl-pothos | Epipremnum aureum | Pothos | بوتوس | پۆتۆس | Transliterated name; these houseplants have no established Sorani name. |
 | pl-snake-plant | Dracaena trifasciata | Snake Plant | نبتة الأفعى | ڕووەکی مار | Descriptive phrase, not an established Sorani name. |
 | pl-spider-plant | Chlorophytum comosum | Spider Plant | نبتة العنكبوت | ڕووەکی جاڵجاڵۆکە | Descriptive phrase, not an established Sorani name. |
@@ -64,9 +61,6 @@ give replaces it and the old one is kept as a search alias, so nothing is lost.
 | pl-sage | Salvia officinalis | Sage | مريمية | مەریەمیە | No lexical source found; widely used as found. |
 | pl-lavender | Lavandula angustifolia | Lavender | خزامى | لاڤەندەر | Transliterated name; no lexical source checked. |
 | pl-lemon-balm | Melissa officinalis | Lemon Balm | مليسة | مێلیسا | Transliterated name; no lexical source checked. |
-| pl-apple | Malus domestica | Apple | تفاح | سێو | No lexical source found; widely used as found. |
-| pl-apricot | Prunus armeniaca | Apricot | مشمش | قەیسی | No lexical source found; widely used as found. |
-| pl-date-palm | Phoenix dactylifera | Date Palm | نخيل | دارخورما | خورما is the fruit; the tree is دارخورما. |
 | pl-jade-plant | Crassula ovata | Jade Plant | نبتة اليشم | ڕووەکی یەشیم | Descriptive phrase, not an established Sorani name. |
 | pl-rubber-plant | Ficus elastica | Rubber Plant | فيكس مطاطي | ڕووەکی لاستیک | Descriptive phrase, not an established Sorani name. |
 

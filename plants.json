@@ -1577,8 +1577,8 @@
         "ku": {
           "name": "لیمۆ",
           "notes": "پابەندبوونێکی درێژخایەنە — چەند ساڵێک پێش یەکەم بەرهەم، بەڵام دەیان ساڵ دەژیت.",
-          "nameStatus": "needs_native_review",
-          "nameReviewNote": "Loan word in general use; no lexical source checked."
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
         }
       },
       "aliases": [
@@ -1692,8 +1692,8 @@
         "ku": {
           "name": "هەنجیر",
           "notes": "لە قاپی گەورە و هاوینی وشکدا باشتر لە زۆربەی دارەوەی بەرهەمەکان خۆڕاگرە.",
-          "nameStatus": "needs_native_review",
-          "nameReviewNote": "No lexical source found; widely used as found."
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
         }
       },
       "aliases": [
@@ -1746,8 +1746,8 @@
         "ku": {
           "name": "زەیتوون",
           "notes": "هاوینی درێژ و وشکی خۆش دەوێت. هێواشە، بەڵام زۆر درێژعومر و بەرگەی وشکەساڵی دەگرێت.",
-          "nameStatus": "needs_native_review",
-          "nameReviewNote": "No lexical source found; widely used as found."
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
         }
       },
       "aliases": [
@@ -3796,8 +3796,8 @@
         "ku": {
           "name": "سێو",
           "notes": "پێویستی بە سەرمای زستان هەیە بۆ بەرهەمدان. زۆربەی جۆرەکان دارێکی دووەم دەوێت بۆ پیتکردن.",
-          "nameStatus": "needs_native_review",
-          "nameReviewNote": "No lexical source found; widely used as found."
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia"
         }
       },
       "aliases": [
@@ -3851,8 +3851,8 @@
         "ku": {
           "name": "قەیسی",
           "notes": "زوو گوڵ دەکات، بۆیە بەستەڵەکی درەنگ دەتوانێت بەرهەمەکە بەرێت — شوێنی پارێزراو یارمەتی دەدات.",
-          "nameStatus": "needs_native_review",
-          "nameReviewNote": "No lexical source found; widely used as found.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
           "alternatives": [
             "زەردەئالو"
           ]
@@ -3963,8 +3963,8 @@
         "ku": {
           "name": "دارخورما",
           "notes": "دارێکی بیابانە پێویستی بە گەرمییەکی زۆر و ڕەگی قووڵ هەیە — بەرهەمێکی زۆر درێژخایەن.",
-          "nameStatus": "needs_native_review",
-          "nameReviewNote": "خورما is the fruit; the tree is دارخورما.",
+          "nameStatus": "verified",
+          "nameSource": "ckb-wikipedia",
           "alternatives": [
             "خورما"
           ]
