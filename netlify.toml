@@ -4,9 +4,9 @@
 # Netlify in front of it keeps the browser on ONE origin: no CORS, and nothing
 # to configure in the JavaScript. Netlify forwards /api/* to Render server-side.
 #
-#   >> Replace REPLACE-WITH-YOUR-RENDER-SERVICE below with your Render URL,
-#      e.g. https://greenomy-api.onrender.com  (Render shows it on the service
-#      page once the API exists). No other file needs to change.
+#   The API host below is the one the Render Blueprint creates (render.yaml,
+#   service name "greenomy-api"). Rename the Render service and this must change
+#   with it — no other file needs editing.
 
 [build]
   publish = "."
@@ -17,7 +17,7 @@
 # /api/* -> the Render API. ":splat" passes the rest of the path through.
 [[redirects]]
   from = "/api/*"
-  to = "https://REPLACE-WITH-YOUR-RENDER-SERVICE.onrender.com/api/:splat"
+  to = "https://greenomy-api.onrender.com/api/:splat"
   status = 200
   force = true
 
