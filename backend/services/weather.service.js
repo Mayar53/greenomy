@@ -1,17 +1,17 @@
 // services/weather.service.js — where a member is, what season it is there, and
 // what the weather is doing. Two providers, chosen by WEATHER_PROVIDER:
 //
-//   open-meteo  keyless live forecast + geocoding (default)
-//   offline     a built-in climate table, no network at all
+//   offline     a built-in climate table, no network at all (default)
+//   open-meteo  keyless live forecast + geocoding (opt-in)
 //
 // Either way this never throws for an unknown city or a dead network: growing
 // advice falls back to a general climate rather than failing the request. That
 // mirrors how the AI features degrade without a key.
 //
-// Licence note: Open-Meteo's free tier is for NON-COMMERCIAL use (CC BY 4.0,
-// attribution required). Commercial use needs their paid plan — set
-// WEATHER_API_KEY, which switches to the customer- host as their docs require.
-// See docs/DEPLOYMENT.md.
+// Offline is the default, so the app needs no weather account and makes no
+// external call. Open-Meteo is opt-in (WEATHER_PROVIDER=open-meteo) and its
+// free tier is NON-COMMERCIAL only (CC BY 4.0, attribution required); commercial
+// use needs their paid plan via WEATHER_API_KEY. See docs/DEPLOYMENT.md.
 
 const DEFAULT_BASE = "https://api.open-meteo.com/v1/forecast";
 const DEFAULT_GEOCODE = "https://geocoding-api.open-meteo.com/v1/search";
@@ -68,7 +68,7 @@ const geocodeCache = new Map();
 const conditionsCache = new Map();
 
 function config() {
-  const provider = (process.env.WEATHER_PROVIDER || "open-meteo").trim().toLowerCase();
+  const provider = (process.env.WEATHER_PROVIDER || "offline").trim().toLowerCase();
   const apiKey = (process.env.WEATHER_API_KEY || "").trim();
   return {
     provider,

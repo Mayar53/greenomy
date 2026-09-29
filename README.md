@@ -34,11 +34,11 @@ rewards). See `docs/ARCHITECTURE.md`.
 - SEO — `robots.txt`, `sitemap.xml`, canonical URLs, OG image and Twitter card on the public pages
 - **Plant recommendations** — the seed wizard suggests what to grow, ranked from
   the catalog by the member's city and climate, the current season, how long
-  they'll wait for a harvest, and the preferences they chose at onboarding. Live
-  weather comes from Open-Meteo (keyless) with a built-in climate table as
-  fallback, so it works offline. The ranking is deterministic — no AI decides
-  what to plant, because a model that invents a harvest time is worse than no
-  suggestion at all
+  they'll wait for a harvest, and the preferences they chose at onboarding.
+  Climate and season come from a built-in city table, so recommendations need no
+  network and no weather account (Open-Meteo is opt-in). The ranking is
+  deterministic — no AI decides what to plant, because a model that invents a
+  harvest time is worse than no suggestion at all
 - **Canonical plant catalog** — 63 plants, one row each, with taxonomy (Kew
   POWO), varieties, sourced agronomic facts (FAO ECOCROP / crop calendars) and
   **aliases in English, MSA, Iraqi Arabic and Kurdish**: `tomato`, `tomatoes`,

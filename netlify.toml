@@ -1,0 +1,72 @@
+# Netlify — serves the static frontend and proxies /api to the Render API.
+#
+# The frontend always calls the API on its own origin (`/api`), so putting
+# Netlify in front of it keeps the browser on ONE origin: no CORS, and nothing
+# to configure in the JavaScript. Netlify forwards /api/* to Render server-side.
+#
+#   >> Replace REPLACE-WITH-YOUR-RENDER-SERVICE below with your Render URL,
+#      e.g. https://greenomy-api.onrender.com  (Render shows it on the service
+#      page once the API exists). No other file needs to change.
+
+[build]
+  publish = "."
+  # No build step — the site is plain HTML/CSS/JS. Set explicitly so Netlify
+  # never tries to run one.
+  command = "echo 'static site - no build step'"
+
+# /api/* -> the Render API. ":splat" passes the rest of the path through.
+[[redirects]]
+  from = "/api/*"
+  to = "https://REPLACE-WITH-YOUR-RENDER-SERVICE.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+# The backend, docs and tooling live in this repo but are not part of the site.
+# Return 404 for them instead of publishing source.
+[[redirects]]
+  from = "/backend/*"
+  to = "/"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/docs/*"
+  to = "/"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/scripts/*"
+  to = "/"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/tests/*"
+  to = "/"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/.github/*"
+  to = "/"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/package.json"
+  to = "/"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/dev.js"
+  to = "/"
+  status = 404
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # camera=(self) keeps the in-app camera working on the same origin.
+    Permissions-Policy = "camera=(self), microphone=(), geolocation=()"
+    # Fonts load from Google, the QR library from cdnjs, images may be external
+    # (partner logos, article images); everything else stays same-origin.
+    Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'"
