@@ -113,20 +113,31 @@ services:
       # Leave AI_API_KEY empty (blank) to run fully offline: no AI features and
       # heuristic photo scoring. These values use the Gemini compatible
       # endpoint — change them in the dashboard for another provider.
+      #
+      # The time budget matters. The site is served through Netlify, whose proxy
+      # gives up after 26 SECONDS and returns a bare 504 — that is why a member
+      # saw "Request failed (504)" from the assistant instead of its own answer.
+      # With retries across several models the chain could run for minutes. One
+      # attempt per model, two models, 10s each caps the worst case at ~20s, so
+      # the member always gets a real reply: the model's, or the Green Hub
+      # fallback the assistant already uses when a call fails.
       - key: AI_API_KEY
         sync: false
       - key: AI_API_URL
         value: https://generativelanguage.googleapis.com/v1beta/openai
-      # gemini-3.5-flash answers immediately; gemini-3.6-flash is frequently
-      # shedding load (503 "high demand") and took 19s to say so, so it is a
-      # stand-in rather than the default. The client retries, then walks this
-      # list in order.
+      # gemini-3.6-flash sheds load constantly (503 "high demand", taking 19s to
+      # say so), so it is not used at all here.
       - key: AI_MODEL
         value: gemini-3.5-flash
       - key: AI_FALLBACK_MODELS
-        value: gemini-3.6-flash,gemini-flash-latest
+        value: gemini-flash-latest
       - key: AI_TIMEOUT_MS
-        value: "120000"
+        value: "10000"
+      # One attempt per model. A retry of a busy model only adds to the wait
+      # before the fallback that would have answered, and a timeout is not
+      # retried anyway (services/ai.service.js).
+      - key: AI_MAX_ATTEMPTS
+        value: "1"
 
       # --- defaults that need no network or account ---
       - key: WEATHER_PROVIDER
