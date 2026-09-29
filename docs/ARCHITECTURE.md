@@ -114,10 +114,19 @@ none of the backend logic is web-specific.
 - Evidence is a verified photo: approving a milestone photo completes that
   milestone, advances the journey and pays its reward.
 
+## Tests
+- `backend/tests/` — the API suite (`cd backend && npm test`) runs against an
+  in-process PGlite database, so it needs no services.
+- `tests/` — the frontend suite (`npm test` at the project root) reads the static
+  files and checks links, i18n keys across all three languages, locale parity,
+  icon names, absence of emoji, catalog integrity, and that the generated
+  reviewer worklist still matches `plants.json`.
+- Both run in CI on every push and pull request (`.github/workflows/ci.yml`).
+
 ## What remains
-- Real push delivery through Firebase, and a frontend test suite (the suite in
-  `backend/tests/` is API-only). Everything else in Phases 1–7 plus the
-  catalog/journey/verification/reward work above is built.
+- Real push delivery through Firebase (the console provider is the default).
+  Everything else in Phases 1–7 plus the catalog/journey/verification/reward work
+  above is built.
 
 `services/push.service.js` follows the same swappable-provider shape as
 `services/verification-provider.js`: `getPushProvider()` returns a console

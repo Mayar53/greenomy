@@ -9,8 +9,9 @@ API's URL if it isn't served from the same origin under `/api`.
 ## Backend
 1. `cd backend && npm install` (installs `sharp`, which ships prebuilt binaries
    — no system packages required)
-2. Copy `.env.example` → `backend/.env` and fill in real values, especially
-   `DATABASE_URL` and `JWT_SECRET`.
+2. Copy the root `.env.example` → `backend/.env` (`cd backend && cp ../.env.example .env`)
+   and fill in real values, especially `DATABASE_URL` and `JWT_SECRET`. It is the
+   one env file for the whole backend — there is no second copy.
 3. Provide PostgreSQL. `DB_DRIVER` selects the driver: `pglite` runs Postgres
    in-process for local development (nothing to install, single connection),
    while `pg` needs a real server — either `docker compose up -d db` from the
@@ -193,10 +194,8 @@ Related knobs: `WEATHER_CACHE_TTL_MS` (default 3600000), `WEATHER_TIMEOUT_MS`
 (default 8000).
 
 ## Not yet implemented
-- CI/CD pipeline
 - Log aggregation / monitoring
 - CDN / image optimization pipeline
-- Frontend tests (the suite in `backend/tests/` is API-only)
 - **Internet-wide reverse-image search.** Provenance can never be *proven*:
   metadata is trivially stripped or edited, filenames can be renamed, and a
   plant photographed against a plain wall resembles a screenshot. Duplicate

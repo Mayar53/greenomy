@@ -4,6 +4,8 @@
   "private": true,
   "description": "Greenomy — run the whole stack (API + website) with one command",
   "scripts": {
-    "start": "node dev.js"
+    "start": "node dev.js",
+    "test": "node --test tests/catalog.test.js tests/site.test.js",
+    "kurdish:review": "node scripts/kurdish-review.js"
   }
 }

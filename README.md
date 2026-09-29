@@ -61,7 +61,7 @@ rewards). See `docs/ARCHITECTURE.md`.
   evidences; the journey completion bonus is separate
 - **AI (optional)** — three features, all off until `AI_API_KEY` is set: real photo verification (a vision model adds challenge/identity signals to the deterministic ones), plant identification from a photo in the seed wizard, and a gardening assistant on the garden page that knows what you're growing. The assistant runs an explicit pipeline (language → entities → intent → retrieval → conditions → context), continues a conversation, understands Iraqi Arabic and Kurdish, and answers exact values only from the sourced knowledge rows. Provider-agnostic (any OpenAI-compatible endpoint), and every path degrades gracefully without a key
 - Express REST API on **PostgreSQL** — migrations (`npm run migrate`), seed (`npm run seed`), `models/*.model.js`, and atomic points/redemption transactions
-- 157 API tests (`cd backend && npm test`)
+- 278 API tests (`cd backend && npm test`) plus a static-integrity suite for the frontend (`npm test`)
 - Docs: `docs/ARCHITECTURE.md`, `docs/DATABASE.md`, `docs/API.md`, `docs/DEPLOYMENT.md`
 
 **Not yet built:**
@@ -69,7 +69,6 @@ rewards). See `docs/ARCHITECTURE.md`.
 - A real mail provider — reset emails are logged, not sent, until `MAIL_PROVIDER=api` is configured
 - Email verification — the reset flow is done, but an address isn't verified at signup
 - Push delivery — the provider seam and device registration are in place, but `FcmPushProvider` throws rather than sending (no Firebase project yet), and nothing on the web client registers a device token
-- Frontend tests — the API suite covers the backend; the UI was verified by hand in a browser
 - Internet-wide reverse-image search — duplicate detection compares against this
   platform's stored images plus provenance (challenge code, hashes), so it cannot
   know an image came from Google Images. Suspicious images go to review
@@ -102,7 +101,14 @@ PostgreSQL — it exits with a clear message if it can't connect.
 database in a temp dir, migrates and seeds it, and exercises auth, the points
 ledger, redemption concurrency, notifications, the admin dashboard, the security
 hardening, the plant catalog and alias search, journeys, photo verification with
-duplicate detection, and the reward engine (181 tests).
+duplicate detection, and the reward engine (278 tests).
+
+`npm test` at the project root runs the frontend suite: it reads the static files
+and checks every page's links resolve, every `data-i18n` key exists in all three
+languages, locale files declare the same keys, icon names are in the sprite, no
+emoji slipped into the UI, the catalog is internally consistent, and the generated
+reviewer worklist still matches `plants.json`. Both suites run in CI on every push
+and pull request (`.github/workflows/ci.yml`).
 
 **Frontend** — any static file server from the project root, e.g.:
 ```
