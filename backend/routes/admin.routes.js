@@ -27,7 +27,12 @@ router.patch("/admins/:id", requirePermission("admins.manage"), admins.update);
 router.delete("/admins/:id", requirePermission("admins.manage"), admins.remove);
 
 router.get("/users", requirePermission("users.manage"), users.list);
+// "/users/active" must stay ABOVE "/users/:id": otherwise the id route matches it
+// first and the ranking is looked up as a member whose id is literally "active".
+router.get("/users/active", requirePermission("users.manage"), users.active);
+router.get("/users/:id", requirePermission("users.manage"), users.detail);
 router.patch("/users/:id", requirePermission("users.manage"), users.update);
+router.post("/users/:id/points", requirePermission("users.manage"), users.adjustPoints);
 
 router.get("/partners", requirePermission("partners.manage"), partners.listAll);
 router.post("/partners", requirePermission("partners.manage"), partners.create);

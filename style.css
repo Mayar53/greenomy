@@ -578,6 +578,60 @@ section.section-tight { padding: 56px 0; }
 .perm-option[data-locked="true"] { opacity: 0.55; cursor: not-allowed; }
 .perm-cell { display: flex; flex-wrap: wrap; gap: 4px; }
 
+/* Users — the search bar, the activity ranking and the member panel. Logical
+   properties throughout, so nothing has to be mirrored for RTL. */
+.admin-toolbar {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px; padding: 0 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+.admin-toolbar .icon-slot { color: var(--color-text-muted); flex: none; }
+.admin-toolbar input {
+  flex: 1; min-width: 0; border: 0; background: transparent;
+  padding: 13px 0; font: inherit; color: var(--color-text);
+}
+.admin-toolbar input:focus { outline: none; }
+.admin-toolbar:focus-within { border-color: var(--sage); }
+
+.active-list { display: grid; gap: 8px; list-style: none; padding: 0; margin: 0 0 34px; }
+.active-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+.active-rank {
+  flex: none; inline-size: 26px; block-size: 26px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px; background: rgba(135,169,107,0.16);
+  color: var(--sage-ink); font-weight: 800; font-size: 0.78rem;
+}
+.active-who { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.active-who .tx-label,
+.active-who .tx-date { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.active-counts { display: flex; flex-wrap: wrap; gap: 6px; flex: none; }
+
+.row-actions { display: inline-flex; align-items: center; gap: 8px; }
+
+.user-stats { margin: 18px 0 24px; }
+.user-section { margin: 28px 0 14px; font-size: 1rem; }
+.photo-grid {
+  display: grid; gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+.photo-card { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.photo-thumb {
+  inline-size: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--beige-dark);
+  border: 1px solid var(--color-border);
+}
+.photo-card figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 0.8rem; }
+.modal-card .admin-form { margin-bottom: 0; }
+
 .stat-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 .stat-card { text-align: center; padding: 20px; }
 .stat-card strong { display: block; font-size: 1.7rem; font-weight: 800; color: var(--charcoal); }

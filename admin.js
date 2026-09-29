@@ -36,6 +36,10 @@ const VERDICT_LABELS = {
 
 let me = null;
 let renderCurrent = () => {};
+// The member panel can change a row that the users page is showing, so the page
+// registers a reloader here (set in the boot below) rather than the panel
+// reaching into a section's private state.
+let refreshUserViews = () => {};
 const modal = { root: null, body: null };
 
 /* ---------------------------------------------------------------- utils */
@@ -288,12 +292,13 @@ function userRowHTML(user) {
   const isSelf = me && user.user_id === me.user_id;
   const isOwner = user.role === "super_admin";
   const suspended = user.status !== "active";
+  const id = escapeHtml(user.user_id);
 
   // The owner can never be suspended, so offering the button would only produce
   // the API's refusal — it says "owner only" instead.
-  const actions = isOwner
+  const suspendButton = isOwner
     ? `<span class="pill is-off">${escapeHtml(t("admin.ownerOnly"))}</span>`
-    : `<button type="button" class="btn btn-secondary" data-user="${escapeHtml(user.user_id)}" data-status="${suspended ? "active" : "suspended"}"${isSelf ? " disabled" : ""}>
+    : `<button type="button" class="btn btn-secondary" data-user="${id}" data-status="${suspended ? "active" : "suspended"}"${isSelf ? " disabled" : ""}>
           ${escapeHtml(suspended ? t("admin.activate") : t("admin.suspend"))}
         </button>`;
 
@@ -304,17 +309,32 @@ function userRowHTML(user) {
       <td>${escapeHtml(t(ROLE_LABELS[user.role] || "admin.roleUser"))}</td>
       <td>${Number(user.total_points || 0).toLocaleString()}</td>
       <td>${suspended ? pill(t("admin.statusSuspended"), "is-warn") : pill(t("admin.statusActive"), "is-on")}</td>
-      <td class="actions">${actions}</td>
+      <td class="actions">
+        <span class="row-actions">
+          <button type="button" class="btn btn-ghost" data-view-user="${id}">${escapeHtml(t("admin.view"))}</button>
+          ${suspendButton}
+        </span>
+      </td>
     </tr>
   `;
 }
 
 function initUsers() {
   let users = null;
+  let search = "";
 
   const render = () => {
     if (users === null) return setContent("[data-admin-users]", loadingState("users"));
-    if (!users.length) return setContent("[data-admin-users]", emptyState());
+    if (!users.length) {
+      // An empty search result is not the same as an empty platform, and saying
+      // "nothing here yet" to a typo would be misleading.
+      return setContent(
+        "[data-admin-users]",
+        search
+          ? `<div class="empty-state">${iconMarkup("search")}${escapeHtml(t("admin.noResults"))}</div>`
+          : emptyState()
+      );
+    }
     setContent(
       "[data-admin-users]",
       `<div class="table-wrap"><table class="admin-table">
@@ -335,7 +355,7 @@ function initUsers() {
     users = null;
     render();
     try {
-      users = await api.get("/admin/users");
+      users = await api.get(`/admin/users${search ? `?search=${encodeURIComponent(search)}` : ""}`);
     } catch (err) {
       if (isAuthError(err)) return toLogin();
       if (isForbidden(err)) return setContent("[data-admin-users]", forbiddenState());
@@ -344,7 +364,24 @@ function initUsers() {
     render();
   };
 
+  // Typing narrows the list; the pause keeps it to one request per burst of keys
+  // rather than one per keystroke.
+  const field = host("[data-admin-user-search]");
+  if (field) {
+    let timer = null;
+    field.addEventListener("input", () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        search = field.value.trim();
+        load();
+      }, 250);
+    });
+  }
+
   host("[data-admin-host]").addEventListener("click", (e) => {
+    const view = e.target.closest("[data-view-user]");
+    if (view) return openUserDetail(view.getAttribute("data-view-user"));
+
     const button = e.target.closest("[data-user]");
     if (!button) return;
     withBusy(button, async () => {
@@ -356,8 +393,254 @@ function initUsers() {
     });
   });
 
-  renderCurrent = render;
-  return load();
+  load();
+  return { render, load };
+}
+
+/* ----------------------------------------------------------- most active */
+/** The busiest members as a ranked list. Each row opens the same panel the
+ * table's View button does — one detail view, two ways in. */
+function activeRowHTML(user, index) {
+  return `
+    <li class="active-row">
+      <span class="active-rank">${index + 1}</span>
+      <div class="active-who">
+        <span class="tx-label">${escapeHtml(user.full_name)}</span>
+        <span class="tx-date">${escapeHtml(user.email)}</span>
+      </div>
+      <div class="active-counts">
+        <span class="pill is-on">${escapeHtml(t("admin.photosTitle"))} ${Number(user.verifications_count || 0)}</span>
+        <span class="pill is-off">${escapeHtml(t("admin.activityPlants"))} ${Number(user.plants_count || 0)}</span>
+      </div>
+      <button type="button" class="btn btn-ghost" data-view-user="${escapeHtml(user.user_id)}">${escapeHtml(t("admin.view"))}</button>
+    </li>
+  `;
+}
+
+function initMostActive() {
+  let members = null;
+
+  const render = () => {
+    if (members === null) return setContent("[data-admin-active]", loadingState("users"));
+    if (!members.length) return setContent("[data-admin-active]", emptyState());
+    setContent(
+      "[data-admin-active]",
+      `<div class="admin-subhead">
+        <h2 class="heading-md">${escapeHtml(t("admin.mostActiveTitle"))}</h2>
+        <p class="section-lead">${escapeHtml(t("admin.mostActiveLead"))}</p>
+      </div>
+      <ol class="active-list">${members.map(activeRowHTML).join("")}</ol>`
+    );
+  };
+
+  const load = async () => {
+    members = null;
+    render();
+    try {
+      members = await api.get("/admin/users/active?limit=5");
+    } catch (err) {
+      if (isAuthError(err)) return toLogin();
+      if (isForbidden(err)) return setContent("[data-admin-active]", forbiddenState());
+      return setContent("[data-admin-active]", errorState());
+    }
+    render();
+  };
+
+  load();
+  return { render, load };
+}
+
+/* ------------------------------------------------------------ member panel */
+/** One submission: the bounded preview, its verdict and when it arrived. The
+ * predecessor of this screen shows admins the same preview in the queue; the
+ * member's GPS coordinates and image hashes are deliberately not requested. */
+function photoCardHTML(photo) {
+  const verdict = VERDICT_LABELS[photo.approval_status] || "admin.pending";
+  const variant =
+    photo.approval_status === "approved" ? "is-on" : photo.approval_status === "rejected" ? "is-warn" : "is-off";
+  const thumb = photo.image_url
+    ? `<img class="photo-thumb" src="${escapeHtml(photo.image_url)}" alt="" />`
+    : `<div class="photo-thumb" aria-hidden="true"></div>`;
+
+  return `
+    <figure class="photo-card">
+      ${thumb}
+      <figcaption>
+        <span class="tx-label">${escapeHtml(photo.plant_type || t("admin.unknownPlant"))}</span>
+        ${pill(t(verdict), variant)}
+        <span class="tx-date">${escapeHtml(fmtDateTime(photo.created_at))}</span>
+      </figcaption>
+    </figure>
+  `;
+}
+
+function userDetailHTML(detail) {
+  const user = detail.user;
+  const isSelf = me && user.user_id === me.user_id;
+  const isOwner = user.role === "super_admin";
+  // The API refuses suspending or demoting the owner, and locking yourself out,
+  // so those two selects arrive disabled rather than failing on submit.
+  const locked = isOwner || isSelf;
+  const disabled = locked ? " disabled" : "";
+
+  const option = (value, label, current) =>
+    `<option value="${value}"${current === value ? " selected" : ""}>${escapeHtml(t(label))}</option>`;
+
+  const photos = detail.photosPermitted
+    ? detail.photos.length
+      ? `<div class="photo-grid">${detail.photos.map(photoCardHTML).join("")}</div>`
+      : `<p class="form-status">${escapeHtml(t("admin.photosEmpty"))}</p>`
+    : `<p class="form-status">${escapeHtml(t("admin.photosNotPermitted"))}</p>`;
+
+  return `
+    <h2 class="heading-md" id="admin-modal-title">${escapeHtml(user.full_name)}</h2>
+    <p class="tx-date">${escapeHtml(user.email)}</p>
+
+    <div class="stat-grid user-stats">
+      <div class="stat-card card">
+        <strong data-balance-stat>${Number(detail.wallet.currentPoints || 0).toLocaleString()}</strong>
+        <span>${escapeHtml(t("wallet.balance"))}</span>
+      </div>
+      <div class="stat-card card">
+        <strong>${Number(detail.activity.plants_total || 0)}</strong>
+        <span>${escapeHtml(t("admin.activityPlants"))}</span>
+      </div>
+      <div class="stat-card card">
+        <strong>${Number(detail.activity.verifications_total || 0)}</strong>
+        <span>${escapeHtml(t("admin.photosTitle"))}</span>
+      </div>
+      <div class="stat-card card">
+        <strong>${Number(detail.wallet.totalEarned || 0).toLocaleString()}</strong>
+        <span>${escapeHtml(t("wallet.earned"))}</span>
+      </div>
+    </div>
+
+    <h3 class="user-section">${escapeHtml(t("admin.editProfile"))}</h3>
+    <form class="admin-form" data-user-form>
+      <div class="form-field">
+        <label for="userDetailName">${escapeHtml(t("admin.colName"))}</label>
+        <input id="userDetailName" name="fullName" value="${escapeHtml(user.full_name)}" />
+      </div>
+      <div class="form-field">
+        <label for="userDetailCity">${escapeHtml(t("auth.city"))}</label>
+        <input id="userDetailCity" name="city" value="${escapeHtml(user.city || "")}" />
+      </div>
+      <div class="form-field">
+        <label for="userDetailRole">${escapeHtml(t("admin.colRole"))}</label>
+        <select id="userDetailRole" name="role"${disabled}>
+          ${option("user", "admin.roleUser", user.role)}
+          ${option("admin", "admin.roleAdmin", user.role)}
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="userDetailStatus">${escapeHtml(t("admin.colStatus"))}</label>
+        <select id="userDetailStatus" name="status"${disabled}>
+          ${option("active", "admin.statusActive", user.status)}
+          ${option("suspended", "admin.statusSuspended", user.status)}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">${escapeHtml(t("admin.saveChanges"))}</button>
+      ${locked ? `<p class="form-status admin-form-wide">${escapeHtml(t("admin.lockedFields"))}</p>` : ""}
+      <p class="form-status admin-form-wide" data-user-form-status role="status"></p>
+    </form>
+
+    <h3 class="user-section">${escapeHtml(t("admin.editBalance"))}</h3>
+    <form class="admin-form" data-balance-form>
+      <div class="form-field">
+        <label for="userDetailDelta">${escapeHtml(t("admin.balanceDelta"))}</label>
+        <input id="userDetailDelta" name="delta" type="number" step="1" inputmode="numeric" />
+      </div>
+      <div class="form-field">
+        <label for="userDetailReason">${escapeHtml(t("admin.balanceReason"))}</label>
+        <input id="userDetailReason" name="reason" placeholder="${escapeHtml(t("admin.balanceReasonPlaceholder"))}" />
+      </div>
+      <button type="submit" class="btn btn-accent">${escapeHtml(t("admin.applyAdjustment"))}</button>
+      <p class="form-status admin-form-wide" data-balance-status role="status"></p>
+    </form>
+
+    <h3 class="user-section">
+      ${escapeHtml(t("admin.photosTitle"))}
+      <span class="pill is-off">${Number(detail.photosTotal || 0)}</span>
+    </h3>
+    ${photos}
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-secondary" data-modal-close>${escapeHtml(t("admin.close"))}</button>
+    </div>
+  `;
+}
+
+/** Loads one member and wires the panel's two forms: the profile fields, and the
+ * reasoned points adjustment. Both refresh the lists behind the modal on success. */
+async function openUserDetail(userId) {
+  openModal(loadingState("users"));
+
+  let detail;
+  try {
+    detail = await api.get(`/admin/users/${encodeURIComponent(userId)}`);
+  } catch (err) {
+    if (isAuthError(err)) return toLogin();
+    openModal(
+      isForbidden(err)
+        ? forbiddenState()
+        : `<p class="form-status is-error">${escapeHtml(errorText(err))}</p>`
+    );
+    return;
+  }
+
+  openModal(userDetailHTML(detail));
+
+  const profileForm = modal.body.querySelector("[data-user-form]");
+  const profileStatus = modal.body.querySelector("[data-user-form-status]");
+  profileForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    withBusy(profileForm.querySelector('button[type="submit"]'), async () => {
+      const body = {
+        fullName: readField(profileForm, "fullName"),
+        city: readField(profileForm, "city"),
+      };
+      // A disabled select is one the API would refuse anyway (the owner's, or your
+      // own) — leave it out of the request rather than sending a no-op change.
+      for (const name of ["role", "status"]) {
+        const field = profileForm.querySelector(`[name="${name}"]`);
+        if (field && !field.disabled) body[name] = field.value;
+      }
+
+      await api.patch(`/admin/users/${encodeURIComponent(userId)}`, body);
+      profileStatus.className = "form-status admin-form-wide";
+      profileStatus.textContent = t("admin.saved");
+      await refreshUserViews();
+    });
+  });
+
+  const balanceForm = modal.body.querySelector("[data-balance-form]");
+  const balanceStatus = modal.body.querySelector("[data-balance-status]");
+  balanceForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const delta = Number(readField(balanceForm, "delta"));
+    const reason = readField(balanceForm, "reason");
+    if (!Number.isInteger(delta) || delta === 0) {
+      balanceStatus.className = "form-status is-error admin-form-wide";
+      balanceStatus.textContent = t("admin.invalidDelta");
+      return;
+    }
+    if (!reason) {
+      balanceStatus.className = "form-status is-error admin-form-wide";
+      balanceStatus.textContent = t("admin.reasonRequired");
+      return;
+    }
+
+    withBusy(balanceForm.querySelector('button[type="submit"]'), async () => {
+      const result = await api.post(`/admin/users/${encodeURIComponent(userId)}/points`, { delta, reason });
+      const stat = modal.body.querySelector("[data-balance-stat]");
+      if (stat) stat.textContent = Number(result.total_points || 0).toLocaleString();
+      balanceStatus.className = "form-status admin-form-wide";
+      balanceStatus.textContent = t("admin.balanceAdjusted");
+      balanceForm.reset();
+      await refreshUserViews();
+    });
+  });
 }
 
 /* ---------------------------------------------------------------- admins */
@@ -568,8 +851,10 @@ function initAdmins() {
     });
   });
 
-  renderCurrent = render;
-  return load();
+  // Returns its repaint and reload pair so the users page can compose every one
+  // of its sections into a single hook (see the boot below).
+  load();
+  return { render, load };
 }
 
 /* -------------------------------------------------------------- partners */
@@ -1087,11 +1372,20 @@ async function boot(init) {
 
 document.addEventListener("DOMContentLoaded", () => {
   if (host("[data-admin-queue]")) return boot(initQueue);
-  // The users page also hosts admin management — both sections, one boot.
+  // The users page hosts three sections — the ranking, the member table and admin
+  // management — all on one boot.
   if (host("[data-admin-users]")) {
     return boot(async () => {
-      await initUsers();
-      await initAdmins();
+      const sections = [initUsers()];
+      if (host("[data-admin-active]")) sections.push(initMostActive());
+      sections.push(initAdmins());
+
+      // admin.js has a single repaint hook, so every section on this page is
+      // composed into it: a language change repaints all of them, not just the
+      // last one to have been initialised.
+      renderCurrent = () => sections.forEach((section) => section.render());
+      // An edit in the member panel can change a row either list is showing.
+      refreshUserViews = () => Promise.all(sections.map((section) => section.load()));
     });
   }
   if (host("[data-admin-partners]")) return boot(initPartners);

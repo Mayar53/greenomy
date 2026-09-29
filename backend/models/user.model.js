@@ -143,24 +143,56 @@ async function updatePassword(client, userId, passwordHash) {
   return rows[0] || null;
 }
 
-/** Admin user list — newest first, still without password hashes. */
-async function listAll() {
+/** Admin user list — newest first, still without password hashes.
+ *
+ * `search` narrows by name, email or city: case-insensitive and partial, so a
+ * few letters of either is enough. Omitting it returns the whole list, which is
+ * what this always did. */
+async function listAll({ search } = {}) {
+  const term = String(search == null ? "" : search).trim();
   const { rows } = await query(
-    `SELECT ${PUBLIC_COLUMNS} FROM users ORDER BY created_at DESC`
+    `SELECT ${PUBLIC_COLUMNS} FROM users
+      WHERE $1::text IS NULL
+         OR full_name ILIKE '%' || $1 || '%'
+         OR email     ILIKE '%' || $1 || '%'
+         OR city      ILIKE '%' || $1 || '%'
+      ORDER BY created_at DESC`,
+    [term || null]
   );
   return rows;
 }
 
-/** Admin edit: role and/or status. Partial — omitted fields are left alone. */
-async function updateAdmin(userId, { role, status }) {
+/** The busiest members, most active first — for the dashboard's own ranking.
+ *
+ * Activity is what the product asks of a member: documenting their plants. So it
+ * counts photos submitted first, then plants grown; a member with no plants or
+ * photos stays in the list, at the bottom, rather than vanishing from it. */
+async function listMostActive({ limit = 10 } = {}) {
+  const { rows } = await query(
+    `SELECT ${PUBLIC_COLUMNS},
+            (SELECT count(*)::int FROM verifications v WHERE v.user_id = users.user_id) AS verifications_count,
+            (SELECT count(*)::int FROM plants p        WHERE p.user_id = users.user_id) AS plants_count
+       FROM users
+      ORDER BY verifications_count DESC, plants_count DESC, created_at ASC
+      LIMIT $1`,
+    [limit]
+  );
+  return rows;
+}
+
+/** Admin edit: role, status, name and city. Partial — omitted fields are left
+ * alone, so a form that only sends a status cannot blank a name. */
+async function updateAdmin(userId, { role, status, fullName, city }) {
   const { rows } = await query(
     `UPDATE users
         SET role       = COALESCE($2, role),
             status     = COALESCE($3, status),
+            full_name  = COALESCE($4, full_name),
+            city       = COALESCE($5, city),
             updated_at = now()
       WHERE user_id = $1
       RETURNING ${PUBLIC_COLUMNS}`,
-    [userId, role || null, status || null]
+    [userId, role || null, status || null, fullName || null, city || null]
   );
   return rows[0] || null;
 }
@@ -207,6 +239,7 @@ module.exports = {
   lockForUpdate,
   count,
   listAll,
+  listMostActive,
   updateAdmin,
   listAdmins,
   setAdminAccess,

@@ -52,6 +52,27 @@ async function listByUser(userId) {
   return rows;
 }
 
+/**
+ * A member's submissions for the admin user panel, newest first, with the
+ * plant's type. Deliberately a narrow column list: it carries the bounded
+ * preview (`image_url`) the review queue already shows admins, but NOT the
+ * member's GPS coordinates or image hashes, which this screen has no use for.
+ * Reading the ORIGINAL stays owner-only (GET /verifications/:id/image).
+ */
+async function listByUserWithPlant(userId, { limit = 12 } = {}) {
+  const { rows } = await query(
+    `SELECT v.verification_id, v.created_at, v.approval_status, v.requires_review,
+            v.ai_confidence_score, v.image_url, v.milestone_id, p.plant_type
+       FROM verifications v
+       LEFT JOIN plants p ON p.plant_id = v.plant_id
+      WHERE v.user_id = $1
+      ORDER BY v.created_at DESC
+      LIMIT $2`,
+    [userId, limit]
+  );
+  return rows;
+}
+
 async function findById(verificationId) {
   const { rows } = await query(
     "SELECT * FROM verifications WHERE verification_id = $1",
@@ -140,6 +161,7 @@ module.exports = {
   create,
   findByIdForUser,
   listByUser,
+  listByUserWithPlant,
   findById,
   listPending,
   approve,

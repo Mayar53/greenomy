@@ -51,6 +51,24 @@
         </div>
 
         <div data-admin-host>
+          <!-- Search sits outside the list host on purpose: the list is re-rendered
+               on every load and on every language change, and rebuilding the input
+               would take the caret with it. -->
+          <div class="admin-toolbar" role="search">
+            <span class="icon-slot" aria-hidden="true" data-icon="search"></span>
+            <label class="visually-hidden" for="adminUserSearch" data-i18n="admin.searchLabel">Search members</label>
+            <input
+              type="search"
+              id="adminUserSearch"
+              autocomplete="off"
+              data-admin-user-search
+              data-i18n-attr="placeholder:admin.searchPlaceholder"
+              placeholder="Search by name, email or city"
+            />
+          </div>
+
+          <!-- Most active, then every account. Both are filled by admin.js. -->
+          <div data-admin-active></div>
           <div data-admin-users></div>
         </div>
 
@@ -60,6 +78,16 @@
       </div>
     </section>
   </main>
+
+  <!-- The member panel opens here. Same markup as the queue page's modal, so the
+       shared openModal/closeModal in admin.js work unchanged. -->
+  <div class="modal" data-admin-modal hidden>
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-card card" role="dialog" aria-modal="true" aria-labelledby="admin-modal-title">
+      <button type="button" class="modal-close" data-modal-close aria-label="Close" data-icon="close"></button>
+      <div data-modal-body></div>
+    </div>
+  </div>
 
   <script type="module" src="main.js"></script>
   <script type="module" src="admin.js"></script>

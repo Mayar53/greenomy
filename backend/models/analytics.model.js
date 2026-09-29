@@ -49,4 +49,20 @@ async function verificationsByDay() {
   return rows;
 }
 
-module.exports = { summary, verificationsByDay, DAYS };
+/** One member's activity, for the admin user panel — the same aggregates as
+ * `summary`, scoped to a single account. */
+async function userActivity(userId) {
+  const { rows } = await query(
+    `SELECT
+       (SELECT count(*)::int FROM plants        WHERE user_id = $1) AS plants_total,
+       (SELECT count(*)::int FROM verifications WHERE user_id = $1) AS verifications_total,
+       (SELECT count(*)::int FROM verifications WHERE user_id = $1 AND approval_status = 'approved') AS verifications_approved,
+       (SELECT count(*)::int FROM verifications WHERE user_id = $1 AND approval_status = 'pending')  AS verifications_pending,
+       (SELECT count(*)::int FROM verifications WHERE user_id = $1 AND approval_status = 'rejected') AS verifications_rejected,
+       (SELECT count(*)::int FROM redemptions   WHERE user_id = $1) AS redemptions_total`,
+    [userId]
+  );
+  return rows[0];
+}
+
+module.exports = { summary, verificationsByDay, userActivity, DAYS };
