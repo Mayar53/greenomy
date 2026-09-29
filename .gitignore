@@ -21,6 +21,9 @@ backend/uploads/
 backend/.bot-state.json
 backend/.bot-messages.jsonl
 
+# Local agent scratch (Command Code taste/preferences), never part of the app
+.commandcode/
+
 # OS / editor
 Thumbs.db
 desktop.ini
