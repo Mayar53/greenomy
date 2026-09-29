@@ -55,6 +55,10 @@ services:
         generateValue: true
 
       # --- the owner account (npm run seed creates it) ---
+      # REQUIRED: in production the seed creates no owner at all when this is
+      # blank (database/seed.js logs a warning and skips it), leaving the site
+      # with no admin account. Set it here, or the first deploy goes live with
+      # a completely empty users table.
       - key: ADMIN_SEED_EMAIL
         value: mayarraws@gmail.com
       - key: ADMIN_SEED_PASSWORD
@@ -94,8 +98,12 @@ services:
       # --- Telegram contact bot ---
       - key: TELEGRAM_BOT_TOKEN
         sync: false
+      # Must be the SAME value as TELEGRAM_WEBHOOK_SECRET in backend/.env. The
+      # webhook URL is built from it, and Telegram's registration has to match
+      # what this service checks — a generated value here would make
+      # `npm run telegram -- webhook` register a URL that always 401s.
       - key: TELEGRAM_WEBHOOK_SECRET
-        generateValue: true
+        sync: false
       - key: TELEGRAM_BOT_URL
         value: https://t.me/Greenomy_bot
       - key: TELEGRAM_CHANNEL_URL
